@@ -312,7 +312,10 @@ SECTIONS
       BUILD_DIR/src/main.o(.rodata*);
       BUILD_DIR/src/animation.o(.rodata*);
       BUILD_DIR/src/code_800029B0.o(.rodata*);
-      #ifdef VERSION_JP
+      /* JP 1.1 orders camera.o rodata first; JP 1.0 keeps us's order, measured
+         in the cart: cpu_vehicles .rodata sits at 0x0ecb30, directly after
+         code_800029B0's, with no camera.o block in between. */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          /* JP orders camera.o rodata before the cpu_vehicles float pools */
          BUILD_DIR/src/camera.o(.rodata*);
          BUILD_DIR/src/cpu_vehicles_camera_path.jp.o(.rodata*);
