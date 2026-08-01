@@ -59,3 +59,34 @@
     - 0x1323A0
     - 0x000000
     - 0x14B4A0
+
+d6605879918b0dca3eafa1c75ecbc850a3b2535d:
+  name: Mario Kart 64 [iQue v5]
+  path: yamls/cn.v5
+  config:
+    gbi: F3DEX_MK64
+    sort: OFFSET
+    enums:
+      - include/defines.h
+    output:
+      binary: mkcube.otr
+      headers: include/assets
+      code: assets/code/cn.v5
+  metadata: [yamls/courses]
+  segments:
+    - 0x000000
+    - 0x000000
+    - 0x12A724
+    - 0x000000
+    - 0x000000
+    - 0x000000
+    - 0x831440
+    - 0x000000
+    - 0x000000
+    - 0x897A70
+    - 0x727780
+    - 0x82D950
+    - 0x806000
+    - 0x1328C0
+    - 0x000000
+    - 0x144C60
