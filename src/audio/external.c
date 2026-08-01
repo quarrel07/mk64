@@ -1093,13 +1093,13 @@ void func_800C3724(void) {
             }
         }
         if (D_801930D0[seqPlayerIndex].unk_041) {
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
             if (func_800C357C_eu(-0x10000000, -0x10000000) == 0) {
                 D_801930D0[seqPlayerIndex].unk_041 = 0;
                 return;
             }
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
             if (D_801930D0[seqPlayerIndex].unk_040 != 0) {
                 D_801930D0[seqPlayerIndex].unk_040--;
             } else if (gSequencePlayers[seqPlayerIndex].enabled == 0) {
@@ -1163,7 +1163,7 @@ void func_800C3724(void) {
             }
 
             D_801930D0[seqPlayerIndex].unk_041 = 0;
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
             }
 #endif
         }
@@ -1953,7 +1953,7 @@ void func_800C6108(u8 playerId) {
         D_800E9EB4[playerId] -= D_800E9DF4[playerId];
     }
     D_800E9EE4[playerId] = D_800E9EB4[playerId] - D_800E9EC4[playerId];
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
     if ((D_800E9EE4[playerId] > 0.5f) || (D_800E9EE4[playerId] < -0.5f))
 #else
     if ((D_800E9EE4[playerId] > 0.5f) || (D_800E9EE4[playerId] < 0.5f))
@@ -1964,7 +1964,7 @@ void func_800C6108(u8 playerId) {
     } else {
         D_800E9F7C[playerId].unk_0C = D_800E9EB4[playerId] + D_800E9F34[playerId];
     }
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
     if (D_800E9F7C[playerId].unk_0C < 0.0f) {
         D_800E9F7C[playerId].unk_0C = 0.0f;
     }
@@ -2511,7 +2511,7 @@ void func_800C76C0(u8 playerId) {
                             if ((D_800EA104 == 0) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C3448(0x100100FF);
                                 func_800C3448(0x110100FF);
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
                                 play_sequence2(SEQ_EVENT_RACE_FINISH_FIRST);
 #else
                                 play_sequences(SEQ_EVENT_RACE_FINISH_FIRST, SEQ_MENU_RESULTS_SCREEN_WIN_VS);
@@ -2519,7 +2519,7 @@ void func_800C76C0(u8 playerId) {
                                 D_800EA104 = 1;
                             } else if ((D_800EA104 == 1) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C5278(5U);
-#if !defined(VERSION_EU) && !defined(VERSION_JP)
+#if !defined(VERSION_EU) && !defined(VERSION_JP_V11)
                                 if (func_800C3508(1) != 0x000D)
 #endif
                                 {
@@ -2543,7 +2543,7 @@ void func_800C76C0(u8 playerId) {
                                 D_800EA104 = 2;
                             } else if ((D_800EA104 == 2) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C5278(5U);
-#if !defined(VERSION_EU) && !defined(VERSION_JP)
+#if !defined(VERSION_EU) && !defined(VERSION_JP_V11)
                                 if (func_800C3508(1) != 0x000E)
 #endif
                                 {

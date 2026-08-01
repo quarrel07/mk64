@@ -360,7 +360,7 @@ void seq_channel_layer_process_script(struct SequenceChannelLayer* layer) {
         return;
     }
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     if (!layer->continuousNotes) {
         seq_channel_layer_note_decay(layer);
     } else if (layer->note != NULL && layer->note->wantedParentLayer == layer) {

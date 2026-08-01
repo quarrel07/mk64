@@ -795,7 +795,7 @@ void audio_init(void) {
 #ifdef VERSION_EU
     D_803B7178 = 20.03042f;
     gRefreshRate = 50;
-#elif defined(VERSION_JP)
+#elif defined(VERSION_JP_V11)
     D_803B7178 = 16.713f;
     gRefreshRate = 60;
 #else // US
