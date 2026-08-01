@@ -1092,6 +1092,13 @@ void change_player_color_effect_cmy(UNUSED Player* player, s8 playerIndex, s32 a
     move_u16_towards(&gPlayerYellowEffect[playerIndex], arg2 & 0xFF, arg3);
 }
 
+/* The under-a-light shade. JP 1.0 uses 0xF0 at all four sites below. */
+#ifdef VERSION_JP_V10
+#define CMY_UNDER_LIGHT 0xF0
+#else
+#define CMY_UNDER_LIGHT 0xE0
+#endif
+
 /**
  * Activates in the tunnel to shade the player a bit darker
  * Sort of an atmospheric effect.
@@ -1106,7 +1113,7 @@ bool is_player_under_light_luigi_raceway(Player* player, s8 playerIndex) {
                 ((gNearestPathPointByPlayerId[playerIndex] >= 0x17E) &&
                  (gNearestPathPointByPlayerId[playerIndex] < 0x184))) { // under a light in the tunnel
                 change_player_color_effect_rgb(player, playerIndex, COLOR_LIGHT, 0.3f);
-                change_player_color_effect_cmy(player, playerIndex, 0xE0, 0.3f);
+                change_player_color_effect_cmy(player, playerIndex, CMY_UNDER_LIGHT, 0.3f);
                 D_80164B80[playerIndex] = 0;
                 return true;
             }
@@ -1135,7 +1142,7 @@ void render_light_environment_on_player(Player* player, s8 playerIndex) {
                        ((gNearestPathPointByPlayerId[playerIndex] >= 0x15E) &&
                         (gNearestPathPointByPlayerId[playerIndex] < 0x163))) { // under a lamp
                 change_player_color_effect_rgb(player, playerIndex, COLOR_LIGHT, 0.3f);
-                change_player_color_effect_cmy(player, playerIndex, 0xE0, 0.3f);
+                change_player_color_effect_cmy(player, playerIndex, CMY_UNDER_LIGHT, 0.3f);
                 D_80164B80[playerIndex] = 0;
             } else { // normal color
                 change_player_color_effect_rgb(player, playerIndex, COLOR_BLACK, 0.3f);
@@ -1166,7 +1173,7 @@ void render_light_environment_on_player(Player* player, s8 playerIndex) {
                 ((gNearestPathPointByPlayerId[playerIndex] >= 0x274) &&
                  (gNearestPathPointByPlayerId[playerIndex] < 0x27E))) { // under a lamp
                 change_player_color_effect_rgb(player, playerIndex, COLOR_LIGHT, 0.3f);
-                change_player_color_effect_cmy(player, playerIndex, 0x0000E0, 0.3f);
+                change_player_color_effect_cmy(player, playerIndex, CMY_UNDER_LIGHT, 0.3f);
                 D_80164B80[playerIndex] = 0;
             } else {
                 change_player_color_effect_rgb(player, playerIndex, COLOR_BLACK, 0.3f);
@@ -1187,7 +1194,7 @@ void func_800235AC(Player* player, s8 playerIndex) {
 
     if (((player->type & PLAYER_INVISIBLE_OR_BOMB) == PLAYER_INVISIBLE_OR_BOMB) && (player == gPlayerThree)) {
         change_player_color_effect_rgb(player, playerIndex, COLOR_LIGHT, 0.3f);
-        change_player_color_effect_cmy(player, playerIndex, 0xE0, 0.3f);
+        change_player_color_effect_cmy(player, playerIndex, CMY_UNDER_LIGHT, 0.3f);
         D_80164B80[playerIndex] = 0;
         return;
     }
