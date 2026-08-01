@@ -22,7 +22,7 @@ extern CourseVtx d_course_kalimari_desert_vertex[0x18F9];
 extern CourseVtx d_course_koopa_troopa_beach_vertex[0x24A0];
 #ifdef VERSION_JP
 /* JP's luigi_raceway model carries 13 more vertices - it is the one course whose
-   geography genuinely differs. bin/jp.v11/luigi_raceway_vertices.bin is 0x173D * 14. */
+   geography genuinely differs. Its vertex table is 0x173D entries of 14 bytes. */
 extern CourseVtx d_course_luigi_raceway_vertex[0x173D];
 #else
 extern CourseVtx d_course_luigi_raceway_vertex[0x1730];
