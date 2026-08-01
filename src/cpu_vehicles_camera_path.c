@@ -4752,7 +4752,7 @@ void render_bomb_karts_wrap(s32 cameraId) {
 }
 
 UNUSED void func_8001C42C(void) {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     if (D_800DDB20 == 0) {
         if ((gControllerThree->buttonPressed & L_TRIG) != 0) {
             D_800DDB20 = 1;
