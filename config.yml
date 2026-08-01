@@ -29,6 +29,37 @@
     - 0x000000
     - 0x145470
 
+afeeec65b9a03f0cb8ec92f9ba7a9f0122e8bd0e:
+  name: Mario Kart 64 [JP v1.0]
+  path: yamls/jp.v10
+  config:
+    gbi: F3DEX_MK64
+    sort: OFFSET
+    enums:
+      - include/defines.h
+    output:
+      binary: mkcube.otr
+      headers: include/assets
+      code: assets/code/jp.v10
+  metadata: [yamls/courses]
+  segments:
+    - 0x000000
+    - 0x000000
+    - 0x12B500
+    - 0x000000
+    - 0x000000
+    - 0x000000
+    - 0x825380
+    - 0x000000
+    - 0x000000
+    - 0x88C3D0
+    - 0x729AA0
+    - 0x821890
+    - 0x7FA440
+    - 0x133570
+    - 0x000000
+    - 0x145E40
+
 9f439457585146a4e1da7e1dd9104f7f94381688:
   name: Mario Kart 64 [JP v1.1]
   path: yamls/jp.v11
