@@ -136,12 +136,12 @@ UNUSED u32 external_unused_u32s[] = { 0xff000000, 0xff000000, 0x00000000 };
 char external_unused_string11[] = "FX MIX %d\n";
 char external_unused_string12[] = "************** Seq Fadeout ***************\n";
 char external_unused_string13[] = "SEQ FADE OUT TIME %d\n";
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
 char external_unused_string_eu_02[] = "************** SE Fadeout ***************\n";
 char external_unused_string_eu_03[] = "SE FADE OUT TIME %d\n";
 #endif
 
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
 #define AUDIO_LEFT_TYRE FRONT_LEFT
 #define AUDIO_RIGHT_TYRE FRONT_RIGHT
 #else
@@ -924,7 +924,7 @@ u8 func_800C357C(s32 arg0) {
     return var_v1;
 }
 
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
 u8 func_800C357C_eu(s32 arg0, s32 arg1) {
     u8 var_v1;
     u8 i;
@@ -1093,7 +1093,7 @@ void func_800C3724(void) {
             }
         }
         if (D_801930D0[seqPlayerIndex].unk_041) {
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
             if (func_800C357C_eu(-0x10000000, -0x10000000) == 0) {
                 D_801930D0[seqPlayerIndex].unk_041 = 0;
                 return;
@@ -1953,7 +1953,7 @@ void func_800C6108(u8 playerId) {
         D_800E9EB4[playerId] -= D_800E9DF4[playerId];
     }
     D_800E9EE4[playerId] = D_800E9EB4[playerId] - D_800E9EC4[playerId];
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
     if ((D_800E9EE4[playerId] > 0.5f) || (D_800E9EE4[playerId] < -0.5f))
 #else
     if ((D_800E9EE4[playerId] > 0.5f) || (D_800E9EE4[playerId] < 0.5f))
@@ -1964,7 +1964,7 @@ void func_800C6108(u8 playerId) {
     } else {
         D_800E9F7C[playerId].unk_0C = D_800E9EB4[playerId] + D_800E9F34[playerId];
     }
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
     if (D_800E9F7C[playerId].unk_0C < 0.0f) {
         D_800E9F7C[playerId].unk_0C = 0.0f;
     }
@@ -2511,7 +2511,7 @@ void func_800C76C0(u8 playerId) {
                             if ((D_800EA104 == 0) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C3448(0x100100FF);
                                 func_800C3448(0x110100FF);
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
                                 play_sequence2(SEQ_EVENT_RACE_FINISH_FIRST);
 #else
                                 play_sequences(SEQ_EVENT_RACE_FINISH_FIRST, SEQ_MENU_RESULTS_SCREEN_WIN_VS);
@@ -2519,7 +2519,7 @@ void func_800C76C0(u8 playerId) {
                                 D_800EA104 = 1;
                             } else if ((D_800EA104 == 1) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C5278(5U);
-#if !defined(VERSION_EU) && !defined(VERSION_JP)
+#if !defined(VERSION_EU) && !defined(VERSION_JP) && !defined(VERSION_CN)
                                 if (func_800C3508(1) != 0x000D)
 #endif
                                 {
@@ -2543,7 +2543,7 @@ void func_800C76C0(u8 playerId) {
                                 D_800EA104 = 2;
                             } else if ((D_800EA104 == 2) && (D_800EA0EC[playerId] == 1)) {
                                 func_800C5278(5U);
-#if !defined(VERSION_EU) && !defined(VERSION_JP)
+#if !defined(VERSION_EU) && !defined(VERSION_JP) && !defined(VERSION_CN)
                                 if (func_800C3508(1) != 0x000E)
 #endif
                                 {
