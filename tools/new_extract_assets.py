@@ -267,7 +267,7 @@ def export_bin(baserom, asset):
 
 # Versions that may appear as an override key on an asset. Keep in step with the
 # VERSION option in the Makefile.
-ALL_VERSIONS = ("us", "eu.v10", "eu.v11", "jp.v10", "jp.v11")
+ALL_VERSIONS = ("us", "eu.v10", "eu.v11", "jp.v10", "jp.v11", "cn.v5")
 
 # TODO: use a proper argument parser
 argv = sys.argv[1:]

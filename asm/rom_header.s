@@ -8,7 +8,21 @@
 .word  entry_point               /* Entrypoint */
 
 /* Revision */  
+.ifdef VERSION_CN
+.word  0x0000144C /* iQue Player */
+.else
 .word  0x00001446 /* NTSC-U */
+.endif
+
+/*
+ * An iQue image carries no CIC checksum, ROM name or cartridge ID. The player
+ * authenticates content through its own signed metadata instead, so everything
+ * from 0x10 to 0x3F is zero in the dump. Region and revision bytes included:
+ * there is no "C" region code to emit.
+ */
+.ifdef VERSION_CN
+.fill 0x30, 1, 0
+.else
 
 .word  0x3E5055B6               /* Checksum 1 */
 .word  0x2E92DA52               /* Checksum 2 */
@@ -46,4 +60,6 @@
 .byte  0x01                     /* Version */
 .else
 .byte  0x00                     /* Version */
+.endif
+
 .endif
