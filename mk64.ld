@@ -239,7 +239,9 @@ SECTIONS
       BUILD_DIR/src/os/_Ldtob.o(.text*);
       BUILD_DIR/src/os/ldiv.o(.text*);
       BUILD_DIR/data/rsp.o(.text);
-      #ifdef VERSION_JP
+      /* JP 1.1 reorders the .data head; JP 1.0 keeps us's, measured the same
+         way (code_800029B0, crash_screen, path_spawn_metadata in the cart). */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          /* JP .data head order recovered by content-anchor scan vs real ROM */
          BUILD_DIR/src/main.o(.data*);
          BUILD_DIR/src/code_800029B0.o(.data*);
