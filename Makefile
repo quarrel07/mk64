@@ -43,8 +43,9 @@ GCC ?= 0
 #  eu.v10 - builds the 1997 1.0 PAL version
 #  eu.v11 - builds the 1997 1.1 PAL version
 #  jp.v11 - builds revision 1.1 of the original December 1996 Japanese release
+#  cn.v5  - builds the iQue Player release, content revision 5
 VERSION ?= us
-$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v11))
+$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v11 cn.v5))
 
 ifeq      ($(VERSION),us)
   DEFINES += VERSION_US=1
@@ -58,6 +59,13 @@ else ifeq ($(VERSION),eu.v11)
 else ifeq ($(VERSION),jp.v11)
   DEFINES += VERSION_JP=1 VERSION_JP_V11=1
   GRUCODE   ?= f3dex_old
+else ifeq ($(VERSION),cn.v5)
+  DEFINES += VERSION_CN=1 VERSION_CN_V5=1
+  # The iQue image does not carry the F3DEX/F3DLX microcode this repo ships:
+  # none of gspF3DEXText, gspF3DLXText, gspF3DEXData or gspF3DLXData appears
+  # anywhere in it. That, and the GRUCODE note above, put it on f3dex rather
+  # than f3dex_old. Not yet confirmed against generated code.
+  GRUCODE   ?= f3dex
 endif
 
 ifeq ($(DEBUG),1)
