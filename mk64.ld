@@ -574,7 +574,10 @@ SECTIONS
    }
    END_SEG(common_textures)
 
-   #ifdef VERSION_JP
+   /* JP 1.1 packs ceremonyData + startupLogo before the kart band; JP 1.0 keeps
+      us's segment order (cart: kart 0x145e40, ceremonyData 0x821890,
+      startupLogo 0x825380 -- us builds 0x145470 / 0x821d10 / 0x825800). */
+   #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
    /* JP packs ceremonyData + startupLogo before the kart band,
       and trigTables directly after it (US keeps them later). */
    BEGIN_SEG(ceremonyData, 0x0B000000)
@@ -608,7 +611,7 @@ SECTIONS
    }
    END_SEG(kart_textures)
 
-   #ifdef VERSION_JP
+   #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
    /* JP: trigTables sit between the kart band and other_textures */
    BEGIN_SEG(trigTables, _buffersSegmentNoloadStart)
    {
@@ -626,7 +629,7 @@ SECTIONS
    }
    END_SEG(other_textures)
 
-   #ifndef VERSION_JP
+   #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
    /* 0x802BA370 724220-729A30 [0x5810] */
    BEGIN_SEG(trigTables, _buffersSegmentNoloadStart)
    {
@@ -653,7 +656,7 @@ SECTIONS
    }
    END_SEG(textures_0b)
 
-   #ifndef VERSION_JP
+   #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
    /* TODO: 0x825800 -> 0x8028B230 (0x100) ...
             0x828400 -> 0x8028DE30 (0xD0) */
    BEGIN_SEG(ceremonyData, 0x0B000000)
