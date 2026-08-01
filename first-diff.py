@@ -42,6 +42,14 @@ versionGroup.add_argument(
     const="jp.v11",
     dest="version",
 )
+versionGroup.add_argument(
+    "-C",
+    "--cn5",
+    help="use iQue Player (v5) version",
+    action="store_const",
+    const="cn.v5",
+    dest="version",
+)
 parser.add_argument(
     "-m", "--make", help="run make before finding difference(s)", action="store_true"
 )
