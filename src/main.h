@@ -16,6 +16,15 @@
 #define MTX_HUD_POOL_SIZE_MAX MTX_HUD_POOL_SIZE - 50
 #endif
 
+// JP 1.0 draws these objects without the matrix-pool budget test, so the load
+// and compare are absent from that cart entirely rather than using a different
+// limit. Folding to 1 lets the condition drop out.
+#ifdef VERSION_JP_V10
+#define MTX_HUD_BUDGET_OK 1
+#else
+#define MTX_HUD_BUDGET_OK (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)
+#endif
+
 #define MTX_OBJECT_POOL_SIZE 128
 
 //! @todo Verify with proper documentation
