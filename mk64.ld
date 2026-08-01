@@ -275,8 +275,10 @@ SECTIONS
       BUILD_DIR/src/code_800AF9B0.o(.data*);
       BUILD_DIR/src/menus.o(.data*);
       BUILD_DIR/src/save.o(.data*);
-      #ifdef VERSION_JP
-         /* JP links the audio data tables before the 800E8700 assets */
+      /* JP 1.1 links the audio data tables before the 800E8700 assets. JP 1.0
+         keeps us's placement at the end of the segment: the cart puts this
+         block at 0xf66b0, after rsp.o, not at 0xe8dd0. */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          BUILD_DIR/src/audio/data.o(.data*);
       #endif
       BUILD_DIR/ASSET_CODE_DIR/data_800E8700/data_800E8700.o(.data*);
@@ -369,7 +371,7 @@ SECTIONS
       BUILD_DIR/asm/os/osSetIntMask.o(.rodata);
       BUILD_DIR/src/os/_Ldtob.o(.rodata*);
       BUILD_DIR/data/rsp.o(.data*);
-      #ifndef VERSION_JP
+      #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
       BUILD_DIR/src/audio/data.o(.data*);
       #endif
    }
