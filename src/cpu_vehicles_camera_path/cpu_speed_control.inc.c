@@ -151,12 +151,12 @@ void regulate_cpu_speed(s32 playerId, f32 targetSpeed, Player* player) {
         return;
     }
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     check_ai_crossing_distance(playerId);
 #endif
 
     if ((bStopAICrossing[playerId] == true) && !(player->effects & (STAR_EFFECT | BOO_EFFECT))) {
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
         player->effects &= ~CPU_FAST_EFFECT;
 #endif
         player_decelerate_alternative(player, 10.0f);
@@ -178,7 +178,7 @@ void regulate_cpu_speed(s32 playerId, f32 targetSpeed, Player* player) {
                 break;
         }
         if (speed < var_f0) {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
             player->effects &= ~CPU_FAST_EFFECT;
 #endif
             player_accelerate_alternative(player);
@@ -200,6 +200,24 @@ void regulate_cpu_speed(s32 playerId, f32 targetSpeed, Player* player) {
                 player_decelerate_alternative(player, 1.0f);
             }
         } else {
+#ifdef VERSION_JP_V10
+            // The launch build has no FAST/MAX cases: every behaviour falls
+            // through to the shared speed test below, and FAST only clamps the
+            // target rather than accelerating outright.
+            var_a1 = 0;
+            switch (gSpeedCPUBehaviour[playerId]) { /* irregular */
+                case SPEED_CPU_BEHAVIOUR_NORMAL:
+                    break;
+                case SPEED_CPU_BEHAVIOUR_FAST:
+                    targetSpeed = 8.3333333f;
+                    break;
+                case SPEED_CPU_BEHAVIOUR_SLOW:
+                    if (((targetSpeed / 18.0f) * 216.0f) > 20.0f) {
+                        targetSpeed = 1.6666666f;
+                    }
+                    break;
+            }
+#else
             var_a1 = 1;
             switch (gSpeedCPUBehaviour[playerId]) { /* switch 1; irregular */
                 case SPEED_CPU_BEHAVIOUR_FAST:      /* switch 1 */
@@ -221,6 +239,7 @@ void regulate_cpu_speed(s32 playerId, f32 targetSpeed, Player* player) {
                     var_a1 = 0;
                     break;
             }
+#endif
             if (var_a1 != 1) {
                 if (speed < targetSpeed) {
                     if ((gDemoMode == 1) && (gCurrentCourseId != COURSE_AWARD_CEREMONY)) {
