@@ -12,6 +12,8 @@ def add_custom_arguments(parser):
             help="Set version to JP 1.0.")
     group.add_argument('-jp11', dest='lang', action='store_const', const='jp.v11',
             help="Set version to JP 1.1.")
+    group.add_argument('-cn5', dest='lang', action='store_const', const='cn.v5',
+            help="Set version to iQue v5.")
 
 def apply(config, args):
     lang = args.lang or 'us'
