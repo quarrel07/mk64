@@ -48,9 +48,11 @@ SECTIONS
       BUILD_DIR/src/main.o(.text*);
       BUILD_DIR/src/code_800029B0.o(.text*);
       BUILD_DIR/src/profiler.o(.text*);
-// JP links several translation units in a different order from us. The same
-// applies to the .data, .rodata and .bss blocks further down.
-#ifdef VERSION_JP
+// JP 1.1 links several translation units in a different order from us. The same
+// applies to the .data, .rodata and .bss blocks further down. JP 1.0 keeps the
+// us order here, and carries unused_overflow_check.o rather than the
+// unused_jp_utils.o split of the same eight words.
+#if defined(VERSION_JP) && !defined(VERSION_JP_V10)
       BUILD_DIR/src/replays.o(.text*);
       BUILD_DIR/src/camera.o(.text*);
       BUILD_DIR/src/cpu_vehicles_camera_path.jp.o(.text*);
