@@ -1,4 +1,4 @@
 {
-"common_tlut_debug_font": {"output_dir": "debug_font", "rom_offset": "0x132B50", "block_offset": "0x6ED8", "width": 4, "height": 4, "type": "rgba16", "jp.v10": {"rom_offset": "0x133570"}},
-"common_texture_debug_font": {"output_dir": "debug_font", "rom_offset": "0x132B50", "block_offset": "0x6EF8", "width": 128, "height": 32, "type": "ci4", "tlut": "common_tlut_debug_font", "jp.v10": {"rom_offset": "0x133570"}}
+"common_tlut_debug_font": {"output_dir": "debug_font", "rom_offset": "0x132B50", "block_offset": "0x6ED8", "width": 4, "height": 4, "type": "rgba16", "jp.v10": {"rom_offset": "0x133570"}, "cn.v5": {"rom_offset": "0x1328C0", "block_offset": "0x6ED8"}},
+"common_texture_debug_font": {"output_dir": "debug_font", "rom_offset": "0x132B50", "block_offset": "0x6EF8", "width": 128, "height": 32, "type": "ci4", "tlut": "common_tlut_debug_font", "jp.v10": {"rom_offset": "0x133570"}, "cn.v5": {"rom_offset": "0x1328C0", "block_offset": "0x6EF8"}}
 }
