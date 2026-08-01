@@ -1049,9 +1049,14 @@ void init_hud_one_player(void) {
     D_8018D388 = 4;
     D_8018D380 = 0x00A0;
     D_8018D384 = 0x0078;
+#ifdef VERSION_JP_V10
+    // JP 1.0 sets one value here; the other two arrived with the later revisions.
+    D_8018D3C4 = 0x00000050;
+#else
     D_8018D3C4 = 0x00000032;
     D_8018D3BC = 0x0028;
     D_8018D3C0 = 0x00000050;
+#endif
     D_801657A2 = (4.5f * DEGREES(1));
     switch (gModeSelection) { /* irregular */
         case 0:
@@ -1118,9 +1123,14 @@ void init_hud_two_player_vertical(void) {
 
     playerHUD[PLAYER_ONE].rankScaling = playerHUD[PLAYER_TWO].rankScaling = 0.5f;
 
+#ifdef VERSION_JP_V10
+    // JP 1.0 sets one value here; the other two arrived with the later revisions.
+    D_8018D3C4 = 0x28;
+#else
     D_8018D3C4 = 0x1E;
     D_8018D3BC = 0x18;
     D_8018D3C0 = 0x28;
+#endif
     D_801657A2 = DEGREES(9);
     switch (gModeSelection) { /* irregular */
         case GRAND_PRIX:
@@ -1192,9 +1202,14 @@ void init_hud_two_player_horizontal() {
     init_item_window(gItemWindowObjectByPlayerId[0]);
     init_item_window((gItemWindowObjectByPlayerId[1]));
 
+#ifdef VERSION_JP_V10
+    // JP 1.0 sets one value here; the other two arrived with the later revisions.
+    D_8018D3C4 = 0x28;
+#else
     D_8018D3C4 = 0x1E;
     D_8018D3BC = 0x18;
     D_8018D3C0 = 0x28;
+#endif
     D_801657A2 = DEGREES(9);
     switch (gModeSelection) { /* irregular */
         case GRAND_PRIX:
@@ -1309,8 +1324,13 @@ void init_hud_three_four_player(void) {
         playerHUD[PLAYER_THREE].unknownScaling = playerHUD[PLAYER_FOUR].unknownScaling = 1.5f;
 
     D_8018D158 = (s32) gPlayerCount;
+#ifdef VERSION_JP_V10
+    // JP 1.0 sets one value here; the other two arrived with the later revisions.
+    D_8018D3C4 = 0x0000001E;
+#else
     D_8018D3C4 = 0x00000014;
     D_8018D3BC = 0x00000010;
     D_8018D3C0 = 0x0000001E;
+#endif
     D_801657A2 = DEGREES(12);
 }
