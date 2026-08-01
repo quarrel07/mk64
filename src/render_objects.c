@@ -3233,7 +3233,13 @@ void func_80052044(void) {
 }
 
 void func_80052080(void) {
+#ifdef VERSION_JP_V10
+    // JP 1.0 routes this one through func_80051ABC with no second argument;
+    // the four sibling wrappers around it are unchanged.
+    func_80051ABC(240 - D_800DC5F0->cameraHeight, 0);
+#else
     func_80051C60(240 - D_800DC5F0->cameraHeight, D_8018D1F0);
+#endif
 }
 
 void func_800520C0(s32 arg0) {
