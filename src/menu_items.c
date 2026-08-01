@@ -13149,6 +13149,8 @@ void func_800AD2E8(MenuItem* arg0) {
 }
 #ifdef VERSION_EU
 #define FUNC_800ADF48DEF 70
+#elif defined(VERSION_JP_V10)
+#define FUNC_800ADF48DEF 25
 #else
 #define FUNC_800ADF48DEF 60
 #endif
