@@ -1170,7 +1170,7 @@ void set_current_path(s32 pathIndex) {
     gSelectedPathCount = gPathCountByPathIndex[pathIndex];
 }
 
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 s32 update_player_path_selection(s32 payerId, s32 pathIndex) {
     f32 posX;
     f32 posY;
@@ -1196,7 +1196,7 @@ s32 update_player_path_selection(s32 payerId, s32 pathIndex) {
 }
 #endif
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 void update_player_completion(s32 playerId) {
     s32 lap;
     u16 pathIndex = gPathIndexByPlayerId[playerId];
@@ -1227,7 +1227,7 @@ void update_player_completion(s32 playerId) {
 }
 #endif
 
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 void yoshi_valley_cpu_path(s32 playerId) {
     s16 previous;
 
@@ -1385,7 +1385,7 @@ void update_player_path_completion(s32 playerId, Player* player) {
         }
     }
     gPreviousPlayerZ[playerId] = playerZ;
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     if ((gCurrentCourseId == COURSE_YOSHI_VALLEY) && (gIsPlayerNewPathPoint == true)) {
         yoshi_valley_cpu_path(playerId);
         if (((player->type & PLAYER_HUMAN) == 0) || (player->type & PLAYER_CPU)) {
@@ -1403,7 +1403,7 @@ void update_player_path_completion(s32 playerId, Player* player) {
             }
         }
     } else {
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
         // JP 1.1 randomizes the CPU path on Yoshi Valley at the finish line,
         // where US uses the yoshi_valley_cpu_path machinery instead.
         if ((gCrossedFinishLine[playerId] == 1) && (gLapCountByPlayerId[playerId] >= 0) &&

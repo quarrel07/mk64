@@ -338,7 +338,7 @@ s16 update_path_index_with_track(f32 posX, f32 posY, f32 posZ, s16 pathPointInde
     return nearestPathPointIndex;
 }
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 /**
  * Finds the path point nearest to (posX, posY, posZ), seeded with the distance
  * to pathPointIndex itself so it always returns a valid index. Only JP 1.1 has
@@ -437,7 +437,7 @@ s16 update_path_index(f32 posX, f32 posY, f32 posZ, s16 pathPointIndex, s32 path
     return nearestPathPointIndex;
 }
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 void tweak_path_index_wario_stadium(f32 posX, f32 posY, f32 posZ, s16* pathPointIndex, UNUSED s32 arg4) {
     s16 var_v0;
 
@@ -511,7 +511,7 @@ s16 update_path_index_track_section(f32 posX, f32 posY, f32 posZ, Player* player
  * @param pathIndex Current track path index
  * @return New pathPoint index or -1 if invalid
  */
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 s16 update_player_path(f32 posX, f32 posY, f32 posZ, s16 pathPointIndex, Player* player, s32 playerId, s32 pathIndex) {
     s16 newPathPoint;
     TrackPathPoint* temp_v1;
@@ -643,7 +643,7 @@ s16 find_closest_vehicles_path_point(f32 xPos, UNUSED f32 yPos, f32 zPos, s16 pa
     return minimumIndex;
 }
 
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 s16 func_8000D24C(f32 posX, f32 posY, f32 posZ, s32* pathIndex) {
     UNUSED s32 pad;
     Collision sp24;
@@ -653,7 +653,7 @@ s16 func_8000D24C(f32 posX, f32 posY, f32 posZ, s32* pathIndex) {
 }
 #endif
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 s16 func_8000D2B4(f32 posX, f32 posY, f32 posZ, s16 pathPointIndex, s32 pathIndex) {
     s16 pathPoint;
 
