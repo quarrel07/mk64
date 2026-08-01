@@ -1616,7 +1616,11 @@ void course_update_path_point(Player* player, s8 playerId) {
         case COURSE_BOWSER_CASTLE:
             pathPoint = gNearestPathPointByPlayerId[playerId];
             if ((pathPoint >= 0x235) && (pathPoint < 0x247)) {
+#ifdef VERSION_JP_V10
+                player->nearestPathPointId = 0x21C;
+#else
                 player->nearestPathPointId = 0x214;
+#endif
             } else if ((pathPoint >= 0x267) && (pathPoint < 0x277)) {
                 player->nearestPathPointId = 0x25B;
             } else {
@@ -1643,7 +1647,7 @@ void course_update_path_point(Player* player, s8 playerId) {
             break;
         case COURSE_FRAPPE_SNOWLAND:
             pathPoint = gNearestPathPointByPlayerId[playerId];
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
             if (((pathPoint >= 0xF0) && (pathPoint < 0x11E)) || ((gCopyNearestPathPointByPlayerId[playerId] >= 0xF0) &&
                                                                  (gCopyNearestPathPointByPlayerId[playerId] < 0x11E)))
 #else
