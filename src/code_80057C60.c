@@ -2708,11 +2708,20 @@ void func_8005D0FC(s32 playerId) {
 void func_8005D18C(void) {
     if ((gModeSelection == GRAND_PRIX) && (gPlayerCountSelection1 == TIME_TRIALS)) {
         D_801657D8 = 1;
+#ifdef VERSION_JP_V10
+        D_8018D2A4 = 0;
+        D_8018D2BC = 0;
+#else
         D_8018D2BC = 0;
         D_8018D2A4 = 0;
+#endif
         if (gGPCurrentRaceRankByPlayerId[0] >= 4) {
             D_8018D1FC = 1;
+#ifndef VERSION_JP_V10
+            // The launch build zeroes D_8018D2A4 above but never raises it here,
+            // so its address is used once and IDO stops holding it in a register.
             D_8018D2A4 = 1;
+#endif
             D_8018D2BC = 1;
         }
     }
