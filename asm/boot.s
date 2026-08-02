@@ -15,6 +15,785 @@
 # 0xA4000040-0xA4000B6F: IPL3
 
 # IPL3 entry point jumped to from IPL2
+.ifdef VERSION_CN
+
+# An iQue image does not use the N64 CIC boot. This is the iQue boot code
+# transcribed from the dump: 716 words, verified by assembling this block
+# alone and requiring 0x40-0xB70 of the image back byte for byte. The 15
+# .word entries are encodings the assembler will not round-trip as mnemonics,
+# and j/jal are words because they encode an absolute address.
+#
+# The IPL3 font below is NOT inside this guard: it is byte-identical to US in
+# this dump, so every version shares the same extracted asset.
+glabel ipl3_entry # 0xA4000040
+    mtc0   $zero, $13
+    mtc0   $zero, $9
+    mtc0   $zero, $11
+    lui    $t0, 0xA470
+    lw     $t1, 12($t0)
+    bne    $t1, $zero, .Lboot_A40003FC
+    nop
+    addiu  $sp, $sp, -24
+    sw     $s3, 0($sp)
+    sw     $s4, 4($sp)
+    sw     $s5, 8($sp)
+    sw     $s6, 12($sp)
+    sw     $s7, 16($sp)
+    lui    $t0, 0xA470
+    lui    $t2, 0xA3F8
+    lui    $t3, 0xA3F0
+    lui    $t4, 0xA430
+    ori    $t1, $zero, 0x0040
+    sw     $t1, 4($t0)
+    addiu  $s1, $zero, 8000
+.Lboot_A4000090:
+    nop
+    addi   $s1, $s1, -1
+    bne    $s1, $zero, .Lboot_A4000090
+    nop
+    sw     $zero, 8($t0)
+    ori    $t1, $zero, 0x0014
+    sw     $t1, 12($t0)
+    sw     $zero, 0($t0)
+    addiu  $s1, $zero, 4
+.Lboot_A40000B4:
+    nop
+    addi   $s1, $s1, -1
+    bne    $s1, $zero, .Lboot_A40000B4
+    nop
+    ori    $t1, $zero, 0x000E
+    sw     $t1, 0($t0)
+    addiu  $s1, $zero, 32
+.Lboot_A40000D0:
+    addi   $s1, $s1, -1
+    bne    $s1, $zero, .Lboot_A40000D0
+    ori    $t1, $zero, 0x010F
+    sw     $t1, 0($t4)
+    lui    $t1, 0x1808
+    ori    $t1, $t1, 0x2838
+    sw     $t1, 8($t2)
+    sw     $zero, 20($t2)
+    lui    $t1, 0x8000
+    sw     $t1, 4($t2)
+    daddu  $t5, $zero, $zero
+    daddu  $t6, $zero, $zero
+    lui    $t7, 0xA3F0
+    daddu  $t8, $zero, $zero
+    lui    $t9, 0xA3F0
+    lui    $s6, 0xA000
+    daddu  $s7, $zero, $zero
+    lui    $a2, 0xA3F0
+    lui    $a3, 0xA000
+    daddu  $s2, $zero, $zero
+    lui    $s4, 0xA000
+    addiu  $sp, $sp, -72
+    daddu  $fp, $sp, $zero
+    lui    $s0, 0xA430
+    lw     $s0, 4($s0)
+    lui    $s1, 0x0101
+    ori    $s1, $s1, 0x0101
+    bne    $s0, $s1, .Lboot_A4000154
+    nop
+    addiu  $s0, $zero, 512
+    ori    $s1, $t3, 0x4000
+    beq    $zero, $zero, .Lboot_A400015C
+    nop
+.Lboot_A4000154:
+    addiu  $s0, $zero, 1024
+    ori    $s1, $t3, 0x8000
+.Lboot_A400015C:
+    sw     $t6, 4($s1)
+    addiu  $s5, $t7, 12
+    .word 0x0D0001D4
+    nop
+    beq    $v0, $zero, .Lboot_A4000250
+    nop
+    sw     $v0, 0($sp)
+    addiu  $t1, $zero, 8192
+    sw     $t1, 0($t4)
+    lw     $t3, 0($t7)
+    lui    $t0, 0xF0FF
+    and    $t3, $t3, $t0
+    sw     $t3, 4($sp)
+    addi   $sp, $sp, 8
+    addiu  $t1, $zero, 4096
+    sw     $t1, 0($t4)
+    lui    $t0, 0xB019
+    bne    $t3, $t0, .Lboot_A40001D4
+    nop
+    lui    $t0, 0x0800
+    add    $t8, $t8, $t0
+    add    $t9, $t9, $s0
+    add    $t9, $t9, $s0
+    lui    $t0, 0x0020
+    add    $s6, $s6, $t0
+    add    $s4, $s4, $t0
+    sll    $s2, $s2, 1
+    addi   $s2, $s2, 1
+    beq    $zero, $zero, .Lboot_A40001DC
+    nop
+.Lboot_A40001D4:
+    lui    $t0, 0x0010
+    add    $s4, $s4, $t0
+.Lboot_A40001DC:
+    addiu  $t0, $zero, 8192
+    sw     $t0, 0($t4)
+    lw     $t1, 36($t7)
+    lw     $k0, 0($t7)
+    addiu  $t0, $zero, 4096
+    sw     $t0, 0($t4)
+    andi   $t1, $t1, 0xFFFF
+    addiu  $t0, $zero, 1280
+    bne    $t1, $t0, .Lboot_A4000224
+    nop
+    lui    $k1, 0x0100
+    and    $k0, $k0, $k1
+    bne    $k0, $zero, .Lboot_A4000224
+    nop
+    lui    $t0, 0x101C
+    ori    $t0, $t0, 0x0A04
+    sw     $t0, 24($t7)
+    beq    $zero, $zero, .Lboot_A4000230
+.Lboot_A4000224:
+    lui    $t0, 0x080C
+    ori    $t0, $t0, 0x1204
+    sw     $t0, 24($t7)
+.Lboot_A4000230:
+    lui    $t0, 0x0800
+    add    $t6, $t6, $t0
+    add    $t7, $t7, $s0
+    add    $t7, $t7, $s0
+    addiu  $t5, $t5, 1
+    sltiu  $t0, $t5, 8
+    bne    $t0, $zero, .Lboot_A400015C
+    nop
+.Lboot_A4000250:
+    lui    $t0, 0xC000
+    sw     $t0, 12($t2)
+    lui    $t0, 0x8000
+    sw     $t0, 4($t2)
+    daddu  $sp, $fp, $zero
+    daddu  $v1, $zero, $zero
+.Lboot_A4000268:
+    lw     $t1, 4($sp)
+    lui    $t0, 0xB009
+    bne    $t1, $t0, .Lboot_A40002CC
+    nop
+    sw     $t8, 4($s1)
+    addiu  $s5, $t9, 12
+    lw     $a0, 0($sp)
+    addi   $sp, $sp, 8
+    addiu  $a1, $zero, 1
+    .word 0x0D000285
+    nop
+    lw     $t0, 0($s6)
+    lui    $t0, 0x0008
+    add    $t0, $t0, $s6
+    lw     $t1, 0($t0)
+    lw     $t0, 0($s6)
+    lui    $t0, 0x0008
+    add    $t0, $t0, $s6
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0400
+    add    $t6, $t6, $t0
+    add    $t9, $t9, $s0
+    lui    $t0, 0x0010
+    add    $s6, $s6, $t0
+    beq    $zero, $zero, .Lboot_A4000350
+.Lboot_A40002CC:
+    sw     $s7, 4($s1)
+    addiu  $s5, $a2, 12
+    lw     $a0, 0($sp)
+    addi   $sp, $sp, 8
+    addiu  $a1, $zero, 1
+    .word 0x0D000285
+    nop
+    lw     $t0, 0($a3)
+    lui    $t0, 0x0008
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0010
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0018
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lw     $t0, 0($a3)
+    lui    $t0, 0x0008
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0010
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0018
+    add    $t0, $t0, $a3
+    lw     $t1, 0($t0)
+    lui    $t0, 0x0800
+    add    $s7, $s7, $t0
+    add    $a2, $a2, $s0
+    add    $a2, $a2, $s0
+    lui    $t0, 0x0020
+    add    $a3, $a3, $t0
+.Lboot_A4000350:
+    addiu  $v1, $v1, 1
+    slt    $t0, $v1, $t5
+    bne    $t0, $zero, .Lboot_A4000268
+    nop
+    lui    $t2, 0xA470
+    sll    $s2, $s2, 19
+    lui    $t1, 0x0006
+    ori    $t1, $t1, 0x3634
+    or     $t1, $t1, $s2
+    sw     $t1, 16($t2)
+    lw     $t1, 16($t2)
+    lui    $t0, 0xA000
+    ori    $t0, $t0, 0x0300
+    lui    $t1, 0x0FFF
+    ori    $t1, $t1, 0xFFFF
+    and    $s6, $s6, $t1
+    sw     $s6, 24($t0)
+    daddu  $sp, $fp, $zero
+    addiu  $sp, $sp, 72
+    lw     $s3, 0($sp)
+    lw     $s4, 4($sp)
+    lw     $s5, 8($sp)
+    lw     $s6, 12($sp)
+    lw     $s7, 16($sp)
+    addiu  $sp, $sp, 24
+    lui    $t0, 0x8000
+    addiu  $t1, $t0, 16384
+    addiu  $t1, $t1, -32
+    mtc0   $zero, $28
+    mtc0   $zero, $29
+.Lboot_A40003C8:
+    .word 0xBD080000
+    sltu   $at, $t0, $t1
+    bne    $at, $zero, .Lboot_A40003C8
+    addiu  $t0, $t0, 32
+    lui    $t0, 0x8000
+    addiu  $t1, $t0, 8192
+    addiu  $t1, $t1, -16
+.Lboot_A40003E4:
+    .word 0xBD090000
+    sltu   $at, $t0, $t1
+    bne    $at, $zero, .Lboot_A40003E4
+    addiu  $t0, $t0, 16
+    beq    $zero, $zero, .Lboot_A400043C
+    nop
+.Lboot_A40003FC:
+    lui    $t0, 0x8000
+    addiu  $t1, $t0, 16384
+    addiu  $t1, $t1, -32
+    mtc0   $zero, $28
+    mtc0   $zero, $29
+.Lboot_A4000410:
+    .word 0xBD080000
+    sltu   $at, $t0, $t1
+    bne    $at, $zero, .Lboot_A4000410
+    addiu  $t0, $t0, 32
+    lui    $t0, 0x8000
+    addiu  $t1, $t0, 8192
+    addiu  $t1, $t1, -16
+.Lboot_A400042C:
+    .word 0xBD010000
+    sltu   $at, $t0, $t1
+    bne    $at, $zero, .Lboot_A400042C
+    addiu  $t0, $t0, 16
+.Lboot_A400043C:
+    lui    $t0, 0x0400
+    daddiu $t0, $t0, 1180
+    lui    $t1, 0x000F
+    ori    $t1, $t1, 0xFFFF
+    and    $t0, $t0, $t1
+    lui    $t2, 0xA400
+    lui    $t3, 0xFFF0
+    and    $t2, $t2, $t3
+    or     $t0, $t0, $t2
+    lui    $t3, 0x0400
+    daddiu $t3, $t3, 1868
+    and    $t3, $t3, $t1
+    or     $t3, $t3, $t2
+    lui    $t1, 0xA000
+.Lboot_A4000474:
+    lw     $t5, 0($t0)
+    sw     $t5, 0($t1)
+    addiu  $t0, $t0, 4
+    addiu  $t1, $t1, 4
+    sltu   $at, $t0, $t3
+    bne    $at, $zero, .Lboot_A4000474
+    nop
+    lui    $t4, 0x8000
+    jr     $t4
+    nop
+    lui    $t3, 0xB000
+    lui    $t2, 0x1FFF
+    ori    $t2, $t2, 0xFFFF
+    lw     $t1, 8($t3)
+    and    $t1, $t1, $t2
+    lui    $at, 0xA460
+    sw     $t1, 0($at)
+.Lboot_A40004B8:
+    lui    $t0, 0xA460
+    lw     $t0, 16($t0)
+    andi   $t0, $t0, 0x0002
+    bne    $t0, $zero, .Lboot_A40004B8
+    nop
+    addiu  $t0, $zero, 4096
+    add    $t0, $t0, $t3
+    and    $t0, $t0, $t2
+    lui    $at, 0xA460
+    sw     $t0, 4($at)
+    lui    $t2, 0x000F
+    ori    $t2, $t2, 0xFFFF
+    lui    $at, 0xA460
+    sw     $t2, 12($at)
+.Lboot_A40004F0:
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    lui    $t3, 0xA460
+    lw     $t3, 16($t3)
+    andi   $t3, $t3, 0x0001
+    bne    $t3, $zero, .Lboot_A40004F0
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    lui    $t1, 0xA408
+    lw     $t1, 0($t1)
+    beq    $t1, $zero, .Lboot_A4000698
+    nop
+    addiu  $t2, $zero, 65
+    lui    $at, 0xA404
+    sw     $t2, 16($at)
+    lui    $at, 0xA408
+    sw     $zero, 0($at)
+.Lboot_A4000698:
+    lui    $t3, 0x00AA
+    ori    $t3, $t3, 0xAAAE
+    lui    $at, 0xA404
+    sw     $t3, 16($at)
+    addiu  $t0, $zero, 1365
+    lui    $at, 0xA430
+    sw     $t0, 12($at)
+    lui    $at, 0xA480
+    sw     $zero, 24($at)
+    lui    $at, 0xA450
+    sw     $zero, 12($at)
+    addiu  $t1, $zero, 2048
+    lui    $at, 0xA430
+    sw     $t1, 0($at)
+    addiu  $t1, $zero, 2
+    lui    $at, 0xA460
+    sw     $t1, 16($at)
+    lui    $t0, 0xA000
+    ori    $t0, $t0, 0x0300
+    sw     $s4, 0($t0)
+    sw     $s3, 4($t0)
+    sw     $s5, 12($t0)
+    beq    $s3, $zero, .Lboot_A4000700
+    sw     $s7, 20($t0)
+    beq    $zero, $zero, .Lboot_A4000704
+    lui    $t1, 0xA600
+.Lboot_A4000700:
+    lui    $t1, 0xB000
+.Lboot_A4000704:
+    sw     $t1, 8($t0)
+    lui    $t0, 0xA400
+    addi   $t1, $t0, 4096
+.Lboot_A4000710:
+    sw     $zero, 0($t0)
+    addiu  $t0, $t0, 4
+    bne    $t0, $t1, .Lboot_A4000710
+    nop
+    lui    $t0, 0xA400
+    ori    $t0, $t0, 0x1000
+    addi   $t1, $t0, 4096
+.Lboot_A400072C:
+    sw     $zero, 0($t0)
+    addiu  $t0, $t0, 4
+    bne    $t0, $t1, .Lboot_A400072C
+    nop
+    lui    $t3, 0xB000
+    lw     $t1, 8($t3)
+    jr     $t1
+    nop
+    nop
+.Lboot_A4000750:
+    addiu  $sp, $sp, -160
+    sw     $v0, 0($sp)
+    sw     $v1, 4($sp)
+    sw     $a0, 8($sp)
+    sw     $a1, 12($sp)
+    sw     $a2, 16($sp)
+    sw     $a3, 20($sp)
+    sw     $t0, 24($sp)
+    sw     $t1, 28($sp)
+    sw     $t2, 32($sp)
+    sw     $t3, 36($sp)
+    sw     $t4, 40($sp)
+    sw     $t5, 44($sp)
+    sw     $t6, 48($sp)
+    sw     $t7, 52($sp)
+    sw     $t8, 56($sp)
+    sw     $t9, 60($sp)
+    sw     $s0, 64($sp)
+    sw     $s1, 68($sp)
+    sw     $s2, 72($sp)
+    sw     $s3, 76($sp)
+    sw     $s4, 80($sp)
+    sw     $s5, 84($sp)
+    sw     $s6, 88($sp)
+    sw     $s7, 92($sp)
+    sw     $fp, 96($sp)
+    sw     $ra, 100($sp)
+    daddu  $s0, $zero, $zero
+    daddu  $s1, $zero, $zero
+.Lboot_A40007C4:
+    .word 0x0D000217
+    nop
+    addiu  $s0, $s0, 1
+    addu   $s1, $s1, $v0
+    slti   $t1, $s0, 4
+    bne    $t1, $zero, .Lboot_A40007C4
+    nop
+    srl    $a0, $s1, 2
+    .word 0x0D000285
+    addiu  $a1, $zero, 1
+    srl    $v0, $s1, 2
+    lw     $v1, 4($sp)
+    lw     $a0, 8($sp)
+    lw     $a1, 12($sp)
+    lw     $a2, 16($sp)
+    lw     $a3, 20($sp)
+    lw     $t0, 24($sp)
+    lw     $t1, 28($sp)
+    lw     $t2, 32($sp)
+    lw     $t3, 36($sp)
+    lw     $t4, 40($sp)
+    lw     $t5, 44($sp)
+    lw     $t6, 48($sp)
+    lw     $t7, 52($sp)
+    lw     $t8, 56($sp)
+    lw     $t9, 60($sp)
+    lw     $s0, 64($sp)
+    lw     $s1, 68($sp)
+    lw     $s2, 72($sp)
+    lw     $s3, 76($sp)
+    lw     $s4, 80($sp)
+    lw     $s5, 84($sp)
+    lw     $s6, 88($sp)
+    lw     $s7, 92($sp)
+    lw     $fp, 96($sp)
+    lw     $ra, 100($sp)
+    jr     $ra
+    addiu  $sp, $sp, 160
+.Lboot_A400085C:
+    addiu  $sp, $sp, -32
+    sw     $ra, 28($sp)
+    daddu  $t1, $zero, $zero
+    daddu  $t3, $zero, $zero
+    daddu  $t4, $zero, $zero
+.Lboot_A4000870:
+    slti   $k0, $t4, 64
+    beq    $k0, $zero, .Lboot_A40008D4
+    nop
+    .word 0x0D000239
+    daddu  $a0, $t4, $zero
+    blez   $v0, .Lboot_A40008A0
+    nop
+    subu   $k0, $v0, $t1
+    multu  $k0, $t4
+    mflo   $k0
+    addu   $t3, $t3, $k0
+    daddu  $t1, $v0, $zero
+.Lboot_A40008A0:
+    addiu  $t4, $t4, 1
+    slti   $k0, $t1, 80
+    bne    $k0, $zero, .Lboot_A4000870
+    nop
+    sll    $a0, $t3, 2
+    subu   $a0, $a0, $t3
+    sll    $a0, $a0, 2
+    subu   $a0, $a0, $t3
+    sll    $a0, $a0, 1
+    .word 0x0D000256
+    addiu  $a0, $a0, -880
+    beq    $zero, $zero, .Lboot_A40008D8
+    nop
+.Lboot_A40008D4:
+    daddu  $v0, $zero, $zero
+.Lboot_A40008D8:
+    lw     $ra, 28($sp)
+    jr     $ra
+    addiu  $sp, $sp, 32
+.Lboot_A40008E4:
+    addiu  $sp, $sp, -40
+    sw     $ra, 28($sp)
+    daddu  $v0, $zero, $zero
+    .word 0x0D000285
+    addiu  $a1, $zero, 2
+    daddu  $fp, $zero, $zero
+.Lboot_A40008FC:
+    addiu  $k0, $zero, -1
+    sw     $k0, 0($s4)
+    sw     $k0, 0($s4)
+    sw     $k0, 4($s4)
+    lw     $v1, 4($s4)
+    srl    $v1, $v1, 16
+    daddu  $gp, $zero, $zero
+.Lboot_A4000918:
+    andi   $k0, $v1, 0x0001
+    beq    $k0, $zero, .Lboot_A4000928
+    nop
+    addiu  $v0, $v0, 1
+.Lboot_A4000928:
+    srl    $v1, $v1, 1
+    addiu  $gp, $gp, 1
+    slti   $k0, $gp, 8
+    bne    $k0, $zero, .Lboot_A4000918
+    nop
+    addiu  $fp, $fp, 1
+    slti   $k0, $fp, 10
+    bne    $k0, $zero, .Lboot_A40008FC
+    nop
+    lw     $ra, 28($sp)
+    jr     $ra
+    addiu  $sp, $sp, 40
+.Lboot_A4000958:
+    addiu  $sp, $sp, -40
+    sw     $ra, 28($sp)
+    sw     $a0, 32($sp)
+    daddu  $t0, $zero, $zero
+    daddu  $t2, $zero, $zero
+    ori    $t5, $zero, 0xC800
+    sb     $zero, 39($sp)
+    daddu  $t6, $zero, $zero
+.Lboot_A4000978:
+    slti   $k0, $t6, 64
+    bne    $k0, $zero, .Lboot_A400098C
+    nop
+    beq    $zero, $zero, .Lboot_A4000A08
+    daddu  $v0, $zero, $zero
+.Lboot_A400098C:
+    daddu  $a0, $t6, $zero
+    .word 0x0D000285
+    addiu  $a1, $zero, 1
+    .word 0x0D0002AA
+    addiu  $a0, $sp, 39
+    .word 0x0D0002AA
+    addiu  $a0, $sp, 39
+    lbu    $k0, 39($sp)
+    addiu  $k1, $zero, 800
+    multu  $k0, $k1
+    mflo   $t0
+    lw     $a0, 32($sp)
+    subu   $k0, $t0, $a0
+    bgez   $k0, .Lboot_A40009CC
+    nop
+    subu   $k0, $a0, $t0
+.Lboot_A40009CC:
+    slt    $k1, $k0, $t5
+    beq    $k1, $zero, .Lboot_A40009E0
+    nop
+    daddu  $t5, $k0, $zero
+    daddu  $t2, $t6, $zero
+.Lboot_A40009E0:
+    lw     $a0, 32($sp)
+    slt    $k1, $t0, $a0
+    beq    $k1, $zero, .Lboot_A4000A00
+    nop
+    addiu  $t6, $t6, 1
+    slti   $k1, $t6, 65
+    bne    $k1, $zero, .Lboot_A4000978
+    nop
+.Lboot_A4000A00:
+    addu   $v0, $t2, $t6
+    srl    $v0, $v0, 1
+.Lboot_A4000A08:
+    lw     $ra, 28($sp)
+    jr     $ra
+    addiu  $sp, $sp, 40
+.Lboot_A4000A14:
+    addiu  $sp, $sp, -40
+    sw     $ra, 28($sp)
+    lui    $t7, 0x4200
+    andi   $a0, $a0, 0x00FF
+    xori   $a0, $a0, 0x003F
+    addiu  $k1, $zero, 1
+    bne    $a1, $k1, .Lboot_A4000A3C
+    nop
+    lui    $k0, 0x8000
+    or     $t7, $t7, $k0
+.Lboot_A4000A3C:
+    andi   $k0, $a0, 0x0001
+    sll    $k0, $k0, 6
+    or     $t7, $t7, $k0
+    andi   $k0, $a0, 0x0002
+    sll    $k0, $k0, 13
+    or     $t7, $t7, $k0
+    andi   $k0, $a0, 0x0004
+    sll    $k0, $k0, 20
+    or     $t7, $t7, $k0
+    andi   $k0, $a0, 0x0008
+    sll    $k0, $k0, 4
+    or     $t7, $t7, $k0
+    andi   $k0, $a0, 0x0010
+    sll    $k0, $k0, 11
+    or     $t7, $t7, $k0
+    andi   $k0, $a0, 0x0020
+    sll    $k0, $k0, 18
+    or     $t7, $t7, $k0
+    sw     $t7, 0($s5)
+    addiu  $k1, $zero, 1
+    bne    $a1, $k1, .Lboot_A4000A9C
+    nop
+    lui    $k0, 0xA430
+    sw     $zero, 0($k0)
+.Lboot_A4000A9C:
+    lw     $ra, 28($sp)
+    jr     $ra
+    addiu  $sp, $sp, 40
+.Lboot_A4000AA8:
+    addiu  $sp, $sp, -40
+    sw     $ra, 28($sp)
+    daddu  $fp, $zero, $zero
+    addiu  $k0, $zero, 8192
+    lui    $k1, 0xA430
+    sw     $k0, 0($k1)
+    lw     $fp, 0($s5)
+    addiu  $k0, $zero, 4096
+    sw     $k0, 0($k1)
+    daddu  $k0, $zero, $zero
+    addiu  $k1, $zero, 64
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 6
+    or     $k0, $k0, $k1
+    addiu  $k1, $zero, 16384
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 13
+    or     $k0, $k0, $k1
+    lui    $k1, 0x0040
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 20
+    or     $k0, $k0, $k1
+    addiu  $k1, $zero, 128
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 4
+    or     $k0, $k0, $k1
+    ori    $k1, $zero, 0x8000
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 11
+    or     $k0, $k0, $k1
+    lui    $k1, 0x0080
+    and    $k1, $k1, $fp
+    srl    $k1, $k1, 18
+    or     $k0, $k0, $k1
+    sb     $k0, 0($a0)
+    lw     $ra, 28($sp)
+    jr     $ra
+    addiu  $sp, $sp, 40
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+
+.else
+
 glabel ipl3_entry # 0xA4000040
     mtc0  $zero, $13
     mtc0  $zero, $9
@@ -796,6 +1575,8 @@ func_A4000AD0:
     jr    $ra
      nop
     nop
+
+.endif
 
 # 0xA4000B70-0xA4000FFF: IPL3 Font
 glabel ipl3_font
