@@ -3187,6 +3187,11 @@ void func_80051C60(s16 arg0, s32 arg1) {
     s32 objectIndex;
     Object* object;
 
+#ifdef VERSION_JP_V10
+    // The launch build takes the height as passed; the per-course adjustments
+    // and the D_801658FE alternate set came later.
+    var_s5 = arg0;
+#else
     if (D_801658FE == 0) {
         if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
             var_s5 = arg0;
@@ -3202,6 +3207,7 @@ void func_80051C60(s16 arg0, s32 arg1) {
     } else {
         var_s5 = arg0 + 0x20;
     }
+#endif
     D_8018D228 = 0xFF;
     gSPDisplayList(gDisplayListHead++, D_0D007A60);
     if ((u8) D_8018D230 != 0) {
