@@ -4232,6 +4232,31 @@ void render_object_train_penguins(s32 cameraId) {
     for (i = 0; i < NUM_PENGUINS; i++) {
         objectIndex = indexObjectList1[i];
         if (gObjectList[objectIndex].state >= 2) {
+#ifdef VERSION_JP_V10
+            // The launch build culls the near penguins at 0x2AAB (60 degrees)
+            // where later revisions widen it to 0x4000, and it assigns the
+            // angle in every arm instead of hoisting it.
+            if (gPlayerCountSelection1 == 1) {
+                if (i == 0) {
+                    var_a3 = 0x000005DC;
+                    var_s1 = 0x4000;
+                } else if (func_80072320(objectIndex, 8) != 0) {
+                    var_a3 = 0x00000320;
+                    var_s1 = 0x2AAB;
+                } else {
+                    var_a3 = 0x000003E8;
+                    var_s1 = 0x4000;
+                }
+            } else {
+                if (func_80072320(objectIndex, 8) != 0) {
+                    var_a3 = 0x000001F4;
+                    var_s1 = 0x2AAB;
+                } else {
+                    var_a3 = 0x00000258;
+                    var_s1 = 0x5555;
+                }
+            }
+#else
             if (gPlayerCountSelection1 == 1) {
                 var_s1 = 0x4000;
                 if (i == 0) {
@@ -4250,6 +4275,7 @@ void render_object_train_penguins(s32 cameraId) {
                     var_s1 = 0x5555;
                 }
             }
+#endif
             temp_s1 = func_8008A364(objectIndex, cameraId, var_s1, var_a3);
             if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
                 func_800557B4(objectIndex, (u32) temp_s1, var_s3);
