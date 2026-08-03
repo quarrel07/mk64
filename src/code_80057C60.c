@@ -1622,9 +1622,17 @@ void update_object(void) {
             if (gGamestate != CREDITS_SEQUENCE) {
                 update_crabs();
             }
+#ifdef VERSION_JP_V10
+            // The launch build updates the seagulls in one-player races only;
+            // the two-player allowance came later.
+            if ((gPlayerCount == 1) || (gGamestate == CREDITS_SEQUENCE)) {
+                update_seagulls();
+            }
+#else
             if ((gPlayerCount == 1) || (gPlayerCount == 2) || (gGamestate == CREDITS_SEQUENCE)) {
                 update_seagulls();
             }
+#endif
             break;
         case COURSE_LUIGI_RACEWAY:
             if (D_80165898 != 0) {
