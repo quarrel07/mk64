@@ -854,7 +854,12 @@ $(ELF): $(O_FILES) $(COURSE_DATA_TARGETS) $(BUILD_DIR)/$(LD_SCRIPT) $(BUILD_DIR)
 $(ROM): $(ELF)
 	$(call print,Building ROM:,$<,$@)
 	$(V)$(OBJCOPY) $(OBJCOPYFLAGS) $< $(@:.z64=.bin) -O binary
+ifeq ($(VERSION),cn.v5)
+# iQue has no CIC; the header checksum words stay zero
+	$(V)cp $(@:.z64=.bin) $@
+else
 	$(V)$(N64CKSUM) $(@:.z64=.bin) $@
+endif
 	$(V)$(PYTHON) $(TOOLS_DIR)/doxygen_symbol_gen.py $(BUILD_DIR)/$(TARGET).map
 
 $(BUILD_DIR)/$(TARGET).hex: $(TARGET).z64
