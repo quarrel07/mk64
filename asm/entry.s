@@ -11,6 +11,36 @@
 .section .text, "ax"
 
 glabel entry_point
+.ifdef VERSION_CN
+/* iQue forms every address with lui/ori, runs the clear loop stores-first with
+   a nop in the delay slot, and clears 4 more bytes after it. Bss start and
+   stack top are literals until the cn.v5 data layout is real. */
+  lui   $t0, (0x800F3B50 >> 16)
+  ori   $t0, (0x800F3B50 & 0xFFFF)
+  lui   $t1, (0x000A00A0 >> 16)
+  ori   $t1, (0x000A00A0 & 0xFFFF)
+.Lcn_clear:
+  sw    $zero, ($t0)
+  sw    $zero, 4($t0)
+  addi  $t0, $t0, 8
+  addi  $t1, $t1, -8
+  bnez  $t1, .Lcn_clear
+   nop
+  sw    $zero, ($t0)
+  lui   $sp, (0x8014F610 >> 16)
+  ori   $sp, (0x8014F610 & 0xFFFF)
+  lui   $t2, %hi(main_func)
+  ori   $t2, %lo(main_func)
+  jr    $t2
+   nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+.else
 /* 001000 80000400 3C08800F */  lui   $t0, %hi(_mainSegmentEnd) # $t0, 0x800f
 .ifdef VERSION_JP
 /* JP clears a smaller region */
@@ -39,5 +69,6 @@ glabel entry_point
 /* 00103C 8000043C 00000000 */  nop   
 /* 001040 80000440 00000000 */  nop   
 /* 001044 80000444 00000000 */  nop   
-/* 001048 80000448 00000000 */  nop   
-/* 00104C 8000044C 00000000 */  nop   
+/* 001048 80000448 00000000 */  nop
+/* 00104C 8000044C 00000000 */  nop
+.endif
