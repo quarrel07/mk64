@@ -7114,6 +7114,18 @@ void update_snowmen(void) {
             continue;
         }
 
+#ifdef VERSION_JP_V10
+        // The launch build reads the state through the object pointer, which
+        // is what keeps it in a callee-saved register across the call.
+        object = &gObjectList[objectIndex];
+        if (object->state == 0) {
+            continue;
+        }
+        func_8008379C(objectIndex);
+        if (object->state != 0) {
+            continue;
+        }
+#else
         if (gObjectList[objectIndex].state == 0) {
             continue;
         }
@@ -7121,8 +7133,11 @@ void update_snowmen(void) {
         if (gObjectList[objectIndex].state != 0) {
             continue;
         }
+#endif
         delete_object_wrapper(&gObjectParticle2[var_s0]);
+#ifndef VERSION_JP_V10
         if (var_s0) {} // ??
+#endif
     }
 
     for (var_s0 = 0; var_s0 < NUM_SNOWMEN; var_s0++) {
@@ -7138,6 +7153,13 @@ void update_snowmen(void) {
                 func_800726CC(var_s4, 0x0000000A);
                 func_8008701C(var_s3, 0x0000000A);
                 func_800836F0(object->pos);
+#ifdef VERSION_JP_V10
+                // The launch build also fires the 0x04000000 reaction here,
+                // the same idiom func_80081D34 uses.
+                if (is_obj_flag_status_active(var_s4, 0x04000000) != 0) {
+                    func_80072180();
+                }
+#endif
             }
         } else if (func_80072320(var_s4, 2) != 0) {
             func_800722CC(var_s4, 2);
