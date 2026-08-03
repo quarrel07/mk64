@@ -3697,7 +3697,13 @@ u8 gen_random_item(s16 rank, s16 isCpu) {
     u8 randomItem;
 
     // sRandomItemIndex not initialized for further randomness?
+#ifdef VERSION_JP_V10
+    // The launch build seeds without the controller-entropy term; see
+    // randomize_seed_from_controller in code_80057C60.c.
+    sRandomItemIndex = ((u32) rand + sRandomItemIndex + gRaceFrameCounter) % 100U;
+#else
     sRandomItemIndex = ((u32) rand + (sRandomItemIndex + gControllerRandom) + gRaceFrameCounter) % 100U;
+#endif
 
     if (gModeSelection == VERSUS) {
         switch (gPlayerCountSelection1) {

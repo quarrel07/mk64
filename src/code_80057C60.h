@@ -77,7 +77,9 @@ void render_hud_3p_multi(void);
 void func_800597B8(void);
 void render_hud_4p_multi(void);
 void func_80059820(s32);
+#ifndef VERSION_JP_V10
 void randomize_seed_from_controller(s32);
+#endif
 void func_8005994C(void);
 void func_8005995C(void);
 void func_80059A88(s32);
@@ -376,7 +378,9 @@ extern s8 D_801658EC;
 extern s8 D_801658F4;
 extern u8 sRandomItemIndex;
 extern s8 D_801658FE;
+#ifndef VERSION_JP_V10
 extern u8 gControllerRandom;
+#endif
 
 extern s16 D_80165900;
 extern s8 D_80165908;
