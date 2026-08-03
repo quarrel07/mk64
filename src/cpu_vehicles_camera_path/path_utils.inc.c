@@ -169,7 +169,13 @@ void set_track_offset_position(u16 pathPointIndex, f32 trackOffset, s16 pathInde
     gOffsetPosition[2] = ((temp_f0 * (z1 + z3)) / 2.0f) + ((temp_f12 * (z2 + z4)) / 2.0f);
 }
 
+#ifdef VERSION_JP_V10
+// The launch signature carries the player id and never reads it; later
+// revisions dropped the parameter.
+s16 func_8000BD94(UNUSED s32 playerId, f32 posX, f32 posY, f32 posZ, s32 pathIndex) {
+#else
 s16 func_8000BD94(f32 posX, f32 posY, f32 posZ, s32 pathIndex) {
+#endif
     f32 x_dist;
     f32 y_dist;
     f32 z_dist;
@@ -584,7 +590,11 @@ s16 update_player_path(f32 posX, f32 posY, f32 posZ, s16 pathPointIndex, Player*
             } else {
                 newPathPoint = update_path_index(posX, posY, posZ, pathPointIndex, pathIndex);
                 if (newPathPoint == -1) {
+#ifdef VERSION_JP_V10
+                    newPathPoint = func_8000BD94(playerId, posX, posY, posZ, pathIndex);
+#else
                     newPathPoint = func_8000BD94(posX, posY, posZ, pathIndex);
+#endif
                     temp_v1 = &gTrackPaths[pathIndex][newPathPoint];
                     posX = (f32) temp_v1->posX;
                     posY = (f32) temp_v1->posY;

@@ -3433,7 +3433,9 @@ void func_800188F4(Camera* camera, UNUSED Player* unusePlayer, UNUSED s32 arg2, 
 // JP 1.0 has two more camera routines here, reached from func_8001A588's
 // switch. No other cartridge carries them. Literal words for now: they close
 // the 0xc80 size gap so the rest of the layout can be measured.
+GLOBAL_ASM("asm/jp.v10/func_80019068.s")
 GLOBAL_ASM("asm/jp.v10/func_800190A8.s")
+GLOBAL_ASM("asm/jp.v10/func_80019724.s")
 GLOBAL_ASM("asm/jp.v10/func_80019774.s")
 #endif
 
@@ -3556,6 +3558,13 @@ void func_80019760(Camera* camera, UNUSED Player* player, UNUSED s32 arg2, s32 c
     camera->rot[2] = 0;
 }
 
+#ifdef VERSION_JP_V10
+void func_80019068(s32);
+void func_800190A8(Camera*, Player*, s8);
+void func_80019724(s32);
+void func_80019774(Camera*, Player*, s8);
+#endif
+
 void camera_start_cinematic_shot(s32 playerId, s32 cameraId) {
     s32 pathIndex;
     Camera* camera = camera1;
@@ -3599,6 +3608,16 @@ void camera_start_cinematic_shot(s32 playerId, s32 cameraId) {
         case 8:
             func_80018718(playerId, 0.0f, cameraId, (s16) pathIndex);
             break;
+#ifdef VERSION_JP_V10
+        // Two more launch-only camera modes; their routines are the two
+        // small leaf stubs beside func_800190A8 and func_80019774.
+        case 10:
+            func_80019068(playerId);
+            break;
+        case 11:
+            func_80019724(playerId);
+            break;
+#endif
         case 12:
             func_80019118(playerId, -1.0f, cameraId, (s16) pathIndex);
             break;
@@ -3615,11 +3634,23 @@ void camera_start_cinematic_shot(s32 playerId, s32 cameraId) {
             func_80015314(playerId, 0.0f, cameraId);
             break;
     }
+#ifdef VERSION_JP_V10
+    // The launch build asks the finder which path it landed on instead of
+    // telling it which one to search, reusing the same variable - which is
+    // why the cartridge keeps pathIndex in memory and the cases read it as
+    // the low halfword of the stack slot.
+    gNearestPathPointByCameraId[cameraId] =
+        func_8000D24C(camera->pos[0], camera->pos[1], camera->pos[2], &pathIndex);
+    if ((s16) D_80164680[cameraId] == 9) {
+        D_80163DD8[cameraId] = pathIndex;
+    }
+#else
     gNearestPathPointByCameraId[cameraId] =
         func_8000BD94(camera->pos[0], camera->pos[1], camera->pos[2], (s32) pathIndex);
     if ((s16) D_80164680[cameraId] == 9) {
         D_80163DD8[cameraId] = (s32) pathIndex;
     }
+#endif
 }
 
 void func_80019B50(s32 cameraIndex, u16 arg1) {
@@ -3882,11 +3913,6 @@ void func_8001A518(s32 arg0, s32 arg1, s32 arg2) {
             break;
     }
 }
-
-#ifdef VERSION_JP_V10
-void func_800190A8(Camera*, Player*, s8);
-void func_80019774(Camera*, Player*, s8);
-#endif
 
 void func_8001A588(UNUSED u16* localD_80152300, Camera* camera, Player* player, s8 index, s32 cameraIndex) {
     s32 var_v1;
