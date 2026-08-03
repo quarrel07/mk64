@@ -3936,12 +3936,17 @@ void func_80033AE0(Player* player, struct Controller* controller, s8 playerIndex
                       0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
                       0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8 };
 
-    if ( 
+    if (
          (
            ((player->effects & HOP_EFFECT) != HOP_EFFECT) &&
            (
              ((player->unk_0C0 / DEGREES(1) <= 6) && (player->unk_0C0 / DEGREES(1) >= -6)) ||
+#ifdef VERSION_JP_V10
+             // The launch build lets either shoulder trigger hold the drift.
+             (((controller->button & L_TRIG) != L_TRIG) && ((controller->button & R_TRIG) != R_TRIG))
+#else
              ((controller->button & R_TRIG) != R_TRIG)
+#endif
            )
          ) ||
          (((player->speed / 18.0f) * 216.0f) <= 20.0f) ||
