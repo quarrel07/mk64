@@ -324,7 +324,11 @@ void func_80083248(s32);
 void func_800833D0(s32, s32);
 void func_80083474(s32);
 void update_hedgehogs(void);
+#ifdef VERSION_JP_V10
+void func_80083538(s32, Vec3f, s32);
+#else
 void func_80083538(s32, Vec3f, s32, s32);
+#endif
 void func_800836F0(Vec3f);
 void func_8008379C(s32);
 void func_80083868(s32);
