@@ -6418,6 +6418,19 @@ void func_80081D34(s32 objectIndex) {
     player = gPlayerOne;
     var_s4 = camera1;
     for (playerIndex = 0; playerIndex < D_8018D158; playerIndex++, player++, var_s4++) {
+#ifdef VERSION_JP_V10
+        // The launch build tumbles every player this object touches: no Boo
+        // exemption, and no star sound in place of the tumble.
+        if ((is_obj_flag_status_active(objectIndex, 0x00000200) != 0) &&
+            (has_collided_with_player(objectIndex, player) != 0)) {
+            if ((player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB)) {
+                object = &gObjectList[objectIndex];
+                if (is_obj_flag_status_active(objectIndex, 0x04000000) != 0) {
+                    func_80072180();
+                }
+                var_s5 = 1;
+                player->triggers |= HIGH_TUMBLE_TRIGGER;
+#else
         if ((is_obj_flag_status_active(objectIndex, 0x00000200) != 0) && !(player->effects & BOO_EFFECT) &&
             (has_collided_with_player(objectIndex, player) != 0)) {
             if ((player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB)) {
@@ -6431,6 +6444,7 @@ void func_80081D34(s32 objectIndex) {
                 } else {
                     player->triggers |= HIGH_TUMBLE_TRIGGER;
                 }
+#endif
                 object->direction_angle[1] = var_s4->rot[1];
                 object->velocity[1] = (player->speed / 2) + 3.0;
                 object->unk_034 = player->speed + 1.0;
