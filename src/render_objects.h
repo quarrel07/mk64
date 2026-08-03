@@ -156,7 +156,11 @@ void func_8004A0B0(s32, s32, u16, f32, u8*, Vtx*, s32, s32, s32, s32);
 void func_8004A12C(s32, s32, u16, f32, s32, s32, s32, s32, u8*, Vtx*, s32, s32, s32, s32);
 void func_8004A1BC(s32, s32, u16, f32, u8*, Vtx*, s32, s32, s32, s32);
 void func_8004A258(s32, s32, u16, f32, u8*, Vtx*, s32, s32, s32, s32);
+#ifdef VERSION_JP_V10
+void func_8004A2F4(s32, s32, u16, f32, u8*, Vtx*, s32, s32, s32, s32);
+#else
 void func_8004A2F4(s32, s32, u16, f32, s32, s32, s32, s32, u8*, Vtx*, s32, s32, s32, s32);
+#endif
 void func_8004A384(s32, s32, u16, f32, s32, s32, s32, s32, u8*, Vtx*, s32, s32, s32, s32);
 void func_8004A414(Vec3f, Vec3su, f32, u8*, Vtx*, s32, s32, s32, s32);
 void func_8004A488(Vec3f, Vec3su, f32, u8*, Vtx*, s32, s32, s32, s32);

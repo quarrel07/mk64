@@ -1238,6 +1238,27 @@ UNUSED void func_8004A1BC(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, V
     func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
 }
 
+#ifdef VERSION_JP_V10
+// The launch build's pair are both colorless ten-argument helpers, differing
+// only in the display list. Later revisions gave the speedometer one color
+// arguments (func_8004A2F4) and swapped the display lists between the two
+// positions; on the cartridge the two bodies differ in exactly one word.
+void func_8004A258(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
+                   s32 arg9) {
+    func_80042330(arg0, arg1, arg2, arg3);
+    gSPDisplayList(gDisplayListHead++, D_0D007A40);
+    gDPSetCombineLERP(gDisplayListHead++, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0);
+    func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
+}
+
+void func_8004A2F4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
+                   s32 arg9) {
+    func_80042330(arg0, arg1, arg2, arg3);
+    gSPDisplayList(gDisplayListHead++, D_0D007A60);
+    gDPSetCombineLERP(gDisplayListHead++, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0);
+    func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
+}
+#else
 void func_8004A258(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
                    s32 arg9) {
     func_80042330(arg0, arg1, arg2, arg3);
@@ -1253,6 +1274,7 @@ void func_8004A2F4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, s32 red, s32 green, s
     func_8004B414(red, green, blue, alpha);
     func_80049970(texture, arg9, argA, argB, argC, argD);
 }
+#endif
 
 void func_8004A384(s32 arg0, s32 arg1, u16 arg2, f32 arg3, s32 red, s32 green, s32 blue, s32 alpha, u8* texture,
                    Vtx* arg9, s32 argA, s32 argB, s32 argC, s32 argD) {
@@ -2427,10 +2449,17 @@ void func_8004EB38(s32 playerId) {
 }
 
 void func_8004ED40(s32 arg0) {
+#ifdef VERSION_JP_V10
+    func_8004A258(playerHUD[arg0].speedometerX, playerHUD[arg0].speedometerY, 0U, 1.0f, common_texture_speedometer,
+                  D_0D0064B0, 64, 96, 64, 48);
+    func_8004A2F4(D_8018CFEC, D_8018CFF4, D_8016579E, 1.0f, common_texture_speedometer_needle, D_0D005FF0, 0x40, 0x20,
+                  0x40, 0x20);
+#else
     func_8004A2F4(playerHUD[arg0].speedometerX, playerHUD[arg0].speedometerY, 0U, 1.0f, D_8018D300, D_8018D308,
                   D_8018D310, 0xFF, common_texture_speedometer, D_0D0064B0, 64, 96, 64, 48);
     func_8004A258(D_8018CFEC, D_8018CFF4, D_8016579E, 1.0f, common_texture_speedometer_needle, D_0D005FF0, 0x40, 0x20,
                   0x40, 0x20);
+#endif
 }
 
 void func_8004EE54(s32 arg0) {
