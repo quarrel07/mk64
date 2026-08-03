@@ -6593,11 +6593,20 @@ void func_8008241C(s32 objectIndex, s32 arg1) {
     temp_f4 = random_int(0x00C8) + -100.0;
     if (gGamestate == 9) {
         set_obj_origin_pos(objectIndex, sp22 + -360.0, sp20 + 60.0, temp_f4 + -1300.0);
+#ifdef VERSION_JP_V10
+    // The launch build does not mirror the seagull spawns.
+    } else if (gObjectList[objectIndex].unk_0D5 != 0) {
+        set_obj_origin_pos(objectIndex, sp22 + 328.0, sp20 + 20.0, temp_f4 + 2541.0);
+    } else {
+        set_obj_origin_pos(objectIndex, sp22 + -985.0, sp20 + 15.0, temp_f4 + 1200.0);
+    }
+#else
     } else if (gObjectList[objectIndex].unk_0D5 != 0) {
         set_obj_origin_pos(objectIndex, (sp22 + 328.0) * xOrientation, sp20 + 20.0, temp_f4 + 2541.0);
     } else {
         set_obj_origin_pos(objectIndex, (sp22 + -985.0) * xOrientation, sp20 + 15.0, temp_f4 + 1200.0);
     }
+#endif
     set_obj_direction_angle(objectIndex, 0U, 0U, 0U);
     gObjectList[objectIndex].unk_034 = 1.0f;
     func_80086EF0(objectIndex);
@@ -6919,7 +6928,13 @@ void update_hedgehogs(void) {
     func_80072120(indexObjectList2, 0x0000000F);
 }
 
+#ifdef VERSION_JP_V10
+// Like the smoke chain, the launch build has no particle-count parameter
+// here: fixed 0x800 spacing instead of dividing the circle by the count.
+void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2) {
+#else
 void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2, s32 arg3) {
+#endif
     Object* object;
 
     init_object(objectIndex, 0);
@@ -6934,7 +6949,11 @@ void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2, s32 arg3) {
     object->velocity[1] = (object->velocity[1] * 0.5) + 2.6;
     object->unk_034 = random_int(0x000AU);
     object->unk_034 = (object->unk_034 * 0.1) + 4.5;
+#ifdef VERSION_JP_V10
+    object->direction_angle[1] = arg2 * 0x800;
+#else
     object->direction_angle[1] = (arg2 << 0x10) / arg3;
+#endif
     object->origin_pos[0] = arg1[0];
     object->origin_pos[1] = arg1[1];
     object->origin_pos[2] = arg1[2];
@@ -6945,6 +6964,16 @@ void func_800836F0(Vec3f arg0) {
     s32 objectIndex;
     s32 i;
 
+#ifdef VERSION_JP_V10
+    // Fixed count in the launch build; the D_8018D3BC-driven count came later.
+    for (i = 0; i < 40; i++) {
+        objectIndex = add_unused_obj_index(&gObjectParticle2[0], &gNextFreeObjectParticle2, gObjectParticle2_SIZE);
+        if (objectIndex == NULL_OBJECT_ID) {
+            break;
+        }
+        func_80083538(objectIndex, arg0, i);
+    }
+#else
     for (i = 0; i < D_8018D3BC; i++) {
         objectIndex = add_unused_obj_index(&gObjectParticle2[0], &gNextFreeObjectParticle2, gObjectParticle2_SIZE);
         if (objectIndex == NULL_OBJECT_ID) {
@@ -6952,6 +6981,7 @@ void func_800836F0(Vec3f arg0) {
         }
         func_80083538(objectIndex, arg0, i, D_8018D3BC);
     }
+#endif
 }
 
 void func_8008379C(s32 objectIndex) {
