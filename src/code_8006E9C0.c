@@ -532,8 +532,13 @@ void func_8006FA94(void) {
     D_8018D20C = 0;
     D_8018D2F0 = D_8018D2F8 = 0;
     D_8018D320 = 3;
+#ifdef VERSION_JP_V10
+    // One four-way chain at launch; the revisions split D_8018D2AC out.
+    D_8018D2AC = D_8018D2A4 = D_8018D2B4 = D_8018D2BC = 0;
+#else
     D_8018D2AC = 0;
     D_8018D2A4 = D_8018D2B4 = D_8018D2BC = 0;
+#endif
     D_8018D2C8[0] = D_8018D2C8[1] = D_8018D2C8[2] = D_8018D2C8[3] = 0;
     D_8016581C = 0;
     D_8016580C = 0;
