@@ -7245,7 +7245,12 @@ void func_8008421C(UNUSED s32 arg0, s32 playerId) {
     s32 objectIndex;
     s32 var_s0;
 
+#ifdef VERSION_JP_V10
+    // the launch build still reads the spawn budget from D_8018D3C4
+    for (var_s0 = 0; var_s0 < D_8018D3C4; var_s0++) {
+#else
     for (var_s0 = 0; var_s0 < D_8018D3C0; var_s0++) {
+#endif
         objectIndex = add_unused_obj_index(gObjectParticle2, &gNextFreeObjectParticle2, gObjectParticle2_SIZE);
         if (objectIndex == NULL_OBJECT_ID) {
             break;
