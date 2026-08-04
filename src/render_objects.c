@@ -3073,6 +3073,20 @@ void func_800514BC(void) {
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
+#ifdef VERSION_JP_V10
+// Two launch-only leftovers ahead of the leaf renderer: an empty function
+// and an unreferenced render-state setup. Later revisions deleted both.
+void func_800522EC(void) {
+}
+
+void func_800522F4(void) {
+    gSPDisplayList(gDisplayListHead++, D_0D0079C8);
+    gSPClearGeometryMode(gDisplayListHead++, G_CULL_BOTH);
+    gSPDisplayList(gDisplayListHead++, D_0D007AE0);
+    gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
+}
+#endif
+
 void render_object_leaf_particle(UNUSED s32 cameraId) {
     s32 someIndex;
     s32 leafIndex;
