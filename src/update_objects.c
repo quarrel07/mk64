@@ -2281,7 +2281,12 @@ void init_object_smoke_particle(s32 objectIndex, s32 flameIndex) {
     gObjectList[objectIndex].textureList = common_texture_particle_smoke[0];
     gObjectList[objectIndex].sizeScaling = 0.8f;
 
+#ifdef VERSION_JP_V10
+    // The launch build does not mirror the torch smoke spawns.
+    gObjectList[objectIndex].origin_pos[0] = (f32) * (gTorchSpawns + (flameIndex * 3) + 0);
+#else
     gObjectList[objectIndex].origin_pos[0] = (f32) * (gTorchSpawns + (flameIndex * 3) + 0) * xOrientation;
+#endif
     gObjectList[objectIndex].origin_pos[1] = (f32) * (gTorchSpawns + (flameIndex * 3) + 1);
     gObjectList[objectIndex].origin_pos[2] = (f32) * (gTorchSpawns + (flameIndex * 3) + 2);
     gObjectList[objectIndex].unk_034 = 0;
