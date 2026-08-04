@@ -4766,6 +4766,11 @@ void func_80057114(s32 cameraId) {
 UNUSED void func_80057330(void) {
 }
 
+// The launch build does not have this function here: its body is
+// func_800522F4, sitting ahead of the leaf renderer, and this slot is one
+// of four adjacent empty stubs on the cartridge. The revisions deleted the
+// pair up there and landed the body in this family.
+#ifndef VERSION_JP_V10
 UNUSED void func_80057338(void) {
 
     gSPDisplayList(gDisplayListHead++, D_0D0079C8);
@@ -4776,6 +4781,7 @@ UNUSED void func_80057338(void) {
 
 UNUSED void func_800573BC(void) {
 }
+#endif
 
 UNUSED void func_800573C4(void) {
 }
