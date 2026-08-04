@@ -3260,19 +3260,68 @@ void func_80051F9C(void) {
     func_80051ABC(temp_a0, D_8018D1F0);
 }
 
+#ifdef VERSION_JP_V10
+// At launch the per-course shadow-height cascade lives in these two wrappers,
+// with its own per-course table for the D_801658FE mode; later revisions
+// moved a simplified cascade into func_80051C60 and slimmed the wrappers.
+void func_80052044(void) {
+    s16 height = 240 - D_800DC5EC->cameraHeight;
+
+    if (D_801658FE == 0) {
+        if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+        } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+            height -= 0x10;
+        } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+            height -= 0x10;
+        } else {
+            height += 0x10;
+        }
+    } else if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+    } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+        height -= 8;
+    } else if (gCurrentCourseId == COURSE_KALAMARI_DESERT) {
+        height += 0x60;
+    } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+        height -= 8;
+    } else {
+        height += 8;
+    }
+    func_80051C60(height, 0);
+}
+
+void func_80052080(void) {
+    s16 height = 240 - D_800DC5F0->cameraHeight;
+
+    if (D_801658FE == 0) {
+        if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+        } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+            height -= 0x10;
+        } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+            height -= 0x10;
+        } else {
+            height += 0x10;
+        }
+    } else if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+    } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+        height -= 8;
+    } else if (gCurrentCourseId == COURSE_KALAMARI_DESERT) {
+        height += 0x60;
+    } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+        height -= 8;
+    } else {
+        height += 8;
+    }
+    func_80051C60(height, D_8018D1F0);
+}
+#else
 void func_80052044(void) {
     func_80051C60(240 - D_800DC5EC->cameraHeight, 0);
 }
 
 void func_80052080(void) {
-#ifdef VERSION_JP_V10
-    // JP 1.0 routes this one through func_80051ABC with no second argument;
-    // the four sibling wrappers around it are unchanged.
-    func_80051ABC(240 - D_800DC5F0->cameraHeight, 0);
-#else
     func_80051C60(240 - D_800DC5F0->cameraHeight, D_8018D1F0);
-#endif
 }
+#endif
 
 void func_800520C0(s32 arg0) {
     if (gObjectList[arg0].unk_0D5 == 0) {
@@ -3425,6 +3474,11 @@ void func_800528EC(s32 arg0) {
     s32 var_s3;
     s32 objectIndex;
     Object* object;
+#ifdef VERSION_JP_V10
+    // The launch build holds the viewport id in a saved register across the
+    // loop, which only a local copy reproduces.
+    s32 viewport = arg0;
+#endif
 
     D_80183E80[0] = D_8016582C[0];
     D_80183E80[1] = D_8016582C[1];
@@ -3454,7 +3508,11 @@ void func_800528EC(s32 arg0) {
             objectIndex = gObjectParticle2[var_s3];
             if (objectIndex != NULL_OBJECT_ID) {
                 object = &gObjectList[objectIndex];
+#ifdef VERSION_JP_V10
+                if ((object->state > 0) && (viewport == object->unk_084[7])) {
+#else
                 if ((object->state > 0) && (arg0 == object->unk_084[7]) && (MTX_HUD_BUDGET_OK)) {
+#endif
                     rsp_set_matrix_transformation(object->pos, D_80183E80, object->sizeScaling);
                     gSPVertex(gDisplayListHead++, D_0D005BD0, 3, 0);
                     gSPDisplayList(gDisplayListHead++, D_0D006930);
