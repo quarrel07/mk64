@@ -3103,7 +3103,7 @@ void render_object_snowflakes_particles(void) {
 void func_800518F8(s32 objectIndex, s16 arg1, s16 arg2) {
     UNUSED s32 pad[1];
     if (gObjectList[objectIndex].status & 0x10) {
-        if (D_8018D228 != gObjectList[objectIndex].unk_0D5) {
+        if (gObjectList[objectIndex].unk_0D5 != D_8018D228) {
             D_8018D228 = gObjectList[objectIndex].unk_0D5;
             func_80044DA0(gObjectList[objectIndex].activeTexture, gObjectList[objectIndex].textureWidth,
                           gObjectList[objectIndex].textureHeight);
@@ -3116,7 +3116,7 @@ void func_800518F8(s32 objectIndex, s16 arg1, s16 arg2) {
 
 void func_800519D4(s32 objectIndex, s16 arg1, s16 arg2) {
     if (gObjectList[objectIndex].status & 0x10) {
-        if (D_8018D228 != gObjectList[objectIndex].unk_0D5) {
+        if (gObjectList[objectIndex].unk_0D5 != D_8018D228) {
             D_8018D228 = gObjectList[objectIndex].unk_0D5;
             func_80044DA0(gObjectList[objectIndex].activeTexture, gObjectList[objectIndex].textureWidth,
                           gObjectList[objectIndex].textureHeight);
