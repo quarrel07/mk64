@@ -143,8 +143,8 @@ SECTIONS
       #if GCC
          BUILD_DIR/asm/os/llmuldiv_gcc.o(.text);
       #endif
-      #ifdef VERSION_JP
-      /* JP links sqrtf before __osGetCurrFaultedThread (57 call sites agree) */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
+      /* JP 1.1 links sqrtf before __osGetCurrFaultedThread (57 call sites agree); JP 1.0 keeps the US order */
       BUILD_DIR/asm/os/sqrtf.o(.text);
       BUILD_DIR/src/os/__osGetCurrFaultedThread.o(.text*);
       #else
