@@ -757,6 +757,15 @@ ifeq ($(VERSION),cn.v5)
   CN_IDO71_OBJS := $(addprefix $(BUILD_DIR)/src/,$(addsuffix .o,$(CN_IDO71_SRCS)))
   $(CN_IDO71_OBJS): CC := $(IDO71_ROOT)/cc
   $(BUILD_DIR)/src/cpu_vehicles_camera_path.jp.o: CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py $(IDO71_ROOT)/cc -- $(AS) $(ASFLAGS) --
+
+  # render_objects and menu_items are EGCS-compiled on iQue (egcs-2.91.66, the
+  # BBPlayer SDK compiler), run via a container shim because the binaries are
+  # 32-bit Linux. -mno-abicalls is load-bearing: -fno-pic alone still emits
+  # $gp saves and jalr-$t9 call sequences.
+  CN_EGCS_OBJS := $(BUILD_DIR)/src/render_objects.o $(BUILD_DIR)/src/menu_items.jp.o
+  $(CN_EGCS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -fsigned-char -w $(DEF_INC_CFLAGS)
 endif
 
 #==============================================================================#
