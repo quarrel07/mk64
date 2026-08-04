@@ -770,6 +770,18 @@ ifeq ($(VERSION),cn.v5)
   $(CN_EGCS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  # iQue's libultra C is the same EGCS compiler at -mips2 -O2 (SDK library
+  # build). Only the files measured 100% byte-exact are listed; the rest of
+  # src/os is either still 5.3-matched or carries real iQue source changes
+  # (flash saves, eeprom emulation, interrupt masks).
+  CN_EGCS_LIB_SRCS := __osPiCreateAccessQueue __osSiCreateAccessQueue guOrthoF \
+                      osViSwapBuffer __osSpDeviceBusy __osSiDeviceBusy \
+                      __osAiDeviceBusy __osSiRawWriteIo __osSiRawReadIo
+  CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
+  $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -fsigned-char -w $(DEF_INC_CFLAGS)
 endif
 
 #==============================================================================#
