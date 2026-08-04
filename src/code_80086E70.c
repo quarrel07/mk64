@@ -1180,6 +1180,24 @@ s32 func_80089B50(s32 objectIndex) {
     sp40 = 0;
     player = gPlayerOne;
     if (is_obj_flag_status_active(objectIndex, 0x00000200) != 0) {
+#ifdef VERSION_JP_V10
+        // The launch build gives star players nothing here - no tumble, no
+        // sound, and no hit reported - where later revisions add the sound
+        // and count the hit.
+        for (playerIndex = 0; playerIndex < D_8018D158; playerIndex++, player++) {
+            if ((gObjectList[objectIndex].state != 0) && !(player->effects & (BOO_EFFECT | EXPLOSION_CRASH_EFFECT)) &&
+                (player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB) &&
+                (has_collided_horizontally_with_player(objectIndex, player) != 0)) {
+                if (!(player->effects & STAR_EFFECT)) {
+                    player->triggers |= VERTICAL_TUMBLE_TRIGGER;
+                    sp40 = 1;
+                    if (is_obj_flag_status_active(objectIndex, 0x04000000) != 0) {
+                        func_80072180();
+                    }
+                }
+            }
+        }
+#else
         for (playerIndex = 0; playerIndex < D_8018D158; playerIndex++, player++, test++) {
             if ((gObjectList[objectIndex].state != 0) && !(player->effects & (BOO_EFFECT | EXPLOSION_CRASH_EFFECT)) &&
                 (player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB) &&
@@ -1195,6 +1213,7 @@ s32 func_80089B50(s32 objectIndex) {
                 sp40 = 1;
             }
         }
+#endif
     }
     return sp40;
 }
@@ -1213,11 +1232,18 @@ s32 func_80089CBC(s32 objectIndex, f32 arg1) {
                     (has_collided_with_player_and_within_height(objectIndex, player, arg1) != 0)) {
                     if (!(player->effects & STAR_EFFECT)) {
                         player->triggers |= VERTICAL_TUMBLE_TRIGGER;
+#ifdef VERSION_JP_V10
+                        // The launch build reports the hit only for players
+                        // it actually tumbled.
+                        var_s7 = 1;
+#endif
                         if (is_obj_flag_status_active(objectIndex, 0x04000000) != 0) {
                             func_80072180();
                         }
                     }
+#ifndef VERSION_JP_V10
                     var_s7 = 1;
+#endif
                 }
             }
         }
