@@ -6,7 +6,9 @@
 #include "math_util.h"
 #include "collision.h"
 
-#ifndef VERSION_JP
+// The launch cartridge has both functions; JP 1.1 is the revision that
+// removed them, so the JP side of this guard is really JP 1.1.
+#if !defined(VERSION_JP) || defined(VERSION_JP_V10)
 void func_800914A0(void) {
     D_80152308 = gPlayerOneCopy->unk_006 + 7;
     if ((s32) D_8015F6F8 < D_80152308) {
