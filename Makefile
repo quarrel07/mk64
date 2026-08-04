@@ -765,7 +765,7 @@ ifeq ($(VERSION),cn.v5)
   CN_EGCS_OBJS := $(BUILD_DIR)/src/render_objects.o $(BUILD_DIR)/src/menu_items.jp.o
   $(CN_EGCS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
-    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -fsigned-char -w $(DEF_INC_CFLAGS)
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
   # iQue's libultra C is the same EGCS compiler at -mips2 -O2 (SDK library
   # build). Only the files measured 100% byte-exact are listed; the rest of
@@ -777,7 +777,7 @@ ifeq ($(VERSION),cn.v5)
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
-    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -fsigned-char -w $(DEF_INC_CFLAGS)
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 endif
 
 #==============================================================================#
