@@ -745,6 +745,20 @@ $(GLOBAL_ASM_AUDIO_O_FILES): CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py
 
 $(GLOBAL_ASM_RACING_O_FILES): CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
 
+# iQue rebuilt most game code with IDO 7.1 (measured per file: these objects
+# match the cart under 7.1 -O2 -mips2 where 5.3 drifts). Audio and everything
+# unlisted still matches 5.3 output; render_objects/menu_items are EGCS and
+# handled separately. Only the macOS 7.1 binaries are vendored so far.
+ifeq ($(VERSION),cn.v5)
+  IDO71_ROOT := $(TOOLS_DIR)/ido-recomp-7.1/$(DETECTED_OS)
+  CN_IDO71_SRCS := main camera effects menus replays save spawn_players kart_dma \
+                   math_util_2 render_player player_controller update_objects \
+                   code_80057C60 code_80086E70
+  CN_IDO71_OBJS := $(addprefix $(BUILD_DIR)/src/,$(addsuffix .o,$(CN_IDO71_SRCS)))
+  $(CN_IDO71_OBJS): CC := $(IDO71_ROOT)/cc
+  $(BUILD_DIR)/src/cpu_vehicles_camera_path.jp.o: CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py $(IDO71_ROOT)/cc -- $(AS) $(ASFLAGS) --
+endif
+
 #==============================================================================#
 # Libultra Definitions                                                         #
 #==============================================================================#
