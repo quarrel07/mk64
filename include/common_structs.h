@@ -421,23 +421,9 @@ typedef struct {
     /* 0x0C */ u32 someTimer1;
     /* 0x10 */ u32 timeLastTouchedFinishLine; // Sum of time of all completed laps
     // Times at which each lap was completed
-    union {
-        struct {
-            /* 0x14 */ u32 lap1CompletionTime;
-            /* 0x18 */ u32 lap2CompletionTime;
-            /* 0x1C */ u32 lap3CompletionTime;
-        };
-        u32 lapCompletionTimes[3];
-    };
+    u32 lapCompletionTimes[3];
     // Time each lap took to complete
-    union {
-        struct {
-            /* 0x20 */ u32 lap1Duration;
-            /* 0x24 */ u32 lap2Duration;
-            /* 0x28 */ u32 lap3Duration;
-        };
-        u32 lapDurations[3];
-    };
+    u32 lapDurations[3];
     // Integer parts of the player's X/Y/X coordinates
     /* 0x2C */ s32 posXInt;
     /* 0x30 */ s32 posYInt;
@@ -458,14 +444,7 @@ typedef struct {
     /* 0x4C */ s16 unk_4C;
     /* 0x4E */ s16 timerX; // X coordinate of the on screen timer
     // These 4 X coordinates are "slide" values
-    union {
-        struct {
-            /* 0x50 */ s16 lap1CompletionTimeX; // Pulls double-duty as timerAfterImage1X
-            /* 0x52 */ s16 lap2CompletionTimeX; // Pulls double-duty as timerAfterImage2X
-            /* 0x54 */ s16 lap3CompletionTimeX;
-        };
-        /* 0x50 */ s16 lapCompletionTimeXs[3];
-    };
+    s16 lapCompletionTimeXs[3];
     /* 0x56 */ s16 totalTimeX;
     /* 0x58 */ s16 timerY; // Y coordinate of the on screen timer (used as Y coordinate for lap completion times in
                            // post-race screen)
@@ -518,3 +497,15 @@ typedef struct {
 #define HUD_PLAYERS_SIZE 4
 
 #endif
+
+// gcc 2.91 (the iQue EGCS compiler) cannot see anonymous struct/union members.
+// The named lap fields alias the arrays that replaced those unions above.
+#define lap1CompletionTime lapCompletionTimes[0]
+#define lap2CompletionTime lapCompletionTimes[1]
+#define lap3CompletionTime lapCompletionTimes[2]
+#define lap1Duration lapDurations[0]
+#define lap2Duration lapDurations[1]
+#define lap3Duration lapDurations[2]
+#define lap1CompletionTimeX lapCompletionTimeXs[0]
+#define lap2CompletionTimeX lapCompletionTimeXs[1]
+#define lap3CompletionTimeX lapCompletionTimeXs[2]

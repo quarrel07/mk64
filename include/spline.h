@@ -33,7 +33,12 @@ typedef struct SplineData {
     // The control point arrays have more control points in them than this number indicates. Not sure why though.
     s16 numControlPoints;
     // This has to be an array for this to work, so just make it size 1
+#ifdef __GNUC__
+    // gcc 2.91 (the iQue EGCS compiler) has no C99 flexible arrays
+    SplineControlPoint controlPoints[0];
+#else
     SplineControlPoint controlPoints[];
+#endif
 } SplineData;
 
 // All other SplineDataXX types are for use as data only. The size of the array in them matters a lot.
