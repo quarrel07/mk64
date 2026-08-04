@@ -274,12 +274,12 @@ char* D_800EB710 = "ゴール直後の強制ソート\n";
 char* D_800EB728 = "2PGPで片方がゴール直後の強制ソート\n";
 // rank calculation error
 char* D_800EB74C = "順位計算エラー！！ (num %d) (rank %d) (e_rank %d)\n";
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 // Bypass switching error!!!(num %d org_bipas %d bipas %d)
 char* D_800EB780 = "バイパス切り替え エラー!!!(num %d  org_bipas %d  bipas %d)\n";
 #endif
 char* D_800EB7BC = "(%d) rap %3d  rate_count_F %10.2f  rap_count_F %10.2f  area %5d \n";
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 char* D_800EB800 = "MAP 4 enemy bipas No. change (%d: line %d)\n";
 #else
 // Enter the maze! enemy %d (%d --> %d)
@@ -309,19 +309,19 @@ char* D_800EB9DC = "get_oga_area_sub_BP() ... エリアが見つからないッ�
 // Status: (%d, %d, %d)
 char* D_800EBA20 = "  状況: (%d, %d, %d) \n";
 char* D_800EBA38 = "<%d> (%d, %d, %d) [%d] lng %f\n";
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 // Choco Mountain misstep!!! (area %d, y %7.2f)
 char* D_800EBA3C = "チョコマウンテン踏み外し！！！ (area %d, y %7.2f)\n";
 #endif
 // Wario Stadium Jump failed! ! ! (area %d, y %7.2f)
 char* D_800EBA58 = "ワリオスタジアム  ジャンプ失敗！！！ (area %d, y %7.2f)\n";
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 char* D_800EBA94 = "水に落ちた！！  センターラインに強制移動しました (num %d: area %d : kart %d) (%d,%d,%d)\n";
 #else
 // I fell in the water! ! Forced to centerline (num %d: area %d ) (%d,%d,%d)
 char* D_800EBA94 = "水に落ちた！！  センターラインに強制移動しました (num %d: area %d ) (%d,%d,%d)\n";
 #endif
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 // Course match! ! (Slacking: with bump) Forced move to center line (num %d: area %d ==>%d) (group %d) (%d,%d,%d)
 char* D_800EBAE4 = "こーすあうと！！（手抜き中:バンプ有り）  センターラインに強制移動しました (num %d: area %d ==>%d) "
                    "(group %d) (%d,%d,%d)\n";
@@ -617,7 +617,7 @@ char* D_800ECF30 = "道路に到着\n";
 char* D_800ECF3C = "４位の人終了\n";
 // OGA commendation move end
 char* D_800ECF4C = "OGA 表彰 move 終了\n";
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 char* D_800ECF60 = "OGAWA DEBUG DRAW\n";
 #endif
 
