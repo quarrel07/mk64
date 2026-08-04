@@ -12,6 +12,7 @@
 #include "code_80057C60.h"
 #include "defines.h"
 #include "camera.h"
+#include "course.h"
 
 #pragma intrinsic(sqrtf)
 
@@ -618,11 +619,21 @@ void func_80041D34(void) {
             guOrtho(&gGfxPool->mtxOrtho, 0.0f, 160.0f, 120.0f, 0.0f, -1.0f, 1.0f, 1.0f);
             break;
         case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
+#ifdef VERSION_JP_V10
+            // The launch build keeps the half-height ortho on Koopa Beach
+            // even in the alternate mode.
+            if ((D_801658FE == 0) || (gCurrentCourseId == COURSE_KOOPA_BEACH)) {
+                guOrtho(&gGfxPool->mtxOrtho, 0.0f, 320.0f, 120.0f, 0.0f, -1.0f, 1.0f, 1.0f);
+            } else {
+                guOrtho(&gGfxPool->mtxOrtho, 0.0f, 320.0f, 240.0f, 0.0f, -1.0f, 1.0f, 1.0f);
+            }
+#else
             if (D_801658FE == 0) {
                 guOrtho(&gGfxPool->mtxOrtho, 0.0f, 320.0f, 120.0f, 0.0f, -1.0f, 1.0f, 1.0f);
             } else {
                 guOrtho(&gGfxPool->mtxOrtho, 0.0f, 320.0f, 240.0f, 0.0f, -1.0f, 1.0f, 1.0f);
             }
+#endif
             break;
         case SCREEN_MODE_3P_4P_SPLITSCREEN:
             guOrtho(&gGfxPool->mtxOrtho, 0.0f, 320.0f, 240.0f, 0.0f, -1.0f, 1.0f, 1.0f);
