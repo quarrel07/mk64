@@ -126,17 +126,21 @@ char external_unused_string02[] = "***** CAM MAX %d *****\n";
 u8 D_800EA244 = 0;
 char external_unused_string03[] = "entryout !!! %d\n";
 char external_unused_string04[] = "AFTER GOAL VOICE FLAME %d\n";
+#ifndef VERSION_JP_V10
 char external_unused_string05[] = "*** Pause On ***\n";
 char external_unused_string06[] = "*** Pause Off ***\n";
+#endif
 char external_unused_string07[] = "CALLED!! Na_ChangeSoundMode player %d\n";
 char external_unused_string08[] = "CALLED!! Na_ChangeSoundMode spec   %d\n";
 char external_unused_string09[] = "Interfaced Spec Change player %d\n";
 char external_unused_string10[] = "Interfaced Spec Change spec   %d\n";
 UNUSED u32 external_unused_u32s[] = { 0xff000000, 0xff000000, 0x00000000 };
 char external_unused_string11[] = "FX MIX %d\n";
+#ifndef VERSION_JP_V10
 char external_unused_string12[] = "************** Seq Fadeout ***************\n";
 char external_unused_string13[] = "SEQ FADE OUT TIME %d\n";
-#if defined(VERSION_EU) || defined(VERSION_JP)
+#endif
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
 char external_unused_string_eu_02[] = "************** SE Fadeout ***************\n";
 char external_unused_string_eu_03[] = "SE FADE OUT TIME %d\n";
 #endif
