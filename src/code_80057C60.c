@@ -728,10 +728,16 @@ void render_object_for_player(s32 cameraId) {
                 render_object_crabs(cameraId);
             }
             if (gGamestate != CREDITS_SEQUENCE) {
-
+#ifdef VERSION_JP_V10
+                // One player only at launch, as in update_object.
+                if (gPlayerCount == 1) {
+                    render_object_seagulls(cameraId);
+                }
+#else
                 if ((gPlayerCount == 1) || (gPlayerCount == 2)) {
                     render_object_seagulls(cameraId);
                 }
+#endif
             } else {
                 render_object_seagulls(cameraId);
             }
