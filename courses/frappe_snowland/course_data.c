@@ -1428,13 +1428,13 @@ Gfx d_course_frappe_snowland_dl_33E0[] = {
     gsSPDisplayList(d_course_frappe_snowland_packed_dl_5B58), gsSPEndDisplayList(),
 };
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* VERSION_JP path order: moved to end of file */
 TrackPathPoint d_course_frappe_snowland_unknown_path[] = {
 #include "courses/frappe_snowland/d_course_frappe_snowland_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* VERSION_JP path order: moved to end of file */
 TrackPathPoint d_course_frappe_snowland_track_path[] = {
 #include "courses/frappe_snowland/d_course_frappe_snowland_track_path.inc.c"
 };
@@ -1620,7 +1620,7 @@ TrackSections d_course_frappe_snowland_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* VERSION_JP path order: JP puts the paths last */
 TrackPathPoint d_course_frappe_snowland_unknown_path[] = {
 #include "courses/frappe_snowland/d_course_frappe_snowland_unknown_path.inc.c"
 };
