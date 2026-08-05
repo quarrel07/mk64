@@ -483,11 +483,15 @@ SECTIONS
       BUILD_DIR/src/racing/memory.o(.bss*);
       BUILD_DIR/src/buffers/random.o(.bss*);
       #ifdef VERSION_JP
-      /* JP's racing overlay reserves 0x40 more bss than US. It cannot be in
-         ROM (racing's ROM size only differs by the 0x10 of unmatched code),
-         and no symbol past gActorHotAirBalloonItemBox is lui/lo16-referenced,
-         so the owning variable is not yet identified. */
+      /* JP reserves more bss here than US - 0x40 on 1.1, 0x80 on the launch
+         build. It cannot be in ROM, and no symbol past
+         gActorHotAirBalloonItemBox is lui/lo16-referenced, so the owning
+         variable is not yet identified. */
+      #ifdef VERSION_JP_V10
+      . += 0x80;
+      #else
       . += 0x40;
+      #endif
       #endif
       . = ALIGN(0x10);
    }
