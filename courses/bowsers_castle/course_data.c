@@ -59,7 +59,7 @@ Gfx d_course_bowsers_castle_dl_230[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9328),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_93A0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_30C8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_94D8),
 #endif
@@ -109,7 +109,7 @@ Gfx d_course_bowsers_castle_dl_230[] = {
 
 Gfx d_course_bowsers_castle_dl_398[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78), gsSPDisplayList(d_course_bowsers_castle_packed_dl_93A0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_30C8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_94D8),
 #endif
@@ -156,7 +156,7 @@ Gfx d_course_bowsers_castle_dl_428[] = {
 Gfx d_course_bowsers_castle_dl_4F0[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_93A0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2BB8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_84A8), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8C78),
@@ -860,7 +860,7 @@ Gfx d_course_bowsers_castle_dl_19A8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_1AA0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_19B8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2A48),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6200),
 #else
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_470),
@@ -889,7 +889,7 @@ Gfx d_course_bowsers_castle_dl_1A40[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_1C70),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_1AA0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2A48),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6200),
 #else
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_470),
@@ -1394,7 +1394,7 @@ Gfx d_course_bowsers_castle_dl_2A60[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5270), gsSPDisplayList(d_course_bowsers_castle_packed_dl_51E8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6F08), gsSPDisplayList(d_course_bowsers_castle_packed_dl_6E48),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6D78), gsSPDisplayList(d_course_bowsers_castle_packed_dl_6CB8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_70D0),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7418),
@@ -1443,7 +1443,7 @@ Gfx d_course_bowsers_castle_dl_2C48[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_51E8), gsSPDisplayList(d_course_bowsers_castle_packed_dl_6F08),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6E48), gsSPDisplayList(d_course_bowsers_castle_packed_dl_6D78),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6CB8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_70D0),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7B50), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7BB8),
@@ -1551,7 +1551,7 @@ Gfx d_course_bowsers_castle_dl_3050[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5270),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_51E8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_54E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5778),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6F08),
@@ -1585,14 +1585,14 @@ Gfx d_course_bowsers_castle_dl_3158[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_28B8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2920),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2770),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5300),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5270),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_51E8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_54E8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5778),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6E48),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6D78),
@@ -1645,7 +1645,7 @@ Gfx d_course_bowsers_castle_dl_3338[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6A90),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_87E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8BE0),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8C78),
@@ -1686,7 +1686,7 @@ Gfx d_course_bowsers_castle_dl_3338[] = {
 
 Gfx d_course_bowsers_castle_dl_3480[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6A90),
@@ -1708,8 +1708,10 @@ Gfx d_course_bowsers_castle_dl_3480[] = {
 
 Gfx d_course_bowsers_castle_dl_3508[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2188),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2228),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2290),
@@ -1772,7 +1774,7 @@ Gfx d_course_bowsers_castle_dl_3678[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9328), gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6A90), gsSPDisplayList(d_course_bowsers_castle_packed_dl_87E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8BE0),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8C78),
@@ -1798,7 +1800,7 @@ Gfx d_course_bowsers_castle_dl_3678[] = {
 
 Gfx d_course_bowsers_castle_dl_37D8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9328), gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
@@ -1945,8 +1947,10 @@ Gfx d_course_bowsers_castle_dl_3C08[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2228), gsSPDisplayList(d_course_bowsers_castle_packed_dl_2290),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2528), gsSPDisplayList(d_course_bowsers_castle_packed_dl_28B8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2920), gsSPDisplayList(d_course_bowsers_castle_packed_dl_2770),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2610),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2698),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_5378), gsSPDisplayList(d_course_bowsers_castle_packed_dl_5300),
@@ -1965,7 +1969,7 @@ Gfx d_course_bowsers_castle_dl_3C08[] = {
 
 Gfx d_course_bowsers_castle_dl_3D78[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2378),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2188),
 #endif
@@ -1983,7 +1987,7 @@ Gfx d_course_bowsers_castle_dl_3D78[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6CB8), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7520),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7418), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7340),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7288), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7180),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7A10),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7B50),
@@ -2084,13 +2088,17 @@ Gfx d_course_bowsers_castle_dl_40F0[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2128),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2188),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2228),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2528),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2598),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2610),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2698),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2708),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_56F0),
@@ -2122,7 +2130,7 @@ Gfx d_course_bowsers_castle_dl_40F0[] = {
 
 Gfx d_course_bowsers_castle_dl_4278[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2378),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2128),
@@ -2137,8 +2145,10 @@ Gfx d_course_bowsers_castle_dl_4278[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7520), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7418),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7340), gsSPDisplayList(d_course_bowsers_castle_packed_dl_7288),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7180),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7A10),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7B50),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7C30),
@@ -2211,13 +2221,17 @@ Gfx d_course_bowsers_castle_dl_45D8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_23E0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_20B0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2128), gsSPDisplayList(d_course_bowsers_castle_packed_dl_2188),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2228),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2528),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2598),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2610),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2698),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2708),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_56F0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_55E8),
@@ -2238,7 +2252,7 @@ Gfx d_course_bowsers_castle_dl_45D8[] = {
 Gfx d_course_bowsers_castle_dl_4748[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2378),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2128),
@@ -2258,8 +2272,10 @@ Gfx d_course_bowsers_castle_dl_4748[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7340),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7288),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7180),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7A10),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_7B50),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_76C0),
@@ -2276,18 +2292,18 @@ Gfx d_course_bowsers_castle_dl_4820[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9328),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_30C8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6A90),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_94D8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_84A8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_87E8),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8BE0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8C78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8DA8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2378),
@@ -2431,11 +2447,11 @@ Gfx d_course_bowsers_castle_dl_4C00[] = {
 Gfx d_course_bowsers_castle_dl_4CE8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8FA0), gsSPDisplayList(d_course_bowsers_castle_packed_dl_8E78),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9328), gsSPDisplayList(d_course_bowsers_castle_packed_dl_9438),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_30C8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_6A90),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_94D8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_84A8),
@@ -2443,6 +2459,8 @@ Gfx d_course_bowsers_castle_dl_4CE8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8C78),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8D10),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_8DA8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_2378),
@@ -2480,7 +2498,7 @@ Gfx d_course_bowsers_castle_dl_4EA8[] = {
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_9290),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_93A0),
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_30C8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_94D8),
 #endif
     gsSPDisplayList(d_course_bowsers_castle_packed_dl_84A8),
@@ -2510,13 +2528,13 @@ Gfx d_course_bowsers_castle_dl_4EA8[] = {
 };
 
 // 0x4F90
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_bowsers_castle_unknown_path[] = {
 #include "courses/bowsers_castle/d_course_bowsers_castle_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_bowsers_castle_track_path[] = {
 #include "courses/bowsers_castle/d_course_bowsers_castle_track_path.inc.c"
 };
@@ -2855,7 +2873,7 @@ TrackSections d_course_bowsers_castle_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_bowsers_castle_unknown_path[] = {
 #include "courses/bowsers_castle/d_course_bowsers_castle_unknown_path.inc.c"
 };
