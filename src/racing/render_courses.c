@@ -695,8 +695,13 @@ void render_bowsers_castle(struct UnkStruct_800DC5EC* arg0) {
     if (func_80290C20(arg0->camera) == 1) {
         gDPSetCombineMode(gDisplayListHead++, G_CC_SHADE, G_CC_SHADE);
         gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+#ifdef VERSION_JP_V10
+        // d_course_bowsers_castle_packed_dl_6A80, at 0x07006A70 in the launch stream
+        gSPDisplayList(gDisplayListHead++, ((uintptr_t) 0x07006A70));
+#else
         // d_course_bowsers_castle_packed_dl_6A80
         gSPDisplayList(gDisplayListHead++, ((uintptr_t) 0x07006A80));
+#endif
     }
 
     gDPSetCombineMode(gDisplayListHead++, G_CC_MODULATEIA, G_CC_MODULATEIA);
@@ -1535,8 +1540,13 @@ void course_generate_collision_mesh(void) {
         case COURSE_BOWSER_CASTLE:
             parse_course_displaylists((uintptr_t) d_course_bowsers_castle_addr);
             func_80295C6C();
+#ifdef VERSION_JP_V10
+            // d_course_bowsers_castle_packed_dl_1350, at 0x07001348 in the launch stream
+            find_vtx_and_set_colours((uintptr_t) 0x07001348, 0x32, 0, 0, 0);
+#else
             // d_course_bowsers_castle_packed_dl_1350
             find_vtx_and_set_colours((uintptr_t) 0x07001350, 0x32, 0, 0, 0);
+#endif
             D_8015F8E4 = -50.0f;
             break;
         case COURSE_BANSHEE_BOARDWALK:
