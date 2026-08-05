@@ -32,7 +32,12 @@ extern CourseVtx d_course_banshee_boardwalk_vertex[0x1351];
 extern CourseVtx d_course_dks_jungle_parkway_vertex[0x162F];
 extern CourseVtx d_course_rainbow_road_vertex[0xC27];
 extern CourseVtx d_course_yoshi_valley_vertex[0xE88];
+#ifdef VERSION_JP_V10
+/* the launch build's bowsers_castle model has 4 fewer vertices */
+extern CourseVtx d_course_bowsers_castle_vertex[0x2533];
+#else
 extern CourseVtx d_course_bowsers_castle_vertex[0x2537];
+#endif
 extern CourseVtx d_course_royal_raceway_vertex[0x2072];
 extern CourseVtx d_course_sherbet_land_vertex[0xA76];
 extern CourseVtx d_course_wario_stadium_vertex[0x17B3];
