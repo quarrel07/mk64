@@ -2890,8 +2890,14 @@ void course_update_clouds(s32 arg0) {
                 break;
         }
 
+#ifdef VERSION_JP_V10
+        /* the launch build keeps the cloud band within 5 degrees */
+        D_8018D208 = ((D_8018D200 / 2) * DEGREES(1)) + DEGREES(5);
+        D_8018D210 = (-(D_8018D200 / 2) * DEGREES(1)) - DEGREES(5);
+#else
         D_8018D208 = ((D_8018D200 / 2) * DEGREES(1)) + DEGREES(10);
         D_8018D210 = (-(D_8018D200 / 2) * DEGREES(1)) - DEGREES(10);
+#endif
         D_8018D1E8 = 1.7578125 / D_8018D200;
         D_8018D218 = 0xA0;
 #if !ENABLE_CUSTOM_COURSE_ENGINE
