@@ -429,7 +429,7 @@ Gfx d_course_kalimari_desert_dl_F68[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_5D30),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_71D8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_14A0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_92F8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9210),
@@ -685,12 +685,14 @@ Gfx d_course_kalimari_desert_dl_18C8[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_73A8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_1580),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_92F8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_91A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9210), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9280),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_93F0),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8EC8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9A68),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2710),
 #endif
     gsSPEndDisplayList(),
@@ -825,12 +827,12 @@ Gfx d_course_kalimari_desert_dl_1E80[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_91A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9210), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9280),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_93F0), gsSPDisplayList(d_course_kalimari_desert_packed_dl_8EC8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2068),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2430),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9A68),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2710),
 #endif
     gsSPEndDisplayList(),
@@ -995,14 +997,14 @@ Gfx d_course_kalimari_desert_dl_2458[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9280),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_93F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8EC8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9068),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2430),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9A68),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2598),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2710),
 #endif
@@ -1142,7 +1144,7 @@ Gfx d_course_kalimari_desert_dl_29C0[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_4018), gsSPDisplayList(d_course_kalimari_desert_packed_dl_4878),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_73A8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8EC8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9068),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9480),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958),
@@ -1301,7 +1303,7 @@ Gfx d_course_kalimari_desert_dl_2F30[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9A68),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_97B8),
 #endif
     gsSPEndDisplayList(),
@@ -1462,7 +1464,7 @@ Gfx d_course_kalimari_desert_dl_3460[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_4878), gsSPDisplayList(d_course_kalimari_desert_packed_dl_73A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9958),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9A68), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9510),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_97B8),
 #endif
     gsSPEndDisplayList(),
@@ -2102,11 +2104,11 @@ Gfx d_course_kalimari_desert_dl_4BA0[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6130), gsSPDisplayList(d_course_kalimari_desert_packed_dl_6310),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_65F0), gsSPDisplayList(d_course_kalimari_desert_packed_dl_63C0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6490), gsSPDisplayList(d_course_kalimari_desert_packed_dl_6530),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2D20),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_66C8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_30E8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2AB8),
@@ -2233,14 +2235,14 @@ Gfx d_course_kalimari_desert_dl_4FB0[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_7F80), gsSPDisplayList(d_course_kalimari_desert_packed_dl_47A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_71D8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_72B8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_1F78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2130),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2808),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9630),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_96A8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9740),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9598),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_99D8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9820), gsSPEndDisplayList(),
@@ -2362,7 +2364,7 @@ Gfx d_course_kalimari_desert_dl_5470[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A228),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A1A0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A2D0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A3D8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9DC0),
@@ -2372,7 +2374,7 @@ Gfx d_course_kalimari_desert_dl_5470[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6530),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_66C8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6290),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_3C98),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6DA0),
@@ -2391,14 +2393,14 @@ Gfx d_course_kalimari_desert_dl_5470[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_71D8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_72B8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_1F78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2130),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2808),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_96A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9740),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9598),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_99D8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9820),
@@ -2417,7 +2419,7 @@ Gfx d_course_kalimari_desert_dl_55C8[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A1A0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A2D0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A3D8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9DC0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9D48),
 #endif
@@ -2443,7 +2445,7 @@ Gfx d_course_kalimari_desert_dl_55C8[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_4438),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_73A8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_74A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_1F78),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2130),
 #endif
@@ -2454,7 +2456,7 @@ Gfx d_course_kalimari_desert_dl_55C8[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2710),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_99D8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9820),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_2000),
 #endif
     gsSPEndDisplayList(),
@@ -2923,14 +2925,14 @@ Gfx d_course_kalimari_desert_dl_65B0[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8888), gsSPDisplayList(d_course_kalimari_desert_packed_dl_8508),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9C50), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9BD8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9FE8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_A3D8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9DC0), gsSPDisplayList(d_course_kalimari_desert_packed_dl_9D48),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_5360), gsSPDisplayList(d_course_kalimari_desert_packed_dl_53D0),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_5DB0), gsSPDisplayList(d_course_kalimari_desert_packed_dl_5A60),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_5580), gsSPDisplayList(d_course_kalimari_desert_packed_dl_3300),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6C70),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_6BC0),
@@ -2942,7 +2944,7 @@ Gfx d_course_kalimari_desert_dl_65B0[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_72B8), gsSPDisplayList(d_course_kalimari_desert_packed_dl_8F50),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9368), gsSPDisplayList(d_course_kalimari_desert_packed_dl_92F8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9138),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_99D8),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9820), gsSPDisplayList(d_course_kalimari_desert_packed_dl_90D8),
@@ -3024,7 +3026,7 @@ Gfx d_course_kalimari_desert_dl_6838[] = {
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_71D8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_72B8),
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8F50),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_9368),
 #endif
     gsSPDisplayList(d_course_kalimari_desert_packed_dl_8FF8),
@@ -3084,19 +3086,19 @@ Gfx d_course_kalimari_desert_dl_6940[] = {
 };
 
 // 0x6AC8
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_kalimari_desert_unknown_path[] = {
 #include "courses/kalimari_desert/d_course_kalimari_desert_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_kalimari_desert_train_path[] = {
 #include "courses/kalimari_desert/d_course_kalimari_desert_train_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_kalimari_desert_track_path[] = {
 #include "courses/kalimari_desert/d_course_kalimari_desert_track_path.inc.c"
 };
@@ -7002,7 +7004,7 @@ TrackSections d_course_kalimari_desert_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_kalimari_desert_unknown_path[] = {
 #include "courses/kalimari_desert/d_course_kalimari_desert_unknown_path.inc.c"
 };

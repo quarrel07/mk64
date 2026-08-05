@@ -16,7 +16,7 @@ Gfx d_course_choco_mountain_dl_0[] = {
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x00FC, 0x007C),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_49F0),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4AB0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4B58),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5070),
@@ -27,7 +27,7 @@ Gfx d_course_choco_mountain_dl_0[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2530),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2458),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2380),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2278),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_21D8),
@@ -81,7 +81,7 @@ Gfx d_course_choco_mountain_dl_150[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2530),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2458),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2380),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_2278),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_21D8),
@@ -1701,7 +1701,7 @@ Gfx d_course_choco_mountain_dl_2908[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_52C8),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5338),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_53D8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5148),
 #endif
     gsDPTileSync(),
@@ -1766,9 +1766,11 @@ Gfx d_course_choco_mountain_dl_2A88[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5258),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_52C8),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5338),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_53D8),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5148),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4E40),
 #endif
     gsDPTileSync(),
@@ -2007,7 +2009,7 @@ Gfx d_course_choco_mountain_dl_3070[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_WRAP, 6, G_TX_NOLOD),
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x00FC, 0x007C),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5258),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_52C8),
@@ -2018,7 +2020,7 @@ Gfx d_course_choco_mountain_dl_3070[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_WRAP, 5, G_TX_NOLOD),
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x007C, 0x007C),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_3708),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_3670),
@@ -2132,14 +2134,14 @@ Gfx d_course_choco_mountain_dl_3368[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_53D8),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5148),
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4E40),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4EB0),
 #endif
     gsDPTileSync(),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_WRAP, 5, G_TX_NOLOD),
     gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x007C, 0x007C),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_1538),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_F68),
@@ -2315,6 +2317,8 @@ Gfx d_course_choco_mountain_dl_37D0[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5258),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_choco_mountain_packed_dl_52C8),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5148),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4E40),
@@ -2389,6 +2393,8 @@ Gfx d_course_choco_mountain_dl_39A8[] = {
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5258),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_choco_mountain_packed_dl_52C8),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_choco_mountain_packed_dl_5148),
 #endif
     gsSPDisplayList(d_course_choco_mountain_packed_dl_4E40),
@@ -2806,13 +2812,13 @@ Gfx d_course_choco_mountain_dl_43C8[] = {
     gsSPEndDisplayList(),
 };
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_choco_mountain_unknown_path[] = {
 #include "courses/choco_mountain/d_course_choco_mountain_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_choco_mountain_track_path[] = {
 #include "courses/choco_mountain/d_course_choco_mountain_track_path.inc.c"
 };
@@ -3133,7 +3139,7 @@ TrackSections d_course_choco_mountain_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_choco_mountain_unknown_path[] = {
 #include "courses/choco_mountain/d_course_choco_mountain_unknown_path.inc.c"
 };
