@@ -8,7 +8,15 @@
 #define MESG_START_GFX_SPTASK 103
 #define MESG_NMI_REQUEST 104
 
+// JP 1.0 has 700 HUD and 760 effect matrices; later revisions moved 100
+// entries from the effect pool to the HUD pool. The pool struct size and the
+// fields around them are unchanged. func_80095BD0's 760 check matches the
+// launch effect pool exactly, which is why it reads as off-by-100 today.
+#ifdef VERSION_JP_V10
+#define MTX_HUD_POOL_SIZE 700
+#else
 #define MTX_HUD_POOL_SIZE 800
+#endif
 
 #ifdef AVOID_UB
 #define MTX_HUD_POOL_SIZE_MAX MTX_HUD_POOL_SIZE
@@ -37,7 +45,12 @@
 // 8 Kart AI Players * 4 real players in coop
 #define MTX_KART_POOL_SIZE 8 * 4
 
+// 760 at launch; see the MTX_HUD_POOL_SIZE note above.
+#ifdef VERSION_JP_V10
+#define MTX_EFFECT_POOL_SIZE 760
+#else
 #define MTX_EFFECT_POOL_SIZE 660
+#endif
 
 // func_80095BD0 sets an OOB pool size max check (760)
 #ifdef AVOID_UB
