@@ -322,8 +322,13 @@ void func_80003040(void) {
             spawn_foliage(d_course_mario_raceway_tree_spawns);
             break;
         case COURSE_BOWSER_CASTLE:
+#ifdef VERSION_JP_V10
+            // d_course_bowsers_castle_packed_dl_1350, at 0x07001348 in the launch stream
+            find_vtx_and_set_colours(0x07001348, 0x32, 0, 0, 0);
+#else
             // d_course_bowsers_castle_packed_dl_1350
             find_vtx_and_set_colours(0x07001350, 0x32, 0, 0, 0);
+#endif
             break;
         case COURSE_BANSHEE_BOARDWALK:
             // d_course_banshee_boardwalk_packed_dl_878
