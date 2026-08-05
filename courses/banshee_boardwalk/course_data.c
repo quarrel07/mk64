@@ -2615,13 +2615,13 @@ Gfx d_course_banshee_boardwalk_dl_4480[] = {
 };
 
 // 0x4578 Spawn location
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_banshee_boardwalk_unknown_path[] = {
 #include "courses/banshee_boardwalk/d_course_banshee_boardwalk_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_banshee_boardwalk_track_path[] = {
 #include "courses/banshee_boardwalk/d_course_banshee_boardwalk_track_path.inc.c"
 };
@@ -3389,7 +3389,7 @@ TrackSections d_course_banshee_boardwalk_track_sections[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_banshee_boardwalk_unknown_path[] = {
 #include "courses/banshee_boardwalk/d_course_banshee_boardwalk_unknown_path.inc.c"
 };
