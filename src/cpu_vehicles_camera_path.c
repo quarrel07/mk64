@@ -1520,7 +1520,7 @@ void play_cpu_sound_effect(s32 arg0, Player* player) {
 void update_player_timer_sound(s32 playerId, UNUSED Player* unused) {
     s32 otherPlayerId;
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     if (gPositionSwapTimer[playerId] >= 0xC9) {
 #else
     if (gPositionSwapTimer[playerId] >= 0x65) {
