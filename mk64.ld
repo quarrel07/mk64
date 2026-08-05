@@ -520,8 +520,8 @@ SECTIONS
       BUILD_DIR/src/ending/code_80281780.o(.text*);
       BUILD_DIR/src/ending/code_80281C40.o(.text*);
       BUILD_DIR/src/ending/ceremony_and_credits.o(.text*);
-      #ifdef VERSION_JP
-      /* JP puts credits first in both .data and .rodata */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
+      /* JP 1.1 puts credits first in both .data and .rodata; 1.0 keeps the US order */
       BUILD_DIR/src/ending/credits.jp.o(.data*);
       BUILD_DIR/src/ending/podium_ceremony_actors.o(.data*);
       BUILD_DIR/src/ending/code_80281780.o(.data*);
