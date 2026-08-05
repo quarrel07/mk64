@@ -143,9 +143,20 @@ void* allocate_memory(size_t size) {
     uintptr_t freeSpace;
 
     size = ALIGN16(size);
+#ifdef VERSION_JP_V10
+    // the launch build bounds-checks the pool and returns NULL when the
+    // allocation does not fit; later revisions removed the check
+    freeSpace = 0;
+    if (size < gFreeMemorySize) {
+        freeSpace = gNextFreeMemoryAddress;
+        gFreeMemorySize -= size;
+        gNextFreeMemoryAddress += size;
+    }
+#else
     gFreeMemorySize -= size;
     freeSpace = gNextFreeMemoryAddress;
     gNextFreeMemoryAddress += size;
+#endif
 
     return (void*) freeSpace;
 }
