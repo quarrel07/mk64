@@ -6982,6 +6982,9 @@ void func_800836F0(Vec3f arg0) {
         if (objectIndex == NULL_OBJECT_ID) {
             break;
         }
+        // The jump edge splits the block here, which is what frees the launch
+        // build's register allocation; a bare label is not enough.
+        goto spawn; spawn:;
         func_80083538(objectIndex, arg0, i);
     }
 #else
@@ -7162,6 +7165,7 @@ void update_snowmen(void) {
         if (object->state == 0) {
             continue;
         }
+        objectIndex = gObjectParticle2[var_s0];
         func_8008379C(objectIndex);
         if (object->state != 0) {
             continue;
