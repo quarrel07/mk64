@@ -3412,6 +3412,11 @@ void render_object_bat(s32 cameraId) {
     D_80183E80[2] = gObjectList[objectIndex].orientation[2];
     if ((D_8018CFB0 != 0) || (D_8018CFC8 != 0)) {
         for (var_s2 = 0; var_s2 < 40; var_s2++) {
+#ifdef VERSION_JP_V10
+            // This no-op and the one in the next loop reproduce the launch
+            // cart's register allocation for both loops.
+            if (0) {}
+#endif
             objectIndex = gObjectParticle2[var_s2];
             if (objectIndex == -1) {
                 continue;
@@ -3437,6 +3442,9 @@ void render_object_bat(s32 cameraId) {
                     func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               D_0D0062B0);
+#ifdef VERSION_JP_V10
+                do {} while (0);
+#endif
             }
         }
     }
