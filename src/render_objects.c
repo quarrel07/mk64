@@ -3805,6 +3805,11 @@ void render_object_thwomps(s32 cameraId) {
 void func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 vertexIndex) {
     Object* object;
 
+#ifdef VERSION_JP_V10
+    // Materializes the table address ahead of the register saves, which is
+    // where the launch prologue schedules it.
+    if (!D_80183E80) {}
+#endif
     if (MTX_HUD_BUDGET_OK) {
         object = &gObjectList[objectIndex];
         D_80183E80[2] = (s16) (object->unk_084[6] + 0x8000);
