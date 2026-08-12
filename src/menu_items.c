@@ -2680,6 +2680,100 @@ void func_80093C1C(s32 arg0) {
     gSPDisplayList(gDisplayListHead++, D_02007F48);
 }
 
+#ifdef VERSION_CN
+// iQue replaced these two empty functions with dead helpers that nothing in
+// the ROM calls: a fixed-point-to-float wrapper and a 1,092-entry glyph
+// metrics preprocessor. Their jal/j targets point into the MIDDLE of the
+// glyph-drawing function that follows, which no compilable C reproduces, so
+// they are kept as verbatim words. The branch targets are the cart's final
+// addresses; they stay masked-correct now and become byte-correct when the
+// full layout lands.
+asm(".globl func_80093C88\n"
+    "func_80093C88:\n"
+    ".word 0x27BDFFE8\n"
+    ".word 0xAFBF0010\n"
+    ".word 0x0C0ADE8A\n"
+    ".word 0x00000000\n"
+    ".word 0x3C013780\n"
+    ".word 0x44811000\n"
+    ".word 0x44820000\n"
+    ".word 0x46800020\n"
+    ".word 0x46020002\n"
+    ".word 0x8FBF0010\n"
+    ".word 0x03E00008\n"
+    ".word 0x27BD0018\n"
+);
+
+asm(".globl func_80093C90\n"
+    "func_80093C90:\n"
+    ".word 0x27BDFFC8\n"
+    ".word 0x3C0500FF\n"
+    ".word 0x34A5FFFF\n"
+    ".word 0xAFB20018\n"
+    ".word 0x0000902D\n"
+    ".word 0xAFB3001C\n"
+    ".word 0x24130078\n"
+    ".word 0x3C040600\n"
+    ".word 0x64843538\n"
+    ".word 0x00041582\n"
+    ".word 0x3042003C\n"
+    ".word 0xF7B60030\n"
+    ".word 0x3C014120\n"
+    ".word 0x4481B000\n"
+    ".word 0x00852024\n"
+    ".word 0xF7B40028\n"
+    ".word 0x3C0142A0\n"
+    ".word 0x4481A000\n"
+    ".word 0x3C038015\n"
+    ".word 0x0062182D\n"
+    ".word 0x8C63D568\n"
+    ".word 0x3C028000\n"
+    ".word 0xAFBF0020\n"
+    ".word 0xAFB10014\n"
+    ".word 0xAFB00010\n"
+    ".word 0x00641821\n"
+    ".word 0x00621821\n"
+    ".word 0x2471000D\n"
+    ".word 0x2470000E\n"
+    ".word 0x82020000\n"
+    ".word 0x0441000C\n"
+    ".word 0x00000000\n"
+    ".word 0x0C025225\n"
+    ".word 0x00000000\n"
+    ".word 0x46160002\n"
+    ".word 0x46140000\n"
+    ".word 0x46000007\n"
+    ".word 0x4600008D\n"
+    ".word 0x44021000\n"
+    ".word 0xA2020000\n"
+    ".word 0x24420078\n"
+    ".word 0x08025264\n"
+    ".word 0x00021023\n"
+    ".word 0x0C025225\n"
+    ".word 0x00000000\n"
+    ".word 0x46160002\n"
+    ".word 0x46140000\n"
+    ".word 0x4600008D\n"
+    ".word 0x44021000\n"
+    ".word 0xA2020000\n"
+    ".word 0x02621023\n"
+    ".word 0xA2220000\n"
+    ".word 0x26310010\n"
+    ".word 0x26520001\n"
+    ".word 0x2A420444\n"
+    ".word 0x1440FFE5\n"
+    ".word 0x26100010\n"
+    ".word 0x8FBF0020\n"
+    ".word 0x8FB3001C\n"
+    ".word 0x8FB20018\n"
+    ".word 0x8FB10014\n"
+    ".word 0x8FB00010\n"
+    ".word 0xD7B60030\n"
+    ".word 0xD7B40028\n"
+    ".word 0x03E00008\n"
+    ".word 0x27BD0038\n"
+);
+#else
 UNUSED void func_80093C88(void) {
     return;
 }
@@ -2687,6 +2781,7 @@ UNUSED void func_80093C88(void) {
 UNUSED void func_80093C90(void) {
     return;
 }
+#endif
 
 void func_80093C98(s32 arg0) {
     gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(D_802B8880));
