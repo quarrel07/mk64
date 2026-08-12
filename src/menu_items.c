@@ -4207,7 +4207,7 @@ void func_80099AEC(void) {
         cacheSize = 0x1400;
     }
     if (cacheSize % 8) {
-        cacheSize = ((cacheSize / 8) * 8) + 8;
+        cacheSize = ((cacheSize / 8) + 1) * 8;
     }
 
     osInvalDCache(gMenuCompressedBuffer, cacheSize);
@@ -4226,7 +4226,7 @@ void func_80099AEC(void) {
                 cacheSize = 0x1400;
             }
             if (cacheSize % 8) {
-                cacheSize = ((cacheSize / 8) * 8) + 8;
+                cacheSize = ((cacheSize / 8) + 1) * 8;
             }
             osInvalDCache(&gMenuCompressedBuffer[bufSize], cacheSize);
             osPiStartDma(&mb, 0, 0, (uintptr_t) _textures_0aSegmentRomStart + SEGMENT_OFFSET(texPtr->textureData),
@@ -4255,7 +4255,7 @@ void func_80099AEC(void) {
                 cacheSize = 0x1400;
             }
             if (cacheSize % 8) {
-                cacheSize = ((cacheSize / 8) * 8) + 8;
+                cacheSize = ((cacheSize / 8) + 1) * 8;
             }
             osInvalDCache(gMenuCompressedBuffer, cacheSize);
             osPiStartDma(&mb, 0, 0, (uintptr_t) _textures_0aSegmentRomStart + SEGMENT_OFFSET(texPtr->textureData),
