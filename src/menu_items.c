@@ -8888,7 +8888,13 @@ void render_menu_item_announce_ghost(MenuItem* arg0) {
     temp_t0 = 0x140 - arg0->column;
     temp_t1 = arg0->row;
     temp_t2 = (s32) ((get_string_width(gTextMenuAnnounceGhost) + 8) * someMultiplier) / 2;
-    gDisplayListHead = draw_box(gDisplayListHead, temp_t0 - temp_t2, (temp_t1 - thing) + 4, temp_t2 + temp_t0,
+    gDisplayListHead = draw_box(gDisplayListHead, temp_t0 - temp_t2, (temp_t1 - thing) + 4,
+#ifdef VERSION_CN
+                                // iQue wrote this sum the other way around
+                                temp_t0 + temp_t2,
+#else
+                                temp_t2 + temp_t0,
+#endif
                                 temp_t1 + 4, 0, 0, 0, 0x00000064);
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
     print_text1_center_mode_1(arg0->column - 3, arg0->row, gTextMenuAnnounceGhost, 0, 0.85f, 0.85f);
