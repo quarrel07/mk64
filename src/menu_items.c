@@ -2895,6 +2895,20 @@ void func_800942D0(void) {
         if (var_f26 > 10.0f) {
             var_f26 = 10.0f;
         }
+#ifdef VERSION_CN
+        for (var_s2 = 0; var_s2 < 0xC; var_s2++) {
+            guRotate(test, 0.0f, 1.0f, 0.0f, 0.0f);
+            guRotate(test + 1, sIntroModelMotionSpeed * (var_s2 + 1) * var_f26, 0.0f, 1.0f, 0.0f);
+            guScale(test + 2, 1.0f, 1.0f, 2.0f);
+            gSPMatrix(gDisplayListHead++, test++, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gDisplayListHead++, test++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gDisplayListHead++, test++, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
+            gDPSetEnvColor(gDisplayListHead++, 0x00, 0x00, 0x00, ((0xB - var_s2) * 0x10) + 0x10);
+            gSPDisplayList(gDisplayListHead++, startup_texture_dl4);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+#else
         for (var_s2 = 0, thing = 0xC0; var_s2 < 0xC; var_s2++, thing -= 0x10) {
             guRotate(test, 0.0f, 1.0f, 0.0f, 0.0f);
             guRotate(test + 1, (var_s2 + 1) * sIntroModelMotionSpeed * var_f26, 0.0f, 1.0f, 0.0f);
@@ -2907,6 +2921,7 @@ void func_800942D0(void) {
             gSPDisplayList(gDisplayListHead++, startup_texture_dl4);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
         }
+#endif
     }
 }
 
