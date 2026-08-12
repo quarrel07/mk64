@@ -1209,5 +1209,7 @@
 "bin/cn.v5/gTextureGoldStripe.rgba16.tkmk00": {"meta": {"size": "0x700"}, "offsets": {"cn.v5": ["0x82bf00", "0x0"]}},
 "bin/cn.v5/gTextureWhiteStripe.rgba16.tkmk00": {"meta": {"size": "0x100"}, "offsets": {"cn.v5": ["0x82c600", "0x0"]}},
 "bin/cn.v5/gTexturePinkBar.rgba16.tkmk00": {"meta": {"size": "0x500"}, "offsets": {"cn.v5": ["0x82c700", "0x0"]}},
-"bin/cn.v5/gTextureGoldBar.rgba16.tkmk00": {"meta": {"size": "0xED0"}, "offsets": {"cn.v5": ["0x82cc00", "0x0"]}}
+"bin/cn.v5/gTextureGoldBar.rgba16.tkmk00": {"meta": {"size": "0xED0"}, "offsets": {"cn.v5": ["0x82cc00", "0x0"]}},
+"bin/cn.v5/F3DEX.bin": {"meta": {"size": "0x1430"}, "offsets": {"cn.v5": ["0xD6550", "0x0"]}},
+"bin/cn.v5/F3DLX.bin": {"meta": {"size": "0x1430"}, "offsets": {"cn.v5": ["0xD7980", "0x0"]}}
 }
