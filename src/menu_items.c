@@ -4845,10 +4845,10 @@ Gfx* render_menu_textures(Gfx* arg0, MenuTexture* arg1, s32 column, s32 row) {
             if (gTransitionType[4] != 4) {
                 arg0 =
                     func_80095E10(arg0, var_s4, 0x00000400, 0x00000400, 0, 0, temp_v0->width, temp_v0->height,
-                                  temp_v0->dX + column, temp_v0->dY + row, temp_v0_3, temp_v0->width, temp_v0->height);
+                                  column + temp_v0->dX, row + temp_v0->dY, temp_v0_3, temp_v0->width, temp_v0->height);
             } else {
-                arg0 = func_800987D0(arg0, 0U, 0U, temp_v0->width, temp_v0->height, temp_v0->dX + column,
-                                     temp_v0->dY + row, temp_v0_3, temp_v0->width, temp_v0->height);
+                arg0 = func_800987D0(arg0, 0U, 0U, temp_v0->width, temp_v0->height, column + temp_v0->dX,
+                                     row + temp_v0->dY, temp_v0_3, temp_v0->width, temp_v0->height);
             }
         }
         temp_v0++;
@@ -7151,7 +7151,7 @@ void func_800A1350(MenuItem* arg0) {
             case 3:
                 thing = arg0->param1;
                 gDisplayListHead = draw_box(gDisplayListHead, arg0->column + thing, arg0->row,
-                                            (arg0->column - thing) + 0x40, arg0->row + 0x4C, 0, 0, 0, 0x00000064);
+                                            arg0->column - (thing - 0x40), arg0->row + 0x4C, 0, 0, 0, 0x00000064);
                 break;
         }
     }
@@ -11986,7 +11986,7 @@ void func_800AB164(MenuItem* arg0) {
 
 void func_800AB260(MenuItem* arg0) {
     s32 temp = (arg0->type - 0x58);
-    if (temp == gCupSelection) {
+    if (gCupSelection == temp) {
         arg0->visible = 1;
     } else {
         arg0->visible = 0;
