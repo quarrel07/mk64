@@ -3949,14 +3949,22 @@ void clear_menu_textures(void) {
  * @return void*
  */
 void* segmented_to_virtual_dupe(const void* addr) {
+#ifdef VERSION_CN
+    size_t segment = SEGMENT_NUMBER(addr); // iQue uses the mbi.h macro, which masks to 4 bits
+#else
     size_t segment = (uintptr_t) addr >> 24;
+#endif
     size_t offset = (uintptr_t) addr & 0x00FFFFFF;
 
     return (void*) ((gSegmentTable[segment] + offset) + 0x80000000);
 }
 
 void* segmented_to_virtual_dupe_2(const void* addr) {
+#ifdef VERSION_CN
+    size_t segment = SEGMENT_NUMBER(addr); // iQue uses the mbi.h macro, which masks to 4 bits
+#else
     size_t segment = (uintptr_t) addr >> 24;
+#endif
     size_t offset = (uintptr_t) addr & 0x00FFFFFF;
 
     return (void*) ((gSegmentTable[segment] + offset) + 0x80000000);
