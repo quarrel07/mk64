@@ -482,6 +482,13 @@ SECTIONS
       BUILD_DIR/src/racing/actors.o(.bss*);
       BUILD_DIR/src/racing/memory.o(.bss*);
       BUILD_DIR/src/buffers/random.o(.bss*);
+      #ifdef VERSION_CN
+      /* iQue reserves 0x380 more here, like JP's 0x40 below: nothing in the
+         ROM references it, sized from the D_802BFB80 anchor (22 votes). This
+         one pad also explains the old "+0x30 audio band" - it was upstream
+         minus this gap, not a separate audio difference. */
+      . += 0x380;
+      #endif
       #ifdef VERSION_JP
       /* JP's racing overlay reserves 0x40 more bss than US. It cannot be in
          ROM (racing's ROM size only differs by the 0x10 of unmatched code),
