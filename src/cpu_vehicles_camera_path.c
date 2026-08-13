@@ -3429,6 +3429,14 @@ void func_800188F4(Camera* camera, UNUSED Player* unusePlayer, UNUSED s32 arg2, 
     camera->rot[2] = 0;
 }
 
+#ifdef VERSION_JP_V10
+// JP 1.0 has two more camera routines here, reached from func_8001A588's
+// switch. No other cartridge carries them. Literal words for now: they close
+// the 0xc80 size gap so the rest of the layout can be measured.
+GLOBAL_ASM("asm/jp.v10/func_800190A8.s")
+GLOBAL_ASM("asm/jp.v10/func_80019774.s")
+#endif
+
 void func_80019118(s32 playerId, f32 arg1, s32 cameraId, UNUSED s16 pathIndex) {
     Camera* camera = cameras + cameraId;
     s32 test = gPathCountByPathIndex[0];
@@ -3875,6 +3883,11 @@ void func_8001A518(s32 arg0, s32 arg1, s32 arg2) {
     }
 }
 
+#ifdef VERSION_JP_V10
+void func_800190A8(Camera*, Player*, s8);
+void func_80019774(Camera*, Player*, s8);
+#endif
+
 void func_8001A588(UNUSED u16* localD_80152300, Camera* camera, Player* player, s8 index, s32 cameraIndex) {
     s32 var_v1;
     UnkStruct_46D0* temp_v0_4;
@@ -3990,6 +4003,16 @@ void func_8001A588(UNUSED u16* localD_80152300, Camera* camera, Player* player, 
         case 8:
             func_800188F4(camera, player, index, cameraIndex);
             break;
+#ifdef VERSION_JP_V10
+        // Two camera modes only the launch build has; both routines are absent
+        // from every other cartridge.
+        case 10:
+            func_800190A8(camera, player, index);
+            break;
+        case 11:
+            func_80019774(camera, player, index);
+            break;
+#endif
         case 12:
         case 13:
             func_8001933C(camera, player, index, cameraIndex);
