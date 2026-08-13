@@ -763,6 +763,10 @@ ifeq ($(VERSION),cn.v5)
   # skybox_and_splitscreen 100% exact, the rest 84-97% (residues = source work)
   CN_IDO71_RACING := race_logic actors memory collision render_courses                      skybox_and_splitscreen math_util actors_extended
   CN_IDO71_OBJS += $(addprefix $(BUILD_DIR)/src/racing/,$(addsuffix .o,$(CN_IDO71_RACING)))
+  # The ending overlay is 7.1 as well (podium 20/20, ceremony 85/86 exact);
+  # credits.jp.o and dl_unk stay 5.3 - data-only, no verdict possible yet
+  CN_IDO71_ENDING := code_80280000 podium_ceremony_actors camera_junk                      code_80281780 code_80281C40 ceremony_and_credits
+  CN_IDO71_OBJS += $(addprefix $(BUILD_DIR)/src/ending/,$(addsuffix .o,$(CN_IDO71_ENDING)))
   $(CN_IDO71_OBJS): CC := $(IDO71_ROOT)/cc
   $(BUILD_DIR)/src/cpu_vehicles_camera_path.jp.o: CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py $(IDO71_ROOT)/cc -- $(AS) $(ASFLAGS) --
 
