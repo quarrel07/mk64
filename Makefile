@@ -759,6 +759,10 @@ ifeq ($(VERSION),cn.v5)
                    math_util_2 render_player player_controller update_objects \
                    code_80057C60 code_80086E70
   CN_IDO71_OBJS := $(addprefix $(BUILD_DIR)/src/,$(addsuffix .o,$(CN_IDO71_SRCS)))
+  # The racing overlay is 7.1 on iQue too - measured per file: race_logic and
+  # skybox_and_splitscreen 100% exact, the rest 84-97% (residues = source work)
+  CN_IDO71_RACING := race_logic actors memory collision render_courses                      skybox_and_splitscreen math_util actors_extended
+  CN_IDO71_OBJS += $(addprefix $(BUILD_DIR)/src/racing/,$(addsuffix .o,$(CN_IDO71_RACING)))
   $(CN_IDO71_OBJS): CC := $(IDO71_ROOT)/cc
   $(BUILD_DIR)/src/cpu_vehicles_camera_path.jp.o: CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.py $(IDO71_ROOT)/cc -- $(AS) $(ASFLAGS) --
 
