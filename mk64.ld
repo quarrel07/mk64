@@ -536,7 +536,23 @@ SECTIONS
       BUILD_DIR/src/ending/code_80281780.o(.text*);
       BUILD_DIR/src/ending/code_80281C40.o(.text*);
       BUILD_DIR/src/ending/ceremony_and_credits.o(.text*);
-      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
+      #ifdef VERSION_CN
+      /* iQue groups each object's rodata right after its data (measured:
+         podium+camera rodata at +0x4eb0, credits literals at +0x56d0,
+         ceremony rodata at +0x7610 - all cart-confirmed) */
+      BUILD_DIR/src/ending/podium_ceremony_actors.o(.data*);
+      BUILD_DIR/src/ending/podium_ceremony_actors.o(.rodata*);
+      BUILD_DIR/src/ending/camera_junk.o(.rodata*);
+      BUILD_DIR/src/ending/code_80281780.o(.data*);
+      BUILD_DIR/src/ending/dl_unk_80284EE0.o(.data*);
+      BUILD_DIR/src/ending/credits.jp.o(.data*);
+      BUILD_DIR/src/ending/credits.jp.o(.rodata*);
+      BUILD_DIR/src/ending/ceremony_and_credits.o(.data*);
+      BUILD_DIR/src/ending/ceremony_and_credits.o(.rodata*);
+      BUILD_DIR/src/ending/code_80280000.o(.rodata*);
+      BUILD_DIR/src/ending/code_80281780.o(.rodata*);
+      BUILD_DIR/src/ending/code_80281C40.o(.rodata*);
+      #elif defined(VERSION_JP) && !defined(VERSION_JP_V10)
       /* JP 1.1 puts credits first in both .data and .rodata; 1.0 keeps the US order */
       BUILD_DIR/src/ending/credits.jp.o(.data*);
       BUILD_DIR/src/ending/podium_ceremony_actors.o(.data*);
