@@ -792,7 +792,8 @@ ifeq ($(VERSION),cn.v5)
   # (flash saves, eeprom emulation, interrupt masks).
   CN_EGCS_LIB_SRCS := __osPiCreateAccessQueue __osSiCreateAccessQueue guOrthoF \
                       osViSwapBuffer __osSpDeviceBusy __osSiDeviceBusy \
-                      __osAiDeviceBusy __osSiRawWriteIo __osSiRawReadIo
+                      __osAiDeviceBusy __osSiRawWriteIo __osSiRawReadIo \
+                      osSyncPrintf
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \

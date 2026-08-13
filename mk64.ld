@@ -219,7 +219,10 @@ SECTIONS
       BUILD_DIR/src/os/guNormalize.o(.text*);
       BUILD_DIR/src/os/math/sinf.o(.text*);
       BUILD_DIR/src/os/math/cosf.o(.text*);
+      #ifndef VERSION_CN /* iQue stubs the printfs; the formatter subtree is
+         absent from the cart (rmonPrintf is a 5-word vararg stub there) */
       BUILD_DIR/src/os/_Printf.o(.text*);
+      #endif
       BUILD_DIR/src/os/guMtxCatF.o(.text*);
       BUILD_DIR/src/os/contramwrite.o(.text*);
       BUILD_DIR/src/os/osEepromRead.o(.text*);
@@ -234,10 +237,12 @@ SECTIONS
       BUILD_DIR/src/os/osYieldThread.o(.text*);
       BUILD_DIR/asm/os/__osProbeTLB.o(.text);
       BUILD_DIR/src/os/crc.o(.text*);
+      #ifndef VERSION_CN
       BUILD_DIR/src/os/string.o(.text*);
       BUILD_DIR/src/os/_Litob.o(.text*);
       BUILD_DIR/src/os/_Ldtob.o(.text*);
       BUILD_DIR/src/os/ldiv.o(.text*);
+      #endif
       BUILD_DIR/data/rsp.o(.text);
       /* JP 1.1 reorders the .data head; JP 1.0 keeps us's, measured the same
          way (code_800029B0, crash_screen, path_spawn_metadata in the cart). */
@@ -308,9 +313,13 @@ SECTIONS
       BUILD_DIR/src/os/__osViInit.o(.data*);
       BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);
       BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.data*);
+      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Printf.o(.data*);
+      #endif
       BUILD_DIR/src/os/osViData.o(.data*);
+      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Litob.o(.data*);
+      #endif
       BUILD_DIR/src/main.o(.rodata*);
       BUILD_DIR/src/animation.o(.rodata*);
       BUILD_DIR/src/code_800029B0.o(.rodata*);
@@ -367,9 +376,17 @@ SECTIONS
       BUILD_DIR/src/os/guNormalize.o(.rodata*);
       BUILD_DIR/src/os/math/sinf.o(.rodata*);
       BUILD_DIR/src/os/math/cosf.o(.rodata*);
+      #ifdef VERSION_CN
+      /* NAN's home _Ldtob.o is unlinked on iQue; NaN.c carries it instead */
+      BUILD_DIR/src/os/NaN.o(.rodata*);
+      #endif
+      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Printf.o(.rodata*);
+      #endif
       BUILD_DIR/asm/os/osSetIntMask.o(.rodata);
+      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Ldtob.o(.rodata*);
+      #endif
       BUILD_DIR/data/rsp.o(.data*);
       #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
       BUILD_DIR/src/audio/data.o(.data*);
