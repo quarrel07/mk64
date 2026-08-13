@@ -448,8 +448,13 @@ SECTIONS
       BUILD_DIR/src/os/osLeoDiskInit.o(.bss*);
       . = ALIGN(0x10);
       #ifdef VERSION_CN
-      /* iQue's menu_items commons: the linker gathers them here (experiment) */
+      /* iQue's menu_items commons: the os-library commons gather here, and
+         the menu block follows as real definitions in menu_bss_cn.s - ld
+         resolves each EGCS common against the same-name definition, so the
+         block's order, sizes and gaps are pinned to the cart's (v3 profile) */
       *(COMMON);
+      . = ALIGN(0x10);
+      BUILD_DIR/asm/menu_bss_cn.o(.bss);
       . = ALIGN(0x10);
       #endif
    }
