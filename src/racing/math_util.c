@@ -9,6 +9,12 @@
 #include "math.h"
 #include "memory.h"
 
+
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
 #pragma intrinsic(sqrtf, fabs)
 
 UNUSED s32 D_802B91C0[2] = { 13, 13 };
