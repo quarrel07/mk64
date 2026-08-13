@@ -1285,6 +1285,122 @@ MkAnimation* D_800E7E34[] = {
     D_02001F44, D_02001F54, D_02001F64, D_02001F74, D_02001F84, D_02001F94,
 };
 
+#ifdef VERSION_CN
+/* iQue: 281 Chinese glyphs join the LUT; the neighbors re-point into the
+   Chinese menu segment. Raw segmented addresses - layout-independent. */
+MenuTexture* gGlyphTextureLUT[] = {
+    (MenuTexture*) 0x0200211C, (MenuTexture*) 0x02002144, (MenuTexture*) 0x0200216C, (MenuTexture*) 0x02002194, (MenuTexture*) 0x020021BC, (MenuTexture*) 0x020021E4,
+    (MenuTexture*) 0x0200220C, (MenuTexture*) 0x02002234, (MenuTexture*) 0x0200225C, (MenuTexture*) 0x02002284, (MenuTexture*) 0x020022AC, (MenuTexture*) 0x020022D4,
+    (MenuTexture*) 0x020022FC, (MenuTexture*) 0x02002324, (MenuTexture*) 0x0200234C, (MenuTexture*) 0x02002374, (MenuTexture*) 0x0200239C, (MenuTexture*) 0x020023C4,
+    (MenuTexture*) 0x020023EC, (MenuTexture*) 0x02002414, (MenuTexture*) 0x0200243C, (MenuTexture*) 0x02002464, (MenuTexture*) 0x0200248C, (MenuTexture*) 0x020024B4,
+    (MenuTexture*) 0x020024DC, (MenuTexture*) 0x02002504, (MenuTexture*) 0x0200252C, (MenuTexture*) 0x02002554, (MenuTexture*) 0x0200257C, (MenuTexture*) 0x020025A4,
+    (MenuTexture*) 0x0200716C, (MenuTexture*) 0x0200261C, (MenuTexture*) 0x02002694, (MenuTexture*) 0x020026BC, (MenuTexture*) 0x020026E4, (MenuTexture*) 0x0200270C,
+    (MenuTexture*) 0x02002734, (MenuTexture*) 0x0200275C, (MenuTexture*) 0x02002784, (MenuTexture*) 0x020027AC, (MenuTexture*) 0x020027D4, (MenuTexture*) 0x020027FC,
+    (MenuTexture*) 0x020025CC, (MenuTexture*) 0x02002644, (MenuTexture*) 0x020025F4, (MenuTexture*) 0x0200266C, (MenuTexture*) 0x0200711C, (MenuTexture*) 0x0200716C,
+    (MenuTexture*) 0x02002824, (MenuTexture*) 0x0200284C, (MenuTexture*) 0x02002874, (MenuTexture*) 0x0200289C, (MenuTexture*) 0x020028C4, (MenuTexture*) 0x020028EC,
+    (MenuTexture*) 0x02002914, (MenuTexture*) 0x0200293C, (MenuTexture*) 0x02002964, (MenuTexture*) 0x0200298C, (MenuTexture*) 0x020029B4, (MenuTexture*) 0x020029DC,
+    (MenuTexture*) 0x02002A04, (MenuTexture*) 0x02002A2C, (MenuTexture*) 0x02002A54, (MenuTexture*) 0x02002A7C, (MenuTexture*) 0x02002AA4, (MenuTexture*) 0x02002ACC,
+    (MenuTexture*) 0x02002AF4, (MenuTexture*) 0x02002B1C, (MenuTexture*) 0x02002B44, (MenuTexture*) 0x02002B6C, (MenuTexture*) 0x02002B94, (MenuTexture*) 0x02002BBC,
+    (MenuTexture*) 0x02002BE4, (MenuTexture*) 0x02002C0C, (MenuTexture*) 0x02002C34, (MenuTexture*) 0x02002C5C, (MenuTexture*) 0x02002C84, (MenuTexture*) 0x02002CAC,
+    (MenuTexture*) 0x02002CD4, (MenuTexture*) 0x02002CFC, (MenuTexture*) 0x02002D24, (MenuTexture*) 0x02002D4C, (MenuTexture*) 0x02002D74, (MenuTexture*) 0x02002D9C,
+    (MenuTexture*) 0x02002DC4, (MenuTexture*) 0x02002DEC, (MenuTexture*) 0x02002E14, (MenuTexture*) 0x02002E3C, (MenuTexture*) 0x02002E64, (MenuTexture*) 0x02002E8C,
+    (MenuTexture*) 0x02002EB4, (MenuTexture*) 0x02002EDC, (MenuTexture*) 0x02002F04, (MenuTexture*) 0x02002F2C, (MenuTexture*) 0x02002F54, (MenuTexture*) 0x02002F7C,
+    (MenuTexture*) 0x02002FA4, (MenuTexture*) 0x02002FCC, (MenuTexture*) 0x02002FF4, (MenuTexture*) 0x0200301C, (MenuTexture*) 0x02003044, (MenuTexture*) 0x0200306C,
+    (MenuTexture*) 0x02003094, (MenuTexture*) 0x020030BC, (MenuTexture*) 0x020030E4, (MenuTexture*) 0x0200310C, (MenuTexture*) 0x02003134, (MenuTexture*) 0x0200315C,
+    (MenuTexture*) 0x02003184, (MenuTexture*) 0x020031AC, (MenuTexture*) 0x020031D4, (MenuTexture*) 0x020031FC, (MenuTexture*) 0x02003224, (MenuTexture*) 0x0200324C,
+    (MenuTexture*) 0x02003274, (MenuTexture*) 0x0200329C, (MenuTexture*) 0x020032C4, (MenuTexture*) 0x020032EC, (MenuTexture*) 0x02003314, (MenuTexture*) 0x0200333C,
+    (MenuTexture*) 0x02003364, (MenuTexture*) 0x0200338C, (MenuTexture*) 0x020033B4, (MenuTexture*) 0x020033DC, (MenuTexture*) 0x02003404, (MenuTexture*) 0x0200342C,
+    (MenuTexture*) 0x02003454, (MenuTexture*) 0x0200347C, (MenuTexture*) 0x020034A4, (MenuTexture*) 0x020034CC, (MenuTexture*) 0x020034F4, (MenuTexture*) 0x0200351C,
+    (MenuTexture*) 0x02003544, (MenuTexture*) 0x0200356C, (MenuTexture*) 0x02003594, (MenuTexture*) 0x020035BC, (MenuTexture*) 0x020035E4, (MenuTexture*) 0x0200360C,
+    (MenuTexture*) 0x02003634, (MenuTexture*) 0x0200365C, (MenuTexture*) 0x02003684, (MenuTexture*) 0x020036AC, (MenuTexture*) 0x020036D4, (MenuTexture*) 0x020036FC,
+    (MenuTexture*) 0x02003724, (MenuTexture*) 0x0200374C, (MenuTexture*) 0x02003774, (MenuTexture*) 0x0200379C, (MenuTexture*) 0x020037C4, (MenuTexture*) 0x020037EC,
+    (MenuTexture*) 0x02003814, (MenuTexture*) 0x0200383C, (MenuTexture*) 0x02003864, (MenuTexture*) 0x0200388C, (MenuTexture*) 0x020038B4, (MenuTexture*) 0x020038DC,
+    (MenuTexture*) 0x02003904, (MenuTexture*) 0x0200392C, (MenuTexture*) 0x02003954, (MenuTexture*) 0x0200397C, (MenuTexture*) 0x020039A4, (MenuTexture*) 0x020039CC,
+    (MenuTexture*) 0x020039F4, (MenuTexture*) 0x02003A1C, (MenuTexture*) 0x02003A44, (MenuTexture*) 0x02003A6C, (MenuTexture*) 0x02003A94, (MenuTexture*) 0x02003ABC,
+    (MenuTexture*) 0x02003AE4, (MenuTexture*) 0x02003B0C, (MenuTexture*) 0x02003B34, (MenuTexture*) 0x02003B5C, (MenuTexture*) 0x02003B84, (MenuTexture*) 0x02003BAC,
+    (MenuTexture*) 0x02003BD4, (MenuTexture*) 0x02003BFC, (MenuTexture*) 0x02003C24, (MenuTexture*) 0x02003C4C, (MenuTexture*) 0x02003C74, (MenuTexture*) 0x02003C9C,
+    (MenuTexture*) 0x02003CC4, (MenuTexture*) 0x02003CEC, (MenuTexture*) 0x02003D14, (MenuTexture*) 0x02003D3C, (MenuTexture*) 0x02003D64, (MenuTexture*) 0x02003D8C,
+    (MenuTexture*) 0x02003DB4, (MenuTexture*) 0x02003DDC, (MenuTexture*) 0x02003E04, (MenuTexture*) 0x02003E2C, (MenuTexture*) 0x02003E54, (MenuTexture*) 0x02003E7C,
+    (MenuTexture*) 0x02003EA4, (MenuTexture*) 0x02003ECC, (MenuTexture*) 0x02003EF4, (MenuTexture*) 0x02003F1C, (MenuTexture*) 0x02003F44, (MenuTexture*) 0x02003F6C,
+    (MenuTexture*) 0x02003F94, (MenuTexture*) 0x02003FBC, (MenuTexture*) 0x02003FE4, (MenuTexture*) 0x0200400C, (MenuTexture*) 0x02004034, (MenuTexture*) 0x0200405C,
+    (MenuTexture*) 0x02004084, (MenuTexture*) 0x020040AC, (MenuTexture*) 0x020040D4, (MenuTexture*) 0x020040FC, (MenuTexture*) 0x02004124, (MenuTexture*) 0x0200414C,
+    (MenuTexture*) 0x02004174, (MenuTexture*) 0x0200419C, (MenuTexture*) 0x020041C4, (MenuTexture*) 0x020041EC, (MenuTexture*) 0x02004214, (MenuTexture*) 0x0200423C,
+    (MenuTexture*) 0x02004264, (MenuTexture*) 0x0200428C, (MenuTexture*) 0x020042B4, (MenuTexture*) 0x020042DC, (MenuTexture*) 0x02004304, (MenuTexture*) 0x0200432C,
+    (MenuTexture*) 0x02004354, (MenuTexture*) 0x0200437C, (MenuTexture*) 0x020043A4, (MenuTexture*) 0x020043CC, (MenuTexture*) 0x020043F4, (MenuTexture*) 0x0200441C,
+    (MenuTexture*) 0x02004444, (MenuTexture*) 0x0200446C, (MenuTexture*) 0x02004494, (MenuTexture*) 0x020044BC, (MenuTexture*) 0x020044E4, (MenuTexture*) 0x0200450C,
+    (MenuTexture*) 0x02004534, (MenuTexture*) 0x0200455C, (MenuTexture*) 0x02004584, (MenuTexture*) 0x020045AC, (MenuTexture*) 0x020045D4, (MenuTexture*) 0x020045FC,
+    (MenuTexture*) 0x02004624, (MenuTexture*) 0x0200464C, (MenuTexture*) 0x02004674, (MenuTexture*) 0x0200469C, (MenuTexture*) 0x020046C4, (MenuTexture*) 0x020046EC,
+    (MenuTexture*) 0x02004714, (MenuTexture*) 0x0200473C, (MenuTexture*) 0x02004764, (MenuTexture*) 0x0200478C, (MenuTexture*) 0x020047B4, (MenuTexture*) 0x020047DC,
+    (MenuTexture*) 0x02004804, (MenuTexture*) 0x0200482C, (MenuTexture*) 0x02004854, (MenuTexture*) 0x0200487C, (MenuTexture*) 0x020048A4, (MenuTexture*) 0x020048CC,
+    (MenuTexture*) 0x020048F4, (MenuTexture*) 0x0200491C, (MenuTexture*) 0x02004944, (MenuTexture*) 0x0200496C, (MenuTexture*) 0x02004994, (MenuTexture*) 0x020049BC,
+    (MenuTexture*) 0x020049E4, (MenuTexture*) 0x02004A0C, (MenuTexture*) 0x02004A34, (MenuTexture*) 0x02004A5C, (MenuTexture*) 0x02004A84, (MenuTexture*) 0x02004AAC,
+    (MenuTexture*) 0x02004AD4, (MenuTexture*) 0x02004AFC, (MenuTexture*) 0x02004B24, (MenuTexture*) 0x02004B4C, (MenuTexture*) 0x02004B74, (MenuTexture*) 0x02004B9C,
+    (MenuTexture*) 0x02004BC4, (MenuTexture*) 0x02004BEC, (MenuTexture*) 0x02004C14, (MenuTexture*) 0x02004C3C, (MenuTexture*) 0x02004C64, (MenuTexture*) 0x02004C8C,
+    (MenuTexture*) 0x02004CB4, (MenuTexture*) 0x02004CDC, (MenuTexture*) 0x02004D04, (MenuTexture*) 0x02004D2C, (MenuTexture*) 0x02004D54, (MenuTexture*) 0x02004D7C,
+    (MenuTexture*) 0x02004DA4, (MenuTexture*) 0x02004DCC, (MenuTexture*) 0x02004DF4, (MenuTexture*) 0x02004E1C, (MenuTexture*) 0x02004E44, (MenuTexture*) 0x02004E6C,
+    (MenuTexture*) 0x02004E94, (MenuTexture*) 0x02004EBC, (MenuTexture*) 0x02004EE4, (MenuTexture*) 0x02004F0C, (MenuTexture*) 0x02004F34, (MenuTexture*) 0x02004F5C,
+    (MenuTexture*) 0x02004F84, (MenuTexture*) 0x02004FAC, (MenuTexture*) 0x02004FD4, (MenuTexture*) 0x02004FFC, (MenuTexture*) 0x02005024, (MenuTexture*) 0x0200504C,
+    (MenuTexture*) 0x02005074, (MenuTexture*) 0x0200509C, (MenuTexture*) 0x020050C4, (MenuTexture*) 0x020050EC, (MenuTexture*) 0x02005114, (MenuTexture*) 0x0200513C,
+    (MenuTexture*) 0x02005164, (MenuTexture*) 0x0200518C, (MenuTexture*) 0x020051B4, (MenuTexture*) 0x020051DC, (MenuTexture*) 0x02005204, (MenuTexture*) 0x0200522C,
+    (MenuTexture*) 0x02005254, (MenuTexture*) 0x0200527C, (MenuTexture*) 0x020052A4, (MenuTexture*) 0x020052CC, (MenuTexture*) 0x020052F4, (MenuTexture*) 0x0200531C,
+    (MenuTexture*) 0x02005344, (MenuTexture*) 0x0200536C, (MenuTexture*) 0x02005394, (MenuTexture*) 0x020053BC, (MenuTexture*) 0x020053E4, (MenuTexture*) 0x0200540C,
+    (MenuTexture*) 0x02005434, (MenuTexture*) 0x0200545C, (MenuTexture*) 0x02005484, (MenuTexture*) 0x020054AC, (MenuTexture*) 0x020054D4, (MenuTexture*) 0x02005B3C,
+    (MenuTexture*) 0x020054FC, (MenuTexture*) 0x02005B64, (MenuTexture*) 0x02005524, (MenuTexture*) 0x02005B8C, (MenuTexture*) 0x0200554C, (MenuTexture*) 0x02005BB4,
+    (MenuTexture*) 0x02005574, (MenuTexture*) 0x02005BDC, (MenuTexture*) 0x0200559C, (MenuTexture*) 0x02005C04, (MenuTexture*) 0x020055C4, (MenuTexture*) 0x02005C2C,
+    (MenuTexture*) 0x020055EC, (MenuTexture*) 0x02005C54, (MenuTexture*) 0x02005614, (MenuTexture*) 0x02005C7C, (MenuTexture*) 0x0200563C, (MenuTexture*) 0x02005CA4,
+    (MenuTexture*) 0x02005664, (MenuTexture*) 0x02005CCC, (MenuTexture*) 0x0200568C, (MenuTexture*) 0x02005CF4, (MenuTexture*) 0x02005F9C, (MenuTexture*) 0x020056B4,
+    (MenuTexture*) 0x02005D1C, (MenuTexture*) 0x020056DC, (MenuTexture*) 0x02005D44, (MenuTexture*) 0x02005704, (MenuTexture*) 0x02005D6C, (MenuTexture*) 0x0200572C,
+    (MenuTexture*) 0x02005754, (MenuTexture*) 0x0200577C, (MenuTexture*) 0x020057A4, (MenuTexture*) 0x020057CC, (MenuTexture*) 0x020057F4, (MenuTexture*) 0x02005D94,
+};
+
+MenuTexture* D_800E7FF0[] = {
+    (MenuTexture*) 0x02005E5C, (MenuTexture*) 0x0200581C, (MenuTexture*) 0x02005DBC, (MenuTexture*) 0x02005E84, (MenuTexture*) 0x02005844, (MenuTexture*) 0x02005DE4,
+    (MenuTexture*) 0x02005EAC, (MenuTexture*) 0x0200586C, (MenuTexture*) 0x02005E0C, (MenuTexture*) 0x02005ED4, (MenuTexture*) 0x02005894, (MenuTexture*) 0x02005E34,
+    (MenuTexture*) 0x02005EFC, (MenuTexture*) 0x020058BC, (MenuTexture*) 0x020058E4, (MenuTexture*) 0x0200590C, (MenuTexture*) 0x02005934, (MenuTexture*) 0x0200595C,
+    (MenuTexture*) 0x02005F24, (MenuTexture*) 0x02005984, (MenuTexture*) 0x02005F4C, (MenuTexture*) 0x020059AC, (MenuTexture*) 0x02005F74, (MenuTexture*) 0x020059D4,
+    (MenuTexture*) 0x020059FC, (MenuTexture*) 0x02005A24, (MenuTexture*) 0x02005A4C, (MenuTexture*) 0x02005A74, (MenuTexture*) 0x02005A9C, (MenuTexture*) 0x02005AC4,
+    (MenuTexture*) 0x02005AEC, (MenuTexture*) 0x02005B14, (MenuTexture*) 0x02005FC4, (MenuTexture*) 0x02005FEC, (MenuTexture*) 0x02006014, (MenuTexture*) 0x0200603C,
+    (MenuTexture*) 0x02006064, (MenuTexture*) 0x0200608C, (MenuTexture*) 0x020060B4, (MenuTexture*) 0x020060DC, (MenuTexture*) 0x02006104, (MenuTexture*) 0x0200612C,
+    (MenuTexture*) 0x02006154, (MenuTexture*) 0x020067BC,
+};
+
+MenuTexture* D_800E80A0[] = {
+    (MenuTexture*) 0x0200617C, (MenuTexture*) 0x020067E4, (MenuTexture*) 0x020061A4, (MenuTexture*) 0x0200680C, (MenuTexture*) 0x020061CC, (MenuTexture*) 0x02006834,
+    (MenuTexture*) 0x020061F4, (MenuTexture*) 0x0200685C, (MenuTexture*) 0x0200621C, (MenuTexture*) 0x02006884, (MenuTexture*) 0x02006244, (MenuTexture*) 0x020068AC,
+    (MenuTexture*) 0x0200626C, (MenuTexture*) 0x020068D4, (MenuTexture*) 0x02006294, (MenuTexture*) 0x020068FC, (MenuTexture*) 0x020062BC, (MenuTexture*) 0x02006924,
+    (MenuTexture*) 0x020062E4, (MenuTexture*) 0x0200694C, (MenuTexture*) 0x0200630C, (MenuTexture*) 0x02006974, (MenuTexture*) 0x02006C1C, (MenuTexture*) 0x02006334,
+    (MenuTexture*) 0x0200699C, (MenuTexture*) 0x0200635C, (MenuTexture*) 0x020069C4, (MenuTexture*) 0x02006384, (MenuTexture*) 0x020069EC,
+};
+
+MenuTexture* D_800E8114[] = {
+    (MenuTexture*) 0x020063AC, (MenuTexture*) 0x020063D4, (MenuTexture*) 0x020063FC, (MenuTexture*) 0x02006424, (MenuTexture*) 0x0200644C, (MenuTexture*) 0x02006474,
+    (MenuTexture*) 0x02006A14, (MenuTexture*) 0x02006ADC, (MenuTexture*) 0x0200649C, (MenuTexture*) 0x02006A3C, (MenuTexture*) 0x02006B04, (MenuTexture*) 0x020064C4,
+    (MenuTexture*) 0x02006A64, (MenuTexture*) 0x02006B2C, (MenuTexture*) 0x020064EC, (MenuTexture*) 0x02006A8C, (MenuTexture*) 0x02006B54, (MenuTexture*) 0x02006514,
+    (MenuTexture*) 0x02006AB4, (MenuTexture*) 0x02006B7C, (MenuTexture*) 0x0200653C, (MenuTexture*) 0x02006564, (MenuTexture*) 0x0200658C, (MenuTexture*) 0x020065B4,
+};
+
+MenuTexture* D_800E8174[] = {
+    (MenuTexture*) 0x020065DC, (MenuTexture*) 0x02006BA4,
+};
+
+MenuTexture* D_800E817C[] = {
+    (MenuTexture*) 0x02006604, (MenuTexture*) 0x02006BCC, (MenuTexture*) 0x0200662C, (MenuTexture*) 0x02006BF4, (MenuTexture*) 0x02006654, (MenuTexture*) 0x0200667C,
+    (MenuTexture*) 0x020066A4, (MenuTexture*) 0x020066CC, (MenuTexture*) 0x020066F4, (MenuTexture*) 0x0200671C, (MenuTexture*) 0x02006744, (MenuTexture*) 0x0200676C,
+    (MenuTexture*) 0x02006794, (MenuTexture*) 0x02006C44, (MenuTexture*) 0x02006C6C, (MenuTexture*) 0x02006C94, (MenuTexture*) 0x02006CBC, (MenuTexture*) 0x02006CE4,
+    (MenuTexture*) 0x02006FB4, (MenuTexture*) 0x0200702C, (MenuTexture*) 0x02006F64, (MenuTexture*) 0x02006FDC, (MenuTexture*) 0x02006D0C, (MenuTexture*) 0x02006D34,
+    (MenuTexture*) 0x02006D5C, (MenuTexture*) 0x02006D84,
+};
+
+MenuTexture* D_800E81E4[] = {
+    (MenuTexture*) 0x02006DAC, (MenuTexture*) 0x02006DD4, (MenuTexture*) 0x02006DFC, (MenuTexture*) 0x02006E24, (MenuTexture*) 0x02006E4C, (MenuTexture*) 0x02006E74,
+    (MenuTexture*) 0x02006E9C, (MenuTexture*) 0x02006EC4, (MenuTexture*) 0x02006F3C, (MenuTexture*) 0x02006F8C, (MenuTexture*) 0x02007004, (MenuTexture*) 0x02007054,
+    (MenuTexture*) 0x0200707C, (MenuTexture*) 0x020070A4, (MenuTexture*) 0x02006EEC, (MenuTexture*) 0x02006F14, (MenuTexture*) 0x020070CC, (MenuTexture*) 0x020070F4,
+};
+
+MenuTexture* D_800E822C[] = {
+    (MenuTexture*) 0x0200711C, (MenuTexture*) 0x02007144,
+};
+#else
 MenuTexture* gGlyphTextureLUT[] = {
     seg2_textureFontLetterA,
     seg2_textureFontLetterB,
@@ -1420,6 +1536,8 @@ MenuTexture* D_800E822C[] = {
     seg2_textureFontComma,
     D_0200455C,
 };
+#endif
+
 
 // In a perfect world this would be `MenuTexture *D_800E8234[][2]`
 MenuTexture* D_800E8234[] = {
