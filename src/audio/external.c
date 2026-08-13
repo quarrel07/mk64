@@ -924,7 +924,9 @@ u8 func_800C357C(s32 arg0) {
     return var_v1;
 }
 
-#if defined(VERSION_EU) || defined(VERSION_JP)
+// Matches the guard on its one call site: the launch cartridge does not have
+// this function, so the JP side is really JP 1.1.
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
 u8 func_800C357C_eu(s32 arg0, s32 arg1) {
     u8 var_v1;
     u8 i;
@@ -945,6 +947,8 @@ void func_800C35E8(u8 arg0) {
     D_80192CC6[arg0] = 0;
 }
 
+// Absent from the launch cartridge along with its one call in func_800CA730.
+#ifndef VERSION_JP_V10
 void func_800C3608(u8 arg0, u8 arg1) {
     u8 var_v0;
     u8 thing;
@@ -956,6 +960,7 @@ void func_800C3608(u8 arg0, u8 arg1) {
         }
     }
 }
+#endif
 
 void func_800C36C4(u8 arg0, u8 arg1, u8 arg2, u8 arg3) {
     D_801930D0[arg0].unk_00E[arg1] = arg2;
@@ -3400,11 +3405,14 @@ void func_800CA730(u8 playerIndex) {
                         func_800C9018(playerIndex, SOUND_ARG_LOAD(0x01, 0x00, 0xFF, 0x2C));
                     } else if ((D_800EA10C[0] == 0) && (D_800EA10C[1] == 0)) {
                         if (D_8018FC08 != 0) {
+#ifndef VERSION_JP_V10
                             if (((u32) (gSequencePlayers[1].enabled)) == 0) {
                                 func_800C3608(1, 5);
                                 play_sequence(D_800EA15C);
                                 func_800C3448(0xB001307DU);
-                            } else if ((func_800C3508(1) == 0xC) || (func_800C357C(0x0101000C) == 0)) {
+                            } else
+#endif
+                            if ((func_800C3508(1) == 0xC) || (func_800C357C(0x0101000C) == 0)) {
                                 func_800C3448(0xC1F00000U);
                                 func_800C3448(D_800EA15C | 0xC1500000);
                                 func_800C3448(0xC130017DU);

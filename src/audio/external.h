@@ -220,7 +220,9 @@ void func_800C2A2C(u32);
 void func_800C3448(u32);
 void func_800C3478(void);
 u16 func_800C3508(u8);
+#ifndef VERSION_JP_V10
 void func_800C3608(u8, u8);
+#endif
 u8 func_800C357C(s32);
 void func_800C35E8(u8);
 void func_800C36C4(u8, u8, u8, u8);

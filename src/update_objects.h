@@ -117,8 +117,13 @@ void func_80074D94(s32);
 void func_80074E28(s32);
 void func_80074EE8(void);
 void func_80074FD8(s32);
+#ifdef VERSION_JP_V10
+void func_800750D8(s32, s32, Vec3f, s32);
+void func_80075304(Vec3f, s32, s32);
+#else
 void func_800750D8(s32, s32, Vec3f, s32, s32);
 void func_80075304(Vec3f, s32, s32, s32);
+#endif
 void func_8007542C(s32);
 void init_train_smoke(s32, Vec3f, f32);
 s32 spawn_train_smoke(s32, Vec3f, f32);

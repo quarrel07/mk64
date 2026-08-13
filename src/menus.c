@@ -901,7 +901,11 @@ void controller_pak_menu_act(struct Controller* controller, UNUSED u16 controlle
                 if ((btnAndStick & (A_BUTTON | START_BUTTON)) != 0) {
                     play_sound2(SOUND_MENU_SELECT);
                     func_8009E1C0();
+#ifndef VERSION_JP_V10
+                    // Leaving the menu does not invalidate the pak state in the
+                    // launch build; the other six sites that write BAD do.
                     gControllerPak1State = BAD;
+#endif
                     return;
                 }
                 if ((btnAndStick & (L_JPAD | R_JPAD)) != 0) {

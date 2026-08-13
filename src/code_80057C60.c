@@ -216,7 +216,9 @@ UNUSED s32 D_801658F8;
 UNUSED s8 D_801658FC;
 u8 sRandomItemIndex;
 s8 D_801658FE;
+#ifndef VERSION_JP_V10
 u8 gControllerRandom;
+#endif
 s16 D_80165900;
 UNUSED s32 D_80165904;
 s8 D_80165908;
@@ -1202,6 +1204,10 @@ void func_80059820(s32 playerId) {
     temp_v0->posZInt = (s32) D_8018CF1C->pos[2];
 }
 
+// The whole controller-entropy mechanism postdates the launch build: the
+// cartridge has no randomize_seed_from_controller body, no calls to it in
+// func_80059D00, and gen_random_item's seed has no gControllerRandom term.
+#ifndef VERSION_JP_V10
 void randomize_seed_from_controller(s32 arg0) {
     struct Controller* controller = &gControllerOne[arg0];
 
@@ -1215,6 +1221,7 @@ void randomize_seed_from_controller(s32 arg0) {
         gControllerRandom++;
     }
 }
+#endif
 
 void func_8005994C(void) {
     D_8018D214 = true;
@@ -1312,7 +1319,9 @@ void func_80059D00(void) {
     if (D_801657AE == 0) {
         switch (gScreenModeSelection) {
             case SCREEN_MODE_1P:
+#ifndef VERSION_JP_V10
                 randomize_seed_from_controller(PLAYER_ONE);
+#endif
                 if (D_8018D214 == false) {
                     func_80059820(PLAYER_ONE);
                     func_8005B914();
@@ -1333,8 +1342,10 @@ void func_80059D00(void) {
                 update_object();
                 break;
             case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
+#ifndef VERSION_JP_V10
                 randomize_seed_from_controller(PLAYER_ONE);
                 randomize_seed_from_controller(PLAYER_TWO);
+#endif
                 func_80059820(PLAYER_ONE);
                 func_8005D0FC(PLAYER_ONE);
                 if (!gDemoMode) {
@@ -1352,8 +1363,10 @@ void func_80059D00(void) {
                 update_object();
                 break;
             case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
+#ifndef VERSION_JP_V10
                 randomize_seed_from_controller(PLAYER_ONE);
                 randomize_seed_from_controller(PLAYER_TWO);
+#endif
                 func_80059820(PLAYER_ONE);
                 func_8005D0FC(PLAYER_ONE);
                 if (!gDemoMode) {
@@ -1371,10 +1384,12 @@ void func_80059D00(void) {
                 update_object();
                 break;
             case SCREEN_MODE_3P_4P_SPLITSCREEN:
+#ifndef VERSION_JP_V10
                 randomize_seed_from_controller(PLAYER_ONE);
                 randomize_seed_from_controller(PLAYER_TWO);
                 randomize_seed_from_controller(PLAYER_THREE);
                 randomize_seed_from_controller(PLAYER_FOUR);
+#endif
                 func_80059820(PLAYER_ONE);
                 func_8005D0FC(PLAYER_ONE);
                 if (!gDemoMode) {
@@ -1607,9 +1622,17 @@ void update_object(void) {
             if (gGamestate != CREDITS_SEQUENCE) {
                 update_crabs();
             }
+#ifdef VERSION_JP_V10
+            // The launch build updates the seagulls in one-player races only;
+            // the two-player allowance came later.
+            if ((gPlayerCount == 1) || (gGamestate == CREDITS_SEQUENCE)) {
+                update_seagulls();
+            }
+#else
             if ((gPlayerCount == 1) || (gPlayerCount == 2) || (gGamestate == CREDITS_SEQUENCE)) {
                 update_seagulls();
             }
+#endif
             break;
         case COURSE_LUIGI_RACEWAY:
             if (D_80165898 != 0) {
@@ -2708,11 +2731,20 @@ void func_8005D0FC(s32 playerId) {
 void func_8005D18C(void) {
     if ((gModeSelection == GRAND_PRIX) && (gPlayerCountSelection1 == TIME_TRIALS)) {
         D_801657D8 = 1;
+#ifdef VERSION_JP_V10
+        D_8018D2A4 = 0;
+        D_8018D2BC = 0;
+#else
         D_8018D2BC = 0;
         D_8018D2A4 = 0;
+#endif
         if (gGPCurrentRaceRankByPlayerId[0] >= 4) {
             D_8018D1FC = 1;
+#ifndef VERSION_JP_V10
+            // The launch build zeroes D_8018D2A4 above but never raises it here,
+            // so its address is used once and IDO stops holding it in a register.
             D_8018D2A4 = 1;
+#endif
             D_8018D2BC = 1;
         }
     }

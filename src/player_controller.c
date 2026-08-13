@@ -1109,13 +1109,21 @@ void func_8002A5F4(Vec3f arg0, f32 arg1, Vec3f arg2, f32 arg3, f32 arg4) {
     }
 }
 
+#ifdef VERSION_JP_V10
+// The launch build plays only the engine sound here; the voice clip and the
+// playerIndex parameter that carries it came later.
+void func_8002A704(Player* player) {
+#else
 void func_8002A704(Player* player, s8 playerIndex) {
+#endif
     player->effects |= MUSHROOM_EFFECT;
     player->triggers &= ~START_BOOST_TRIGGER;
     if (((player->type & PLAYER_HUMAN) == PLAYER_HUMAN) &&
         ((player->type & PLAYER_INVISIBLE_OR_BOMB) != PLAYER_INVISIBLE_OR_BOMB)) {
         func_800C90F4(0U, (player->characterId * 0x10) + 0x29008001);
+#ifndef VERSION_JP_V10
         func_800C9060(playerIndex, 0x1900A40BU);
+#endif
     }
     player->boostTimer = 0x0050;
 }
@@ -1390,7 +1398,11 @@ void apply_triggers(Player* player, s8 playerId, UNUSED s8 screenId) {
         trigger_shroom(player, playerId);
     }
     if ((player->triggers & START_BOOST_TRIGGER) == START_BOOST_TRIGGER) {
+#ifdef VERSION_JP_V10
+        func_8002A704(player);
+#else
         func_8002A704(player, playerId);
+#endif
     }
     if ((player->triggers & UNUSED_TRIGGER_0x1000) == UNUSED_TRIGGER_0x1000) {
         func_8008D570(player, playerId);
@@ -3924,12 +3936,17 @@ void func_80033AE0(Player* player, struct Controller* controller, s8 playerIndex
                       0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
                       0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8 };
 
-    if ( 
+    if (
          (
            ((player->effects & HOP_EFFECT) != HOP_EFFECT) &&
            (
              ((player->unk_0C0 / DEGREES(1) <= 6) && (player->unk_0C0 / DEGREES(1) >= -6)) ||
+#ifdef VERSION_JP_V10
+             // The launch build lets either shoulder trigger hold the drift.
+             (((controller->button & L_TRIG) != L_TRIG) && ((controller->button & R_TRIG) != R_TRIG))
+#else
              ((controller->button & R_TRIG) != R_TRIG)
+#endif
            )
          ) ||
          (((player->speed / 18.0f) * 216.0f) <= 20.0f) ||

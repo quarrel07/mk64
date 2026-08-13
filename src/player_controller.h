@@ -33,7 +33,11 @@ void func_8002934C(Player*, Camera*, s8, s8);
 
 void func_8002A194(Player*, f32, f32, f32);
 void func_8002A5F4(Vec3f, f32, Vec3f, f32, f32);
+#ifdef VERSION_JP_V10
+void func_8002A704(Player*);
+#else
 void func_8002A704(Player*, s8);
+#endif
 void func_8002A79C(Player*, s8);
 void update_drift_state_counter(Player*, s8);
 void kart_hop(Player*);

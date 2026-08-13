@@ -1462,7 +1462,14 @@ void func_80074FD8(s32 objectIndex) {
     }
 }
 
+#ifdef VERSION_JP_V10
+// The launch build has no particle-count parameter in this chain: func_80075304
+// reads D_8018D3C4 directly, re-reading it every iteration, and this function
+// never needs the count at all.
+void func_800750D8(s32 objectIndex, s32 arg1, Vec3f arg2, s32 arg3) {
+#else
 void func_800750D8(s32 objectIndex, s32 arg1, Vec3f arg2, s32 arg3, s32 arg4) {
+#endif
     s32 sp24;
     s32 temp_v0;
     Object* object;
@@ -1476,7 +1483,13 @@ void func_800750D8(s32 objectIndex, s32 arg1, Vec3f arg2, s32 arg3, s32 arg4) {
     // ALL HAIL THE FAKE MATCH GODS!!!!!
     object->velocity[1] = ((f64) (f32) temp_v0 * (0.05 * 1.0)) + 2.0;
     object->unk_034 = ((f64) (f32) (temp_v0 % 5) * 0.1) + 1.0;
+#ifdef VERSION_JP_V10
+    // Fixed spacing in the launch build: a constant multiply, not a division by
+    // the particle count, so the angle does not spread to fill the circle.
+    object->direction_angle[1] = arg1 * 0x500;
+#else
     object->direction_angle[1] = (arg1 << 0x10) / arg4;
+#endif
     object->origin_pos[0] = (arg2[0] + (temp_v0 / 2)) - 12.0f;
     object->origin_pos[1] = (arg2[1] - 10.0) + random_int(0x000AU);
     object->origin_pos[2] = (arg2[2] + (temp_v0 / 2)) - 12.0f;
@@ -1485,11 +1498,19 @@ void func_800750D8(s32 objectIndex, s32 arg1, Vec3f arg2, s32 arg3, s32 arg4) {
     object->orientation[2] = temp_v0 * 0x50;
 }
 
+#ifdef VERSION_JP_V10
+void func_80075304(Vec3f arg0, s32 arg1, s32 arg2) {
+#else
 void func_80075304(Vec3f arg0, s32 arg1, s32 arg2, s32 arg3) {
+#endif
     s32 var_s1;
     s32 objectIndex;
 
+#ifdef VERSION_JP_V10
+    for (var_s1 = 0; var_s1 < D_8018D3C4; var_s1++) {
+#else
     for (var_s1 = 0; var_s1 < arg3; var_s1++) {
+#endif
         switch (arg1) { /* irregular */
             case 1:
                 objectIndex = add_unused_obj_index(gObjectParticle1, &gNextFreeObjectParticle1, gObjectParticle1_SIZE);
@@ -1504,7 +1525,11 @@ void func_80075304(Vec3f arg0, s32 arg1, s32 arg2, s32 arg3) {
         if (objectIndex == NULL_OBJECT_ID) {
             break;
         }
+#ifdef VERSION_JP_V10
+        func_800750D8(objectIndex, var_s1, arg0, arg2);
+#else
         func_800750D8(objectIndex, var_s1, arg0, arg2, arg3);
+#endif
     }
 }
 
@@ -3672,7 +3697,13 @@ u8 gen_random_item(s16 rank, s16 isCpu) {
     u8 randomItem;
 
     // sRandomItemIndex not initialized for further randomness?
+#ifdef VERSION_JP_V10
+    // The launch build seeds without the controller-entropy term; see
+    // randomize_seed_from_controller in code_80057C60.c.
+    sRandomItemIndex = ((u32) rand + sRandomItemIndex + gRaceFrameCounter) % 100U;
+#else
     sRandomItemIndex = ((u32) rand + (sRandomItemIndex + gControllerRandom) + gRaceFrameCounter) % 100U;
+#endif
 
     if (gModeSelection == VERSUS) {
         switch (gPlayerCountSelection1) {
@@ -5992,7 +6023,11 @@ void func_80080B28(s32 objectIndex, s32 playerId) {
                             func_800C9060((u8) playerId, SOUND_ARG_LOAD(0x19, 0x01, 0xA2, 0x4A));
                         }
                         func_80080DE4(objectIndex);
+#ifdef VERSION_JP_V10
+                        func_80075304(gObjectList[objectIndex].pos, 3, 3);
+#else
                         func_80075304(gObjectList[objectIndex].pos, 3, 3, D_8018D3C4);
+#endif
                         set_object_flag_status_false(objectIndex, 0x00000200);
                         func_800722A4(objectIndex, 0x00000040);
                         func_80086F60(objectIndex);
