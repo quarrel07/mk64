@@ -757,7 +757,7 @@ ifeq ($(VERSION),cn.v5)
   IDO71_ROOT := $(TOOLS_DIR)/ido-recomp-7.1/$(DETECTED_OS)
   CN_IDO71_SRCS := main camera effects menus replays save spawn_players kart_dma \
                    math_util_2 render_player player_controller update_objects \
-                   code_80057C60 code_80086E70
+                   code_80057C60 code_80086E70 code_80091440
   CN_IDO71_OBJS := $(addprefix $(BUILD_DIR)/src/,$(addsuffix .o,$(CN_IDO71_SRCS)))
   # The racing overlay is 7.1 on iQue too - measured per file: race_logic and
   # skybox_and_splitscreen 100% exact, the rest 84-97% (residues = source work)
