@@ -1238,27 +1238,6 @@ UNUSED void func_8004A1BC(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, V
     func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
 }
 
-#ifdef VERSION_JP_V10
-// The launch build's pair are both colorless ten-argument helpers, differing
-// only in the display list. Later revisions gave the speedometer one color
-// arguments (func_8004A2F4) and swapped the display lists between the two
-// positions; on the cartridge the two bodies differ in exactly one word.
-void func_8004A258(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
-                   s32 arg9) {
-    func_80042330(arg0, arg1, arg2, arg3);
-    gSPDisplayList(gDisplayListHead++, D_0D007A40);
-    gDPSetCombineLERP(gDisplayListHead++, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0);
-    func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
-}
-
-void func_8004A2F4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
-                   s32 arg9) {
-    func_80042330(arg0, arg1, arg2, arg3);
-    gSPDisplayList(gDisplayListHead++, D_0D007A60);
-    gDPSetCombineLERP(gDisplayListHead++, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0, 1, 0, SHADE, 0, 0, 0, 0, TEXEL0);
-    func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
-}
-#else
 void func_8004A258(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg5, s32 arg6, s32 arg7, s32 arg8,
                    s32 arg9) {
     func_80042330(arg0, arg1, arg2, arg3);
@@ -1267,6 +1246,10 @@ void func_8004A258(s32 arg0, s32 arg1, u16 arg2, f32 arg3, u8* texture, Vtx* arg
     func_80049970(texture, arg5, arg6, arg7, arg8, arg9);
 }
 
+// Absent from the launch cartridge: at launch the speedometer body drew
+// through the colorless func_8004A1BC (which is why that one survives
+// unused in later sources), and this color-taking replacement came later.
+#ifndef VERSION_JP_V10
 void func_8004A2F4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, s32 red, s32 green, s32 blue, s32 alpha, u8* texture,
                    Vtx* arg9, s32 argA, s32 argB, s32 argC, s32 argD) {
     func_80042330(arg0, arg1, arg2, arg3);
@@ -2450,9 +2433,9 @@ void func_8004EB38(s32 playerId) {
 
 void func_8004ED40(s32 arg0) {
 #ifdef VERSION_JP_V10
-    func_8004A258(playerHUD[arg0].speedometerX, playerHUD[arg0].speedometerY, 0U, 1.0f, common_texture_speedometer,
+    func_8004A1BC(playerHUD[arg0].speedometerX, playerHUD[arg0].speedometerY, 0U, 1.0f, common_texture_speedometer,
                   D_0D0064B0, 64, 96, 64, 48);
-    func_8004A2F4(D_8018CFEC, D_8018CFF4, D_8016579E, 1.0f, common_texture_speedometer_needle, D_0D005FF0, 0x40, 0x20,
+    func_8004A258(D_8018CFEC, D_8018CFF4, D_8016579E, 1.0f, common_texture_speedometer_needle, D_0D005FF0, 0x40, 0x20,
                   0x40, 0x20);
 #else
     func_8004A2F4(playerHUD[arg0].speedometerX, playerHUD[arg0].speedometerY, 0U, 1.0f, D_8018D300, D_8018D308,
@@ -3090,6 +3073,20 @@ void func_800514BC(void) {
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
+#ifdef VERSION_JP_V10
+// Two launch-only leftovers ahead of the leaf renderer: an empty function
+// and an unreferenced render-state setup. Later revisions deleted both.
+void func_800522EC(void) {
+}
+
+void func_800522F4(void) {
+    gSPDisplayList(gDisplayListHead++, D_0D0079C8);
+    gSPClearGeometryMode(gDisplayListHead++, G_CULL_BOTH);
+    gSPDisplayList(gDisplayListHead++, D_0D007AE0);
+    gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
+}
+#endif
+
 void render_object_leaf_particle(UNUSED s32 cameraId) {
     s32 someIndex;
     s32 leafIndex;
@@ -3263,19 +3260,68 @@ void func_80051F9C(void) {
     func_80051ABC(temp_a0, D_8018D1F0);
 }
 
+#ifdef VERSION_JP_V10
+// At launch the per-course shadow-height cascade lives in these two wrappers,
+// with its own per-course table for the D_801658FE mode; later revisions
+// moved a simplified cascade into func_80051C60 and slimmed the wrappers.
+void func_80052044(void) {
+    s16 height = 240 - D_800DC5EC->cameraHeight;
+
+    if (D_801658FE == 0) {
+        if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+        } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+            height -= 0x10;
+        } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+            height -= 0x10;
+        } else {
+            height += 0x10;
+        }
+    } else if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+    } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+        height -= 8;
+    } else if (gCurrentCourseId == COURSE_KALAMARI_DESERT) {
+        height += 0x60;
+    } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+        height -= 8;
+    } else {
+        height += 8;
+    }
+    func_80051C60(height, 0);
+}
+
+void func_80052080(void) {
+    s16 height = 240 - D_800DC5F0->cameraHeight;
+
+    if (D_801658FE == 0) {
+        if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+        } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+            height -= 0x10;
+        } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+            height -= 0x10;
+        } else {
+            height += 0x10;
+        }
+    } else if (gCurrentCourseId == COURSE_KOOPA_BEACH) {
+    } else if (gCurrentCourseId == COURSE_MOO_MOO_FARM) {
+        height -= 8;
+    } else if (gCurrentCourseId == COURSE_KALAMARI_DESERT) {
+        height += 0x60;
+    } else if (gCurrentCourseId == COURSE_YOSHI_VALLEY) {
+        height -= 8;
+    } else {
+        height += 8;
+    }
+    func_80051C60(height, D_8018D1F0);
+}
+#else
 void func_80052044(void) {
     func_80051C60(240 - D_800DC5EC->cameraHeight, 0);
 }
 
 void func_80052080(void) {
-#ifdef VERSION_JP_V10
-    // JP 1.0 routes this one through func_80051ABC with no second argument;
-    // the four sibling wrappers around it are unchanged.
-    func_80051ABC(240 - D_800DC5F0->cameraHeight, 0);
-#else
     func_80051C60(240 - D_800DC5F0->cameraHeight, D_8018D1F0);
-#endif
 }
+#endif
 
 void func_800520C0(s32 arg0) {
     if (gObjectList[arg0].unk_0D5 == 0) {
@@ -3428,6 +3474,11 @@ void func_800528EC(s32 arg0) {
     s32 var_s3;
     s32 objectIndex;
     Object* object;
+#ifdef VERSION_JP_V10
+    // The launch build holds the viewport id in a saved register across the
+    // loop, which only a local copy reproduces.
+    s32 viewport = arg0;
+#endif
 
     D_80183E80[0] = D_8016582C[0];
     D_80183E80[1] = D_8016582C[1];
@@ -3457,7 +3508,11 @@ void func_800528EC(s32 arg0) {
             objectIndex = gObjectParticle2[var_s3];
             if (objectIndex != NULL_OBJECT_ID) {
                 object = &gObjectList[objectIndex];
+#ifdef VERSION_JP_V10
+                if ((object->state > 0) && (viewport == object->unk_084[7])) {
+#else
                 if ((object->state > 0) && (arg0 == object->unk_084[7]) && (MTX_HUD_BUDGET_OK)) {
+#endif
                     rsp_set_matrix_transformation(object->pos, D_80183E80, object->sizeScaling);
                     gSPVertex(gDisplayListHead++, D_0D005BD0, 3, 0);
                     gSPDisplayList(gDisplayListHead++, D_0D006930);
@@ -4711,6 +4766,11 @@ void func_80057114(s32 cameraId) {
 UNUSED void func_80057330(void) {
 }
 
+// The launch build does not have this function here: its body is
+// func_800522F4, sitting ahead of the leaf renderer, and this slot is one
+// of four adjacent empty stubs on the cartridge. The revisions deleted the
+// pair up there and landed the body in this family.
+#ifndef VERSION_JP_V10
 UNUSED void func_80057338(void) {
 
     gSPDisplayList(gDisplayListHead++, D_0D0079C8);
@@ -4721,6 +4781,7 @@ UNUSED void func_80057338(void) {
 
 UNUSED void func_800573BC(void) {
 }
+#endif
 
 UNUSED void func_800573C4(void) {
 }

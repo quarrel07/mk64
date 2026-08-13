@@ -1199,6 +1199,10 @@ void render_hud_4p_multi(void) {
     }
 }
 
+#ifdef VERSION_JP_V10
+GLOBAL_ASM("asm/jp.v10/pad_8005A4E8.s")
+#endif
+
 void func_80059820(s32 playerId) {
     hud_player* temp_v0;
 
@@ -2782,6 +2786,10 @@ void func_8005D1F4(s32 arg0) {
 }
 
 // Appears to load GP Mode race staging balloons and kart shadows.
+#ifdef VERSION_JP_V10
+GLOBAL_ASM("asm/jp.v10/pad_8005DE94.s")
+#endif
+
 void func_8005D290(void) {
     D_8018D488 = dma_textures(gTexture69C80C, 0x400, 0x400);
     gLoadedTextureKartShadow = dma_textures(gTextureKartShadow, 0x1000, 0x1000);
