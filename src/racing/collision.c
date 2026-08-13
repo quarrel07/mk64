@@ -13,6 +13,12 @@
 #include "code_800029B0.h"
 #include <defines.h>
 
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
+
 #pragma intrinsic(sqrtf)
 
 // Used to delete the choco mountain guard rail

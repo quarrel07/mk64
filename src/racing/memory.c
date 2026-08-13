@@ -12,6 +12,12 @@
 #include "courses/courseTable.h"
 #include "defines.h"
 
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
+
 s32 sGfxSeekPosition;
 s32 sPackedSeekPosition;
 
@@ -107,7 +113,7 @@ void* get_segment_base_addr(s32 segment) {
  * @brief converts an RSP segment + offset address to a normal memory address
  */
 void* segmented_to_virtual(const void* addr) {
-    size_t segment = (uintptr_t) addr >> 24;
+    size_t segment = SEGMENT_NUMBER2(addr);
     size_t offset = (uintptr_t) addr & 0x00FFFFFF;
 
     return (void*) ((gSegmentTable[segment] + offset) | 0x80000000);

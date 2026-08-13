@@ -2421,6 +2421,12 @@ void init_actor_hot_air_balloon_item_box(f32 x, f32 y, f32 z) {
 
 #include "actors/palm_tree/render.inc.c"
 
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
+
 void render_item_boxes(struct UnkStruct_800DC5EC* arg0) {
     Camera* camera = arg0->camera;
     struct Actor* actor;
