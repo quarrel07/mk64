@@ -1,6 +1,6 @@
 {
-"gTextureLuigiRacewaySignLeft": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0C588", "width": 32, "height": 64, "type": "rgba16", "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0A330"}},
-"gTextureLuigiRacewaySignRight": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0D588", "width": 32, "height": 64, "type": "rgba16", "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0B330"}},
-"gTextureLuigiRacewayBalloonBasket": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0E588", "width": 32, "height": 32, "type": "rgba16", "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0C330"}},
-"gTextureLuigiRacewayBalloonRope": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0ED88", "width": 32, "height": 32, "type": "rgba16", "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0CB30"}}
+"gTextureLuigiRacewaySignLeft": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0C588", "width": 32, "height": 64, "type": "rgba16", "jp.v10": {"rom_offset": "0x84E210", "block_offset": "0x0B8D0"}, "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0A330"}},
+"gTextureLuigiRacewaySignRight": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0D588", "width": 32, "height": 64, "type": "rgba16", "jp.v10": {"rom_offset": "0x84E210", "block_offset": "0x0C8D0"}, "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0B330"}},
+"gTextureLuigiRacewayBalloonBasket": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0E588", "width": 32, "height": 32, "type": "rgba16", "jp.v10": {"rom_offset": "0x84E210", "block_offset": "0x0D8D0"}, "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0C330"}},
+"gTextureLuigiRacewayBalloonRope": {"output_dir": "luigi_raceway", "rom_offset": "0x84E8E0", "block_offset": "0x0ED88", "width": 32, "height": 32, "type": "rgba16", "jp.v10": {"rom_offset": "0x84E210", "block_offset": "0x0E0D0"}, "jp.v11": {"rom_offset": "0x84CEB0", "block_offset": "0x0CB30"}}
 }
