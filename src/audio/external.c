@@ -140,7 +140,9 @@ char external_unused_string11[] = "FX MIX %d\n";
 char external_unused_string12[] = "************** Seq Fadeout ***************\n";
 char external_unused_string13[] = "SEQ FADE OUT TIME %d\n";
 #endif
-#if defined(VERSION_EU) || defined(VERSION_JP_V11) || defined(VERSION_CN)
+/* the iQue cart drops exactly these two strings (measured: its gap between
+   D_800EA244 and D_800EA3A0 is 0x40 smaller and the other 13 are verbatim) */
+#if defined(VERSION_EU) || defined(VERSION_JP_V11)
 char external_unused_string_eu_02[] = "************** SE Fadeout ***************\n";
 char external_unused_string_eu_03[] = "SE FADE OUT TIME %d\n";
 #endif
