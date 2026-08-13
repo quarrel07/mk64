@@ -58,7 +58,9 @@ s8 D_8018D9D9;
 MenuItem gMenuItems[MENU_ITEMS_MAX];
 struct_8018DEE0_entry D_8018DEE0[D_8018DEE0_SIZE];
 struct_8018E060_entry D_8018E060[D_8018E060_SIZE];
+#ifndef VERSION_CN
 UNUSED u8 menu_item_bss_padding0[8];
+#endif
 struct_8018E0E8_entry D_8018E0E8[D_8018E0E8_SIZE];
 s32 sMenuTextureBufferIndex;
 TextureMap sMenuTextureMap[TEXTURE_MAP_MAX];
@@ -80,7 +82,9 @@ s32 D_8018E840[4]; // This may all be one big array.
 s32 D_8018E850[2]; // This is probably incorrect. Fix after decomping code.
 s32 D_8018E858[2];
 s8 gTextColor;
+#ifndef VERSION_CN
 s32 D_8018E864_pad;
+#endif
 OSPfs gControllerPak1FileHandle;
 OSPfs gControllerPak2FileHandle;
 #ifdef VERSION_JP
@@ -97,7 +101,9 @@ s32 gControllerPak1MaxWriteableFiles;
 s32 gControllerPak1NumPagesFree;
 s32 gControllerPak1FileNote;
 s32 gControllerPak2FileNote;
+#ifndef VERSION_CN
 s32 menu_item_bss_pad2;
+#endif
 ALIGNED8 SaveData gSaveData;
 
 u8 D_8018ED90;
