@@ -32,6 +32,13 @@
 #include "data/path_spawn_metadata.h"
 #include "math_util_2.h"
 
+#ifdef VERSION_CN
+/* iQue uses the 4-bit segment macro here too (both sites are in
+   vehicle_utils.inc.c: the train and ferry path setup) */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
+
 #ifdef VERSION_JP
 s32 unk_cpu_vehicles_camera_path_pad[14];
 s16 D_801633E0[12];
