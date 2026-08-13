@@ -48,9 +48,11 @@ SECTIONS
       BUILD_DIR/src/main.o(.text*);
       BUILD_DIR/src/code_800029B0.o(.text*);
       BUILD_DIR/src/profiler.o(.text*);
-// JP links several translation units in a different order from us. The same
-// applies to the .data, .rodata and .bss blocks further down.
-#ifdef VERSION_JP
+// JP 1.1 links several translation units in a different order from us. The same
+// applies to the .data, .rodata and .bss blocks further down. JP 1.0 keeps the
+// us order here, and carries unused_overflow_check.o rather than the
+// unused_jp_utils.o split of the same eight words.
+#if defined(VERSION_JP) && !defined(VERSION_JP_V10)
       BUILD_DIR/src/replays.o(.text*);
       BUILD_DIR/src/camera.o(.text*);
       BUILD_DIR/src/cpu_vehicles_camera_path.jp.o(.text*);
@@ -237,7 +239,9 @@ SECTIONS
       BUILD_DIR/src/os/_Ldtob.o(.text*);
       BUILD_DIR/src/os/ldiv.o(.text*);
       BUILD_DIR/data/rsp.o(.text);
-      #ifdef VERSION_JP
+      /* JP 1.1 reorders the .data head; JP 1.0 keeps us's, measured the same
+         way (code_800029B0, crash_screen, path_spawn_metadata in the cart). */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          /* JP .data head order recovered by content-anchor scan vs real ROM */
          BUILD_DIR/src/main.o(.data*);
          BUILD_DIR/src/code_800029B0.o(.data*);
@@ -271,8 +275,10 @@ SECTIONS
       BUILD_DIR/src/code_800AF9B0.o(.data*);
       BUILD_DIR/src/menus.o(.data*);
       BUILD_DIR/src/save.o(.data*);
-      #ifdef VERSION_JP
-         /* JP links the audio data tables before the 800E8700 assets */
+      /* JP 1.1 links the audio data tables before the 800E8700 assets. JP 1.0
+         keeps us's placement at the end of the segment: the cart puts this
+         block at 0xf66b0, after rsp.o, not at 0xe8dd0. */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          BUILD_DIR/src/audio/data.o(.data*);
       #endif
       BUILD_DIR/ASSET_CODE_DIR/data_800E8700/data_800E8700.o(.data*);
@@ -308,7 +314,10 @@ SECTIONS
       BUILD_DIR/src/main.o(.rodata*);
       BUILD_DIR/src/animation.o(.rodata*);
       BUILD_DIR/src/code_800029B0.o(.rodata*);
-      #ifdef VERSION_JP
+      /* JP 1.1 orders camera.o rodata first; JP 1.0 keeps us's order, measured
+         in the cart: cpu_vehicles .rodata sits at 0x0ecb30, directly after
+         code_800029B0's, with no camera.o block in between. */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
          /* JP orders camera.o rodata before the cpu_vehicles float pools */
          BUILD_DIR/src/camera.o(.rodata*);
          BUILD_DIR/src/cpu_vehicles_camera_path.jp.o(.rodata*);
@@ -362,7 +371,7 @@ SECTIONS
       BUILD_DIR/asm/os/osSetIntMask.o(.rodata);
       BUILD_DIR/src/os/_Ldtob.o(.rodata*);
       BUILD_DIR/data/rsp.o(.data*);
-      #ifndef VERSION_JP
+      #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
       BUILD_DIR/src/audio/data.o(.data*);
       #endif
    }
@@ -565,7 +574,10 @@ SECTIONS
    }
    END_SEG(common_textures)
 
-   #ifdef VERSION_JP
+   /* JP 1.1 packs ceremonyData + startupLogo before the kart band; JP 1.0 keeps
+      us's segment order (cart: kart 0x145e40, ceremonyData 0x821890,
+      startupLogo 0x825380 -- us builds 0x145470 / 0x821d10 / 0x825800). */
+   #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
    /* JP packs ceremonyData + startupLogo before the kart band,
       and trigTables directly after it (US keeps them later). */
    BEGIN_SEG(ceremonyData, 0x0B000000)
@@ -599,7 +611,7 @@ SECTIONS
    }
    END_SEG(kart_textures)
 
-   #ifdef VERSION_JP
+   #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
    /* JP: trigTables sit between the kart band and other_textures */
    BEGIN_SEG(trigTables, _buffersSegmentNoloadStart)
    {
@@ -617,7 +629,7 @@ SECTIONS
    }
    END_SEG(other_textures)
 
-   #ifndef VERSION_JP
+   #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
    /* 0x802BA370 724220-729A30 [0x5810] */
    BEGIN_SEG(trigTables, _buffersSegmentNoloadStart)
    {
@@ -644,7 +656,7 @@ SECTIONS
    }
    END_SEG(textures_0b)
 
-   #ifndef VERSION_JP
+   #if !defined(VERSION_JP) || defined(VERSION_JP_V10)
    /* TODO: 0x825800 -> 0x8028B230 (0x100) ...
             0x828400 -> 0x8028DE30 (0xD0) */
    BEGIN_SEG(ceremonyData, 0x0B000000)
