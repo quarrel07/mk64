@@ -3412,6 +3412,11 @@ void render_object_bat(s32 cameraId) {
     D_80183E80[2] = gObjectList[objectIndex].orientation[2];
     if ((D_8018CFB0 != 0) || (D_8018CFC8 != 0)) {
         for (var_s2 = 0; var_s2 < 40; var_s2++) {
+#ifdef VERSION_JP_V10
+            // This no-op and the one in the next loop reproduce the launch
+            // cart's register allocation for both loops.
+            if (0) {}
+#endif
             objectIndex = gObjectParticle2[var_s2];
             if (objectIndex == -1) {
                 continue;
@@ -3437,6 +3442,9 @@ void render_object_bat(s32 cameraId) {
                     func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
                               D_0D0062B0);
+#ifdef VERSION_JP_V10
+                do {} while (0);
+#endif
             }
         }
     }
@@ -3774,7 +3782,13 @@ void render_object_thwomps(s32 cameraId) {
         objectIndex = gObjectParticle3[i];
         if (objectIndex != NULL_OBJECT_ID) {
             object = &gObjectList[objectIndex];
+#ifdef VERSION_JP_V10
+            // Both budget tests in this function are dropped, not folded to 1:
+            // the leftover constant operand changes IDO's register allocation.
+            if ((object->state > 0) && (object->unk_0D5 == 3)) {
+#else
             if ((object->state > 0) && (object->unk_0D5 == 3) && (MTX_HUD_BUDGET_OK)) {
+#endif
                 rsp_set_matrix_transformation(object->pos, object->orientation, object->sizeScaling);
                 gSPVertex(gDisplayListHead++, D_0D005C00, 3, 0);
                 gSPDisplayList(gDisplayListHead++, D_0D006930);
@@ -3793,7 +3807,11 @@ void render_object_thwomps(s32 cameraId) {
         objectIndex = gObjectParticle2[i];
         if (objectIndex != NULL_OBJECT_ID) {
             object = &gObjectList[objectIndex];
+#ifdef VERSION_JP_V10
+            if ((object->state >= 2) && (object->unk_0D5 == 2)) {
+#else
             if ((object->state >= 2) && (object->unk_0D5 == 2) && (MTX_HUD_BUDGET_OK)) {
+#endif
                 func_8004B138(0x000000FF, 0x000000FF, 0x000000FF, (s32) object->primAlpha);
                 D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
                 func_800431B0(object->pos, D_80183E80, object->sizeScaling, D_0D005AE0);
@@ -3805,6 +3823,11 @@ void render_object_thwomps(s32 cameraId) {
 void func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 vertexIndex) {
     Object* object;
 
+#ifdef VERSION_JP_V10
+    // Materializes the table address ahead of the register saves, which is
+    // where the launch prologue schedules it.
+    if (!D_80183E80) {}
+#endif
     if (MTX_HUD_BUDGET_OK) {
         object = &gObjectList[objectIndex];
         D_80183E80[2] = (s16) (object->unk_084[6] + 0x8000);
@@ -4118,7 +4141,13 @@ void func_80054F04(s32 cameraId) {
         object = &gObjectList[objectIndex];
         if (object->state > 0) {
             func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
+#ifdef VERSION_JP_V10
+            // No budget test at launch; even folded to a constant it changes
+            // IDO's schedule, so the operand is dropped rather than defined to 1.
+            if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
+#else
             if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (MTX_HUD_BUDGET_OK)) {
+#endif
                 object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], sp44->pos);
                 rsp_set_matrix_gObjectList(objectIndex);
                 gSPDisplayList(gDisplayListHead++, D_0D006980);

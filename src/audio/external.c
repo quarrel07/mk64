@@ -629,7 +629,10 @@ void func_800C2474(void) {
 
 void func_800C284C(u8 arg0, u8 arg1, u8 arg2, u16 arg3) {
     u8 var_v1;
+#ifndef VERSION_JP_V10
+    /* not in the launch build; the extra local is what moves the spill slots */
     UNUSED s32 pad;
+#endif
 
     if ((D_800EA1EC != 0) && (arg0 != 2)) {
         return;

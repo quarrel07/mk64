@@ -1232,14 +1232,15 @@ s32 func_80089CBC(s32 objectIndex, f32 arg1) {
                     (has_collided_with_player_and_within_height(objectIndex, player, arg1) != 0)) {
                     if (!(player->effects & STAR_EFFECT)) {
                         player->triggers |= VERTICAL_TUMBLE_TRIGGER;
-#ifdef VERSION_JP_V10
-                        // The launch build reports the hit only for players
-                        // it actually tumbled.
-                        var_s7 = 1;
-#endif
                         if (is_obj_flag_status_active(objectIndex, 0x04000000) != 0) {
                             func_80072180();
                         }
+#ifdef VERSION_JP_V10
+                        // The launch build reports the hit only for players it
+                        // actually tumbled, setting the flag after the particle
+                        // call (the assignment lands in the jal's delay slot).
+                        var_s7 = 1;
+#endif
                     }
 #ifndef VERSION_JP_V10
                     var_s7 = 1;
