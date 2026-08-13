@@ -1659,7 +1659,13 @@ bool collision_yoshi_egg(Player* player, struct YoshiValleyEgg* egg) {
             func_800C90F4(player - gPlayerOne, (player->characterId * 0x10) + SOUND_ARG_LOAD(0x29, 0x00, 0x80, 0x0D));
         } else {
             trigger_squish(player, player - gPlayerOne);
+#ifdef VERSION_JP_V10
+            // the launch build blocks the replay save in every non-GP mode and
+            // does not exempt CPU players
+            if (gModeSelection != GRAND_PRIX) {
+#else
             if ((gModeSelection == TIME_TRIALS) && ((player->type & PLAYER_CPU) == 0)) {
+#endif
                 gPostTimeTrialReplayCannotSave = 1;
             }
         }
@@ -2200,7 +2206,12 @@ void evaluate_collision_between_player_actor(Player* player, struct Actor* actor
             if (!(player->effects & BOO_EFFECT) && !(player->type & PLAYER_INVISIBLE_OR_BOMB)) {
                 if (query_collision_player_vs_actor_item(player, actor) == COLLISION) {
                     func_800C98B8(actor->pos, actor->velocity, SOUND_ACTION_EXPLOSION);
+#ifdef VERSION_JP_V10
+                    // the launch build does not exempt CPU players here
+                    if (gModeSelection == TIME_TRIALS) {
+#else
                     if ((gModeSelection == TIME_TRIALS) && !(player->type & PLAYER_CPU)) {
+#endif
                         gPostTimeTrialReplayCannotSave = 1;
                     }
                     if (player->effects & STAR_EFFECT) {

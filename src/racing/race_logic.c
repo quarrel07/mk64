@@ -872,6 +872,7 @@ void func_8028F970(void) {
                 gLapCountByPlayerId[0] = 2;
                 gLapCountByPlayerId[1] = 2;
             }
+#ifndef VERSION_JP_V10
             if (gControllerOne->buttonPressed & D_JPAD) {
                 gLapCountByPlayerId[0] = 2;
                 gLapCountByPlayerId[1] = 2;
@@ -882,6 +883,7 @@ void func_8028F970(void) {
                 gLapCountByPlayerId[6] = 2;
                 gLapCountByPlayerId[7] = 2;
             }
+#endif
         }
     }
 }
