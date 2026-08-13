@@ -9,5 +9,9 @@ float cosf(float);
 double cos(double);
 
 float sqrtf(float);
+#ifdef VERSION_CN
+/* iQue's build emits sqrt.s inline everywhere ours calls libm */
+#pragma intrinsic (sqrtf)
+#endif
 
 #endif
