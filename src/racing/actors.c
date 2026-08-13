@@ -1752,10 +1752,10 @@ bool collision_tree(Player* player, struct Actor* actor) {
         spawn_leaf(actorPos, 0);
     }
     if (xz_dist < 0.1f) {
-        sqrtf((sp48 * sp48) + (sp44 * sp44));
+        temp_f0_4 = sqrtf((sp48 * sp48) + (sp44 * sp44));
         if (xz_dist) {}
-        player->velocity[0] = 0;
-        player->velocity[2] = 0;
+        player->velocity[0] = 0.0f;
+        player->velocity[2] = 0.0f;
         player->pos[0] = actorPos[0] - (x_dist * var_f16 * 1.2f);
         player->pos[2] = actorPos[2] - (z_dist * var_f16 * 1.2f);
     } else {
@@ -1765,8 +1765,8 @@ bool collision_tree(Player* player, struct Actor* actor) {
         if (temp_f0_4 < 0.25f) {
             player->pos[0] = actorPos[0] - (x_dist * var_f16 * 1.2f);
             player->pos[2] = actorPos[2] - (z_dist * var_f16 * 1.2f);
-            player->velocity[0] = 0;
-            player->velocity[2] = 0;
+            player->velocity[0] = 0.0f;
+            player->velocity[2] = 0.0f;
             return true;
         }
         temp_f12 = ((x_dist * sp48) + (z_dist * sp44)) / temp_f0_4;
