@@ -160,7 +160,14 @@ ALIGNED8 u8 gAudioThreadStack[STACKSIZE];
 UNUSED OSThread D_8015CD30;
 UNUSED ALIGNED8 u8 D_8015CD30_Stack[STACKSIZE / 2];
 
+#ifdef VERSION_CN
+/* 0x100 smaller on iQue (newer libultra, smaller OS_YIELD_DATA_SIZE):
+   measured - gGfxSPTaskYieldBuffer rides the -0x520 bss band and
+   gGfxSPTaskStack right after it rides -0x620 */
+ALIGNED8 u8 gGfxSPTaskYieldBuffer[4096];
+#else
 ALIGNED8 u8 gGfxSPTaskYieldBuffer[4352];
+#endif
 ALIGNED8 u32 gGfxSPTaskStack[256];
 OSMesg gPIMesgBuf[32];
 OSMesgQueue gPIMesgQueue;
