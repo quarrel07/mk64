@@ -129,7 +129,11 @@ f32 calculate_track_position_factor(f32, f32, u16, s32);
 void update_player_position_factor(s32, u16, s32);
 void calculate_track_offset_position(u16, f32, f32, s16);
 void set_track_offset_position(u16, f32, s16);
+#ifdef VERSION_JP_V10
+s16 func_8000BD94(s32, f32, f32, f32, s32);
+#else
 s16 func_8000BD94(f32, f32, f32, s32);
+#endif
 
 s16 find_closest_path_point_track_section(f32, f32, f32, u16, s32*);
 s16 update_path_index_with_track(f32, f32, f32, s16, s32, u16);

@@ -2281,7 +2281,12 @@ void init_object_smoke_particle(s32 objectIndex, s32 flameIndex) {
     gObjectList[objectIndex].textureList = common_texture_particle_smoke[0];
     gObjectList[objectIndex].sizeScaling = 0.8f;
 
+#ifdef VERSION_JP_V10
+    // The launch build does not mirror the torch smoke spawns.
+    gObjectList[objectIndex].origin_pos[0] = (f32) * (gTorchSpawns + (flameIndex * 3) + 0);
+#else
     gObjectList[objectIndex].origin_pos[0] = (f32) * (gTorchSpawns + (flameIndex * 3) + 0) * xOrientation;
+#endif
     gObjectList[objectIndex].origin_pos[1] = (f32) * (gTorchSpawns + (flameIndex * 3) + 1);
     gObjectList[objectIndex].origin_pos[2] = (f32) * (gTorchSpawns + (flameIndex * 3) + 2);
     gObjectList[objectIndex].unk_034 = 0;
@@ -6418,6 +6423,19 @@ void func_80081D34(s32 objectIndex) {
     player = gPlayerOne;
     var_s4 = camera1;
     for (playerIndex = 0; playerIndex < D_8018D158; playerIndex++, player++, var_s4++) {
+#ifdef VERSION_JP_V10
+        // The launch build tumbles every player this object touches: no Boo
+        // exemption, and no star sound in place of the tumble.
+        if ((is_obj_flag_status_active(objectIndex, 0x00000200) != 0) &&
+            (has_collided_with_player(objectIndex, player) != 0)) {
+            if ((player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB)) {
+                object = &gObjectList[objectIndex];
+                if (is_obj_flag_status_active(objectIndex, 0x04000000) != 0) {
+                    func_80072180();
+                }
+                var_s5 = 1;
+                player->triggers |= HIGH_TUMBLE_TRIGGER;
+#else
         if ((is_obj_flag_status_active(objectIndex, 0x00000200) != 0) && !(player->effects & BOO_EFFECT) &&
             (has_collided_with_player(objectIndex, player) != 0)) {
             if ((player->type & PLAYER_EXISTS) && !(player->type & PLAYER_INVISIBLE_OR_BOMB)) {
@@ -6431,6 +6449,7 @@ void func_80081D34(s32 objectIndex) {
                 } else {
                     player->triggers |= HIGH_TUMBLE_TRIGGER;
                 }
+#endif
                 object->direction_angle[1] = var_s4->rot[1];
                 object->velocity[1] = (player->speed / 2) + 3.0;
                 object->unk_034 = player->speed + 1.0;
@@ -6579,11 +6598,20 @@ void func_8008241C(s32 objectIndex, s32 arg1) {
     temp_f4 = random_int(0x00C8) + -100.0;
     if (gGamestate == 9) {
         set_obj_origin_pos(objectIndex, sp22 + -360.0, sp20 + 60.0, temp_f4 + -1300.0);
+#ifdef VERSION_JP_V10
+    // The launch build does not mirror the seagull spawns.
+    } else if (gObjectList[objectIndex].unk_0D5 != 0) {
+        set_obj_origin_pos(objectIndex, sp22 + 328.0, sp20 + 20.0, temp_f4 + 2541.0);
+    } else {
+        set_obj_origin_pos(objectIndex, sp22 + -985.0, sp20 + 15.0, temp_f4 + 1200.0);
+    }
+#else
     } else if (gObjectList[objectIndex].unk_0D5 != 0) {
         set_obj_origin_pos(objectIndex, (sp22 + 328.0) * xOrientation, sp20 + 20.0, temp_f4 + 2541.0);
     } else {
         set_obj_origin_pos(objectIndex, (sp22 + -985.0) * xOrientation, sp20 + 15.0, temp_f4 + 1200.0);
     }
+#endif
     set_obj_direction_angle(objectIndex, 0U, 0U, 0U);
     gObjectList[objectIndex].unk_034 = 1.0f;
     func_80086EF0(objectIndex);
@@ -6905,7 +6933,13 @@ void update_hedgehogs(void) {
     func_80072120(indexObjectList2, 0x0000000F);
 }
 
+#ifdef VERSION_JP_V10
+// Like the smoke chain, the launch build has no particle-count parameter
+// here: fixed 0x800 spacing instead of dividing the circle by the count.
+void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2) {
+#else
 void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2, s32 arg3) {
+#endif
     Object* object;
 
     init_object(objectIndex, 0);
@@ -6920,7 +6954,11 @@ void func_80083538(s32 objectIndex, Vec3f arg1, s32 arg2, s32 arg3) {
     object->velocity[1] = (object->velocity[1] * 0.5) + 2.6;
     object->unk_034 = random_int(0x000AU);
     object->unk_034 = (object->unk_034 * 0.1) + 4.5;
+#ifdef VERSION_JP_V10
+    object->direction_angle[1] = arg2 * 0x800;
+#else
     object->direction_angle[1] = (arg2 << 0x10) / arg3;
+#endif
     object->origin_pos[0] = arg1[0];
     object->origin_pos[1] = arg1[1];
     object->origin_pos[2] = arg1[2];
@@ -6931,6 +6969,16 @@ void func_800836F0(Vec3f arg0) {
     s32 objectIndex;
     s32 i;
 
+#ifdef VERSION_JP_V10
+    // Fixed count in the launch build; the D_8018D3BC-driven count came later.
+    for (i = 0; i < 40; i++) {
+        objectIndex = add_unused_obj_index(&gObjectParticle2[0], &gNextFreeObjectParticle2, gObjectParticle2_SIZE);
+        if (objectIndex == NULL_OBJECT_ID) {
+            break;
+        }
+        func_80083538(objectIndex, arg0, i);
+    }
+#else
     for (i = 0; i < D_8018D3BC; i++) {
         objectIndex = add_unused_obj_index(&gObjectParticle2[0], &gNextFreeObjectParticle2, gObjectParticle2_SIZE);
         if (objectIndex == NULL_OBJECT_ID) {
@@ -6938,6 +6986,7 @@ void func_800836F0(Vec3f arg0) {
         }
         func_80083538(objectIndex, arg0, i, D_8018D3BC);
     }
+#endif
 }
 
 void func_8008379C(s32 objectIndex) {
@@ -7100,6 +7149,18 @@ void update_snowmen(void) {
             continue;
         }
 
+#ifdef VERSION_JP_V10
+        // The launch build reads the state through the object pointer, which
+        // is what keeps it in a callee-saved register across the call.
+        object = &gObjectList[objectIndex];
+        if (object->state == 0) {
+            continue;
+        }
+        func_8008379C(objectIndex);
+        if (object->state != 0) {
+            continue;
+        }
+#else
         if (gObjectList[objectIndex].state == 0) {
             continue;
         }
@@ -7107,8 +7168,11 @@ void update_snowmen(void) {
         if (gObjectList[objectIndex].state != 0) {
             continue;
         }
+#endif
         delete_object_wrapper(&gObjectParticle2[var_s0]);
+#ifndef VERSION_JP_V10
         if (var_s0) {} // ??
+#endif
     }
 
     for (var_s0 = 0; var_s0 < NUM_SNOWMEN; var_s0++) {
@@ -7124,6 +7188,13 @@ void update_snowmen(void) {
                 func_800726CC(var_s4, 0x0000000A);
                 func_8008701C(var_s3, 0x0000000A);
                 func_800836F0(object->pos);
+#ifdef VERSION_JP_V10
+                // The launch build also fires the 0x04000000 reaction here,
+                // the same idiom func_80081D34 uses.
+                if (is_obj_flag_status_active(var_s4, 0x04000000) != 0) {
+                    func_80072180();
+                }
+#endif
             }
         } else if (func_80072320(var_s4, 2) != 0) {
             func_800722CC(var_s4, 2);

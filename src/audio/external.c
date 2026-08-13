@@ -1454,6 +1454,21 @@ void func_800C4888(u8 bankId) {
             if (&D_800EA1C8 == entry[0].unk00) {
                 entry->distance = 0.0f;
             } else {
+#ifdef VERSION_JP_V10
+                // The launch build clamps both coordinates to +/-30000 before
+                // squaring them, keeping the distance from overflowing; later
+                // revisions dropped the clamp.
+                if (*entry->unk00[0] > 30000.0f) {
+                    *entry->unk00[0] = 30000.0f;
+                } else if (*entry->unk00[0] < -30000.0f) {
+                    *entry->unk00[0] = -30000.0f;
+                }
+                if (*entry->unk08 > 30000.0f) {
+                    *entry->unk08 = 30000.0f;
+                } else if (*entry->unk08 < -30000.0f) {
+                    *entry->unk08 = -30000.0f;
+                }
+#endif
                 entry->distance = (*entry->unk00[0] * *entry->unk00[0]) + (*entry->unk08 * *entry->unk08);
             }
             requestedPriority = (((u32) (entry->soundBits & 0xFF00)) >> 8);

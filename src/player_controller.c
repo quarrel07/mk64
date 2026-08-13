@@ -1816,6 +1816,21 @@ void func_8002C17C(Player* player, s8 playerId) {
                 gCopyPathIndexByPlayerId[playerId] = gPathIndexByPlayerId[playerId];
             }
             break;
+#ifdef VERSION_JP_V10
+        // The launch build also snapshots the path point when a player goes
+        // airborne on Toad's Turnpike; later revisions dropped the case.
+        case COURSE_TOADS_TURNPIKE:
+            if (((player->effects & MIDAIR_EFFECT) != 0) && (D_80165330[playerId] == 0)) {
+                D_80165330[playerId] = 1;
+                gCopyNearestPathPointByPlayerId[playerId] = gNearestPathPointByPlayerId[playerId];
+                gCopyPathIndexByPlayerId[playerId] = gPathIndexByPlayerId[playerId];
+            } else if ((player->effects & MIDAIR_EFFECT) == 0) {
+                D_80165330[playerId] = 0;
+                gCopyNearestPathPointByPlayerId[playerId] = gNearestPathPointByPlayerId[playerId];
+                gCopyPathIndexByPlayerId[playerId] = gPathIndexByPlayerId[playerId];
+            }
+            break;
+#endif
         case COURSE_RAINBOW_ROAD:
             if ((player->collision.surfaceDistance[2] >= 600.0f) && (D_80165330[playerId] == 0)) {
                 D_80165330[playerId] = 1;
