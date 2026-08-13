@@ -369,6 +369,10 @@ SECTIONS
    END_SEG(main)
 
    BEGIN_NOLOAD(main) {
+      #ifdef VERSION_CN
+      /* iQue: menu_items' small commons lead the bss segment */
+      *(.scommon);
+      #endif
       BUILD_DIR/src/main.o(.bss*);
       #ifdef VERSION_JP
          /* JP bss order recovered from code-reloc anchor mining vs real ROM */
@@ -426,6 +430,11 @@ SECTIONS
       BUILD_DIR/asm/os/__osException.o(.bss);
       BUILD_DIR/src/os/osLeoDiskInit.o(.bss*);
       . = ALIGN(0x10);
+      #ifdef VERSION_CN
+      /* iQue's menu_items commons: the linker gathers them here (experiment) */
+      *(COMMON);
+      . = ALIGN(0x10);
+      #endif
    }
    END_NOLOAD(main)
 
