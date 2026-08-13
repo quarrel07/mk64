@@ -760,7 +760,8 @@ ifeq ($(VERSION),cn.v5)
   CN_IDO71_RACING := race_logic actors memory collision render_courses                      skybox_and_splitscreen math_util actors_extended
   CN_IDO71_OBJS += $(addprefix $(BUILD_DIR)/src/racing/,$(addsuffix .o,$(CN_IDO71_RACING)))
   # The ending overlay is 7.1 as well (podium 20/20, ceremony 85/86 exact);
-  # credits.jp.o and dl_unk stay 5.3 - data-only, no verdict possible yet
+  # credits.jp.o is EGCS - data-only, identified by its literal pool: the cart
+  # emits each initializer's strings last-first (gcc LIFO), IDO emits forward
   CN_IDO71_ENDING := code_80280000 podium_ceremony_actors camera_junk                      code_80281780 code_80281C40 ceremony_and_credits
   CN_IDO71_OBJS += $(addprefix $(BUILD_DIR)/src/ending/,$(addsuffix .o,$(CN_IDO71_ENDING)))
   $(CN_IDO71_OBJS): CC := $(IDO71_ROOT)/cc
@@ -773,6 +774,9 @@ ifeq ($(VERSION),cn.v5)
   CN_EGCS_OBJS := $(BUILD_DIR)/src/render_objects.o
   $(BUILD_DIR)/src/menu_items.jp.o: CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(BUILD_DIR)/src/menu_items.jp.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+  $(BUILD_DIR)/src/ending/credits.jp.o: CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(BUILD_DIR)/src/ending/credits.jp.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
   $(CN_EGCS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
