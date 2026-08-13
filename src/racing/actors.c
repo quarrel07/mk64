@@ -28,6 +28,12 @@
 
 // Appears to be textures
 // or tluts
+
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
 u8* D_802BA050;
 u8* D_802BA054;
 u8* D_802BA058;
@@ -2431,12 +2437,6 @@ void init_actor_hot_air_balloon_item_box(f32 x, f32 y, f32 z) {
 #include "actors/railroad_crossing/render.inc.c"
 
 #include "actors/palm_tree/render.inc.c"
-
-#ifdef VERSION_CN
-/* iQue's racing overlay uses the 4-bit segment macro throughout */
-#undef SEGMENT_NUMBER2
-#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
-#endif
 
 void render_item_boxes(struct UnkStruct_800DC5EC* arg0) {
     Camera* camera = arg0->camera;
