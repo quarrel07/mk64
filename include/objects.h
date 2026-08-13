@@ -368,11 +368,7 @@ extern s16 D_80165730;
 //! Tracking a count of some object type, don't know what object type yet
 extern s16 D_80165738;
 
-#ifdef VERSION_JP_V10
-#define gObjectParticle4_SIZE 0x50
-#else
 #define gObjectParticle4_SIZE 0x40
-#endif
 
 #define NUM_TORCHES 8
 

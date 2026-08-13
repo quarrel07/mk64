@@ -1643,6 +1643,10 @@ void course_update_path_point(Player* player, s8 playerId) {
             break;
         case COURSE_YOSHI_VALLEY:
         case COURSE_RAINBOW_ROAD:
+#ifdef VERSION_JP_V10
+        /* the launch build also runs toads_turnpike off the copied path point */
+        case COURSE_TOADS_TURNPIKE:
+#endif
             player->nearestPathPointId = gCopyNearestPathPointByPlayerId[playerId];
             break;
         case COURSE_FRAPPE_SNOWLAND:
