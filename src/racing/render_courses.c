@@ -18,6 +18,12 @@
 #include "courses/all_course_packed.h"
 #include "courses/all_course_offsets.h"
 
+#ifdef VERSION_CN
+/* iQue's racing overlay uses the 4-bit segment macro throughout */
+#undef SEGMENT_NUMBER2
+#define SEGMENT_NUMBER2(a) SEGMENT_NUMBER(a)
+#endif
+
 s16 D_802B87B0 = 995;
 s16 D_802B87B4 = 1000;
 UNUSED s32 D_802B87B8 = 0;
