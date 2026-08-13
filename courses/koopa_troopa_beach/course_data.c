@@ -580,7 +580,7 @@ Gfx d_course_koopa_troopa_beach_dl_E48[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_80F8),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8200),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_82D8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8360),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8468),
@@ -2999,7 +2999,7 @@ Gfx d_course_koopa_troopa_beach_dl_4E70[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_928),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_1190),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_1B58),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_1A40),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_2D40),
@@ -3019,6 +3019,8 @@ Gfx d_course_koopa_troopa_beach_dl_4E70[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7A98),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7DB0),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7E48),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8510),
@@ -3258,7 +3260,7 @@ Gfx d_course_koopa_troopa_beach_dl_5500[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_6140),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_4920),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_6268),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_4490),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7970),
@@ -3640,7 +3642,7 @@ Gfx d_course_koopa_troopa_beach_dl_5F58[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_47E0),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_48B0),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_4920),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_4A08),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7DB0),
@@ -3648,7 +3650,7 @@ Gfx d_course_koopa_troopa_beach_dl_5F58[] = {
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8510),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8C18),
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_8D08),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_70A0),
 #endif
     gsSPDisplayList(d_course_koopa_troopa_beach_packed_dl_7608),
@@ -6582,25 +6584,25 @@ Gfx d_course_koopa_troopa_beach_dl_AD40[] = {
 };
 
 // 0xADE0 path
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_koopa_troopa_beach_unknown_path[] = {
 #include "courses/koopa_troopa_beach/d_course_koopa_troopa_beach_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_koopa_troopa_beach_unknown_path1[] = {
 #include "courses/koopa_troopa_beach/d_course_koopa_troopa_beach_unknown_path1.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_koopa_troopa_beach_track_path[] = {
 #include "courses/koopa_troopa_beach/d_course_koopa_troopa_beach_track_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_koopa_troopa_beach_track_path_2[] = {
 #include "courses/koopa_troopa_beach/d_course_koopa_troopa_beach_track_path_2.inc.c"
 };
@@ -7589,7 +7591,7 @@ Gfx* d_course_koopa_troopa_beach_dl_list2[] = {
     d_course_koopa_troopa_beach_dl_AD40,
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_koopa_troopa_beach_unknown_path[] = {
 #include "courses/koopa_troopa_beach/d_course_koopa_troopa_beach_unknown_path.inc.c"
 };

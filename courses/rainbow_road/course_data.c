@@ -813,13 +813,13 @@ Gfx d_course_rainbow_road_dl_1948[] = {
     gsSPEndDisplayList(),
 };
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* VERSION_JP path order: moved to end of file */
 TrackPathPoint d_course_rainbow_road_unknown_path[] = {
 #include "courses/rainbow_road/d_course_rainbow_road_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* VERSION_JP path order: moved to end of file */
 TrackPathPoint d_course_rainbow_road_track_path[] = {
 #include "courses/rainbow_road/d_course_rainbow_road_track_path.inc.c"
 };
@@ -1547,7 +1547,7 @@ Gfx* d_course_rainbow_road_dl_list[] = {
     d_course_rainbow_road_dl_18D0, d_course_rainbow_road_dl_1878, d_course_rainbow_road_dl_1948,
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* VERSION_JP path order: JP puts the paths last */
 TrackPathPoint d_course_rainbow_road_unknown_path[] = {
 #include "courses/rainbow_road/d_course_rainbow_road_unknown_path.inc.c"
 };

@@ -906,7 +906,7 @@ Gfx d_course_moo_moo_farm_dl_1790[] = {
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 1023, 256),
     gsSPDisplayList(d_course_moo_moo_farm_dl_60),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_26C0),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2C68),
@@ -1003,7 +1003,7 @@ Gfx d_course_moo_moo_farm_dl_1A20[] = {
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 1023, 256),
     gsSPDisplayList(d_course_moo_moo_farm_dl_60),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_26C0),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2C68),
@@ -3098,7 +3098,7 @@ Gfx d_course_moo_moo_farm_dl_5458[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2C10),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2998),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_29F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_28D8),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2A50),
@@ -3198,7 +3198,7 @@ Gfx d_course_moo_moo_farm_dl_5758[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2C10),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2998),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_29F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_28D8),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2A50),
@@ -5199,7 +5199,7 @@ Gfx d_course_moo_moo_farm_dl_8F18[] = {
     gsSPDisplayList(d_course_moo_moo_farm_dl_60),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_28D8),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2AB8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2898),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2AF0),
@@ -5464,7 +5464,7 @@ Gfx d_course_moo_moo_farm_dl_9640[] = {
     gsSPDisplayList(d_course_moo_moo_farm_dl_60),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_28D8),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2AB8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2898),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2AF0),
@@ -7393,7 +7393,7 @@ Gfx d_course_moo_moo_farm_dl_CBC8[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3310),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3350),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3380),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2748),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_31C8),
@@ -7582,7 +7582,7 @@ Gfx d_course_moo_moo_farm_dl_D140[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3310),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3350),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3380),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2748),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_31C8),
@@ -7686,7 +7686,7 @@ Gfx d_course_moo_moo_farm_dl_D408[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3310),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3350),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_3380),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_2748),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_31C8),
@@ -7766,7 +7766,7 @@ Gfx d_course_moo_moo_farm_dl_D6B0[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5668),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5F08),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_40A8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5FD8),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_41B0),
@@ -7889,7 +7889,7 @@ Gfx d_course_moo_moo_farm_dl_DA50[] = {
     gsSPDisplayList(d_course_moo_moo_farm_dl_48),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5F08),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_40A8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5FD8),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_41B0),
@@ -7973,7 +7973,7 @@ Gfx d_course_moo_moo_farm_dl_DC70[] = {
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5C98),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5F08),
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_40A8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_5FD8),
 #else
     gsSPDisplayList(d_course_moo_moo_farm_packed_dl_41B0),
@@ -8536,13 +8536,13 @@ Gfx d_course_moo_moo_farm_dl_EA18[] = {
 };
 
 // 0xEC80
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_moo_moo_farm_unknown_path[] = {
 #include "courses/moo_moo_farm/d_course_moo_moo_farm_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_moo_moo_farm_track_path[] = {
 #include "courses/moo_moo_farm/d_course_moo_moo_farm_track_path.inc.c"
 };
@@ -8974,7 +8974,7 @@ TrackSections d_course_moo_moo_farm_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_moo_moo_farm_unknown_path[] = {
 #include "courses/moo_moo_farm/d_course_moo_moo_farm_unknown_path.inc.c"
 };

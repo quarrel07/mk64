@@ -62,7 +62,7 @@ Gfx d_course_royal_raceway_dl_0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6E20),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6EB8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6F28),
@@ -477,7 +477,7 @@ Gfx d_course_royal_raceway_dl_F40[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8618), gsSPDisplayList(d_course_royal_raceway_packed_dl_8400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318), gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -603,7 +603,7 @@ Gfx d_course_royal_raceway_dl_12C0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -691,7 +691,7 @@ Gfx d_course_royal_raceway_dl_1610[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00), gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8618), gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740), gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -802,7 +802,7 @@ Gfx d_course_royal_raceway_dl_19B0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -898,7 +898,7 @@ Gfx d_course_royal_raceway_dl_1C40[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8618),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -955,7 +955,7 @@ Gfx d_course_royal_raceway_dl_2018[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_14C8), gsSPDisplayList(d_course_royal_raceway_packed_dl_8D48),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8CD8), gsSPDisplayList(d_course_royal_raceway_packed_dl_8C70),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8C00),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8B98),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_21B8), gsSPDisplayList(d_course_royal_raceway_packed_dl_2230),
@@ -971,7 +971,7 @@ Gfx d_course_royal_raceway_dl_2018[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3FA8), gsSPDisplayList(d_course_royal_raceway_packed_dl_3B70),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3C18), gsSPDisplayList(d_course_royal_raceway_packed_dl_6E20),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7500), gsSPDisplayList(d_course_royal_raceway_packed_dl_7578),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_47C0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
@@ -979,11 +979,11 @@ Gfx d_course_royal_raceway_dl_2018[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18), gsSPDisplayList(d_course_royal_raceway_packed_dl_8618),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
 #endif
     gsSPEndDisplayList(),
@@ -1062,7 +1062,7 @@ Gfx d_course_royal_raceway_dl_2210[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
@@ -1070,7 +1070,7 @@ Gfx d_course_royal_raceway_dl_2210[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8618),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -1144,13 +1144,13 @@ Gfx d_course_royal_raceway_dl_2428[] = {
 };
 
 Gfx d_course_royal_raceway_dl_25F0[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_AB8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1548), gsSPDisplayList(d_course_royal_raceway_packed_dl_14C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8CD8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8B98),
 #endif
@@ -1158,21 +1158,21 @@ Gfx d_course_royal_raceway_dl_25F0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_22C0), gsSPDisplayList(d_course_royal_raceway_packed_dl_1F58),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1B98), gsSPDisplayList(d_course_royal_raceway_packed_dl_2F70),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3190),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_69B0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6950),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3268),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4350), gsSPDisplayList(d_course_royal_raceway_packed_dl_3FA8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3B70), gsSPDisplayList(d_course_royal_raceway_packed_dl_3C18),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7578),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_47C0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138), gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18), gsSPDisplayList(d_course_royal_raceway_packed_dl_8618),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -1532,7 +1532,7 @@ Gfx d_course_royal_raceway_dl_31F8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1940),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8C70),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8C00),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8B98),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9B68),
@@ -1542,7 +1542,7 @@ Gfx d_course_royal_raceway_dl_31F8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1C48),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9FF0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9E98),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9F10),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2EE0),
@@ -1565,7 +1565,7 @@ Gfx d_course_royal_raceway_dl_31F8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6F28),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7500),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7578),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_47C0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
@@ -1579,7 +1579,7 @@ Gfx d_course_royal_raceway_dl_31F8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9520),
@@ -2277,7 +2277,7 @@ Gfx d_course_royal_raceway_dl_4BA8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4A08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4A80),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4B30),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_78E0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
@@ -2286,13 +2286,13 @@ Gfx d_course_royal_raceway_dl_4BA8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
@@ -2300,7 +2300,7 @@ Gfx d_course_royal_raceway_dl_4BA8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -2360,12 +2360,12 @@ Gfx d_course_royal_raceway_dl_4DF8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
@@ -2374,7 +2374,7 @@ Gfx d_course_royal_raceway_dl_4DF8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -2410,30 +2410,30 @@ Gfx d_course_royal_raceway_dl_4F80[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4400), gsSPDisplayList(d_course_royal_raceway_packed_dl_4A08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4A80), gsSPDisplayList(d_course_royal_raceway_packed_dl_4B30),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_78E0), gsSPDisplayList(d_course_royal_raceway_packed_dl_7980),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400), gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520), gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#else
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
-#endif
-#ifdef VERSION_JP
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
-#else
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
 #ifndef VERSION_JP
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
+#endif
+#ifdef VERSION_JP_V11
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
+#endif
+#ifndef VERSION_JP_V11
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00), gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318), gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -2474,24 +2474,24 @@ Gfx d_course_royal_raceway_dl_51D0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -2542,30 +2542,30 @@ Gfx d_course_royal_raceway_dl_53B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7360), gsSPDisplayList(d_course_royal_raceway_packed_dl_4A08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4A80), gsSPDisplayList(d_course_royal_raceway_packed_dl_4B30),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4BC8), gsSPDisplayList(d_course_royal_raceway_packed_dl_7980),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400), gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520), gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#else
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
-#endif
-#ifdef VERSION_JP
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
-#else
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
 #ifndef VERSION_JP
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
+#endif
+#ifdef VERSION_JP_V11
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
+#endif
+#ifndef VERSION_JP_V11
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00), gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318), gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
@@ -2611,17 +2611,17 @@ Gfx d_course_royal_raceway_dl_5598[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2630,7 +2630,7 @@ Gfx d_course_royal_raceway_dl_5598[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -2691,17 +2691,17 @@ Gfx d_course_royal_raceway_dl_5758[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
@@ -2740,13 +2740,13 @@ Gfx d_course_royal_raceway_dl_5900[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520), gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F20),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2782,13 +2782,13 @@ Gfx d_course_royal_raceway_dl_5A40[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2833,12 +2833,12 @@ Gfx d_course_royal_raceway_dl_5B28[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2891,13 +2891,13 @@ Gfx d_course_royal_raceway_dl_5D08[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520), gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90), gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2925,17 +2925,17 @@ Gfx d_course_royal_raceway_dl_5EB8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520), gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90), gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -2957,7 +2957,7 @@ Gfx d_course_royal_raceway_dl_5FD8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_44B0), gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400), gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5520),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #endif
@@ -2966,11 +2966,11 @@ Gfx d_course_royal_raceway_dl_5FD8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8618), gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740), gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278), gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A6A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_94B0),
 #endif
     gsSPEndDisplayList(),
@@ -3040,17 +3040,17 @@ Gfx d_course_royal_raceway_dl_61B0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -3064,11 +3064,11 @@ Gfx d_course_royal_raceway_dl_61B0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A6A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_94B0),
 #endif
     gsSPEndDisplayList(),
@@ -3093,7 +3093,7 @@ Gfx d_course_royal_raceway_dl_6378[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7278), gsSPDisplayList(d_course_royal_raceway_packed_dl_72E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7020), gsSPDisplayList(d_course_royal_raceway_packed_dl_6D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D98),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6F28),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7360),
@@ -3105,17 +3105,17 @@ Gfx d_course_royal_raceway_dl_6378[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8), gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -3134,7 +3134,7 @@ Gfx d_course_royal_raceway_dl_6538[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_B78),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8AC0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8A60),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8900),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8888),
@@ -3147,7 +3147,7 @@ Gfx d_course_royal_raceway_dl_6538[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9988),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9A38),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9A98),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9918),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9630),
@@ -3174,7 +3174,7 @@ Gfx d_course_royal_raceway_dl_6538[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_71A0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7278),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D18),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D98),
@@ -3188,7 +3188,7 @@ Gfx d_course_royal_raceway_dl_6538[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
@@ -3316,7 +3316,7 @@ Gfx d_course_royal_raceway_dl_68C8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6E20),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6F28),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6FB0),
@@ -3329,7 +3329,7 @@ Gfx d_course_royal_raceway_dl_68C8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7578),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_75F8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7680),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
@@ -3340,17 +3340,17 @@ Gfx d_course_royal_raceway_dl_68C8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -3412,17 +3412,17 @@ Gfx d_course_royal_raceway_dl_6BC0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8), gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -3458,7 +3458,7 @@ Gfx d_course_royal_raceway_dl_6E20[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_75F8), gsSPDisplayList(d_course_royal_raceway_packed_dl_7680),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08), gsSPDisplayList(d_course_royal_raceway_packed_dl_5330),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400), gsSPDisplayList(d_course_royal_raceway_packed_dl_54A8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
 #endif
@@ -3466,7 +3466,7 @@ Gfx d_course_royal_raceway_dl_6E20[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18), gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
@@ -3517,7 +3517,7 @@ Gfx d_course_royal_raceway_dl_70C0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_69B0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6950),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_68E8),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6880),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_32F0),
@@ -3561,7 +3561,7 @@ Gfx d_course_royal_raceway_dl_72B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_AB8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_B78),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8AC0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8A60),
@@ -3592,7 +3592,7 @@ Gfx d_course_royal_raceway_dl_72B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9E18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9E98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9F10),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9F80),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2EE0),
@@ -3610,7 +3610,7 @@ Gfx d_course_royal_raceway_dl_72B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6C58),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6BE8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6A80),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_70B8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7138),
@@ -3626,23 +3626,23 @@ Gfx d_course_royal_raceway_dl_72B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7500),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7578),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_75F8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7680),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4F98),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_50B0),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5138),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8040),
@@ -3654,7 +3654,7 @@ Gfx d_course_royal_raceway_dl_72B8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_80C8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
@@ -3776,7 +3776,7 @@ Gfx d_course_royal_raceway_dl_7778[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00), gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8), gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5990),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3978), gsSPDisplayList(d_course_royal_raceway_packed_dl_3908),
@@ -3881,7 +3881,7 @@ Gfx d_course_royal_raceway_dl_7AD0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5990),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6328),
@@ -4189,7 +4189,7 @@ Gfx d_course_royal_raceway_dl_84A0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7578), gsSPDisplayList(d_course_royal_raceway_packed_dl_7E08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400), gsSPDisplayList(d_course_royal_raceway_packed_dl_7FD0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8), gsSPDisplayList(d_course_royal_raceway_packed_dl_7D10),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5B50),
@@ -4387,7 +4387,7 @@ Gfx d_course_royal_raceway_dl_8C58[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_26B0), gsSPDisplayList(d_course_royal_raceway_packed_dl_4538),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_45E0), gsSPDisplayList(d_course_royal_raceway_packed_dl_46E0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_47C0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4890),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5298),
 #endif
@@ -4546,7 +4546,7 @@ Gfx d_course_royal_raceway_dl_92D0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2E08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2D80),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2CF8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2F70),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3190),
 #endif
@@ -4561,7 +4561,7 @@ Gfx d_course_royal_raceway_dl_92D0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_71A0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_72E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7020),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6D18),
 #endif
@@ -4578,7 +4578,7 @@ Gfx d_course_royal_raceway_dl_92D0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7C98),
 #endif
@@ -4742,13 +4742,13 @@ Gfx d_course_royal_raceway_dl_9900[] = {
 
 Gfx d_course_royal_raceway_dl_99A0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_930),  gsSPDisplayList(d_course_royal_raceway_packed_dl_9C8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_AB8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_B78),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1720), gsSPDisplayList(d_course_royal_raceway_packed_dl_16B8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_89F0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8988),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8900),
 #endif
@@ -4759,19 +4759,19 @@ Gfx d_course_royal_raceway_dl_99A0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2758), gsSPDisplayList(d_course_royal_raceway_packed_dl_27E0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2EE0), gsSPDisplayList(d_course_royal_raceway_packed_dl_2E08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2D80),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2CF8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2F70),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3440),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_33D8), gsSPDisplayList(d_course_royal_raceway_packed_dl_68E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6880),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6808),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4078), gsSPDisplayList(d_course_royal_raceway_packed_dl_4118),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_71A0), gsSPDisplayList(d_course_royal_raceway_packed_dl_7278),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_72E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7020),
 #endif
@@ -4780,7 +4780,7 @@ Gfx d_course_royal_raceway_dl_99A0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5330), gsSPDisplayList(d_course_royal_raceway_packed_dl_5400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8), gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50), gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5018),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5A10),
@@ -4930,12 +4930,13 @@ Gfx d_course_royal_raceway_dl_9FE8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_47C0), gsSPDisplayList(d_course_royal_raceway_packed_dl_4890),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5298), gsSPDisplayList(d_course_royal_raceway_packed_dl_8400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_56A0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
-#else
-    gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
 #endif
 #ifndef VERSION_JP
+    gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
@@ -4945,12 +4946,12 @@ Gfx d_course_royal_raceway_dl_9FE8[] = {
 Gfx d_course_royal_raceway_dl_A0A8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_930),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9C8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_B78),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1720),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_16B8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_89F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8988),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8900),
@@ -4958,7 +4959,7 @@ Gfx d_course_royal_raceway_dl_A0A8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_17F8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1FE8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_20A0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2110),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9B08),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_9B68),
@@ -4967,19 +4968,19 @@ Gfx d_course_royal_raceway_dl_A0A8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_27E0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2EE0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2E08),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2D80),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_2CF8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3440),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_33D8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3368),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_6880),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4078),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4118),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_41A8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7278),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_72E8),
@@ -4991,7 +4992,7 @@ Gfx d_course_royal_raceway_dl_A0A8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_51E8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_4E90),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7B50),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_7BB8),
 #endif
@@ -5084,7 +5085,7 @@ Gfx d_course_royal_raceway_dl_A200[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8400),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_56A0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
@@ -5234,7 +5235,7 @@ Gfx d_course_royal_raceway_dl_A8A8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5990),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A3C8),
@@ -5324,12 +5325,12 @@ Gfx d_course_royal_raceway_dl_AB28[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5EF8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5990),
@@ -5370,12 +5371,12 @@ Gfx d_course_royal_raceway_dl_AC28[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5EF8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #endif
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
 #else
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5990),
@@ -5404,12 +5405,12 @@ Gfx d_course_royal_raceway_dl_AC28[] = {
 };
 
 Gfx d_course_royal_raceway_dl_AD90[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1AA0),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3628),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3540), gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A3C8),
@@ -5512,6 +5513,8 @@ Gfx d_course_royal_raceway_dl_B188[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3540),
 #ifndef VERSION_JP
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
+#endif
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_58E8),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A3C8),
@@ -5556,7 +5559,7 @@ Gfx d_course_royal_raceway_dl_B2E0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3540),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5C00),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
@@ -5564,7 +5567,7 @@ Gfx d_course_royal_raceway_dl_B2E0[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
 #endif
@@ -5591,7 +5594,7 @@ Gfx d_course_royal_raceway_dl_B2E0[] = {
 };
 
 Gfx d_course_royal_raceway_dl_B3E8[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8E30),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_1A30),
@@ -5602,9 +5605,11 @@ Gfx d_course_royal_raceway_dl_B3E8[] = {
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5D18), gsSPDisplayList(d_course_royal_raceway_packed_dl_5DC8),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_5EF8), gsSPDisplayList(d_course_royal_raceway_packed_dl_5740),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_57F0), gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8318),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8390),
+#endif
+#ifndef VERSION_JP
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A438),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A4B8),
@@ -5622,12 +5627,12 @@ Gfx d_course_royal_raceway_dl_B3E8[] = {
 };
 
 Gfx d_course_royal_raceway_dl_B508[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8E30),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3628),
     gsSPDisplayList(d_course_royal_raceway_packed_dl_3540), gsSPDisplayList(d_course_royal_raceway_packed_dl_55D0),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_royal_raceway_packed_dl_8278),
 #endif
     gsSPDisplayList(d_course_royal_raceway_packed_dl_A438),
@@ -5642,13 +5647,13 @@ Gfx d_course_royal_raceway_dl_B508[] = {
 };
 
 // 0xB5B8
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_royal_raceway_unknown_path[] = {
 #include "courses/royal_raceway/d_course_royal_raceway_unknown_path.inc.c"
 };
 #endif
 
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_royal_raceway_track_path[] = {
 #include "courses/royal_raceway/d_course_royal_raceway_track_path.inc.c"
 };
@@ -5930,7 +5935,7 @@ TrackSections d_course_royal_raceway_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_royal_raceway_unknown_path[] = {
 #include "courses/royal_raceway/d_course_royal_raceway_unknown_path.inc.c"
 };

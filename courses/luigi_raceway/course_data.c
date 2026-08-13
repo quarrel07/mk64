@@ -3307,7 +3307,7 @@ Gfx d_course_luigi_raceway_dl_66B8[] = {
 };
 
 Gfx d_course_luigi_raceway_dl_6708[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_1B28),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_1E70),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_20C0),
@@ -3320,7 +3320,7 @@ Gfx d_course_luigi_raceway_dl_6708[] = {
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_77B0),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_7878),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_7940),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_4880),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_4960),
 #endif
@@ -3350,7 +3350,7 @@ Gfx d_course_luigi_raceway_dl_67A0[] = {
 };
 
 Gfx d_course_luigi_raceway_dl_6810[] = {
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_1B28),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_1E70),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_20C0),
@@ -3362,7 +3362,7 @@ Gfx d_course_luigi_raceway_dl_6810[] = {
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_7650), gsSPDisplayList(d_course_luigi_raceway_packed_dl_76F8),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_77B0), gsSPDisplayList(d_course_luigi_raceway_packed_dl_7878),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_7940),
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_4880),
     gsSPDisplayList(d_course_luigi_raceway_packed_dl_4960),
 #endif
@@ -5231,14 +5231,14 @@ Gfx d_course_luigi_raceway_dl_A320[] = {
 };
 
 // 0xA540
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_luigi_raceway_unknown_path[] = {
 #include "courses/luigi_raceway/d_course_luigi_raceway_unknown_path.inc.c"
 };
 #endif
 
 // 0xA6D0
-#ifndef VERSION_JP  /* VERSION_JP path order: moved to end of file */
+#ifndef VERSION_JP_V11  /* JP 1.1 path order: moved to end of file */
 TrackPathPoint d_course_luigi_raceway_track_path[] = {
 #include "courses/luigi_raceway/d_course_luigi_raceway_track_path.inc.c"
 };
@@ -5937,7 +5937,7 @@ TrackSections d_course_luigi_raceway_addr[] = {
     { 0x00000000, 0, 0, 0x0000 },
 };
 
-#ifdef VERSION_JP  /* VERSION_JP path order: JP puts the paths last */
+#ifdef VERSION_JP_V11  /* JP 1.1 path order: JP 1.1 puts the paths last */
 TrackPathPoint d_course_luigi_raceway_unknown_path[] = {
 #include "courses/luigi_raceway/d_course_luigi_raceway_unknown_path.inc.c"
 };
