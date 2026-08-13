@@ -398,6 +398,7 @@ SECTIONS
       #ifdef VERSION_CN
       /* iQue: menu_items' small commons lead the bss segment */
       *(.scommon);
+      BUILD_DIR/asm/menu_sbss_cn.o(.bss);
       #endif
       BUILD_DIR/src/main.o(.bss*);
       #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
