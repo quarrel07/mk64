@@ -143,8 +143,8 @@ SECTIONS
       #if GCC
          BUILD_DIR/asm/os/llmuldiv_gcc.o(.text);
       #endif
-      #ifdef VERSION_JP
-      /* JP links sqrtf before __osGetCurrFaultedThread (57 call sites agree) */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
+      /* JP 1.1 links sqrtf before __osGetCurrFaultedThread (57 call sites agree); JP 1.0 keeps the US order */
       BUILD_DIR/asm/os/sqrtf.o(.text);
       BUILD_DIR/src/os/__osGetCurrFaultedThread.o(.text*);
       #else
@@ -379,8 +379,8 @@ SECTIONS
 
    BEGIN_NOLOAD(main) {
       BUILD_DIR/src/main.o(.bss*);
-      #ifdef VERSION_JP
-         /* JP bss order recovered from code-reloc anchor mining vs real ROM */
+      #if defined(VERSION_JP) && !defined(VERSION_JP_V10)
+         /* JP 1.1 bss order recovered from code-reloc anchor mining vs real ROM; JP 1.0 keeps the us order */
          BUILD_DIR/src/code_800029B0.o(.bss*);
          BUILD_DIR/src/profiler.o(.bss*);
          BUILD_DIR/src/replays.o(.bss*);

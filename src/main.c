@@ -80,7 +80,7 @@ Player* gPlayerTwoCopy = &gPlayers[1];
 UNUSED Player* gPlayerThreeCopy = &gPlayers[2];
 UNUSED Player* gPlayerFourCopy = &gPlayers[3];
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 UNUSED s32 D_800FD850[1];
 #else
 UNUSED s32 D_800FD850[3];
