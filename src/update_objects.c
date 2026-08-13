@@ -1374,7 +1374,11 @@ void func_80074924(s32 objectIndex) {
     } else {
         object->unk_084[7] = -0x100 - (sp20 / 32);
     }
+#ifdef VERSION_JP_V10
+    object->primAlpha = 0xFF;
+#else
     object->primAlpha = 0x00E6;
+#endif
     object_next_state(objectIndex);
 }
 

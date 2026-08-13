@@ -3073,7 +3073,7 @@ void render_object_leaf_particle(UNUSED s32 cameraId) {
         leafIndex = gLeafParticle[someIndex];
         if (leafIndex != -1) {
             object = &gObjectList[leafIndex];
-            if ((object->state >= 2) && (object->unk_0D5 == 7) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            if ((object->state >= 2) && (object->unk_0D5 == 7) && (MTX_HUD_BUDGET_OK)) {
                 rsp_set_matrix_gObjectList(leafIndex);
                 gSPDisplayList(gDisplayListHead++, D_0D0069C8);
             }
@@ -3233,7 +3233,13 @@ void func_80052044(void) {
 }
 
 void func_80052080(void) {
+#ifdef VERSION_JP_V10
+    // JP 1.0 routes this one through func_80051ABC with no second argument;
+    // the four sibling wrappers around it are unchanged.
+    func_80051ABC(240 - D_800DC5F0->cameraHeight, 0);
+#else
     func_80051C60(240 - D_800DC5F0->cameraHeight, D_8018D1F0);
+#endif
 }
 
 void func_800520C0(s32 arg0) {
@@ -3330,7 +3336,7 @@ void render_object_bat(s32 cameraId) {
                 continue;
             }
 
-            if ((gObjectList[objectIndex].state >= 2) && (gMatrixHudCount < 0x2EF)) {
+            if ((gObjectList[objectIndex].state >= 2) && (MTX_HUD_BUDGET_OK)) {
                 D_80183E80[1] =
                     func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
@@ -3345,7 +3351,7 @@ void render_object_bat(s32 cameraId) {
                 continue;
             }
 
-            if ((gObjectList[objectIndex].state >= 2) && (gMatrixHudCount < 0x2EF)) {
+            if ((gObjectList[objectIndex].state >= 2) && (MTX_HUD_BUDGET_OK)) {
                 D_80183E80[1] =
                     func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], temp_s7->pos);
                 func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
@@ -3416,7 +3422,7 @@ void func_800528EC(s32 arg0) {
             objectIndex = gObjectParticle2[var_s3];
             if (objectIndex != NULL_OBJECT_ID) {
                 object = &gObjectList[objectIndex];
-                if ((object->state > 0) && (arg0 == object->unk_084[7]) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+                if ((object->state > 0) && (arg0 == object->unk_084[7]) && (MTX_HUD_BUDGET_OK)) {
                     rsp_set_matrix_transformation(object->pos, D_80183E80, object->sizeScaling);
                     gSPVertex(gDisplayListHead++, D_0D005BD0, 3, 0);
                     gSPDisplayList(gDisplayListHead++, D_0D006930);
@@ -3678,7 +3684,7 @@ void render_object_thwomps(s32 cameraId) {
         objectIndex = gObjectParticle3[i];
         if (objectIndex != NULL_OBJECT_ID) {
             object = &gObjectList[objectIndex];
-            if ((object->state > 0) && (object->unk_0D5 == 3) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            if ((object->state > 0) && (object->unk_0D5 == 3) && (MTX_HUD_BUDGET_OK)) {
                 rsp_set_matrix_transformation(object->pos, object->orientation, object->sizeScaling);
                 gSPVertex(gDisplayListHead++, D_0D005C00, 3, 0);
                 gSPDisplayList(gDisplayListHead++, D_0D006930);
@@ -3697,7 +3703,7 @@ void render_object_thwomps(s32 cameraId) {
         objectIndex = gObjectParticle2[i];
         if (objectIndex != NULL_OBJECT_ID) {
             object = &gObjectList[objectIndex];
-            if ((object->state >= 2) && (object->unk_0D5 == 2) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            if ((object->state >= 2) && (object->unk_0D5 == 2) && (MTX_HUD_BUDGET_OK)) {
                 func_8004B138(0x000000FF, 0x000000FF, 0x000000FF, (s32) object->primAlpha);
                 D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
                 func_800431B0(object->pos, D_80183E80, object->sizeScaling, D_0D005AE0);
@@ -3709,7 +3715,7 @@ void render_object_thwomps(s32 cameraId) {
 void func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 vertexIndex) {
     Object* object;
 
-    if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
+    if (MTX_HUD_BUDGET_OK) {
         object = &gObjectList[objectIndex];
         D_80183E80[2] = (s16) (object->unk_084[6] + 0x8000);
         rsp_set_matrix_transformation(object->pos, (u16*) D_80183E80, object->sizeScaling);
@@ -3752,7 +3758,7 @@ void render_object_train_smoke_particle(s32 objectIndex, s32 cameraId) {
     camera = &camera1[cameraId];
     if (objectIndex != NULL_OBJECT_ID) {
         if ((gObjectList[objectIndex].state >= 2) && (gObjectList[objectIndex].unk_0D5 == 1) &&
-            (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            (MTX_HUD_BUDGET_OK)) {
             set_color_render((s32) gObjectList[objectIndex].type, (s32) gObjectList[objectIndex].type,
                              (s32) gObjectList[objectIndex].type, 0, 0, 0, (s32) gObjectList[objectIndex].primAlpha);
             D_80183E80[1] =
@@ -3812,7 +3818,7 @@ void render_object_paddle_boat_smoke_particle(s32 objectIndex, s32 cameraId) {
     camera = &camera1[cameraId];
     if (objectIndex != NULL_OBJECT_ID) {
         if ((gObjectList[objectIndex].state >= 2) && (gObjectList[objectIndex].unk_0D5 == 6) &&
-            (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            (MTX_HUD_BUDGET_OK)) {
             set_color_render((s32) gObjectList[objectIndex].type, (s32) gObjectList[objectIndex].type,
                              (s32) gObjectList[objectIndex].type, gObjectList[objectIndex].unk_0A2,
                              gObjectList[objectIndex].unk_0A2, gObjectList[objectIndex].unk_0A2,
@@ -3854,7 +3860,7 @@ void render_object_bowser_flame_particle(s32 objectIndex, s32 cameraId) {
     Object* object;
 
     camera = &camera1[cameraId];
-    if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
+    if (MTX_HUD_BUDGET_OK) {
         object = &gObjectList[objectIndex];
         if (object->unk_0D5 == 9) {
             func_8004B72C(0xFF, (s32) object->type, 0, (s32) object->unk_0A2, 0, 0, (s32) object->primAlpha);
@@ -3884,7 +3890,7 @@ void render_object_bowser_flame(s32 cameraId) {
 }
 
 void func_8005477C(s32 objectIndex, u8 arg1, Vec3f arg2) {
-    if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
+    if (MTX_HUD_BUDGET_OK) {
         switch (arg1) { /* irregular */
             case 0:
                 set_color_render(0xE6, 0xFF, 0xFF, 0x00, 0x00, 0xFF, (s32) gObjectList[objectIndex].primAlpha);
@@ -4022,7 +4028,7 @@ void func_80054F04(s32 cameraId) {
         object = &gObjectList[objectIndex];
         if (object->state > 0) {
             func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
-            if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+            if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (MTX_HUD_BUDGET_OK)) {
                 object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], sp44->pos);
                 rsp_set_matrix_gObjectList(objectIndex);
                 gSPDisplayList(gDisplayListHead++, D_0D006980);

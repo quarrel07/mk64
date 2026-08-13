@@ -1170,7 +1170,7 @@ void set_current_path(s32 pathIndex) {
     gSelectedPathCount = gPathCountByPathIndex[pathIndex];
 }
 
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 s32 update_player_path_selection(s32 payerId, s32 pathIndex) {
     f32 posX;
     f32 posY;
@@ -1196,7 +1196,7 @@ s32 update_player_path_selection(s32 payerId, s32 pathIndex) {
 }
 #endif
 
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
 void update_player_completion(s32 playerId) {
     s32 lap;
     u16 pathIndex = gPathIndexByPlayerId[playerId];
@@ -1227,7 +1227,7 @@ void update_player_completion(s32 playerId) {
 }
 #endif
 
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
 void yoshi_valley_cpu_path(s32 playerId) {
     s16 previous;
 
@@ -1385,7 +1385,7 @@ void update_player_path_completion(s32 playerId, Player* player) {
         }
     }
     gPreviousPlayerZ[playerId] = playerZ;
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
     if ((gCurrentCourseId == COURSE_YOSHI_VALLEY) && (gIsPlayerNewPathPoint == true)) {
         yoshi_valley_cpu_path(playerId);
         if (((player->type & PLAYER_HUMAN) == 0) || (player->type & PLAYER_CPU)) {
@@ -1403,7 +1403,7 @@ void update_player_path_completion(s32 playerId, Player* player) {
             }
         }
     } else {
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
         // JP randomizes the CPU path on Yoshi Valley at the finish line; the US
         // revision replaced this with the yoshi_valley_cpu_path machinery.
         if ((gCrossedFinishLine[playerId] == 1) && (gLapCountByPlayerId[playerId] >= 0) &&
@@ -1505,7 +1505,7 @@ void update_player_timer_sound(s32 playerId, UNUSED Player* unused) {
 
 void update_player(s32 playerId) {
     UNUSED s32 pad[14];
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
     /* JP declares these in the opposite order, which moves var_a0_2's slot to 0x94. */
     s16 prevSteering;
     s16 newAngle;
@@ -1544,7 +1544,7 @@ void update_player(s32 playerId) {
             gLapCompletionPercentByPlayerId[playerId] = -1000.0f;
             return;
         }
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
         D_801633E0[playerId] = 0;
         // clang-format off
         if (player->pos[0] < gCourseMinX) {            D_801633E0[playerId] = 1;        }
@@ -1587,7 +1587,7 @@ void update_player(s32 playerId) {
                 set_places();
             }
             if (player->type & PLAYER_CPU) {
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
                 if (gCurrentCourseId != COURSE_AWARD_CEREMONY) {
 #else
                 if ((gIsPlayerNewPathPoint == true) && (gCurrentCourseId != COURSE_AWARD_CEREMONY)) {
@@ -1665,7 +1665,7 @@ void update_player(s32 playerId) {
                     } else {
                         gPreviousCpuTargetSpeed[playerId] = GET_COURSE_cpu_NormalTargetSpeed(gCCSelection);
                     }
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
                     check_ai_crossing_distance(playerId);
 #endif
                     cpu_track_position_factor(playerId);
@@ -1728,7 +1728,7 @@ void update_player(s32 playerId) {
                             if (steeringSensitivity > 5) {
                                 D_801630E8[playerId] = 0;
                                 player->effects &= ~DRIFTING_EFFECT;
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
                                 if (steeringSensitivity) {} // fake match
 #endif
                             }
@@ -1745,7 +1745,7 @@ void update_player(s32 playerId) {
                 }
 
                 if ((playerId & 1) != (gIncrementUpdatePlayer & 1)) {
-#ifdef VERSION_JP
+#ifdef VERSION_JP_V11
                     prevSteering = gPreviousAngleSteering[playerId];
                     apply_cpu_turn(player, prevSteering);
 #else
@@ -1879,7 +1879,7 @@ void update_player(s32 playerId) {
                 gCurrentCpuTargetSpeed = cpu_TargetSpeed[playerId];
                 player->effects &= ~CPU_FAST_EFFECT;
                 gPreviousCpuTargetSpeed[playerId] = gCurrentCpuTargetSpeed;
-#ifndef VERSION_JP
+#ifndef VERSION_JP_V11
                 check_ai_crossing_distance(playerId);
 #endif
                 regulate_cpu_speed(playerId, gCurrentCpuTargetSpeed, player);
