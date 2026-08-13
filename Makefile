@@ -42,9 +42,10 @@ GCC ?= 0
 #  us     - builds the 1997 North American version
 #  eu.v10 - builds the 1997 1.0 PAL version
 #  eu.v11 - builds the 1997 1.1 PAL version
+#  jp.v10 - builds the original December 1996 Japanese release
 #  jp.v11 - builds revision 1.1 of the original December 1996 Japanese release
 VERSION ?= us
-$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v11))
+$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v10 jp.v11))
 
 ifeq      ($(VERSION),us)
   DEFINES += VERSION_US=1
@@ -54,6 +55,9 @@ else ifeq ($(VERSION),eu.v10)
   GRUCODE   ?= f3dex_old
 else ifeq ($(VERSION),eu.v11)
   DEFINES += VERSION_EU=1 VERSION_EU_V11=1
+  GRUCODE   ?= f3dex_old
+else ifeq ($(VERSION),jp.v10)
+  DEFINES += VERSION_JP=1 VERSION_JP_V10=1
   GRUCODE   ?= f3dex_old
 else ifeq ($(VERSION),jp.v11)
   DEFINES += VERSION_JP=1 VERSION_JP_V11=1
