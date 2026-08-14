@@ -12644,6 +12644,21 @@ void func_800AAE18(MenuItem* arg0) {
  * hard lock in the function if no appropriate gMenuItems entry
  * is found.
  **/
+#ifdef VERSION_CN
+/* iQue's finder family iterates a second, iQue-added item array and uses
+   do-while loops with subtract-form compares (bodies read from the cart at
+   0xAA880-0xAA970; find_menu_items also returns NULL there, same as ours) */
+MenuItem* get_menu_item_player_count(void) {
+    MenuItem* entry = gMenuItemsCN;
+    s32 nbPlayer = gPlayerCount - 1;
+
+    do {
+        if ((entry->type - MENU_ITEM_UI_1P_GAME) == nbPlayer) {
+            goto escape;
+        }
+        entry++;
+    } while (!(&gMenuItemsCN[MENU_ITEMS_MAX] < entry));
+#else
 MenuItem* get_menu_item_player_count(void) {
     MenuItem* entry = gMenuItems;
     s32 nbPlayer = gPlayerCount - 1;
@@ -12653,6 +12668,7 @@ MenuItem* get_menu_item_player_count(void) {
             goto escape;
         }
     }
+#endif
 
     // Something VERY wrong has occurred
     while (true) {
@@ -12667,6 +12683,17 @@ escape:
  * hard lock in the function if no appropriate gMenuItems entry
  * is found.
  **/
+#ifdef VERSION_CN
+MenuItem* get_menu_item_character(s32 characterId) {
+    MenuItem* entry = gMenuItemsCN;
+
+    do {
+        if ((entry->type - CHARACTER_SELECT_MENU_MARIO) == characterId) {
+            goto escape;
+        }
+        entry++;
+    } while (!(&gMenuItemsCN[MENU_ITEMS_MAX] < entry));
+#else
 MenuItem* get_menu_item_character(s32 characterId) {
     MenuItem* entry = gMenuItems;
 
@@ -12675,6 +12702,7 @@ MenuItem* get_menu_item_character(s32 characterId) {
             goto escape;
         }
     }
+#endif
 
     // Something VERY wrong has occurred
     while (true) {
@@ -12694,6 +12722,16 @@ escape:
  * probably as much a matter of luck as it is good
  * reasoning on the original author(s) part.
  **/
+#ifdef VERSION_CN
+MenuItem* find_menu_items_dupe(s32 type) {
+    MenuItem* entry = gMenuItemsCN;
+    do {
+        if (entry->type == type) {
+            goto escape;
+        }
+        entry++;
+    } while (!(&gMenuItemsCN[MENU_ITEMS_MAX] < entry));
+#else
 MenuItem* find_menu_items_dupe(s32 type) {
     MenuItem* entry = gMenuItems;
     for (; !(entry > (&gMenuItems[MENU_ITEMS_MAX])); entry++) {
@@ -12701,6 +12739,7 @@ MenuItem* find_menu_items_dupe(s32 type) {
             goto escape;
         }
     }
+#endif
 
     // Something VERY wrong has occurred
     while (true) {
@@ -12710,6 +12749,18 @@ escape:
     return entry;
 }
 
+#ifdef VERSION_CN
+MenuItem* find_menu_items(s32 type) {
+    MenuItem* entry = gMenuItemsCN;
+    do {
+        if (entry->type == type) {
+            goto escape;
+        }
+        entry++;
+    } while (!(&gMenuItemsCN[MENU_ITEMS_MAX] < entry));
+
+    return NULL;
+#else
 MenuItem* find_menu_items(s32 type) {
     MenuItem* entry = gMenuItems;
     for (; !(entry > (&gMenuItems[MENU_ITEMS_MAX])); entry++) {
@@ -12719,6 +12770,7 @@ MenuItem* find_menu_items(s32 type) {
     }
 
     return NULL;
+#endif
 escape:
     return entry;
 }

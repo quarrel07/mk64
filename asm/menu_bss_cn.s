@@ -20,6 +20,13 @@
 .section .bss
 
 .align 3
+# iQue-ADDED: a second full-size menu-item array their rewritten finder
+# family iterates (base 0x801922c0 and bound +0x500 read directly from the
+# finders' code at cart 0xAA880-0xAA970; no matched code references it).
+# gSaveData follows at +0x6F0, cart-measured.
+.global gMenuItemsCN
+gMenuItemsCN: .space 0x500
+.space 0x1f0
 .global gSaveData
 gSaveData: .space 0x200
 .space 0x74
