@@ -10977,12 +10977,24 @@ void menu_item_credits_render(MenuItem* arg0) {
 
 // Originally func_800A7894
 // Presumes that "number" is a 2 digit number. Convert it to a string
+#ifdef VERSION_CN
+/* iQue writes digit GLYPH PAIRS: 0xA3 prefix + (digit | 0x80) - the glyph
+   LUT maps 0xB0-0xB9 to the digit art (cart body at 0xA78E0) */
+void convert_number_to_ascii(s32 number, char* buffer) {
+    buffer[0] = -93;
+    buffer[2] = -93;
+    buffer[4] = 0;
+    buffer[1] = (number / 0xA) - 80;
+    buffer[3] = (number % 0xA) - 80;
+}
+#else
 void convert_number_to_ascii(s32 number, char* buffer) {
     buffer[0] = (number / 0xA) + 0x30;
     buffer[1] = (number % 0xA) + 0x30;
     // Terminator
     buffer[2] = 0;
 }
+#endif
 
 // Originally func_800A78E0
 // MK 64 doesn't show more then 2 digits for any given time
