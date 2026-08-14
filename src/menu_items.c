@@ -6759,8 +6759,8 @@ void func_8009E5FC(s32 arg0) {
 
 void clear_menus(void) {
     s32 index;
-    for (index = 0; index < ARRAY_COUNT(gMenuItems); index++) {
-        gMenuItems[index].type = 0;
+    for (index = 0; index < ARRAY_COUNT(MENU_ITEMS); index++) {
+        MENU_ITEMS[index].type = 0;
     }
 }
 
@@ -6771,13 +6771,13 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
     MkAnimation* var_a0;
 
     i = 0;
-    menuItem = gMenuItems;
+    menuItem = MENU_ITEMS;
     while (true) {
         if (menuItem->type == 0) {
             break;
         }
         i++;
-        if (i > ARRAY_COUNT(gMenuItems)) {
+        if (i > ARRAY_COUNT(MENU_ITEMS)) {
             while (true) {}
         }
         menuItem++;

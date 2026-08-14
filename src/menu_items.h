@@ -668,6 +668,12 @@ extern s8 D_8018D9D9;
 extern MenuItem gMenuItems[MENU_ITEMS_MAX];
 #ifdef VERSION_CN
 extern MenuItem gMenuItemsCN[MENU_ITEMS_MAX];
+/* iQue's menu system reads and writes its added second array; functions
+   measured to use it swap through this macro (identical expansion for
+   every other version) */
+#define MENU_ITEMS gMenuItemsCN
+#else
+#define MENU_ITEMS gMenuItems
 #endif
 extern struct_8018DEE0_entry D_8018DEE0[D_8018DEE0_SIZE];
 extern struct_8018E060_entry D_8018E060[D_8018E060_SIZE];
