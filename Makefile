@@ -820,7 +820,7 @@ ifeq ($(VERSION),cn.v5)
                          osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask \
                          osSendMesg osRecvMesg osCreateThread osStartThread \
                          osDestroyThread osSetTimer osSetEventMesg __osSetGlobalIntMask \
-                         __osViGetCurrentContext
+                         __osViGetCurrentContext osInitialize
   CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
                          $(BUILD_DIR)/src/os/math/llmuldiv.o
   $(CN_EGCS_LIB_O0_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh

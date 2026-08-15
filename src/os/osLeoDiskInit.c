@@ -11,6 +11,9 @@ extern OSPiHandle* __osPiTable;
 OSPiHandle LeoDiskHandle;
 OSPiHandle* __osDiskHandle;
 
+/* cn: no cart body, no callers; the handles above stay - the matched cn
+   device manager still references them */
+#ifndef VERSION_CN
 OSPiHandle* osLeoDiskInit(void) {
     s32 sp1c;
     LeoDiskHandle.type = 2;
@@ -35,4 +38,5 @@ OSPiHandle* osLeoDiskInit(void) {
     return &LeoDiskHandle;
 }
 
+#endif
 #undef MK64
