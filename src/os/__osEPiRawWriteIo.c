@@ -1,6 +1,9 @@
 #include "libultra_internal.h"
 #include "hardware.h"
 
+/* cn: no cart body and zero references in the cn link - the EGCS wrapper
+   osEPiRawWriteIo is self-contained and the printf/DevMgr users are gone */
+#ifndef VERSION_CN
 s32 __osEPiRawWriteIo(OSPiHandle* a0, u32 a1, u32 a2) {
     register u32 a3 = HW_REG(PI_STATUS_REG, u32);
     while (a3 & PI_STATUS_ERROR) {
@@ -9,6 +12,7 @@ s32 __osEPiRawWriteIo(OSPiHandle* a0, u32 a1, u32 a2) {
     HW_REG(a0->baseAddress | a1, u32) = a2;
     return 0;
 }
+#endif
 /*
 / 0B69A0 802F71A0 3C0EA460 /  lui   $t6, %hi(PI_STATUS_REG) # $t6, 0xa460
 / 0B69A4 802F71A4 8DC70010 /  lw    $a3, %lo(PI_STATUS_REG)($t6)
