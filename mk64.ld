@@ -161,9 +161,15 @@ SECTIONS
       BUILD_DIR/src/os/osPfsFreeBlocks.o(.text*);
       BUILD_DIR/src/os/guRotateF.o(.text*);
       BUILD_DIR/src/os/guScaleF.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/asm/os/guScale_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/guPerspectiveF.o(.text*);
       BUILD_DIR/src/os/guLookAtF.o(.text*);
       BUILD_DIR/src/os/guTranslateF.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/asm/os/guTranslate_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/osSyncPrintf.o(.text*);
       BUILD_DIR/src/os/guMtxCatL.o(.text*);
       BUILD_DIR/src/os/osPfsSearchFile.o(.text*);
@@ -225,11 +231,18 @@ SECTIONS
       BUILD_DIR/src/os/osPiGetCmdQueue.o(.text*);
       BUILD_DIR/src/os/__osSpGetStatus.o(.text*);
       BUILD_DIR/src/os/guMtxF2L.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/asm/os/guMtxF2L_cn.o(.text);
+      BUILD_DIR/asm/os/guMtxIdentF_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/osEepromWrite.o(.text*);
       BUILD_DIR/src/os/contpfs.o(.text*);
       BUILD_DIR/src/os/osPfsChecker.o(.text*);
       BUILD_DIR/src/os/contramread.o(.text*);
       BUILD_DIR/src/os/guNormalize.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/asm/os/guNormalize_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/math/sinf.o(.text*);
       BUILD_DIR/src/os/math/cosf.o(.text*);
       #ifndef VERSION_CN /* iQue stubs the printfs; the formatter subtree is

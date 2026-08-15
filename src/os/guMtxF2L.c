@@ -4,6 +4,7 @@
 #endif
 
 #ifndef GBI_FLOATS
+#ifndef VERSION_CN /* iQue uses the asm body in guMtxF2L_cn.s */
 void guMtxF2L(float mf[4][4], Mtx* m) {
     int r, c;
     s32 tmp1;
@@ -20,6 +21,8 @@ void guMtxF2L(float mf[4][4], Mtx* m) {
     }
 }
 
+#endif
+/* still called by guMtxCatL/guMtxXFML on cn - stays in every version */
 void guMtxL2F(float mf[4][4], Mtx* m) {
     int r, c;
     u32 tmp1;
@@ -41,11 +44,14 @@ void guMtxL2F(float mf[4][4], Mtx* m) {
     }
 }
 #else
+#ifndef VERSION_CN
 void guMtxF2L(float mf[4][4], Mtx* m) {
     memcpy(m, mf, sizeof(Mtx));
 }
 #endif
+#endif
 
+#ifndef VERSION_CN /* iQue uses the asm body in guMtxIdentF_cn.s */
 void guMtxIdentF(float mf[4][4]) {
     int r, c;
     for (r = 0; r < 4; r++) {
@@ -59,6 +65,8 @@ void guMtxIdentF(float mf[4][4]) {
     }
 }
 
+#endif
+#ifndef VERSION_CN /* absent on the iQue cart (dead code dropped) */
 void guMtxIdent(Mtx* m) {
 #ifndef GBI_FLOATS
     float mf[4][4];
@@ -68,3 +76,4 @@ void guMtxIdent(Mtx* m) {
     guMtxIdentF(m->m);
 #endif
 }
+#endif
