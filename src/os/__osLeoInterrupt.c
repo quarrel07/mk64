@@ -3,6 +3,13 @@
 #include "piint.h"
 #include "libultra_internal.h"
 
+#ifdef VERSION_CN
+/* errStatus lives inside __OSBlockInfo on iQue's libultra; this IDO body
+   predates the move - route the tranx-level writes at block 0 so the cn
+   build compiles until the true iQue body (if any survives on cart) lands */
+#define errStatus block[0].errStatus
+#endif
+
 static void __osLeoResume(void);
 static void __osLeoAbnormalResume(void);
 extern u32 D_800EA5F0;

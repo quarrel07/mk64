@@ -14,6 +14,12 @@ typedef struct {
 u32 D_80194040;
 
 u64 osClockRate = 62500000;
+#ifdef VERSION_CN
+/* iQue keeps osViClock at the head of this object's .data, right before
+   __osShutdown (cart 0x800E8678/0x800E867C); the cn arm of __osViInit does
+   not define it (mirrors sm64's SH/CN guard) */
+u32 osViClock = 48681812; /* VI_NTSC_CLOCK; cart bytes 02E6D354 */
+#endif
 u32 __osShutdown = 0;
 u32 __OSGlobalIntMask = OS_IM_ALL;
 u32 D_800EA5F0 = 0;
