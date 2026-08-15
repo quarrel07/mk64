@@ -267,6 +267,11 @@ ASSET_VERSION := $(TORCH_VERSION)
 ASSET_BASEROM := baserom.$(ASSET_VERSION).z64
 SRC_ASSETS_DIR := $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo $(ASSET_CODE_DIR)/data_800E45C0 $(ASSET_CODE_DIR)/data_segment2 $(ASSET_CODE_DIR)/data_800E8700 $(ASSET_CODE_DIR)/common_data
 SRC_DIRS       := src src/data src/buffers src/racing src/ending src/audio src/debug src/os src/os/math courses $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo $(SRC_ASSETS_DIR)
+# iQue's EGCS-compiled llmuldiv calls libgcc's 64-bit division helpers, and
+# the cart carries them (cn only; four functions right before the ucode text)
+ifeq ($(VERSION),cn.v5)
+  SRC_DIRS += src/os/libgcc
+endif
 ASM_DIRS       := asm asm/os asm/unused $(DATA_DIR) $(DATA_DIR)/sound_data $(DATA_DIR)/karts
 
 
@@ -783,18 +788,37 @@ ifeq ($(VERSION),cn.v5)
   $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
-  # iQue's libultra C is the same EGCS compiler at -mips2 -O2 (SDK library
-  # build). Only the files measured 100% byte-exact are listed; the rest of
-  # src/os is either still 5.3-matched or carries real iQue source changes
-  # (flash saves, eeprom emulation, interrupt masks).
+  # iQue's libultra C is the same EGCS compiler at -mips2 (SDK library build),
+  # with per-file opt levels mirroring sm64's measured cn table: the core
+  # thread/mesg/time files compile with NO -O flag, device/VI files with -O2.
+  # Only files measured 100% byte-exact against the cart are listed.
   CN_EGCS_LIB_SRCS := __osPiCreateAccessQueue __osSiCreateAccessQueue guOrthoF \
                       osViSwapBuffer __osSpDeviceBusy __osSiDeviceBusy \
                       __osAiDeviceBusy __osSiRawWriteIo __osSiRawReadIo \
-                      osSyncPrintf
+                      osSyncPrintf \
+                      osPiGetCmdQueue __osSpSetStatus __osSpGetStatus \
+                      osViSetEvent osViSetSpecialFeatures osViBlack osAiGetLength \
+                      guLookAtF guPerspectiveF
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  CN_EGCS_LIB_O0_SRCS := osCreateMesgQueue osJamMesg osYieldThread osGetThreadPri \
+                         osSetThreadPri __osDequeueThread __osGetCurrFaultedThread \
+                         osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask
+  CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
+                         $(BUILD_DIR)/src/os/math/llmuldiv.o
+  $(CN_EGCS_LIB_O0_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_LIB_O0_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -fno-common -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  # libgcc division helpers: measured 100% only WITHOUT -mno-abicalls (the
+  # cart bodies save $gp - iQue built libgcc with abicalls on), at -O2 -g
+  CN_LIBGCC_OBJS := $(addprefix $(BUILD_DIR)/src/os/libgcc/,_divdi3.o _moddi3.o _udivdi3.o _umoddi3.o)
+  $(CN_LIBGCC_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_LIBGCC_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic \
+    -fno-common -Wa,--strip-local-absolute -O2 -g -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 endif
 
 #==============================================================================#
