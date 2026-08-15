@@ -798,7 +798,10 @@ ifeq ($(VERSION),cn.v5)
                       osSyncPrintf \
                       osPiGetCmdQueue __osSpSetStatus __osSpGetStatus \
                       osViSetEvent osViSetSpecialFeatures osViBlack osAiGetLength \
-                      guLookAtF guPerspectiveF
+                      guLookAtF guPerspectiveF \
+                      osSpTaskYielded osPiStartDma osViSetMode __osViSwapContext \
+                      osAiSetFrequency osAiSetNextBuffer osEepromProbe \
+                      osEepromLongRead guRotateF osCreateViManager
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
@@ -806,12 +809,20 @@ ifeq ($(VERSION),cn.v5)
 
   CN_EGCS_LIB_O0_SRCS := osCreateMesgQueue osJamMesg osYieldThread osGetThreadPri \
                          osSetThreadPri __osDequeueThread __osGetCurrFaultedThread \
-                         osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask
+                         osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask \
+                         osSendMesg osRecvMesg osCreateThread osStartThread \
+                         osDestroyThread osTimer osSetTimer osSetEventMesg
   CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
                          $(BUILD_DIR)/src/os/math/llmuldiv.o
   $(CN_EGCS_LIB_O0_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_O0_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  # osSetEventMesg compiles WITHOUT -fno-common: iQue's __osEventStateTab is a
+  # gathered COMMON resolved against the real def in asm/menu_bss_cn.s
+  # (cart 0x8019396C = gMenuItems + 0x274)
+  $(BUILD_DIR)/src/os/osSetEventMesg.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
   # libgcc division helpers: measured 100% only WITHOUT -mno-abicalls (the
   # cart bodies save $gp - iQue built libgcc with abicalls on), at -O2 -g

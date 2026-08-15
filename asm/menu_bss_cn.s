@@ -56,7 +56,14 @@ gCurrentTransitionTime: .space 0x10
 .global D_8018DEE0
 D_8018DEE0: .space 0xc
 .global gMenuItems
-gMenuItems: .space 0x374
+# The old 0x374 measurement here was really two objects: gMenuItems (0x274)
+# followed by libultra's event table - osSetEventMesg's cart body computes
+# entries from base 0x8019396C = 0x801936F8 + 0x274. The 0x40 after the
+# table up to D_8018E060 stays pad until an anchor claims it.
+gMenuItems: .space 0x274
+.global __osEventStateTab
+__osEventStateTab: .space 0xC0
+.space 0x40
 .global D_8018E060
 D_8018E060: .space 0x80
 .space 0x8
