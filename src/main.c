@@ -674,7 +674,13 @@ void race_logic_loop(void) {
 
         case SCREEN_MODE_2P_SPLITSCREEN_VERTICAL:
             if (gCurrentCourseId == COURSE_DK_JUNGLE) {
+#ifdef VERSION_CN
+                /* cn: the cart stores 2 in BOTH arms - iQue dropped the DK
+                   Jungle slowdown but kept the branch shape */
+                gTickSpeed = 2;
+#else
                 gTickSpeed = 3;
+#endif
             } else {
                 gTickSpeed = 2;
             }
@@ -719,7 +725,11 @@ void race_logic_loop(void) {
         case SCREEN_MODE_2P_SPLITSCREEN_HORIZONTAL:
 
             if (gCurrentCourseId == COURSE_DK_JUNGLE) {
+#ifdef VERSION_CN
+                gTickSpeed = 2;
+#else
                 gTickSpeed = 3;
+#endif
             } else {
                 gTickSpeed = 2;
             }
@@ -770,7 +780,14 @@ void race_logic_loop(void) {
                     case COURSE_MOO_MOO_FARM:
                     case COURSE_SKYSCRAPER:
                     case COURSE_DK_JUNGLE:
+#ifdef VERSION_CN
+                        /* cn: every tick-speed store in this function is 2
+                           on the cart; iQue removed the per-course speedups
+                           but kept every branch shape */
+                        gTickSpeed = 2;
+#else
                         gTickSpeed = 3;
+#endif
                         break;
                     default:
                         gTickSpeed = 2;
@@ -785,10 +802,18 @@ void race_logic_loop(void) {
                         gTickSpeed = 2;
                         break;
                     case COURSE_DK_JUNGLE:
+#ifdef VERSION_CN
+                        gTickSpeed = 2;
+#else
                         gTickSpeed = 4;
+#endif
                         break;
                     default:
+#ifdef VERSION_CN
+                        gTickSpeed = 2;
+#else
                         gTickSpeed = 3;
+#endif
                         break;
                 }
             }
