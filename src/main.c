@@ -215,7 +215,12 @@ void main_func(void) {
 #ifdef VERSION_EU
     osTvType = TV_TYPE_PAL;
 #endif
+#ifdef VERSION_CN
+    __osInitialize_common();
+    __osInitialize_autodetect();
+#else
     osInitialize();
+#endif
 #ifdef DEBUG
     isPrintfInit(); // init osSyncPrintf
 #endif

@@ -768,6 +768,10 @@ extern void bzero(void*, size_t);
 /* Miscellaneous operations */
 
 extern void osInitialize(void);
+#ifdef VERSION_CN
+extern void __osInitialize_common(void);
+extern void __osInitialize_autodetect(void);
+#endif
 extern u32 osGetCount(void);
 extern void osExit(void);
 extern u32 osGetMemSize(void);
