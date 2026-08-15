@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -39,3 +40,5 @@ s32 osPfsFindFile(OSPfs* pfs, u16 company_code, u32 game_code, u8* game_name, u8
     *file_no = -1;
     return PFS_ERR_INVALID;
 }
+
+#endif

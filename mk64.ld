@@ -155,10 +155,26 @@ SECTIONS
       BUILD_DIR/src/os/osSetTime.o(.text*);
       BUILD_DIR/src/os/osEepromProbe.o(.text*);
       BUILD_DIR/src/os/osPfsIsPlug.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsInit.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsinit.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsgetstatus.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsNumFiles.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsnumfiles.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsFileState.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsfilestate.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsFreeBlocks.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsfreeblocks.o(.text*);
+      #endif
       BUILD_DIR/src/os/guRotateF.o(.text*);
       BUILD_DIR/src/os/guScaleF.o(.text*);
       #ifdef VERSION_CN
@@ -173,11 +189,29 @@ SECTIONS
       BUILD_DIR/src/os/osSyncPrintf.o(.text*);
       BUILD_DIR/src/os/guMtxCatL.o(.text*);
       BUILD_DIR/src/os/osPfsSearchFile.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfssearchfile.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsDeleteFile.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsdeletefile.o(.text*);
+      #endif
       BUILD_DIR/src/os/osEepromLongWrite.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.text*);
+      #endif
       BUILD_DIR/src/os/osEepromLongRead.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/conteeplongread.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsReadWriteFile.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsreadwritefile.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsAllocateFile.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.text*);
+      #endif
       BUILD_DIR/src/os/osAiSetFrequency.o(.text*);
       BUILD_DIR/src/os/osAiGetLength.o(.text*);
       BUILD_DIR/src/os/osAiSetNextBuffer.o(.text*);
@@ -219,6 +253,10 @@ SECTIONS
       BUILD_DIR/asm/os/iQueKernelCalls.o(.text);
       #endif
       BUILD_DIR/asm/os/bcopy.o(.text);
+      #ifdef VERSION_CN
+      /* 2.0L bcmp (cart 0x800D2710), transcribed; old SDK had none */
+      BUILD_DIR/asm/os/bcmp_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/osVirtualToPhysical.o(.text*);
       BUILD_DIR/src/os/__osSpSetStatus.o(.text*);
       BUILD_DIR/src/os/__osSpSetPc.o(.text*);
@@ -237,7 +275,14 @@ SECTIONS
       #endif
       BUILD_DIR/src/os/osEepromWrite.o(.text*);
       BUILD_DIR/src/os/contpfs.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.text*);
+      #endif
       BUILD_DIR/src/os/osPfsChecker.o(.text*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfschecker.o(.text*);
+      #endif
       BUILD_DIR/src/os/contramread.o(.text*);
       BUILD_DIR/src/os/guNormalize.o(.text*);
       #ifdef VERSION_CN
@@ -521,6 +566,53 @@ SECTIONS
       BUILD_DIR/src/os/osContStartReadData.o(.bss*);
       BUILD_DIR/src/os/osContInit.o(.bss*);
       BUILD_DIR/src/os/osPfsIsPlug.o(.bss*);
+      #ifdef VERSION_CN
+      BUILD_DIR/src/os/ique_pfs/pfsinit.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsinit.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsinit.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsgetstatus.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsgetstatus.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsgetstatus.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfschecker.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfschecker.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfschecker.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsdeletefile.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsdeletefile.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsdeletefile.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsfilestate.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsfilestate.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsfilestate.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsfreeblocks.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsfreeblocks.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsfreeblocks.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsnumfiles.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsnumfiles.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsnumfiles.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsreadwritefile.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsreadwritefile.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsreadwritefile.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfssearchfile.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfssearchfile.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfssearchfile.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongread.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongread.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongread.o(.rodata*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.bss*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.data*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.rodata*);
+      #endif
       BUILD_DIR/src/os/guRotateF.o(.bss*);
       BUILD_DIR/src/os/__osLeoInterrupt.o(.bss*);
       BUILD_DIR/src/os/osTimer.o(.bss*);

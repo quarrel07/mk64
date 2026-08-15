@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -28,3 +29,5 @@ s32 osEepromLongWrite(OSMesgQueue* mq, u8 address, u8* buffer, s32 nbytes) {
 
     return result;
 }
+
+#endif

@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -28,3 +29,5 @@ s32 osPfsFreeBlocks(OSPfs* pfs, s32* bytes_not_used) {
     *bytes_not_used = pages * PFS_ONE_PAGE * BLOCKSIZE;
     return 0;
 }
+
+#endif
