@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include <PR/os.h>
 #include "controller.h"
@@ -21,3 +22,5 @@ s32 osPfsNumFiles(OSPfs* pfs, s32* max_files, s32* files_used) {
     *max_files = pfs->dir_size;
     return 0;
 }
+
+#endif

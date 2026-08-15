@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #ifdef VERSION_CN
 /* iQue compiles this file with EGCS (see Makefile for the opt level); this
    arm is the byte-exact body, via sm64's matched cn libultra */
@@ -61,4 +62,6 @@ s32 osEepromLongRead(OSMesgQueue* mq, u8 address, u8* buffer, s32 nbytes) {
 
     return status;
 }
+#endif
+
 #endif

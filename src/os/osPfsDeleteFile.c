@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -129,3 +130,5 @@ s32 __osBlockSum(OSPfs* pfs, u8 page_no, u16* sum, u8 bank) {
     ret = __osPfsSelectBank(pfs);
     return ret;
 }
+
+#endif

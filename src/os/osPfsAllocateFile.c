@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -179,3 +180,5 @@ static s32 __osClearPage(OSPfs* pfs, int page_no, u8* data, u8 bank) {
     ret = __osPfsSelectBank(pfs);
     return ret;
 }
+
+#endif

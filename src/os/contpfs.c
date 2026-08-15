@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -278,3 +279,5 @@ s32 __osPfsSelectBank(OSPfs* pfs) {
     ret = __osContRamWrite(pfs->queue, pfs->channel, 1024, (u8*) temp, false);
     return ret;
 }
+
+#endif

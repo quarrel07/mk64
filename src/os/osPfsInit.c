@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -49,3 +50,5 @@ s32 __osPfsGetStatus(OSMesgQueue* queue, int channel) {
     }
     return ret;
 }
+
+#endif

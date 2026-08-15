@@ -270,7 +270,7 @@ SRC_DIRS       := src src/data src/buffers src/racing src/ending src/audio src/d
 # iQue's EGCS-compiled llmuldiv calls libgcc's 64-bit division helpers, and
 # the cart carries them (cn only; four functions right before the ucode text)
 ifeq ($(VERSION),cn.v5)
-  SRC_DIRS += src/os/libgcc
+  SRC_DIRS += src/os/libgcc src/os/ique_pfs
 endif
 ASM_DIRS       := asm asm/os asm/unused $(DATA_DIR) $(DATA_DIR)/sound_data $(DATA_DIR)/karts
 
@@ -849,6 +849,15 @@ ifeq ($(VERSION),cn.v5)
   $(CN_EGCS_MATH_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_MATH_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  # iQue's controller-pak layer: 2.0L SDK sources (ultralib) at EGCS -O2,
+  # compiled against their own header tree (the 2.0L internal structs)
+  CN_PFS_OBJS := $(patsubst src/%.c,$(BUILD_DIR)/src/%.o,$(wildcard src/os/ique_pfs/*.c))
+  $(CN_PFS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_PFS_OBJS): CFLAGS := -G 0 -nostdinc -D_LANGUAGE_C -D_MIPS_SZLONG=32 -DNDEBUG -D_FINALROM \
+    -DBUILD_VERSION=VERSION_L -DVERSION_CN=1 -D__sgi -DBBPLAYER -fno-pic -mno-abicalls -fno-common \
+    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w \
+    -Isrc/os/ique_pfs/include -Isrc/os/ique_pfs/include/PR
 
   CN_LIBGCC_OBJS := $(addprefix $(BUILD_DIR)/src/os/libgcc/,_divdi3.o _moddi3.o _udivdi3.o _umoddi3.o)
   $(CN_LIBGCC_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh

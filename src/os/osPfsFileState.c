@@ -1,3 +1,4 @@
+#ifndef VERSION_CN /* iQue uses the 2.0L bodies in src/os/ique_pfs/ */
 #include "libultra_internal.h"
 #include "controller.h"
 
@@ -59,3 +60,5 @@ s32 osPfsFileState(OSPfs* pfs, s32 file_no, OSPfsState* state) {
     }
     return 0;
 }
+
+#endif
