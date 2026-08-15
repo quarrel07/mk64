@@ -2,6 +2,36 @@
 #include <PR/rcp.h>
 #include "controller.h"
 
+/* cn: pak writes go straight to the memory-mapped BB pak; same shape as the
+   cn __osContRamRead, keeping the retail ID-area (1..6) write filter.
+   Parked 1 word short of the cart: iQue's compile carries an extra register
+   move before the copy loop that no source shape or flag reproduces here
+   (allocation-only, patchlevel-class; evidence in IQUE-SCOPING.md). */
+#ifdef VERSION_CN
+extern u32 __osBbPakAddress[];
+extern u32 __osBbPakSize;
+
+s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int force) {
+    s32 ret = 0;
+    int i;
+
+    if (force != 1 && address < 7 && address != 0) {
+        return 0;
+    }
+    __osSiGetAccess();
+    if (__osBbPakAddress[channel] != 0) {
+        if ((address << 5) <= __osBbPakSize - 0x20) {
+            for (i = 0; i < 0x20; i++) {
+                *(u8*) ((address << 5) + __osBbPakAddress[channel] + i) = buffer[i];
+            }
+        }
+    } else {
+        ret = PFS_ERR_NOPACK;
+    }
+    __osSiRelAccess();
+    return ret;
+}
+#else
 extern s32 __osPfsGetStatus(OSMesgQueue*, s32);
 void __osPackRamWriteData(int channel, u16 address, u8* buffer);
 
@@ -88,3 +118,4 @@ void __osPackRamWriteData(int channel, u16 address, u8* buffer) {
     ptr += sizeof(__OSContRamReadFormat);
     ptr[0] = CONT_CMD_END;
 }
+#endif

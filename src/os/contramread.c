@@ -2,6 +2,30 @@
 #include <PR/rcp.h>
 #include "controller.h"
 
+/* cn: pak reads go straight to the memory-mapped BB pak (kernel table at
+   0x80000374, size global at 0x80000384); no SI transaction, no Pack helper */
+#ifdef VERSION_CN
+extern u32 __osBbPakAddress[];
+extern u32 __osBbPakSize;
+
+s32 __osContRamRead(OSMesgQueue* mq, int channel, u16 address, u8* buffer) {
+    s32 ret = 0;
+    int i;
+
+    __osSiGetAccess();
+    if (__osBbPakAddress[channel] != 0) {
+        if ((address << 5) <= __osBbPakSize - 0x20) {
+            for (i = 0; i < 0x20; i++) {
+                buffer[i] = *(u8*) ((address << 5) + __osBbPakAddress[channel] + i);
+            }
+        }
+    } else {
+        ret = PFS_ERR_NOPACK;
+    }
+    __osSiRelAccess();
+    return ret;
+}
+#else
 extern s32 __osPfsGetStatus(OSMesgQueue*, s32);
 void __osPackRamReadData(int channel, u16 address);
 
@@ -89,3 +113,4 @@ void __osPackRamReadData(int channel, u16 address) {
     ptr += sizeof(__OSContRamReadFormat);
     ptr[0] = CONT_CMD_END;
 }
+#endif
