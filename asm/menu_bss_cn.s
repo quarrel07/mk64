@@ -26,7 +26,14 @@
 # gSaveData follows at +0x6F0, cart-measured.
 .global gMenuItemsCN
 gMenuItemsCN: .space 0x500
-.space 0x1f0
+# The old 0x1F0 pad here decomposes exactly (2026-08-14 symaddr profile):
+# __osThreadSave 0x801927C0 (OSThread, 0x1B0) + __osContPifRam 0x80192970
+# (OSPifRam, 0x40) abut gSaveData with zero slack. Both arrive as commons
+# (exception handler asm / osContInit's common group) and resolve here.
+.global __osThreadSave
+__osThreadSave: .space 0x1b0
+.global __osContPifRam
+__osContPifRam: .space 0x40
 .global gSaveData
 gSaveData: .space 0x200
 .space 0x74

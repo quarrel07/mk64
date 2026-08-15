@@ -814,7 +814,7 @@ ifeq ($(VERSION),cn.v5)
                          osSetThreadPri __osDequeueThread __osGetCurrFaultedThread \
                          osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask \
                          osSendMesg osRecvMesg osCreateThread osStartThread \
-                         osDestroyThread osTimer osSetTimer osSetEventMesg __osSetGlobalIntMask \
+                         osDestroyThread osSetTimer osSetEventMesg __osSetGlobalIntMask \
                          __osViGetCurrentContext
   CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
                          $(BUILD_DIR)/src/os/math/llmuldiv.o
@@ -822,10 +822,13 @@ ifeq ($(VERSION),cn.v5)
   $(CN_EGCS_LIB_O0_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -fno-common -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
-  # osSetEventMesg compiles WITHOUT -fno-common: iQue's __osEventStateTab is a
-  # gathered COMMON resolved against the real def in asm/menu_bss_cn.s
-  # (cart 0x8019396C = gMenuItems + 0x274)
-  $(BUILD_DIR)/src/os/osSetEventMesg.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+  # osSetEventMesg and osTimer compile WITHOUT -fno-common: iQue gathers their
+  # uninitialized globals as COMMONs resolved against real defs -
+  # __osEventStateTab in asm/menu_bss_cn.s (cart 0x8019396C = gMenuItems +
+  # 0x274), the timer/counter scalars in asm/menu_sbss_cn.s (head bss block)
+  CN_EGCS_LIB_O0C_OBJS := $(BUILD_DIR)/src/os/osSetEventMesg.o $(BUILD_DIR)/src/os/osTimer.o
+  $(CN_EGCS_LIB_O0C_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_LIB_O0C_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
   # -O2 EGCS files that DEFINE their own buffers/tables (pif rams, tmpTask,
