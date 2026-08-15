@@ -3,6 +3,9 @@
 
 extern u32 osRomBase;
 
+/* cn: no cart body and no callers - the cn osInitialize reads no PI clock
+   and osCartRomInit is already cn-excluded */
+#ifndef VERSION_CN
 s32 osPiRawReadIo(u32 a0, u32* a1) {
     register int status;
     status = HW_REG(PI_STATUS_REG, u32);
@@ -12,3 +15,4 @@ s32 osPiRawReadIo(u32 a0, u32* a1) {
     *a1 = HW_REG(osRomBase | a0, u32);
     return 0;
 }
+#endif

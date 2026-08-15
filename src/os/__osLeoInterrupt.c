@@ -10,12 +10,17 @@
 #define errStatus block[0].errStatus
 #endif
 
+#ifndef VERSION_CN
 static void __osLeoResume(void);
 static void __osLeoAbnormalResume(void);
+#endif
 extern u32 D_800EA5F0;
 
 u8 leoDiskStack[OS_PIM_STACKSIZE]; // technically should have a OS_LEO_STACKSIZE or something..
 
+/* cn: no cart body - the cart's hw interrupt table is never populated, so
+   this handler is unreachable; leoDiskStack stays defined for layout */
+#ifndef VERSION_CN
 s32 __osLeoInterrupt() {
     u32 stat;
     volatile u32 pistat;
@@ -190,3 +195,4 @@ static void __osLeoResume(void) {
         __osEnqueueThread(&__osRunQueue, __osPopThread(&mq->mtqueue));
     }
 }
+#endif

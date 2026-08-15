@@ -226,13 +226,24 @@ SECTIONS
       BUILD_DIR/asm/os/osSetIntMask.o(.text);
       #endif
       BUILD_DIR/src/os/__osDequeueThread.o(.text*);
+      #ifdef VERSION_CN
+      /* cart stub run: GetCause 0x800D2CC0 .. SetWatchLo 0x800D2D00 */
+      BUILD_DIR/asm/os/__osGetCause_cn.o(.text);
+      #endif
       BUILD_DIR/asm/os/__osSetSR.o(.text);
       BUILD_DIR/asm/os/__osGetSR.o(.text);
       BUILD_DIR/asm/os/__osSetFpcCsr.o(.text);
+      #ifdef VERSION_CN
+      BUILD_DIR/asm/os/__osSetWatchLo_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/__osSiRawReadIo.o(.text*);
       BUILD_DIR/src/os/__osSiRawWriteIo.o(.text*);
       BUILD_DIR/asm/os/osWritebackDCache.o(.text);
       BUILD_DIR/asm/os/osMapTLBRdb.o(.text);
+      #ifdef VERSION_CN
+      /* cart: osUnmapTLBAll right after osMapTLBRdb (0x800D31B0) */
+      BUILD_DIR/asm/os/osUnmapTLBAll_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/osPiRawReadIo.o(.text*);
       BUILD_DIR/src/os/__osSetHWIntrRoutine.o(.text*);
       BUILD_DIR/src/os/__osLeoInterrupt.o(.text*);
