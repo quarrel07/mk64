@@ -10,14 +10,9 @@ OSPiHandle __Dom1SpeedParam;
 OSPiHandle __Dom2SpeedParam;
 OSPiHandle __CartRomHandle;
 
-/* count-overflow trackers for iQue's rewritten osGetCount/__osSetCompare
-   (the BB counter runs at 192/125 the N64 rate; these carry the scaling) */
-u32 sNumCountOverflows;
-u32 sLastHighestCount;
-u32 sNumCountOverflows2;
-u32 sLastHighestCount2;
+/* the count-overflow trackers for osGetCount/__osSetCompare live in the
+   head bss block on cart - real defs in asm/menu_sbss_cn.s */
 
-/* the cn exception handler saves the faulted context here (sm64 keeps it as
-   a gathered common; ours pins placement later via the data profile) */
-OSThread __osThreadSave;
+/* __osThreadSave's real def lives in asm/menu_bss_cn.s (cart 0x801927C0,
+   right after gMenuItemsCN) */
 #endif
