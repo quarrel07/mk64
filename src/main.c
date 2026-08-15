@@ -235,7 +235,9 @@ void thread1_idle(void* arg) {
     osCreateViManager(OS_PRIORITY_VIMGR);
 #ifdef VERSION_EU
     osViSetMode(&osViModeTable[OS_VI_PAL_LAN1]);
-#elif VERSION_JP
+#elif defined(VERSION_JP) || defined(VERSION_CN)
+    /* cn: the cart's thread1_idle has ONE unconditional osViSetMode (no
+       TvType branch) - iQue forces NTSC in __osInitialize_common */
     osViSetMode(&osViModeTable[OS_VI_NTSC_LAN1]);
 #else // VERSION_US
     if (osTvType == TV_TYPE_NTSC) {
