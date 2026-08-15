@@ -16,4 +16,8 @@ u32 sNumCountOverflows;
 u32 sLastHighestCount;
 u32 sNumCountOverflows2;
 u32 sLastHighestCount2;
+
+/* the cn exception handler saves the faulted context here (sm64 keeps it as
+   a gathered common; ours pins placement later via the data profile) */
+OSThread __osThreadSave;
 #endif

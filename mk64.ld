@@ -354,6 +354,9 @@ SECTIONS
          cart keeps it right after the VI tables (0x3c8efa35 @ ROM 0xE91C0),
          the same slot sm64's cn ld uses */
       BUILD_DIR/src/os/guRotateF.o(.data*);
+      /* cn exception handler's BB hw-int table (sm64's cn ld puts the
+         exception data right after guRotateF's) */
+      BUILD_DIR/asm/os/__osException.o(.data*);
       #endif
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
       BUILD_DIR/src/os/osContInit.o(.data*);

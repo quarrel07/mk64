@@ -23,7 +23,9 @@ void osCreateThread(OSThread* thread, OSId id, void (*entry)(void*), void* arg, 
     thread->context.ra = (u64) __osCleanupThread;
 
     mask = OS_IM_ALL;
-    thread->context.sr = 65283;
+    /* -O0 keeps every read of `mask`: the cart computes sr FROM the variable
+       (andi/ori), so the constant-folded 65283 spelling cannot match */
+    thread->context.sr = (mask & 0xFF01) | 2;
     thread->context.rcp = (mask & 0x3f0000) >> 16;
     thread->context.fpcsr = (u32) 0x01000800;
     thread->fp = 0;
