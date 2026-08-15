@@ -69,7 +69,7 @@ void __createSpeedParam(void) {
     __Dom2SpeedParam.relDuration = IO_READ(PI_BSD_DOM2_RLS_REG);
 }
 
-void osInitialize(void) {
+void __osInitialize_common(void) {
     u32 pifdata;
     u32 intrMask1, intrMask2;
 
@@ -144,6 +144,11 @@ void osInitialize(void) {
     IO_WRITE(AI_CONTROL_REG, 1);
     IO_WRITE(AI_DACRATE_REG, 0x3fff);
     IO_WRITE(AI_BITRATE_REG, 0xf);
+}
+
+/* cart 0x800D2510, directly after the common body: empty, called second
+   from main_func (sm64's split; mk64's main calls the pair inline) */
+void __osInitialize_autodetect(void) {
 }
 #else
 void osInitialize(void) {
