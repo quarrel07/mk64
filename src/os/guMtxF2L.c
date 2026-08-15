@@ -22,7 +22,7 @@ void guMtxF2L(float mf[4][4], Mtx* m) {
 }
 
 #endif
-/* still called by guMtxCatL/guMtxXFML on cn - stays in every version */
+#ifndef VERSION_CN /* iQue uses the asm body in guMtxL2F_cn.s */
 void guMtxL2F(float mf[4][4], Mtx* m) {
     int r, c;
     u32 tmp1;
@@ -43,6 +43,7 @@ void guMtxL2F(float mf[4][4], Mtx* m) {
         }
     }
 }
+#endif
 #else
 #ifndef VERSION_CN
 void guMtxF2L(float mf[4][4], Mtx* m) {

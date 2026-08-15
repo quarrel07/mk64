@@ -250,6 +250,10 @@ SECTIONS
       BUILD_DIR/src/os/_Printf.o(.text*);
       #endif
       BUILD_DIR/src/os/guMtxCatF.o(.text*);
+      #ifdef VERSION_CN
+      /* cart: guMtxL2F asm right before guMtxCatF's region (0x800D3320) */
+      BUILD_DIR/asm/os/guMtxL2F_cn.o(.text);
+      #endif
       BUILD_DIR/src/os/contramwrite.o(.text*);
       BUILD_DIR/src/os/osEepromRead.o(.text*);
       BUILD_DIR/src/os/__osAiDeviceBusy.o(.text*);
