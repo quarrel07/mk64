@@ -178,6 +178,10 @@ SECTIONS
       BUILD_DIR/asm/os/osGetCount.o(.text);
       BUILD_DIR/asm/os/__osException.o(.text);
       BUILD_DIR/asm/os/__osDisableInt.o(.text);
+      #ifdef VERSION_CN
+      /* cart keeps it right before __osRestoreInt (0x800CEF20/0x800CEF90) */
+      BUILD_DIR/src/os/__osSetGlobalIntMask.o(.text*);
+      #endif
       BUILD_DIR/asm/os/__osRestoreInt.o(.text);
       BUILD_DIR/src/os/__osDequeueThread.o(.text*);
       BUILD_DIR/asm/os/__osSetSR.o(.text);
@@ -199,6 +203,11 @@ SECTIONS
       BUILD_DIR/src/os/osPiRawStartDma.o(.text*);
       BUILD_DIR/src/os/osEPiRawStartDma.o(.text*);
       BUILD_DIR/src/os/__osDevMgrMain.o(.text*);
+      #ifdef VERSION_CN
+      /* the iQue OS trap stubs (skGetId..sk14) follow the device manager on
+         cart (0x800CFBB0..0x800CFDFC) */
+      BUILD_DIR/asm/os/iQueKernelCalls.o(.text);
+      #endif
       BUILD_DIR/asm/os/bcopy.o(.text);
       BUILD_DIR/src/os/osVirtualToPhysical.o(.text*);
       BUILD_DIR/src/os/__osSpSetStatus.o(.text*);
@@ -246,6 +255,10 @@ SECTIONS
       /* iQue adds libgcc's 64-bit division helpers before the ucode text
          (called by the EGCS-compiled llmuldiv; order read from cart jals:
          _divdi3 0x800D4290, _moddi3, _udivdi3, _umoddi3) */
+      /* iQue's public EPi io wrappers precede the libgcc helpers on cart
+         (0x800D3660/0x800D36C0) */
+      BUILD_DIR/src/os/osEPiRawWriteIo.o(.text*);
+      BUILD_DIR/src/os/osEPiRawReadIo.o(.text*);
       BUILD_DIR/src/os/libgcc/_divdi3.o(.text*);
       BUILD_DIR/src/os/libgcc/_moddi3.o(.text*);
       BUILD_DIR/src/os/libgcc/_udivdi3.o(.text*);
@@ -488,6 +501,10 @@ SECTIONS
          resolves each EGCS common against the same-name definition, so the
          block's order, sizes and gaps are pinned to the cart's (v3 profile) */
       *(COMMON);
+      . = ALIGN(0x10);
+      /* iQue-only PI handles (osInitialize/osCreatePiManager cn arms);
+         provisional slot until the data profile pins their cart addresses */
+      BUILD_DIR/src/os/ique_globals.o(.bss*);
       . = ALIGN(0x10);
       BUILD_DIR/asm/menu_bss_cn.o(.bss);
       . = ALIGN(0x10);

@@ -161,7 +161,11 @@ s32 __osPfsGetStatus(OSMesgQueue* queue, int channel);
 
 extern u8 __osContLastCmd;
 extern OSTimer __osEepromTimer;
+#ifdef VERSION_CN
+extern OSMesg __osEepromTimerMsg[4];
+#else
 extern OSMesg __osEepromTimerMsg;
+#endif
 extern OSMesgQueue __osEepromTimerQ;
 extern OSPifRam __osEepPifRam;
 extern OSPifRam __osContPifRam;

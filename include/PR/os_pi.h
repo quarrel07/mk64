@@ -6,6 +6,11 @@
 /* Types */
 
 typedef struct {
+#ifdef VERSION_CN
+    /* iQue's newer libultra moved errStatus to the head of the block info
+       (the SH-era layout); __osDevMgrMain's cart body indexes it there */
+    u32 errStatus;
+#endif
     void* dramAddr;
     void* C2Addr;
     u32 sectorSize;
@@ -19,7 +24,9 @@ typedef struct {
     u16 blockNum;           // 6
     s32 sectorNum;          // 8
     uintptr_t devAddr;      // c
+#ifndef VERSION_CN
     u32 errStatus;          // error status added moved to blockinfo
+#endif
     u32 bmCtlShadow;        // 10
     u32 seqCtlShadow;       // 14
     __OSBlockInfo block[2]; // 18

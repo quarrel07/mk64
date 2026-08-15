@@ -805,7 +805,9 @@ ifeq ($(VERSION),cn.v5)
                       guLookAtF guPerspectiveF \
                       osSpTaskYielded osPiStartDma osViSetMode __osViSwapContext \
                       osAiSetFrequency osAiSetNextBuffer osEepromProbe \
-                      osEepromLongRead guRotateF osCreateViManager
+                      osEepromLongRead guRotateF osCreateViManager \
+                      __osSiRawStartDma __osViInit __osDevMgrMain \
+                      osEPiRawWriteIo osEPiRawReadIo osEPiRawStartDma
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
@@ -815,7 +817,7 @@ ifeq ($(VERSION),cn.v5)
                          osSetThreadPri __osDequeueThread __osGetCurrFaultedThread \
                          osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask \
                          osSendMesg osRecvMesg osCreateThread osStartThread \
-                         osDestroyThread osTimer osSetTimer osSetEventMesg
+                         osDestroyThread osTimer osSetTimer osSetEventMesg __osSetGlobalIntMask
   CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
                          $(BUILD_DIR)/src/os/math/llmuldiv.o
   $(CN_EGCS_LIB_O0_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
@@ -827,6 +829,16 @@ ifeq ($(VERSION),cn.v5)
   # (cart 0x8019396C = gMenuItems + 0x274)
   $(BUILD_DIR)/src/os/osSetEventMesg.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
     -Wa,--strip-local-absolute -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
+  # -O2 EGCS files that DEFINE their own buffers/tables (pif rams, tmpTask,
+  # eeprom queues): also without -fno-common so those gather as commons until
+  # the data profile pins them
+  CN_EGCS_LIB_O2C_SRCS := osSpTaskLoadGo osContInit osContStartReadData \
+                          osEepromRead osEepromWrite osCreatePiManager
+  CN_EGCS_LIB_O2C_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O2C_SRCS)))
+  $(CN_EGCS_LIB_O2C_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_LIB_O2C_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
   # libgcc division helpers: measured 100% only WITHOUT -mno-abicalls (the
   # cart bodies save $gp - iQue built libgcc with abicalls on), at -O2 -g
