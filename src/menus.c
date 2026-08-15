@@ -246,7 +246,11 @@ void options_menu_act(struct Controller* controller, u16 controllerIdx) {
     s32 res;
     struct_8018EE10_entry* sp30;
     bool tempVar; // cursorWasMoved or communicateStoredAction
+#ifdef VERSION_CN
+    struct_8018EE10_entry* ghost;
+#else
     UNUSED u32 pad;
+#endif
 
     btnAndStick = (controller->buttonPressed | controller->stickPressed);
 
@@ -485,10 +489,20 @@ void options_menu_act(struct Controller* controller, u16 controllerIdx) {
             }
             case SUB_MENU_COPY_PAK_TO_GHOST1_2P:
             case SUB_MENU_COPY_PAK_TO_GHOST2_2P: {
+#ifdef VERSION_CN
+                /* cn: the cart computes the ghost entry's address once
+                   (scaled index folded by an addiu before the base add) and
+                   loads +4/+5 off it - a pointer local, not the retail
+                   comma-operator fakematch */
+                if ((sp30[sp38->param2].courseIndex !=
+                     (ghost = &D_8018EE10[gSubMenuSelection - SUB_MENU_COPY_PAK_TO_GHOST_MIN])->courseIndex) ||
+                    (ghost->ghostDataSaved == 0)) {
+#else
                 // bit of a fake match, but if it works it works?
                 if ((sp30[sp38->param2].courseIndex !=
                      ((0, (D_8018EE10 + (gSubMenuSelection - SUB_MENU_COPY_PAK_TO_GHOST_MIN))->courseIndex))) ||
                     ((D_8018EE10 + (gSubMenuSelection - SUB_MENU_COPY_PAK_TO_GHOST_MIN))->ghostDataSaved == 0)) {
+#endif
                     if ((btnAndStick & D_JPAD) && (gSubMenuSelection < SUB_MENU_COPY_PAK_TO_GHOST_MAX)) {
                         gSubMenuSelection += 1;
                         play_sound2(SOUND_MENU_CURSOR_MOVE);
