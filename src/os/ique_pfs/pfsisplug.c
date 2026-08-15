@@ -15,8 +15,8 @@ s32 osPfsIsPlug(OSMesgQueue* mq, u8* pattern) {
     u8 bitpattern;
     OSContStatus contData[MAXCONTROLLERS];
     s32 channel;
+    s32 crcErrorCount = 3; /* iQue's build initializes this before `bits` */
     u8 bits = 0;
-    s32 crcErrorCount = 3;
 
     __osSiGetAccess();
 
@@ -77,6 +77,14 @@ void __osPfsRequestData(u8 cmd) {
     *ptr = CONT_CMD_END;
 }
 
+/* iQue rewrite (cart 0x800D0F24): the per-channel status byte becomes the
+   kernel pak-present flag (__osBbPakAddress[i] != 0), and the BB hack-flags
+   controller remap (the same idiom sm64's cn osContInit carries) swaps
+   channel 0 with channel __osBbHackFlags at the end. */
+extern u32 __osBbPakAddress[];
+extern u32 __osBbIsBb;
+extern u32 __osBbHackFlags;
+
 void __osPfsGetInitData(u8* pattern, OSContStatus* data) {
     u8* ptr;
     __OSContRequesFormat requestformat;
@@ -84,19 +92,28 @@ void __osPfsGetInitData(u8* pattern, OSContStatus* data) {
     u8 bits = 0;
 
     ptr = (u8*)&__osPfsPifRam;
-
     for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(requestformat), data++) {
-        requestformat = *((__OSContRequesFormat*)ptr);
+        requestformat = *(__OSContRequesFormat*)ptr;
         data->errno = CHNL_ERR(requestformat);
 
-        if (data->errno != 0) {
-            continue;
+        if (data->errno == 0) {
+            bits |= 1 << i;
+            data->type = (requestformat.typel << 8) | (requestformat.typeh);
+            data->status = (__osBbPakAddress[i] != 0);
         }
-
-        data->type = ((requestformat.typel << 8) | requestformat.typeh);
-        data->status = requestformat.status;
-        bits |= (1 << i);
     }
+
+    if (__osBbIsBb != 0 && __osBbHackFlags != 0) {
+        OSContStatus tmp;
+        data -= __osMaxControllers;
+        bits = (bits & ~((1 << __osBbHackFlags) | 1)) |
+               ((bits & 1) << __osBbHackFlags) |
+               ((bits & (1 << __osBbHackFlags)) >> __osBbHackFlags);
+        tmp = *data;
+        *data = data[__osBbHackFlags];
+        data[__osBbHackFlags] = tmp;
+    }
+
     *pattern = bits;
 }
 #endif
