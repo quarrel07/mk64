@@ -838,6 +838,12 @@ ifeq ($(VERSION),cn.v5)
 
   # libgcc division helpers: measured 100% only WITHOUT -mno-abicalls (the
   # cart bodies save $gp - iQue built libgcc with abicalls on), at -O2 -g
+  # sinf/cosf are EGCS -O2 too (sm64's cn table)
+  CN_EGCS_MATH_OBJS := $(BUILD_DIR)/src/os/math/sinf.o $(BUILD_DIR)/src/os/math/cosf.o
+  $(CN_EGCS_MATH_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
+  $(CN_EGCS_MATH_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips2 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+
   CN_LIBGCC_OBJS := $(addprefix $(BUILD_DIR)/src/os/libgcc/,_divdi3.o _moddi3.o _udivdi3.o _umoddi3.o)
   $(CN_LIBGCC_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_LIBGCC_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic \

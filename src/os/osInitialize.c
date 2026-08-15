@@ -21,6 +21,11 @@ u64 osClockRate = 62500000;
 u32 osViClock = 48681812; /* VI_NTSC_CLOCK; cart bytes 02E6D354 */
 #endif
 u32 __osShutdown = 0;
+#ifdef VERSION_CN
+/* iQue: Count latched at first prenmi (cart 0x800E8680, right after
+   __osShutdown; written by the cn exception handler) */
+u32 __osPreNMICount = 0;
+#endif
 u32 __OSGlobalIntMask = OS_IM_ALL;
 u32 D_800EA5F0 = 0;
 

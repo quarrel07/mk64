@@ -18,6 +18,795 @@
 .set IP7_HDLR, 0x1c
 .set COUNTER, 0x20
 
+
+.ifdef VERSION_CN
+# iQue exception handler (via sm64's matched cn arm): BB hardware
+# interrupts (IP6/IP7, __osHwIntTable), the sk watchdog, and the thread
+# context save in __osThreadSave instead of the local buffer
+.section .text, "ax"
+glabel __osExceptionPreamble
+    lui   $k0, %hi(__osException)
+    daddiu $k0, $k0, %lo(__osException)
+    jr    $k0
+     nop
+glabel __osException
+    lui   $k0, %hi(__osThreadSave)
+    daddiu $k0, $k0, %lo(__osThreadSave)
+    sd    $at, 0x20($k0)
+    mfc0  $k1, $12
+    sw    $k1, 0x118($k0)
+    li    $at, -4
+    and   $k1, $k1, $at
+    mtc0  $k1, $12
+    sd    $t0, 0x58($k0)
+    sd    $t1, 0x60($k0)
+    sd    $t2, 0x68($k0)
+    sw    $zero, 0x18($k0)
+    mfc0  $t0, $13
+    daddu $t0, $k0, $zero
+    lui   $k0, %hi(__osThreadTail + 0x10)
+    lw    $k0, %lo(__osThreadTail + 0x10)($k0)
+    ld    $t1, 0x20($t0)
+    sd    $t1, 0x20($k0)
+    ld    $t1, 0x118($t0)
+    sd    $t1, 0x118($k0)
+    ld    $t1, 0x58($t0)
+    sd    $t1, 0x58($k0)
+    ld    $t1, 0x60($t0)
+    sd    $t1, 0x60($k0)
+    ld    $t1, 0x68($t0)
+    sd    $t1, 0x68($k0)
+.L80326794:
+    sd    $v0, 0x28($k0)
+    sd    $v1, 0x30($k0)
+    sd    $a0, 0x38($k0)
+    sd    $a1, 0x40($k0)
+    sd    $a2, 0x48($k0)
+    sd    $a3, 0x50($k0)
+    sd    $t3, 0x70($k0)
+    sd    $t4, 0x78($k0)
+    sd    $t5, 0x80($k0)
+    sd    $t6, 0x88($k0)
+    sd    $t7, 0x90($k0)
+    sd    $s0, 0x98($k0)
+    sd    $s1, 0xa0($k0)
+    sd    $s2, 0xa8($k0)
+    sd    $s3, 0xb0($k0)
+    sd    $s4, 0xb8($k0)
+    sd    $s5, 0xc0($k0)
+    sd    $s6, 0xc8($k0)
+    sd    $s7, 0xd0($k0)
+    sd    $t8, 0xd8($k0)
+    sd    $t9, 0xe0($k0)
+    sd    $gp, 0xe8($k0)
+    sd    $sp, 0xf0($k0)
+    sd    $fp, 0xf8($k0)
+    sd    $ra, 0x100($k0)
+    mflo  $t0
+    sd    $t0, 0x108($k0)
+    mfhi  $t0
+    sd    $t0, 0x110($k0)
+    lw    $k1, 0x118($k0)
+    andi  $t1, $k1, 0x0000ff00
+    beqz  $t1, savercp
+     nop
+    lui   $t0, %hi(__OSGlobalIntMask)
+    daddiu $t0, $t0, %lo(__OSGlobalIntMask)
+    lw    $t0, ($t0)
+    lui   $at, (0xFFFFFFFF >> 16)
+    ori   $at, (0xFFFFFFFF & 0xFFFF)
+    xor   $t2, $t0, $at
+    andi  $t2, $t2, 0x0000ff00
+    or    $t4, $t1, $t2
+    lui   $at, (~0x0000ff00 >> 16) & 0xFFFF
+    ori   $at, (~0x0000ff00 & 0xFFFF)
+    and   $t3, $k1, $at
+    or    $t3, $t3, $t4
+    sw    $t3, 0x118($k0)
+    andi  $t0, $t0, 0x0000ff00
+    and   $t1, $t1, $t0
+    lui   $at, (~0x0000ff00 >> 16) & 0xFFFF
+    ori   $at, (~0x0000ff00 & 0xFFFF)
+    and   $k1, $k1, $at
+    or    $k1, $k1, $t1
+savercp:
+    lui   $t1, %hi((((0x04300000 +0x0C))|0xA0000000))
+    lw    $t1, %lo((((0x04300000 +0x0C))|0xA0000000))($t1)
+    beqz  $t1, endrcp
+     nop
+    lui   $t0, %hi(__OSGlobalIntMask)
+    daddiu $t0, $t0, %lo(__OSGlobalIntMask)
+    lw    $t0, ($t0)
+    srl   $t0, $t0, 0x10
+    lui   $at, 0xffff
+    ori   $at, $at, 0xffff
+    xor   $t0, $t0, $at
+    andi  $t0, $t0, 0x3f
+    lw    $t4, 0x128($k0)
+    and   $t0, $t0, $t4
+    or    $t1, $t1, $t0
+endrcp:
+    sw    $t1, 0x128($k0)
+    mfc0  $t0, $14
+    sw    $t0, 0x11c($k0)
+    lw    $t0, 0x18($k0)
+    beqz  $t0, .L80326868
+     nop
+    cfc1  $t0, $31
+    nop
+    sw    $t0, 0x12c($k0)
+    sdc1  $f0, 0x130($k0)
+    sdc1  $f2, 0x138($k0)
+    sdc1  $f4, 0x140($k0)
+    sdc1  $f6, 0x148($k0)
+    sdc1  $f8, 0x150($k0)
+    sdc1  $f10, 0x158($k0)
+    sdc1  $f12, 0x160($k0)
+    sdc1  $f14, 0x168($k0)
+    sdc1  $f16, 0x170($k0)
+    sdc1  $f18, 0x178($k0)
+    sdc1  $f20, 0x180($k0)
+    sdc1  $f22, 0x188($k0)
+    sdc1  $f24, 0x190($k0)
+    sdc1  $f26, 0x198($k0)
+    sdc1  $f28, 0x1a0($k0)
+    sdc1  $f30, 0x1a8($k0)
+.L80326868:
+    mfc0  $t0, $13
+    sw    $t0, 0x120($k0)
+    li    $t1, 2
+    sh    $t1, 0x10($k0)
+    andi  $t1, $t0, 0x0000007C
+    li    $t2, ((9)<<2)
+    beq   $t1, $t2, handle_break
+     nop
+    li    $t2, ((11)<<2)
+    beq   $t1, $t2, handle_CpU
+     nop
+    li    $t2, ((0)<<2)
+    bne   $t1, $t2, panic
+     nop
+    # mk64-iQue watchdog (cart 0x0CF270): once prenmi has latched, an
+    # exception arriving more than 0x05000000 Count ticks later exits to
+    # the iQue OS via skExit
+    lui   $t1, %hi(__osShutdown)
+    daddiu $t1, $t1, %lo(__osShutdown)
+    lw    $t2, ($t1)
+    beqz  $t2, .Lno_watchdog
+     nop
+    lui   $t1, %hi(__osPreNMICount)
+    daddiu $t1, $t1, %lo(__osPreNMICount)
+    lw    $t1, ($t1)
+    mfc0  $t2, $9
+    subu  $t2, $t2, $t1
+    lui   $t1, 0x0500
+    sltu  $t1, $t1, $t2
+    beqz  $t1, .Lno_watchdog
+     nop
+    jal   skExit
+     nop
+.Lno_watchdog:
+    and   $s0, $k1, $t0
+next_interrupt:
+    andi  $t1, $s0, 0x0000ff00
+    srl   $t2, $t1, 0xc
+    bnez  $t2, .L80326944
+     nop
+    srl   $t2, $t1, 8
+    addi  $t2, $t2, 0x10
+.L80326944:
+    # hand-expanded: iQue's as forms these with daddu, GAS with addu
+    lui   $at, %hi(__osIntOffTable)
+    daddu $at, $at, $t2
+    lbu   $t2, %lo(__osIntOffTable)($at)
+    lui   $at, %hi(__osIntTable)
+    daddu $at, $at, $t2
+    lw    $t2, %lo(__osIntTable)($at)
+    jr    $t2
+     nop
+glabel IP6_Hdlr
+    li    $at, ~0x00002000
+    b     next_interrupt
+     and   $s0, $s0, $at
+glabel IP7_Hdlr
+    li    $at, ~0x00004000
+    b     next_interrupt
+     and   $s0, $s0, $at
+glabel counter
+    mfc0  $t1, $11
+    mtc0  $t1, $11
+    li    $a0, 24
+    jal   send_mesg
+     nop
+    lui   $at, (~0x00008000 >> 16) & 0xFFFF
+    ori   $at, (~0x00008000 & 0xFFFF)
+    b     next_interrupt
+     and   $s0, $s0, $at
+glabel cart
+    li    $at, ~0x00000800
+    and   $s0, $s0, $at
+    lui   $t1, %hi(__osHwIntTable)
+    daddiu $t1, $t1, %lo(__osHwIntTable)
+    addi  $t1, $t1, 4 * 2
+    lw    $t2, ($t1)
+    beqz  $t2, .L80307480
+     nop
+    jalr  $t2
+     lw   $sp, 4($t1)
+    beqz  $v0, .L80307480
+     nop
+    b     redispatch
+     nop
+.L80307480:
+    lui   $s1, %hi((((0x04300000 +0x38))|0xA0000000))
+    lw    $s1, %lo((((0x04300000 +0x38))|0xA0000000))($s1)
+    andi  $t1, $s1, 0x40
+    beqz  $t1, .L803074AC
+     nop
+    andi  $s1, $s1, 0x3F80
+    li    $t1, 0
+    lui   $at, %hi((((0x04600000 +0x48))|0xA0000000))
+    sw    $t1, %lo((((0x04600000 +0x48))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 184
+.L803074AC:
+    andi  $t1, $s1, 0x2000
+    beqz  $t1, .L803074D0
+     nop
+    andi  $s1, $s1, 0x1FC0
+    li    $t1, 0x2000
+    lui   $at, %hi((((0x04300000 +0x38))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x38))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 240
+.L803074D0:
+    andi  $t1, $s1, 0x80
+    beqz  $t1, .L803074F4
+     nop
+    andi  $s1, $s1, 0x3F40
+    li    $t1, 0x4000
+    lui   $at, %hi((((0x04300000 +0x3C))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x3C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 192
+.L803074F4:
+    andi  $t1, $s1, 0x100
+    beqz  $t1, .L80307518
+     nop
+    andi  $s1, $s1, 0x3EC0
+    lui   $t1, 1
+    lui   $at, %hi((((0x04300000 +0x3C))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x3C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 200
+.L80307518:
+    andi  $t1, $s1, 0x200
+    beqz  $t1, .L8030753C
+     nop
+    andi  $s1, $s1, 0x3DC0
+    lui   $t1, 4
+    lui   $at, %hi((((0x04300000 +0x3C))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x3C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 208
+.L8030753C:
+    andi  $t1, $s1, 0x400
+    beqz  $t1, .L80307560
+     nop
+    andi  $s1, $s1, 0x3BC0
+    lui   $t1, 0x10
+    lui   $at, %hi((((0x04300000 +0x3C))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x3C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 216
+.L80307560:
+    andi  $t1, $s1, 0x800
+    beqz  $t1, .L80307584
+     nop
+    andi  $s1, $s1, 0x37C0
+    lui   $t1, 0x40
+    lui   $at, %hi((((0x04300000 +0x3C))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x3C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 224
+.L80307584:
+    b     next_interrupt
+     nop
+glabel rcp
+    lui   $s1, %hi((((0x04300000 +0x08))|0xA0000000))
+    lw    $s1, %lo((((0x04300000 +0x08))|0xA0000000))($s1)
+    lui   $t0, %hi(__OSGlobalIntMask)
+    daddiu $t0, $t0, %lo(__OSGlobalIntMask)
+    lw    $t0, ($t0)
+    srl   $t0, $t0, 0x10
+    and   $s1, $s1, $t0
+    andi  $t1, $s1, 0x01
+    beqz  $t1, vi
+     nop
+    andi  $s1, $s1, 0x3e
+    lui   $t4, %hi((((0x04040000 +0x10))|0xA0000000))
+    lw    $t4, %lo((((0x04040000 +0x10))|0xA0000000))($t4)
+    li    $t1, 0x00008 | 0x08000
+    lui   $at, %hi((((0x04040000 +0x10))|0xA0000000))
+    sw    $t1, %lo((((0x04040000 +0x10))|0xA0000000))($at)
+    andi  $t4, $t4, 0x300
+    beqz  $t4, sp_other_break
+     nop
+    jal   send_mesg
+     li    $a0, 32
+    beqz  $s1, no_more_rcp_ints
+     nop
+    b     vi
+     nop
+sp_other_break:
+    jal   send_mesg
+     li    $a0, 88
+    beqz  $s1, no_more_rcp_ints
+     nop
+vi:
+    andi  $t1, $s1, 8
+    beqz  $t1, ai
+     nop
+    andi  $s1, $s1, 0x37
+    lui   $at, %hi((((0x04400000 +0x10))|0xA0000000))
+    sw    $zero, %lo((((0x04400000 +0x10))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 56
+    beqz  $s1, no_more_rcp_ints
+     nop
+ai:
+    andi  $t1, $s1, 4
+    beqz  $t1, si
+     nop
+    andi  $s1, $s1, 0x3b
+    li    $t1, 1
+    lui   $at, %hi((((0x04500000 +0x0C))|0xA0000000))
+    sw    $t1, %lo((((0x04500000 +0x0C))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 48
+    beqz  $s1, no_more_rcp_ints
+     nop
+si:
+    andi  $t1, $s1, 2
+    beqz  $t1, pi
+    nop
+    andi  $s1, $s1, 0x3d
+     lui   $at, %hi((((0x04800000 +0x18))|0xA0000000))
+    sw    $zero, %lo((((0x04800000 +0x18))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 40
+    beqz  $s1, no_more_rcp_ints
+     nop
+pi:
+    andi  $t1, $s1, 0x10
+    beqz  $t1, dp
+     nop
+    andi  $s1, $s1, 0x2f
+    li    $t1, 2
+    lui   $at, %hi((((0x04600000 +0x10))|0xA0000000))
+    sw    $t1, %lo((((0x04600000 +0x10))|0xA0000000))($at)
+    lui   $t1, %hi(D_CN_80319658)
+    daddiu $t1, $t1, %lo(D_CN_80319658)
+    lw    $t2, ($t1)
+    beqz  $t2, .L803076C0
+     nop
+    lw    $sp, 4($t1)
+    jalr  $t2
+    daddu $a0, $v0, $zero
+    bnez  $v0, .L803076C8
+     nop
+.L803076C0:
+    jal   send_mesg
+     li    $a0, 64
+.L803076C8:
+    beqz  $s1, no_more_rcp_ints
+     nop
+dp:
+    andi  $t1, $s1, 0x20
+    beqz  $t1, no_more_rcp_ints
+     nop
+    andi  $s1, $s1, 0x1f
+    li    $t1, 0x0800
+    lui   $at, %hi((((0x04300000 +0x00))|0xA0000000))
+    sw    $t1, %lo((((0x04300000 +0x00))|0xA0000000))($at)
+    jal   send_mesg
+     li    $a0, 72
+no_more_rcp_ints:
+    li    $at, -1025
+    b     next_interrupt
+     and   $s0, $s0, $at
+glabel prenmi
+    lw    $k1, 0x118($k0)
+    li    $at, -4097
+    and   $k1, $k1, $at
+    sw    $k1, 0x118($k0)
+    lui   $t1, %hi(__osShutdown)
+    daddiu $t1, $t1, %lo(__osShutdown)
+    lw    $t2, ($t1)
+    beqz  $t2, firstnmi
+     nop
+     li    $at, -4097
+    b     redispatch
+     and   $s0, $s0, $at
+firstnmi:
+    li    $t2, 1
+    sw    $t2, ($t1)
+    # mk64-iQue addition (cart 0x0CF618): latch the Count register at first
+    # prenmi into __osPreNMICount (0x800E8680, right after __osShutdown)
+    mfc0  $t2, $9
+    lui   $t1, %hi(__osPreNMICount)
+    daddiu $t1, $t1, %lo(__osPreNMICount)
+    sw    $t2, ($t1)
+    jal   send_mesg
+     li    $a0, 112
+    li    $at, -4097
+    and   $s0, $s0, $at
+    lui   $t2, %hi(__osThreadTail + 0x8)
+    lw    $t2, %lo(__osThreadTail + 0x8)($t2)
+    lw    $k1, 0x118($t2)
+    li    $at, -4097
+    and   $k1, $k1, $at
+    b     redispatch
+     sw    $k1, 0x118($t2)
+glabel sw2
+    li    $at, -513
+    and   $t0, $t0, $at
+    mtc0  $t0, $13
+    li    $a0, 8
+    jal   send_mesg
+     nop
+    li    $at, -513
+    b     next_interrupt
+     and   $s0, $s0, $at
+glabel sw1
+    li    $at, -257
+    and   $t0, $t0, $at
+    mtc0  $t0, $13
+    li    $a0, 0
+    jal   send_mesg
+     nop
+    li    $at, -257
+    b     next_interrupt
+     and   $s0, $s0, $at
+handle_break:
+    li    $t1, 1
+    sh    $t1, 0x12($k0)
+    jal   send_mesg
+     li    $a0, 80
+    b     redispatch
+     nop
+glabel redispatch
+    lw    $t1, 4($k0)
+    lui   $t2, %hi(__osThreadTail + 0x8)
+    lw    $t2, %lo(__osThreadTail + 0x8)($t2)
+    lw    $t3, 4($t2)
+    slt   $at, $t1, $t3
+    beqz  $at, enqueue_running
+     nop
+    daddu $a1, $k0, $zero
+    lui   $a0, %hi(__osThreadTail + 0x8)
+    daddiu $a0, $a0, %lo(__osThreadTail + 0x8)
+    jal   __osEnqueueThread
+     nop
+    j     __osDispatchThread
+     nop
+enqueue_running:
+    lui   $t1, %hi(__osThreadTail + 0x8)
+    daddiu $t1, $t1, %lo(__osThreadTail + 0x8)
+    lw    $t2, ($t1)
+    sw    $t2, ($k0)
+    j     __osDispatchThread
+     sw    $k0, ($t1)
+glabel panic
+    lui   $at, %hi(__osThreadTail + 0x14)
+    sw    $k0, %lo(__osThreadTail + 0x14)($at)
+    li    $t1, 1
+    sh    $t1, 0x10($k0)
+    li    $t1, 2
+    sh    $t1, 0x12($k0)
+    mfc0  $t2, $8
+    sw    $t2, 0x124($k0)
+    jal   send_mesg
+     li    $a0, 96
+    j     __osDispatchThread
+     nop
+glabel send_mesg
+    daddu $s2, $ra, $zero
+    lui   $t2, %hi(__osEventStateTab)
+    daddiu $t2, $t2, %lo(__osEventStateTab)
+    addu  $t2, $t2, $a0
+    lw    $t1, ($t2)
+    beqz  $t1, .L80326CC4
+     nop
+    lw    $t3, 8($t1)
+    lw    $t4, 0x10($t1)
+    slt   $at, $t3, $t4
+    beqz  $at, .L80326CC4
+     nop
+    lw    $t5, 0xc($t1)
+    addu  $t5, $t5, $t3
+    bnez  $t4, .L80326C60
+     div   $zero, $t5, $t4
+    break 7
+.L80326C60:
+    li    $at, -1
+    bne   $t4, $at, .L80326C78
+     lui   $at, 0x8000
+    bne   $t5, $at, .L80326C78
+     nop
+    break 6
+.L80326C78:
+    mfhi  $t5
+    lw    $t4, 0x14($t1)
+    li    $at, 4
+    mult  $t5, $at
+    mflo  $t5
+    addu  $t4, $t4, $t5
+    lw    $t5, 4($t2)
+    sw    $t5, ($t4)
+    addiu $t2, $t3, 1
+    sw    $t2, 8($t1)
+    lw    $t2, ($t1)
+    lw    $t3, ($t2)
+    beqz  $t3, .L80326CC4
+     nop
+    jal   __osPopThread
+     daddu $a0, $t1, $zero
+    daddu $t2, $v0, $zero
+    daddu $a1, $t2, $zero
+    lui   $a0, %hi(__osThreadTail + 0x8)
+    daddiu $a0, $a0, %lo(__osThreadTail + 0x8)
+    jal   __osEnqueueThread
+     nop
+.L80326CC4:
+    jr    $s2
+     nop
+handle_CpU: 
+    lui   $at, 0x3000
+    and   $t1, $t0, $at
+    srl   $t1, $t1, 0x1c
+    li    $t2, 1
+    bne   $t1, $t2, panic
+     nop
+    li    $t1, 1
+    sw    $t1, 0x18($k0)
+    lw    $k1, 0x118($k0)
+    lui   $at, 0x2000
+    or    $k1, $k1, $at
+    b     enqueue_running
+     sw    $k1, 0x118($k0)
+glabel __osEnqueueAndYield
+    lui   $a1, %hi(__osThreadTail + 0x10)
+    lw    $a1, %lo(__osThreadTail + 0x10)($a1)
+    mfc0  $t0, $12
+    ori   $t0, $t0, 2
+    sw    $t0, 0x118($a1)
+    sd    $s0, 0x98($a1)
+    sd    $s1, 0xa0($a1)
+    sd    $s2, 0xa8($a1)
+    sd    $s3, 0xb0($a1)
+    sd    $s4, 0xb8($a1)
+    sd    $s5, 0xc0($a1)
+    sd    $s6, 0xc8($a1)
+    sd    $s7, 0xd0($a1)
+    sd    $gp, 0xe8($a1)
+    sd    $sp, 0xf0($a1)
+    sd    $fp, 0xf8($a1)
+    sd    $ra, 0x100($a1)
+    sw    $ra, 0x11c($a1)
+    lw    $k1, 0x18($a1)
+    beqz  $k1, .L80326D70
+     nop
+    cfc1  $k1, $31
+    sw    $k1, 0x12c($a1)
+    sdc1  $f20, 0x180($a1)
+    sdc1  $f22, 0x188($a1)
+    sdc1  $f24, 0x190($a1)
+    sdc1  $f26, 0x198($a1)
+    sdc1  $f28, 0x1a0($a1)
+    sdc1  $f30, 0x1a8($a1)
+.L80326D70:
+    lw    $k1, 0x118($a1)
+    andi  $t1, $k1, 0xff00
+    beqz  $t1, .L802F3FBC
+     nop
+    lui   $t0, %hi(__OSGlobalIntMask)
+    daddiu $t0, $t0, %lo(__OSGlobalIntMask)
+    lw    $t0, ($t0)
+    lui   $at, 0xffff
+    ori   $at, $at, 0xffff
+    xor   $t0, $t0, $at
+    andi  $t0, $t0, 0x0000ff00
+    or    $t1, $t1, $t0
+    li    $at, ~0x0000ff00
+    and   $k1, $k1, $at
+    or    $k1, $k1, $t1
+    sw    $k1, 0x118($a1)
+.L802F3FBC:
+    lui   $k1, %hi((((0x04300000 +0x0C))|0xA0000000))
+    lw    $k1, %lo((((0x04300000 +0x0C))|0xA0000000))($k1)
+    beqz  $k1, .L802F3FF4
+     nop
+    lui   $k0, %hi(__OSGlobalIntMask)
+    daddiu $k0, $k0, %lo(__OSGlobalIntMask)
+    lw    $k0, ($k0)
+    srl   $k0, $k0, 0x10
+    lui   $at, 0xffff
+    ori   $at, $at, 0xffff
+    xor   $k0, $k0, $at
+    andi  $k0, $k0, 0x3f
+    lw    $t0, 0x128($a1)
+    and   $k0, $k0, $t0
+    or    $k1, $k1, $k0
+.L802F3FF4:
+    beqz  $a0, .L80326D88
+     sw    $k1, 0x128($a1)
+    jal   __osEnqueueThread
+     nop
+.L80326D88:
+    j     __osDispatchThread
+     nop
+glabel __osEnqueueThread
+    daddu $t9, $a0, $zero
+    lw    $t8, ($a0)
+    lw    $t7, 4($a1)
+    lw    $t6, 4($t8)
+    slt   $at, $t6, $t7
+    bnez  $at, .L80326DC4
+     nop
+.L80326DAC:
+    daddu $t9, $t8, $zero
+    lw    $t8, ($t8)
+    lw    $t6, 4($t8)
+    slt   $at, $t6, $t7
+    beqz  $at, .L80326DAC
+     nop
+.L80326DC4:
+    lw    $t8, ($t9)
+    sw    $t8, ($a1)
+    sw    $a1, ($t9)
+    jr    $ra
+     sw    $a0, 8($a1)
+glabel __osPopThread
+    lw    $v0, ($a0)
+    lw    $t9, ($v0)
+    jr    $ra
+     sw    $t9, ($a0)
+func_unused:
+    jr    $ra
+     nop
+glabel __osDispatchThread
+    lui   $a0, %hi(__osThreadTail + 0x8)
+    daddiu $a0, $a0, %lo(__osThreadTail + 0x8)
+    jal   __osPopThread
+    nop
+    lui   $at, %hi(__osThreadTail + 0x10)
+    sw    $v0, %lo(__osThreadTail + 0x10)($at)
+    li    $t0, 4
+    sh    $t0, 0x10($v0)
+    daddu $k0, $v0, $zero
+    lw    $k1, 0x118($k0)
+    lui   $t0, %hi(__OSGlobalIntMask)
+    daddiu $t0, $t0, %lo(__OSGlobalIntMask)
+    lw    $t0, ($t0)
+    andi  $t0, $t0, 0x0000ff00
+    andi  $t1, $k1, 0x0000ff00
+    and   $t1, $t1, $t0
+    li    $at, ~0x0000ff00
+    and   $k1, $k1, $at
+    or    $k1, $k1, $t1
+    mtc0  $k1, $12
+.L80326E08:
+    ld    $at, 0x20($k0)
+    ld    $v0, 0x28($k0)
+    ld    $v1, 0x30($k0)
+    ld    $a0, 0x38($k0)
+    ld    $a1, 0x40($k0)
+    ld    $a2, 0x48($k0)
+    ld    $a3, 0x50($k0)
+    ld    $t0, 0x58($k0)
+    ld    $t1, 0x60($k0)
+    ld    $t2, 0x68($k0)
+    ld    $t3, 0x70($k0)
+    ld    $t4, 0x78($k0)
+    ld    $t5, 0x80($k0)
+    ld    $t6, 0x88($k0)
+    ld    $t7, 0x90($k0)
+    ld    $s0, 0x98($k0)
+    ld    $s1, 0xa0($k0)
+    ld    $s2, 0xa8($k0)
+    ld    $s3, 0xb0($k0)
+    ld    $s4, 0xb8($k0)
+    ld    $s5, 0xc0($k0)
+    ld    $s6, 0xc8($k0)
+    ld    $s7, 0xd0($k0)
+    ld    $t8, 0xd8($k0)
+    ld    $t9, 0xe0($k0)
+    ld    $gp, 0xe8($k0)
+    ld    $sp, 0xf0($k0)
+    ld    $fp, 0xf8($k0)
+    ld    $ra, 0x100($k0)
+    ld    $k1, 0x108($k0)
+    mtlo  $k1
+    ld    $k1, 0x110($k0)
+    mthi  $k1
+    lw    $k1, 0x11c($k0)
+    mtc0  $k1, $14
+    lw    $k1, 0x18($k0)
+    beqz  $k1, .L80326EF0
+     nop
+    lw    $k1, 0x12c($k0)
+    ctc1  $k1, $31
+    ldc1  $f0, 0x130($k0)
+    ldc1  $f2, 0x138($k0)
+    ldc1  $f4, 0x140($k0)
+    ldc1  $f6, 0x148($k0)
+    ldc1  $f8, 0x150($k0)
+    ldc1  $f10, 0x158($k0)
+    ldc1  $f12, 0x160($k0)
+    ldc1  $f14, 0x168($k0)
+    ldc1  $f16, 0x170($k0)
+    ldc1  $f18, 0x178($k0)
+    ldc1  $f20, 0x180($k0)
+    ldc1  $f22, 0x188($k0)
+    ldc1  $f24, 0x190($k0)
+    ldc1  $f26, 0x198($k0)
+    ldc1  $f28, 0x1a0($k0)
+    ldc1  $f30, 0x1a8($k0)
+.L80326EF0:
+    lw    $k1, 0x128($k0)
+    lui   $k0, %hi(__OSGlobalIntMask)
+    daddiu $k0, $k0, %lo(__OSGlobalIntMask)
+    lw    $k0, ($k0)
+    srl   $k0, $k0, 0x10
+    and   $k1, $k1, $k0
+    sll   $k1, $k1, 1
+    lui   $k0, %hi(__osRcpImTable)
+    daddiu $k0, $k0, %lo(__osRcpImTable)
+    addu  $k1, $k1, $k0
+    lhu   $k1, ($k1)
+    li    $k0, (((0x04300000 +0x0C))|0xA0000000)
+    sw    $k1, ($k0)
+    nop
+    nop
+    nop
+    nop
+    eret
+glabel __osCleanupThread
+    jal   osDestroyThread
+     daddu $a0, $zero, $zero
+.section .data
+glabel __osHwIntTable
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+    .word 0
+glabel D_CN_80319658
+    .word 0
+.section .rodata
+glabel __osIntOffTable
+    .byte 0x00,0x14,0x18,0x18,0x1C,0x1C,0x1C,0x1C,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x00,0x04,0x08,0x08,0x0C,0x0C,0x0C,0x0C,0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x10
+glabel __osIntTable
+    .word redispatch
+    .word sw1
+    .word sw2
+    .word rcp
+    .word cart
+    .word prenmi
+    .word IP6_Hdlr
+    .word IP7_Hdlr
+    .word counter
+    .word 0
+    .word 0
+    .word 0
+
+.else
 glabel __osIntOffTable
 .byte REDISPATCH
 .byte PRENMI
@@ -692,3 +1481,5 @@ glabel __osCleanupThread
 /* 0D26A4 800D1AA4 00002025 */   move  $a0, $zero
 /* 0D26A8 800D1AA8 00000000 */  nop   
 /* 0D26AC 800D1AAC 00000000 */  nop   
+
+.endif
