@@ -309,9 +309,20 @@ SECTIONS
       BUILD_DIR/src/audio/external.o(.data*);
       BUILD_DIR/src/audio/port_eu.o(.data*);
       BUILD_DIR/src/audio/audio_session_presets.o(.data*);
+      #ifdef VERSION_CN
+      /* provisional home for __osPreNMI (cart 0x800E73D0); exact slot gets
+         pinned by the next ique-symaddr data profile */
+      BUILD_DIR/src/os/osSetEventMesg.o(.data*);
+      #endif
       BUILD_DIR/src/os/osInitialize.o(.data*);
       BUILD_DIR/src/os/osCreateViManager.o(.data*);
       BUILD_DIR/src/os/osViTable.o(.data*);
+      #ifdef VERSION_CN
+      /* EGCS emits guRotateF's pi/180 constant into .data, not .rodata; the
+         cart keeps it right after the VI tables (0x3c8efa35 @ ROM 0xE91C0),
+         the same slot sm64's cn ld uses */
+      BUILD_DIR/src/os/guRotateF.o(.data*);
+      #endif
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
       BUILD_DIR/src/os/osContInit.o(.data*);
       BUILD_DIR/src/os/osAiSetNextBuffer.o(.data*);
