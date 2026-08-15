@@ -242,6 +242,14 @@ SECTIONS
       BUILD_DIR/src/os/_Litob.o(.text*);
       BUILD_DIR/src/os/_Ldtob.o(.text*);
       BUILD_DIR/src/os/ldiv.o(.text*);
+      #else
+      /* iQue adds libgcc's 64-bit division helpers before the ucode text
+         (called by the EGCS-compiled llmuldiv; order read from cart jals:
+         _divdi3 0x800D4290, _moddi3, _udivdi3, _umoddi3) */
+      BUILD_DIR/src/os/libgcc/_divdi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_moddi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_udivdi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_umoddi3.o(.text*);
       #endif
       BUILD_DIR/data/rsp.o(.text);
       /* JP 1.1 reorders the .data head; JP 1.0 keeps us's, measured the same
@@ -379,6 +387,12 @@ SECTIONS
       #ifdef VERSION_CN
       /* NAN's home _Ldtob.o is unlinked on iQue; NaN.c carries it instead */
       BUILD_DIR/src/os/NaN.o(.rodata*);
+      /* each libgcc helper carries its own 0x100 __clz_tab copy; the cart has
+         all four between NaN and __osRcpImTable (0x800F0B40..0x800F0F40) */
+      BUILD_DIR/src/os/libgcc/_divdi3.o(.rodata*);
+      BUILD_DIR/src/os/libgcc/_moddi3.o(.rodata*);
+      BUILD_DIR/src/os/libgcc/_udivdi3.o(.rodata*);
+      BUILD_DIR/src/os/libgcc/_umoddi3.o(.rodata*);
       #endif
       #ifndef VERSION_CN
       BUILD_DIR/src/os/_Printf.o(.rodata*);
