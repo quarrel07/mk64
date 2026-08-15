@@ -349,6 +349,9 @@ SECTIONS
       /* provisional home for __osPreNMI (cart 0x800E73D0); exact slot gets
          pinned by the next ique-symaddr data profile */
       BUILD_DIR/src/os/osSetEventMesg.o(.data*);
+      /* profile-measured: the BB hw-int table sits just before the
+         osViClock/__osShutdown cluster (cart 0x800E85D0 vs 0x800E8678) */
+      BUILD_DIR/asm/os/__osException.o(.data*);
       #endif
       BUILD_DIR/src/os/osInitialize.o(.data*);
       BUILD_DIR/src/os/osCreateViManager.o(.data*);
@@ -358,9 +361,6 @@ SECTIONS
          cart keeps it right after the VI tables (0x3c8efa35 @ ROM 0xE91C0),
          the same slot sm64's cn ld uses */
       BUILD_DIR/src/os/guRotateF.o(.data*);
-      /* cn exception handler's BB hw-int table (sm64's cn ld puts the
-         exception data right after guRotateF's) */
-      BUILD_DIR/asm/os/__osException.o(.data*);
       #endif
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
       BUILD_DIR/src/os/osContInit.o(.data*);
