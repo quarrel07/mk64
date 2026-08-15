@@ -9,6 +9,57 @@
 .section .text, "ax"
 
 
+
+.ifdef VERSION_CN
+# iQue body (via sm64's matched cn libultra asm); pseudo-ops may use $at
+.set at
+glabel bzero
+    negu  $v1, $a0
+    blt  $a1, 0xc, .L80303790
+     nop
+    andi  $v1, $v1, 3
+    beqz  $v1, .L80303734
+     subu  $a1, $a1, $v1
+    swl   $zero, ($a0)
+    addu  $a0, $a0, $v1
+.L80303734:
+    and   $a3, $a1, -32
+    beqz  $a3, .L80303770
+     subu  $a1, $a1, $a3
+    addu  $a3, $a3, $a0
+.L80303748:
+    sw    $zero, ($a0)
+    sw    $zero, 4($a0)
+    sw    $zero, 8($a0)
+    sw    $zero, 0xc($a0)
+    addiu $a0, $a0, 0x20
+    sw    $zero, -0x10($a0)
+    sw    $zero, -0xc($a0)
+    sw    $zero, -8($a0)
+    bne   $a0, $a3, .L80303748
+     sw    $zero, -4($a0)
+.L80303770:
+    and   $a3, $a1, -4
+    beqz  $a3, .L80303790
+     subu  $a1, $a1, $a3
+    addu  $a3, $a3, $a0
+.L80303784:
+    addiu $a0, $a0, 4
+    bne   $a0, $a3, .L80303784
+     sw    $zero, -4($a0)
+.L80303790:
+    blez  $a1, .L803037A8
+     nop
+    addu  $a1, $a1, $a0
+.L8030379C:
+    addiu $a0, $a0, 1
+    bne   $a0, $a1, .L8030379C
+     sb    $zero, -1($a0)
+.L803037A8:
+    jr    $ra
+     nop
+.set noat
+.else
 glabel bzero
 /* 0CE660 800CDA60 28A1000C */  slti  $at, $a1, 0xc
 /* 0CE664 800CDA64 1420001D */  bnez  $at, bytezero
@@ -58,3 +109,5 @@ zerodone:
 /* 0CE6F8 800CDAF8 00000000 */   nop   
 
 /* 0CE6FC 800CDAFC 00000000 */  nop   
+
+.endif

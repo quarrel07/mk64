@@ -9,4 +9,11 @@
 OSPiHandle __Dom1SpeedParam;
 OSPiHandle __Dom2SpeedParam;
 OSPiHandle __CartRomHandle;
+
+/* count-overflow trackers for iQue's rewritten osGetCount/__osSetCompare
+   (the BB counter runs at 192/125 the N64 rate; these carry the scaling) */
+u32 sNumCountOverflows;
+u32 sLastHighestCount;
+u32 sNumCountOverflows2;
+u32 sLastHighestCount2;
 #endif

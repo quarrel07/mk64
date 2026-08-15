@@ -181,6 +181,10 @@ SECTIONS
       BUILD_DIR/src/os/__osSetGlobalIntMask.o(.text*);
       #endif
       BUILD_DIR/asm/os/__osRestoreInt.o(.text);
+      #ifdef VERSION_CN
+      /* iQue links osSetIntMask right after __osRestoreInt (0x800CEFB0) */
+      BUILD_DIR/asm/os/osSetIntMask.o(.text);
+      #endif
       BUILD_DIR/src/os/__osDequeueThread.o(.text*);
       BUILD_DIR/asm/os/__osSetSR.o(.text);
       BUILD_DIR/asm/os/__osGetSR.o(.text);
@@ -234,7 +238,9 @@ SECTIONS
       BUILD_DIR/src/os/contramwrite.o(.text*);
       BUILD_DIR/src/os/osEepromRead.o(.text*);
       BUILD_DIR/src/os/__osAiDeviceBusy.o(.text*);
+      #ifndef VERSION_CN
       BUILD_DIR/asm/os/osSetIntMask.o(.text);
+      #endif
       BUILD_DIR/src/os/osDestroyThread.o(.text*);
       BUILD_DIR/src/os/__osSiDeviceBusy.o(.text*);
       BUILD_DIR/src/os/osLeoDiskInit.o(.text*);
