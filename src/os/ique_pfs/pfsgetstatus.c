@@ -13,36 +13,17 @@ void __osPfsRequestOneChannel(int channel);
 #endif
 void __osPfsGetOneChannelData(int channel, OSContStatus* data);
 
+/* iQue: pak presence is kernel-provided - a non-null entry in the
+   __osBbPakAddress table (0x80000374) means the flash-emulated pak for
+   that channel is mapped. No SI transaction at all (cart 0x800D1290,
+   10 words). The SI helpers below survive for the other probe paths. */
+extern u32 __osBbPakAddress[];
+
 s32 __osPfsGetStatus(OSMesgQueue* queue, int channel) {
-    s32 ret = 0;
-    OSMesg dummy;
-    OSContStatus data;
-
-#if BUILD_VERSION >= VERSION_J
-    __osPfsInodeCacheBank = 250;
-
-    __osPfsRequestOneChannel(channel, CONT_CMD_REQUEST_STATUS);
-#else
-    __osPfsRequestOneChannel(channel);
-#endif
-
-    ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);
-    osRecvMesg(queue, &dummy, OS_MESG_BLOCK);
-
-    ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);
-    osRecvMesg(queue, &dummy, OS_MESG_BLOCK);
-
-    __osPfsGetOneChannelData(channel, &data);
-
-    if (((data.status & CONT_CARD_ON) != 0) && ((data.status & CONT_CARD_PULL) != 0)) {
-        return PFS_ERR_NEW_PACK;
-    } else if ((data.errno != 0) || ((data.status & CONT_CARD_ON) == 0)) {
-        return PFS_ERR_NOPACK;
-    } else if ((data.status & CONT_ADDR_CRC_ER) != 0) {
-        return PFS_ERR_CONTRFAIL;
+    if (__osBbPakAddress[channel] != 0) {
+        return 0;
     }
-
-    return ret;
+    return PFS_ERR_NOPACK;
 }
 
 #if BUILD_VERSION >= VERSION_J
