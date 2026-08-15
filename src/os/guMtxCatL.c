@@ -47,6 +47,9 @@ void guMtxCatL(Mtx* m, Mtx* n, Mtx* res) {
     guMtxF2L(resf, res);
 }
 
+/* cn: unused by the game and absent from the cart (its callee guMtxXFMF
+   is cn-excluded in guMtxCatF.c) */
+#ifndef VERSION_CN
 void guMtxXFML(Mtx* m, float x, float y, float z, float* ox, float* oy, float* oz) {
     float mf[4][4];
 
@@ -54,3 +57,4 @@ void guMtxXFML(Mtx* m, float x, float y, float z, float* ox, float* oy, float* o
 
     guMtxXFMF((Mtx*) mf, x, y, z, ox, oy, oz);
 }
+#endif
