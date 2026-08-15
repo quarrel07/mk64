@@ -298,6 +298,8 @@ SECTIONS
       #ifdef VERSION_CN
       /* cart: guMtxL2F asm right before guMtxCatF's region (0x800D3320) */
       BUILD_DIR/asm/os/guMtxL2F_cn.o(.text);
+      /* cart: the rewritten guMtxCatF follows at 0x800D33A0 */
+      BUILD_DIR/asm/os/guMtxCatF_cn.o(.text);
       #endif
       BUILD_DIR/src/os/contramwrite.o(.text*);
       BUILD_DIR/src/os/osEepromRead.o(.text*);
