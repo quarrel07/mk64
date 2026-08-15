@@ -79,8 +79,17 @@ gControllerPak2FileHandle: .space 0x68
 .space 0x44
 .global D_8018E840
 D_8018E840: .space 0x10
-.space 0x18
+# 0x80193BB0 (2026-08-14 profile): the eeprom timer queue fills the old
+# 0x18 pad before gTransitionDuration exactly (osContInit's common
+# resolves here)
+.global __osEepromTimerQ
+__osEepromTimerQ: .space 0x18
 .global gTransitionDuration
 gTransitionDuration: .space 0x14
+# 0x80193BDC: the SI access queue abuts sMemoryPool (0x80193BF4) with
+# zero slack (3 votes, no disagreement; the PI queue's conflicting vote
+# is the known misattribution - it stays a pool common)
+.global gOsSiMessageQueue
+gOsSiMessageQueue: .space 0x18
 
 .endif

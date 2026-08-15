@@ -796,7 +796,7 @@ ifeq ($(VERSION),cn.v5)
   # with per-file opt levels mirroring sm64's measured cn table: the core
   # thread/mesg/time files compile with NO -O flag, device/VI files with -O2.
   # Only files measured 100% byte-exact against the cart are listed.
-  CN_EGCS_LIB_SRCS := __osPiCreateAccessQueue __osSiCreateAccessQueue guOrthoF \
+  CN_EGCS_LIB_SRCS := __osPiCreateAccessQueue guOrthoF \
                       osViSwapBuffer __osSpDeviceBusy __osSiDeviceBusy \
                       __osAiDeviceBusy __osSiRawWriteIo __osSiRawReadIo \
                       osSyncPrintf \
@@ -839,7 +839,8 @@ ifeq ($(VERSION),cn.v5)
   # eeprom queues): also without -fno-common so those gather as commons until
   # the data profile pins them
   CN_EGCS_LIB_O2C_SRCS := osSpTaskLoadGo osContInit osContStartReadData \
-                          osEepromRead osEepromWrite osCreatePiManager
+                          osEepromRead osEepromWrite osCreatePiManager \
+                          __osSiCreateAccessQueue
   CN_EGCS_LIB_O2C_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O2C_SRCS)))
   $(CN_EGCS_LIB_O2C_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_O2C_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
