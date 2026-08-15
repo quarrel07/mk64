@@ -1,5 +1,9 @@
 #include "libultra_internal.h"
 
+/* cn: the SI mempak CRC helpers have no cart bodies - their only callers
+   are the SI transaction paths, all replaced by direct BB pak access */
+#ifndef VERSION_CN
+
 u8 __osContAddressCrc(u16 addr) {
     u8 temp;
     u8 temp2;
@@ -44,3 +48,5 @@ u8 __osContDataCrc(u8* data) {
     }
     return temp;
 }
+
+#endif
