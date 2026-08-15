@@ -340,22 +340,34 @@ SECTIONS
       BUILD_DIR/src/audio/port_eu.o(.data*);
       BUILD_DIR/src/audio/audio_session_presets.o(.data*);
       #ifdef VERSION_CN
-      /* provisional home for __osPreNMI (cart 0x800E73D0); exact slot gets
-         pinned by the next ique-symaddr data profile */
+      /* iQue's os .data chain, in the 2026-08-14 symaddr profile's cart
+         order (0x800E73B0..0x800E87xx): osAiSetNextBuffer leads right after
+         the audio data, the thread/VI-manager cluster follows, the VI
+         tables + guRotateF's pi/180 + the exception data sit mid-chain,
+         and osInitialize's scalar cluster (osViClock/__osShutdown/
+         __osPreNMICount/__OSGlobalIntMask, internally exact) comes late.
+         KNOWN SLACK: __osSiCreateAccessQueue carries 0x30 here vs 0x10 on
+         cart - the band check grades it; see IQUE-SCOPING.md. */
+      BUILD_DIR/src/os/osAiSetNextBuffer.o(.data*);
+      BUILD_DIR/src/os/osContInit.o(.data*);
       BUILD_DIR/src/os/osSetEventMesg.o(.data*);
-      /* profile-measured: the BB hw-int table sits just before the
-         osViClock/__osShutdown cluster (cart 0x800E85D0 vs 0x800E8678) */
+      BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.data*);
+      BUILD_DIR/src/os/__osDequeueThread.o(.data*);
+      BUILD_DIR/src/os/osTimer.o(.data*);
+      BUILD_DIR/src/os/osCreateViManager.o(.data*);
+      BUILD_DIR/src/os/osViTable.o(.data*);
+      BUILD_DIR/src/os/guRotateF.o(.data*);
       BUILD_DIR/asm/os/__osException.o(.data*);
-      #endif
+      BUILD_DIR/src/os/osCreatePiManager.o(.data*);
+      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);
+      BUILD_DIR/src/os/osInitialize.o(.data*);
+      BUILD_DIR/src/os/__osViInit.o(.data*);
+      BUILD_DIR/src/os/osViData.o(.data*);
+      BUILD_DIR/src/os/__osSetHWIntrRoutine.o(.data*);
+      #else
       BUILD_DIR/src/os/osInitialize.o(.data*);
       BUILD_DIR/src/os/osCreateViManager.o(.data*);
       BUILD_DIR/src/os/osViTable.o(.data*);
-      #ifdef VERSION_CN
-      /* EGCS emits guRotateF's pi/180 constant into .data, not .rodata; the
-         cart keeps it right after the VI tables (0x3c8efa35 @ ROM 0xE91C0),
-         the same slot sm64's cn ld uses */
-      BUILD_DIR/src/os/guRotateF.o(.data*);
-      #endif
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
       BUILD_DIR/src/os/osContInit.o(.data*);
       BUILD_DIR/src/os/osAiSetNextBuffer.o(.data*);
@@ -365,11 +377,8 @@ SECTIONS
       BUILD_DIR/src/os/__osViInit.o(.data*);
       BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);
       BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.data*);
-      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Printf.o(.data*);
-      #endif
       BUILD_DIR/src/os/osViData.o(.data*);
-      #ifndef VERSION_CN
       BUILD_DIR/src/os/_Litob.o(.data*);
       #endif
       BUILD_DIR/src/main.o(.rodata*);
@@ -524,7 +533,8 @@ SECTIONS
       BUILD_DIR/src/os/ique_globals.o(.bss*);
       . = ALIGN(0x10);
       BUILD_DIR/asm/menu_bss_cn.o(.bss);
-      . = ALIGN(0x10);
+      /* no ALIGN here: sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4
+         on cart (not 16-aligned) */
       #endif
    }
    END_NOLOAD(main)
