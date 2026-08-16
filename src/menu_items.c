@@ -2757,7 +2757,12 @@ void func_80092290(s32 arg0, s32* arg1, s32* arg2) {
         return;
     }
 
+#ifdef VERSION_CN
+    /* cn: reuses the range check's (arg0 - 4); arithmetically equal */
+    idx = (((arg0 - 4) * 4) + ((gGlobalTimer % 2) * 2)) + 10;
+#else
     idx = (((arg0 * 4) + ((gGlobalTimer % 2) * 2)) - 6);
+#endif
 
     *arg2 += 16;
     if (*arg2 >= 256) {
@@ -4702,8 +4707,14 @@ Gfx* func_800987D0(Gfx* displayListHead, u32 arg1, u32 arg2, u32 width, u32 heig
             gDPLoadTextureTile(displayListHead++, gMenuTextureBuffer, G_IM_FMT_RGBA, G_IM_SIZ_16b, textureWidth, 0,
                                var_a2, var_v0_2, var_a2 + 0x20, var_v0_2 + 0x20, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
+#ifdef VERSION_CN
+            /* cn: temp_f18 is the right operand of both products */
+            temp_f6 = ((((temp_f0 * (column - 0xA0)) + (temp_f24 * (row - 0x78))) * temp_f18)) + 160.0f;
+            temp_f4_2 = ((((-temp_f24 * (column - 0xA0)) + (temp_f0 * (row - 0x78))) * temp_f18)) + 120.0f;
+#else
             temp_f6 = (temp_f18 * ((temp_f0 * (column - 0xA0)) + (temp_f24 * (row - 0x78)))) + 160.0f;
             temp_f4_2 = (temp_f18 * ((-temp_f24 * (column - 0xA0)) + (temp_f0 * (row - 0x78)))) + 120.0f;
+#endif
             gSPTextureRectangle(displayListHead++, temp_f6 * 4, temp_f4_2 * 4, ((temp_f6 + 0x20) ^ 0) * 4,
                                 ((temp_f4_2 + 0x20) ^ 0) * 4, 0, 0, 0, 1024, 1024);
             column += 0x20;
