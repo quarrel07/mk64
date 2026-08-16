@@ -61,8 +61,13 @@ void draw_profiler_bar(OSTime clockBase, OSTime clockStart, OSTime clockEnd, s16
     }
 
     // calculate the x coordinates of where start and end begins, respectively.
+#ifdef VERSION_CN
+    rectX1 = ((((u64) durationStart * 64) / 3000 * 3) / 1000) + 30;
+    rectX2 = ((((u64) durationEnd * 64) / 3000 * 3) / 1000) + 30;
+#else
     rectX1 = ((((durationStart * 1000000) / osClockRate * 3) / 1000) + 30);
     rectX2 = ((((durationEnd * 1000000) / osClockRate * 3) / 1000) + 30);
+#endif
 
     //! I believe this is supposed to cap rectX1 and rectX2 to 320, but the
     //  code seems to use the wrong variables... it's possible that the variable

@@ -1,5 +1,8 @@
 #include <ultra64.h>
 #include <PR/ultratypes.h>
+#ifdef VERSION_CN
+#include <string.h>
+#endif
 #include <macros.h>
 #include <defines.h>
 #include <segments.h>
@@ -3322,15 +3325,31 @@ void print_text1(s32 column, s32 row, char* text, s32 tracking, f32 scaleX, f32 
     s32 stringWidth = 0;
     s32 glyphIndex;
     s32 sp60;
+#ifdef VERSION_CN
+    s32 t;
+#endif
 
     while (*temp_string != 0) {
         glyphIndex = char_to_glyph_index(temp_string);
         if (glyphIndex >= 0) {
             stringWidth += ((gGlyphDisplayWidth[glyphIndex] + tracking) * scaleX);
+#ifndef VERSION_CN
         } else if ((glyphIndex != -2) && (glyphIndex == -1)) {
             stringWidth += ((tracking + 7) * scaleX);
+#endif
         } else {
+#ifdef VERSION_CN
+            /* cn: egcs folds (x != -2) && (x == -1) into one compare;
+               reading the value through a second local keeps both */
+            t = glyphIndex;
+            if ((t != -2) && (glyphIndex == -1)) {
+                stringWidth += ((tracking + 7) * scaleX);
+            } else {
+                return;
+            }
+#else
             return;
+#endif
         }
         if (glyphIndex >= 0x30) {
             temp_string += 2;
@@ -3341,9 +3360,11 @@ void print_text1(s32 column, s32 row, char* text, s32 tracking, f32 scaleX, f32 
 
     switch (arg6) {
         case LEFT_TEXT:
+#ifndef VERSION_CN
             // ???
             do {
             } while (0);
+#endif
         case RIGHT_TEXT:
             column -= stringWidth;
             break;
@@ -3364,21 +3385,37 @@ void print_text1(s32 column, s32 row, char* text, s32 tracking, f32 scaleX, f32 
     gSPDisplayList(gDisplayListHead++, D_020077A8);
     while (*text != 0) {
         glyphIndex = char_to_glyph_index(text);
+#ifdef VERSION_CN
+        t = glyphIndex;
+#endif
         if (glyphIndex >= 0) {
             load_menu_img(segmented_to_virtual_dupe(gGlyphTextureLUT[glyphIndex]));
             gDisplayListHead = print_letter(gDisplayListHead, segmented_to_virtual_dupe(gGlyphTextureLUT[glyphIndex]),
                                             column, row, sp60, scaleX, scaleY);
             column = column + (s32) ((gGlyphDisplayWidth[glyphIndex] + tracking) * scaleX);
+#ifdef VERSION_CN
+        } else if ((t != -2) && (glyphIndex == -1)) {
+#else
         } else if ((glyphIndex != -2) && (glyphIndex == -1)) {
+#endif
             column = column + (s32) ((tracking + 7) * scaleX);
         } else {
             gSPDisplayList(gDisplayListHead++, D_020077D8);
             return;
         }
+#ifdef VERSION_CN
+        /* cn: a two-byte glyph is detected from the EUC lead byte itself */
+        if ((u8) *text < 0xA1) {
+            text += 1;
+        } else {
+#else
         if (glyphIndex >= 0x30) {
+#endif
             text += 2;
+#ifndef VERSION_CN
         } else {
             text += 1;
+#endif
         }
     }
     gSPDisplayList(gDisplayListHead++, D_020077D8);
@@ -13019,21 +13056,58 @@ void menu_item_credits_render(MenuItem* arg0) {
     }
 }
 #else
+#ifdef VERSION_CN
+/* iQue swapped the "the end" card for their own: when the sliding text is that
+   string they draw two extra lines and push the card 50px right. strcmp is the
+   cart's own routine at 0x800CFE00, transcribed in asm/os/strcmp_cn.s. */
+#endif
 void menu_item_credits_render(MenuItem* arg0) {
+#ifndef VERSION_CN
     f32 someScaling;
+#endif
     s32 creditIndex;
     s8 slideDirection;
+#ifdef VERSION_CN
+    char** textPtr;
+    char* replacement = "\xa2\x08\xa1\x74";
+    s32 shift = 0;
+
+#else
     UNUSED s32 pad;
+#endif
     creditIndex = arg0->type - 0x190;
+#ifdef VERSION_CN
+    textPtr = &gCreditsText[creditIndex];
+#endif
     set_text_color(gCreditsTextRenderInfo[creditIndex].textColor);
+#ifdef VERSION_CN
+    if (strcmp(*textPtr, "the end") == 0) {
+        textPtr = &replacement;
+        print_text_mode_1(arg0->column - 8, arg0->row - 110, "china production", 0, 1.0f, 1.0f);
+        print_text_mode_1(arg0->column - 1, arg0->row - 80, "ique engineering", 0, 1.0f, 1.0f);
+        shift = 1;
+    }
+#endif
     slideDirection = gCreditsTextRenderInfo[creditIndex].slideDirection;
+#ifdef VERSION_CN
+    /* two spellings of the same read: one tree would fold to (dir != SLIDE_LEFT) */
+    if ((slideDirection == SLIDE_RIGHT) || (gCreditsTextRenderInfo[creditIndex].slideDirection != SLIDE_LEFT)) {
+        f32 someScaling = gCreditsTextRenderInfo[creditIndex].textScaling;
+        print_text1_left(arg0->column + (shift * 50), arg0->row, *textPtr, arg0->param1 * someScaling,
+#else
     if ((slideDirection == SLIDE_RIGHT) || (slideDirection != SLIDE_LEFT)) {
         someScaling = gCreditsTextRenderInfo[creditIndex].textScaling;
         print_text1_left(arg0->column, arg0->row, gCreditsText[creditIndex], arg0->param1 * someScaling,
+#endif
                          arg0->paramf * someScaling, someScaling);
     } else {
+#ifdef VERSION_CN
+        f32 someScaling = gCreditsTextRenderInfo[creditIndex].textScaling;
+        print_text_mode_1(arg0->column + (shift * 50), arg0->row, *textPtr, arg0->param1 * someScaling,
+#else
         someScaling = gCreditsTextRenderInfo[creditIndex].textScaling;
         print_text_mode_1(arg0->column, arg0->row, gCreditsText[creditIndex], arg0->param1 * someScaling,
+#endif
                           arg0->paramf * someScaling, someScaling);
     }
 }

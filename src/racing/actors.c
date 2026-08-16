@@ -1500,11 +1500,16 @@ UNUSED void prototype_actor_spawn_data(Player* player, uintptr_t arg1) {
 
 bool query_and_resolve_collision_player_actor(Player* player, Vec3f pos, f32 minDist, f32 dist, f32 arg4) {
     f32 yDist;
+#ifndef VERSION_CN
     f32 sqrtDist;
+#endif
     f32 zDist;
     f32 xVelocity;
     f32 zVelocity;
     f32 temp_f0_4;
+#ifdef VERSION_CN
+    f32 sqrtDist;
+#endif
     f32 temp_f0_5;
     f32 temp_f0_6;
     f32 xDist;
