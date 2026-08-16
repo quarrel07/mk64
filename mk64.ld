@@ -87,8 +87,11 @@ SECTIONS
       BUILD_DIR/src/render_objects.o(.text*);
       BUILD_DIR/src/code_80057C60.o(.text*);
 #ifdef VERSION_CN
-      /* 8 bytes of zero fill the cart has between this object and the next. */
-      . = . + 0x8;
+      /* iQue splits this file in two at func_8005D290. Both halves already
+         carry IDO's 16-byte .text padding, so the seam needs no fill: the
+         8 zero bytes the cart has after func_8005D1F4 are the first object's
+         own tail, and the 8 after this object are the second's. */
+      BUILD_DIR/src/code_8005D290.o(.text*);
 #endif
       BUILD_DIR/src/code_8006E9C0.o(.text*);
       BUILD_DIR/src/update_objects.o(.text*);
@@ -578,6 +581,9 @@ SECTIONS
       #endif
       BUILD_DIR/ASSET_CODE_DIR/data_800E45C0/data_800E45C0.o(.data*);
       BUILD_DIR/src/code_80057C60.o(.data*);
+#ifdef VERSION_CN
+      BUILD_DIR/src/code_8005D290.o(.data*);
+#endif
       BUILD_DIR/src/data/some_data.o(.data*);
       BUILD_DIR/src/effects.o(.data*);
       BUILD_DIR/src/code_80091440.o(.data*);
@@ -672,6 +678,9 @@ SECTIONS
       BUILD_DIR/src/math_util_2.o(.rodata*);
       BUILD_DIR/src/render_objects.o(.rodata*);
       BUILD_DIR/src/code_80057C60.o(.rodata*);
+#ifdef VERSION_CN
+      BUILD_DIR/src/code_8005D290.o(.rodata*);
+#endif
       BUILD_DIR/src/code_8006E9C0.o(.rodata*);
       BUILD_DIR/src/update_objects.o(.rodata*);
       BUILD_DIR/src/code_80086E70.o(.rodata*);
@@ -772,6 +781,9 @@ SECTIONS
          BUILD_DIR/src/spawn_players.o(.bss*);
       #endif
       BUILD_DIR/src/code_80057C60.o(.bss*);
+#ifdef VERSION_CN
+      BUILD_DIR/src/code_8005D290.o(.bss*);
+#endif
       BUILD_DIR/src/code_80057C60_var.o(.bss*);
       BUILD_DIR/src/effects.o(.bss*);
       BUILD_DIR/src/menu_items.jp.o(.bss*);
