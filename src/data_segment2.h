@@ -53,6 +53,9 @@ extern Gfx D_02008058[];
 extern Gfx common_rectangle_display[];
 
 extern Vtx D_02007BB8[];
+#ifdef VERSION_CN
+extern Vtx seg2_vtxCnUnused[];
+#endif
 extern Vtx D_02007CD8[];
 extern Vtx D_02007DF8[];
 
