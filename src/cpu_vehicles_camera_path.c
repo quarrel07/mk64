@@ -646,6 +646,9 @@ bool is_collide_with_vehicle(f32 vehicleX, f32 vehicleZ, f32 vehicleVelocityX, f
                              f32 distanceY, f32 playerX, f32 playerZ) {
     f32 velocity;
     f32 temp_f18;
+#ifdef VERSION_CN
+    f32 pad[7];
+#endif
 
     velocity = sqrtf((vehicleVelocityX * vehicleVelocityX) + (vehicleVelocityZ * vehicleVelocityZ));
     if (velocity < 0.01f) {

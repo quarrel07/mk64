@@ -4702,7 +4702,9 @@ void func_80056BF0(s32 bombIndex) {
 }
 
 void func_80056E24(s32 bombIndex, Vec3f arg1) {
+#ifndef VERSION_CN  /* CN's frame is 8 bytes smaller here */
     UNUSED s32 stackPadding[2];
+#endif
     BombKart sp2C = gBombKarts[bombIndex];
 
     D_80183E80[0] = 0;
