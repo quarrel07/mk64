@@ -2763,7 +2763,8 @@ void func_80092290(s32 arg0, s32* arg1, s32* arg2) {
 
 #ifdef VERSION_CN
     /* cn: reuses the range check's (arg0 - 4); arithmetically equal */
-    idx = (((arg0 - 4) * 4) + ((gGlobalTimer % 2) * 2)) + 10;
+    temp_t0 = 10;
+    idx = ((arg0 - 4) * 4) + (((gGlobalTimer % 2) * 2) + temp_t0);
 #else
     idx = (((arg0 * 4) + ((gGlobalTimer % 2) * 2)) - 6);
 #endif
@@ -5648,6 +5649,9 @@ void convert_img_to_greyscale(s32 arg0, u32 arg1) {
     s32 blue;
     s32 alpha;
     u32 temp_t9;
+#ifdef VERSION_CN
+    u32 sum;
+#endif
     s32 size;
     u16* color;
     f32 sp48[32];
@@ -5662,8 +5666,15 @@ void convert_img_to_greyscale(s32 arg0, u32 arg1) {
         green = ((*color & 0x7C0) >> 6) * 0x4B;
         blue = ((*color & 0x3E) >> 1) * 0x5F;
         alpha = *color & 0x1;
+#ifdef VERSION_CN
+        /* cn: the channel sum is named and divided unsigned, which is what puts
+           the last add back in the scratch register before the shift */
+        sum = red + green + blue;
+        temp_t9 = sum / 256;
+#else
         temp_t9 = red + green + blue;
         temp_t9 /= 256;
+#endif
         temp_t9 = sp48[temp_t9] * 32.0f;
         if (temp_t9 >= 32) {
             temp_t9 = 31;
@@ -5718,14 +5729,22 @@ void adjust_img_colour(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 u16* func_8009B8C4(u64* arg0) {
+#ifndef VERSION_CN
+    /* cn: iQue's build has no pad here - an unused ARRAY costs frame under
+       EGCS where an unused scalar does not */
     UNUSED s32 pad[2];
+#endif
     s32 offset;
     s32 found;
     s32 someIndex;
 
     found = 0;
     for (someIndex = 0; someIndex < sMenuTextureEntries; someIndex++) {
+#ifdef VERSION_CN
+        if (sMenuTextureMap[someIndex].textureData == arg0) {
+#else
         if (arg0 == sMenuTextureMap[someIndex].textureData) {
+#endif
             found = 1;
             offset = sMenuTextureMap[someIndex].offset;
             break;
@@ -8003,10 +8022,21 @@ void func_800A09E0(MenuItem* arg0) {
 
 void func_800A0AD0(UNUSED MenuItem* arg0) {
     MenuItem* temp_t1;
+#ifdef VERSION_CN
+    /* cn: reading the selection through a local on one side and the global on
+       the other is what stops EGCS folding the pair into one unsigned compare */
+    s32 sel;
+#endif
+
     // Find MenuItem with a type/id of 0xDA
     temp_t1 = find_menu_items_dupe(MENU_ITEM_TYPE_0DA);
+#ifdef VERSION_CN
+    sel = gControllerPakMenuSelection;
+    if ((sel >= CONTROLLER_PAK_MENU_ERASE) || (gControllerPakMenuSelection <= CONTROLLER_PAK_MENU_NONE)) {
+#else
     if ((gControllerPakMenuSelection != CONTROLLER_PAK_MENU_SELECT_RECORD) &&
         (gControllerPakMenuSelection != CONTROLLER_PAK_MENU_END)) {
+#endif
         gDPSetPrimColor(gDisplayListHead++, 0, 0, 0xFF, temp_t1->param2, 0x00, 0xFF);
         gDisplayListHead =
             render_menu_textures(gDisplayListHead, D_02001874, 0x24, (gControllerPakSelectedTableRow * 0xA) + 0x7C);
