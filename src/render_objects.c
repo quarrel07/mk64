@@ -1781,8 +1781,31 @@ void func_8004BA98(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     }
 }
 
+#ifdef VERSION_CN
+/* cn only; func_8004BB3C below with the clipping dropped, drawing the rectangle
+   centred on the position rather than anchored at it. */
+void func_8004BB34(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
+    s16 temp_t9;
+    s32 var_t0;
+    s32 var_t1;
+    s32 xl;
+    s32 yl;
+    s32 xh;
+    s32 yh;
+
+    var_t0 = (arg2 * 2 * arg4) + 0.5;
+    var_t1 = (arg3 * 2 * arg4) + 0.5;
+    xh = (arg0 * 4) + var_t0;
+    yh = (arg1 * 4) + var_t1;
+    xl = (arg0 * 4) - var_t0;
+    yl = (arg1 * 4) - var_t1;
+    temp_t9 = (1024.0f / arg4) + 0.5;
+    gSPTextureRectangle(gDisplayListHead++, xl, yl, xh, yh, 0, 0, 0, temp_t9, temp_t9);
+}
+#else
 UNUSED void func_8004BB34(void) {
 }
+#endif
 
 void func_8004BB3C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     s16 t;
@@ -1898,11 +1921,67 @@ void func_8004C268(u32 arg0, u32 arg1, u8* texture, u32 width, u32 arg4, u32 hei
     }
 }
 
+#ifdef VERSION_CN
+/* cn only; func_8004C268 above drawing through func_8004BB3C, which takes the
+   float, so the position is passed straight through instead of being stepped. */
+void func_8004C354(s32 arg0, s32 arg1, u8* texture, s32 arg3, u32 arg4, u32 width, u32 height, f32 arg7) {
+    s32 i;
+    u8* img2;
+
+    img2 = texture;
+
+    for (i = 0; (u32) i < (arg4 / height); i++) {
+        load_texture_block_rgba16_mirror(img2, width, height);
+        func_8004BB3C(arg0, arg1, arg3, arg4, arg7);
+        img2 += (width * height) * 2 ^ ((arg4 / height) * 0);
+    }
+}
+#else
 UNUSED void func_8004C354() {
 }
+#endif
 
+#ifdef VERSION_CN
+/* cn only; func_8004E06C's wobble loop with a signed cast, the mirrored block
+   loader, and a two-byte-per-texel stride. */
+void func_8004C35C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
+    f32 temp_f20;
+    /* column is declared ahead of temp_s7 because both spill, and the cart puts
+       column in the lower slot of the two. */
+    s32 column;
+    s16 temp_s7;
+    s16 var_s1;
+    u16 temp_s0;
+    s32 var_s2;
+    u8* img;
+    s32 temp_s1;
+    s32 i;
+    s32 var;
+
+    D_801656B0 += D_80165710;
+    temp_s7 = D_80165708;
+    temp_f20 = D_8018D00C;
+    var_s1 = (s16) D_801656B0;
+    img = texture;
+    var = arg3 / 2;
+    var_s2 = arg1 - (arg4 / 2);
+    column = arg0 - var;
+
+    for (i = 0; i < arg4; i++) {
+        temp_s0 = var_s1;
+        temp_s1 = (s32) ((f32) (column) + (temp_f20 * sins(temp_s0)));
+        sins(temp_s0);
+        load_texture_block_rgba16_mirror(img, arg3, 1);
+        func_8004B97C(temp_s1, var_s2, arg3, 1, 1);
+        var_s1 += temp_s7;
+        img += arg3 * 2;
+        var_s2 += 1;
+    }
+}
+#else
 UNUSED void func_8004C35C() {
 }
+#endif
 
 void draw_hud_2d_texture(s32 x, s32 y, u32 width, u32 height, u8* texture) {
 #ifdef VERSION_CN
