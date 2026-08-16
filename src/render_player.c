@@ -1814,27 +1814,55 @@ void update_wheel_palette(Player* player, s8 playerId, s8 screenId, s8 arg3) {
             ((player->kartProps & UNUSED_0x800) == 0)) {
 
             if (frameId <= 20) {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels0[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels0[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             } else {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels1[player->characterId][groupId] +
+                                                     (frameId - 21) * (temp_num * 4) + ((temp_t2 >> 8) * temp_num) + 0x600),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels1[player->characterId][groupId] +
                                                      (frameId - 21) * (temp_num * 4) + ((temp_t2 >> 8) * 0x40) + 0x600),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             }
         } else {
             if (frameId == 0) {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels0[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels0[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             } else {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels1[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels1[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             }
         }
     } else {
@@ -1846,27 +1874,55 @@ void update_wheel_palette(Player* player, s8 playerId, s8 screenId, s8 arg3) {
             ((player->kartProps & UNUSED_0x800) == 0)) {
 
             if (frameId <= 20) {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels0[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels0[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             } else {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels1[player->characterId][groupId] +
+                                                     (frameId - 21) * (temp_num * 4) + ((temp_t2 >> 8) * temp_num) + 0x600),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels1[player->characterId][groupId] +
                                                      (frameId - 21) * (temp_num * 4) + ((temp_t2 >> 8) * 0x40) + 0x600),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             }
         } else {
             if (frameId == 0) {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels0[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels0[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             } else {
+#ifdef VERSION_CN
+                load_player_data_non_blocking(player,
+                                              (s32) (gKartWheels1[player->characterId][groupId] +
+                                                     (frameId * temp_num * 4) + ((temp_t2 >> 8) * temp_num)),
+                                              D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#else
                 load_player_data_non_blocking(player,
                                               (s32) (gKartWheels1[player->characterId][groupId] +
                                                      (frameId * temp_num * 4) + ((temp_t2 >> 8) * 0x40)),
                                               D_802F1F80_WHEEL(arg3, screenId, playerId), 0x80);
+#endif
             }
         }
     }

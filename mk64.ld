@@ -391,6 +391,13 @@ SECTIONS
       BUILD_DIR/src/player_controller.o(.data*);
       BUILD_DIR/src/spawn_players.o(.data*);
       BUILD_DIR/src/update_objects.o(.data*);
+      #ifdef VERSION_CN
+      /* iQue keeps the three arrays only render_objects.c uses in that object's
+         own .data, immediately after update_objects'. gHudLapTextures has to be
+         defined in the same TU as draw_simplified_lap_count: GAS only folds the
+         trailing lw into the jal's delay slot when the symbol is already known. */
+      BUILD_DIR/src/render_objects.o(.data*);
+      #endif
       BUILD_DIR/ASSET_CODE_DIR/data_800E45C0/data_800E45C0.o(.data*);
       BUILD_DIR/src/code_80057C60.o(.data*);
       BUILD_DIR/src/data/some_data.o(.data*);

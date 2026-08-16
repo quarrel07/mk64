@@ -35,6 +35,24 @@
 #include "courses/all_course_data.h"
 #include <vehicles.h>
 #include "data/some_data.h"
+#ifdef VERSION_CN
+
+/* cn: these three arrays are render_objects.o's whole .data on the cart, sitting
+   directly after update_objects' - see the matching line in mk64.ld. Defining
+   them in this TU is what lets the assembler fill the second call's delay slot
+   in draw_simplified_lap_count. */
+u16* gHudLapTextures[] = { common_texture_hud_lap_1_on_3, common_texture_hud_lap_2_on_3,
+                           common_texture_hud_lap_3_on_3 };
+
+u16* gPortraitTLUTs[] = { common_tlut_portrait_mario, common_tlut_portrait_luigi,       common_tlut_portrait_yoshi,
+                          common_tlut_portrait_toad,  common_tlut_portrait_donkey_kong, common_tlut_portrait_wario,
+                          common_tlut_portrait_peach, common_tlut_portrait_bowser };
+
+u8* gPortraitTextures[] = { common_texture_portrait_mario,       common_texture_portrait_luigi,
+                            common_texture_portrait_yoshi,       common_texture_portrait_toad,
+                            common_texture_portrait_donkey_kong, common_texture_portrait_wario,
+                            common_texture_portrait_peach,       common_texture_portrait_bowser };
+#endif
 
 void func_800431B0(Vec3f pos, Vec3su orientation, f32 scale, Vtx* vtx) {
     rsp_set_matrix_transformation(pos, orientation, scale);
