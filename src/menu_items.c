@@ -12095,6 +12095,10 @@ void func_800A8CA4(MenuItem* arg0) {
     s32 temp_s3;
     s32 var_s0;
     MenuItem* temp_v0;
+#ifdef VERSION_CN
+    /* cn: the box alpha is live in a register across the loop */
+    s32 alpha;
+#endif
 
     temp_v0 = find_menu_items_dupe(MENU_ITEM_TYPE_064);
     temp_s2 = arg0->column;
@@ -12105,12 +12109,22 @@ void func_800A8CA4(MenuItem* arg0) {
     if (gModeSelection == GRAND_PRIX) {
         if (gSubMenuSelection != SUB_MENU_MAP_SELECT_OK) {
             for (var_s0 = 0; var_s0 < 4; var_s0++) {
+#ifdef VERSION_CN
+                alpha = 100;
+                // Wut?
+                if (((temp_v0->param1 % 4) != var_s0) != 0) {
+                    gDisplayListHead =
+                        draw_box(gDisplayListHead, D_800E7208[var_s0][0].column + temp_s2,
+                                 D_800E7208[var_s0][0].row + temp_s3, D_800E7208[var_s0][1].column + temp_s2,
+                                 D_800E7208[var_s0][1].row + temp_s3, 0, 0, 0, alpha);
+#else
                 // Wut?
                 if ((var_s0 != (temp_v0->param1 % 4)) != 0) {
                     gDisplayListHead =
                         draw_box(gDisplayListHead, D_800E7208[var_s0][0].column + temp_s2,
                                  D_800E7208[var_s0][0].row + temp_s3, D_800E7208[var_s0][1].column + temp_s2,
                                  D_800E7208[var_s0][1].row + temp_s3, 0, 0, 0, 0x00000064);
+#endif
                 }
             }
         }
@@ -12852,8 +12866,15 @@ void func_800AA2EC(MenuItem* arg0) {
 
             if (gControllerPak1State != 0) {
                 var_t1 = 0;
+#ifdef VERSION_CN
+                /* cn: the find result shares the local the second switch uses */
+                temp_v0 = osPfsFindFile(&gControllerPak1FileHandle, gCompanyCode, gGameCode, (u8*) gGameName,
+                                      (u8*) gExtCode, &gControllerPak1FileNote);
+                switch (temp_v0) {
+#else
                 switch (osPfsFindFile(&gControllerPak1FileHandle, gCompanyCode, gGameCode, (u8*) gGameName,
                                       (u8*) gExtCode, &gControllerPak1FileNote)) {
+#endif
                     case 5:
                         break;
                     case 0:
