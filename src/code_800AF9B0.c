@@ -179,7 +179,11 @@ void func_800B0004(void) {
     Vtx *vtxs;
     s32 res1;
     s32 res2;
+#ifdef VERSION_CN
+    UNUSED u32 pad[0x3];
+#else
     UNUSED u32 pad[0x4];
+#endif
     s32 i;
     s32 j;
     s32 k;

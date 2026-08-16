@@ -5558,34 +5558,44 @@ void func_8009A238(MenuTexture* arg0, s32 arg1) {
 #endif
 }
 
+#ifdef VERSION_CN
 void func_8009A2F0(struct_8018E0E8_entry* arg0) {
     MenuTexture* var_a0;
-#ifdef VERSION_CN
     s32 atEnd;
-#endif
+    struct_8018E0E8_entry* temp_v0;
+
+    temp_v0 = segmented_to_virtual_dupe_2(arg0);
+    var_a0 = temp_v0->mk64Texture;
+    if (var_a0 != NULL) {
+        /* cn: the second null test runs once ahead of the loop, not inside it */
+        atEnd = (var_a0 == NULL);
+        if (!atEnd) {
+            do {
+                load_menu_img_comp_type(var_a0, LOAD_MENU_IMG_TKMK00_ONCE);
+                temp_v0++;
+                var_a0 = temp_v0->mk64Texture;
+            } while (var_a0 != NULL);
+        }
+    }
+}
+#else
+void func_8009A2F0(struct_8018E0E8_entry* arg0) {
+    MenuTexture* var_a0;
     struct_8018E0E8_entry* temp_v0;
 
     temp_v0 = segmented_to_virtual_dupe_2(arg0);
     var_a0 = temp_v0->mk64Texture;
     while (var_a0 != NULL) {
-#ifdef VERSION_CN
-        /* cn: the cart tests the pointer twice; the result has to land
-           somewhere or EGCS drops the second test */
-        atEnd = (var_a0 == NULL);
-        if (atEnd) {
-            break;
-        }
-#else
         if (var_a0 == NULL) {
             break;
         }
-#endif
         load_menu_img_comp_type(var_a0, LOAD_MENU_IMG_TKMK00_ONCE);
         if (1) {}
         temp_v0++;
         var_a0 = temp_v0->mk64Texture;
     }
 }
+#endif
 
 void func_8009A344(void) {
     s32 index;
@@ -7583,7 +7593,11 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
         case 0x17:
         case MAIN_MENU_TIME_TRIALS_BEGIN:
         case MAIN_MENU_TIME_TRIALS_DATA:
+#ifdef VERSION_CN
+            load_menu_img_comp_type(segmented_to_virtual_dupe(D_800E8254[type - 0x0A]), LOAD_MENU_IMG_TKMK00_ONCE);
+#else
             load_menu_img_comp_type(segmented_to_virtual_dupe(D_800E8274[type - 0x12]), LOAD_MENU_IMG_TKMK00_ONCE);
+#endif
             break;
         case MENU_ITEM_UI_1P_GAME:
         case MENU_ITEM_UI_2P_GAME:
@@ -7734,7 +7748,9 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
             bool var_v1_3;
             UNUSED s32 pad2;
             s32 temp_a3 = type - MENU_ITEM_TYPE_0B1;
+#ifndef VERSION_CN
             UNUSED s32 pad[0x3];
+#endif
             temp_a1 = D_800EFD64[gCharacterSelections[type - MENU_ITEM_TYPE_0B1]];
             var_v1_3 = false;
             switch (gModeSelection) {
@@ -10904,7 +10920,11 @@ void render_menu_item_announce_ghost(MenuItem* arg0) {
 #endif
                                 temp_t1 + 4, 0, 0, 0, 0x00000064);
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+#ifdef VERSION_CN
+    print_text1_center_mode_1(arg0->column + 7, arg0->row, gTextMenuAnnounceGhost, 0, 0.85f, 0.85f);
+#else
     print_text1_center_mode_1(arg0->column - 3, arg0->row, gTextMenuAnnounceGhost, 0, 0.85f, 0.85f);
+#endif
 }
 #endif
 
@@ -13036,22 +13056,28 @@ void render_battle_introduction(UNUSED MenuItem* arg0) {
 }
 #endif
 
-void func_800A8EC0(MenuItem* arg0) {
 #ifdef VERSION_CN
-    /* cn: both scale arguments come from one live float */
+void func_800A8EC0(MenuItem* arg0) {
+    /* cn: one live float feeds both scale arguments, and the column offset
+       is 0x23 where retail uses 0x20 */
     f32 scale = 0.7f;
-#endif
 
     if (arg0->param2 != 0) {
         func_8009A76C(arg0->D_8018DEE0_index, arg0->column, arg0->row, -1);
         set_text_color(TEXT_YELLOW);
-#ifdef VERSION_CN
-        print_text_mode_1(arg0->column + 0x20, arg0->row + 0x28, gCupText[arg0->param2], 0, scale, scale);
-#else
-        print_text_mode_1(arg0->column + 0x20, arg0->row + 0x28, gCupText[arg0->param2], 0, 0.7f, 0.7f);
-#endif
+        print_text_mode_1(arg0->column + 0x23, arg0->row + 0x28, gCupText[arg0->param2], 0, scale, scale);
     }
 }
+#else
+void func_800A8EC0(MenuItem* arg0) {
+
+    if (arg0->param2 != 0) {
+        func_8009A76C(arg0->D_8018DEE0_index, arg0->column, arg0->row, -1);
+        set_text_color(TEXT_YELLOW);
+        print_text_mode_1(arg0->column + 0x20, arg0->row + 0x28, gCupText[arg0->param2], 0, 0.7f, 0.7f);
+    }
+}
+#endif
 
 void func_800A8F48(UNUSED MenuItem* arg0) {
     UNUSED Gfx* temp_v0_2;
