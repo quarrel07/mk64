@@ -3181,11 +3181,20 @@ s32 get_string_width(char* buffer) {
             } else if (glyphIndex == -1) {
                 stringWidth += 7;
             }
+#ifdef VERSION_CN
+            /* cn: a two-byte glyph is detected from the EUC lead byte itself */
+            if ((u8) *buffer < 0xA1) {
+                buffer += 1;
+            } else {
+                buffer += 2;
+            }
+#else
             if (glyphIndex >= 0x30) {
                 buffer += 2;
             } else {
                 buffer += 1;
             }
+#endif
         } while (*buffer != 0);
     }
     return stringWidth;
