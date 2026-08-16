@@ -264,8 +264,13 @@ void func_80044924(u8* texture, s32 width, s32 height) {
                G_TX_NOLOD);
     gDPLoadSync(gDisplayListHead++);
     // The last argument to this macro really should be `CALC_DXT_4b(width)` but that creates a massive diff
+#ifdef VERSION_CN
+    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
+                 CALC_DXT_4b(width));
+#else
     gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
                  ((width / 16) + 2047) / (width / 16));
+#endif
     gDPPipeSync(gDisplayListHead++);
     gDPSetTile(gDisplayListHead++, G_IM_FMT_IA, G_IM_SIZ_4b, (((width >> 1) + 7) >> 3), G_TX_RENDERTILE,
                G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP,
@@ -298,8 +303,13 @@ void func_80044DA0(u8* image, s32 width, s32 height) {
                G_TX_NOLOD);
     gDPLoadSync(gDisplayListHead++);
     // The last argument to this macro really should be `CALC_DXT_4b(width)` but that creates a massive diff
+#ifdef VERSION_CN
+    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
+                 CALC_DXT_4b(width));
+#else
     gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
                  ((width / 16) + 2047) / (width / 16));
+#endif
     gDPPipeSync(gDisplayListHead++);
     gDPSetTile(gDisplayListHead++, G_IM_FMT_I, G_IM_SIZ_4b, (((width >> 1) + 7) >> 3), G_TX_RENDERTILE, G_TX_RENDERTILE,
                0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
@@ -321,8 +331,13 @@ void func_80044F34(u8* image, s32 width, s32 height) {
                G_TX_NOLOD);
     gDPLoadSync(gDisplayListHead++);
     // The last argument to this macro really should be `CALC_DXT_4b(width)` but that creates a massive diff
+#ifdef VERSION_CN
+    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
+                 CALC_DXT_4b(width));
+#else
     gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
                  ((width / 16) + 2047) / (width / 16));
+#endif
     gDPPipeSync(gDisplayListHead++);
     gDPSetTile(gDisplayListHead++, G_IM_FMT_I, G_IM_SIZ_4b, (((width >> 1) + 7) >> 3), G_TX_RENDERTILE, G_TX_RENDERTILE,
                0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK,
@@ -342,9 +357,13 @@ void func_800450C8(u8* image, s32 width, s32 height) {
     gDPSetTile(gDisplayListHead++, G_IM_FMT_I, G_IM_SIZ_16b, 0, G_TX_RENDERTILE, G_TX_LOADTILE, 0,
                G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_MIRROR | G_TX_WRAP, masks, G_TX_NOLOD);
     gDPLoadSync(gDisplayListHead++);
+#ifdef VERSION_CN
+    gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1, CALC_DXT_4b(width));
+#else
     // The last argument to this macro really should be `CALC_DXT_4b(width)` but that creates a massive diff
     gDPLoadBlock(gDisplayListHead++, G_TX_LOADTILE, 0, 0, (((width * height) + 3) >> 2) - 1,
                  ((width / 16) + 2047) / (width / 16));
+#endif
     gDPPipeSync(gDisplayListHead++);
     gDPSetTile(gDisplayListHead++, G_IM_FMT_I, G_IM_SIZ_4b, (((width >> 1) + 7) >> 3), G_TX_RENDERTILE, G_TX_RENDERTILE,
                0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_MIRROR | G_TX_WRAP, masks, G_TX_NOLOD);
@@ -682,9 +701,16 @@ void func_80046F60(u8* tlut, u8* arg1, s32 arg2, s32 arg3, s32 arg4) {
 void func_80047068(u8* tlut, u8* texture, Vtx* arg2, UNUSED s32 arg3, s32 arg4, s32 width, s32 height) {
     s32 heightIndex;
     s32 vertexIndex = 0;
+#ifdef VERSION_CN
+    u8* img;
+#else
     u8* img = texture;
+#endif
 
     gDPLoadTLUT_pal256(gDisplayListHead++, tlut);
+#ifdef VERSION_CN
+    img = texture;
+#endif
     for (heightIndex = 0; heightIndex < arg4 / height; heightIndex++) {
         rsp_load_texture(img, width, height);
         gSPVertex(gDisplayListHead++, &arg2[vertexIndex], 4, 0);
@@ -699,9 +725,16 @@ void draw_rectangle_texture_overlap(u8* tlut, u8* texture, Vtx* arg2, UNUSED s32
                                     s32 height) {
     s32 heightIndex;
     s32 vertexIndex = 0;
+#ifdef VERSION_CN
+    u8* img;
+#else
     u8* img = texture;
+#endif
 
     gDPLoadTLUT_pal256(gDisplayListHead++, tlut);
+#ifdef VERSION_CN
+    img = texture;
+#endif
     for (heightIndex = 0; heightIndex < arg4 / height; heightIndex++) {
         rsp_load_texture(img, width, height);
         gSPVertex(gDisplayListHead++, &arg2[vertexIndex], 4, 0);
@@ -715,9 +748,16 @@ void draw_rectangle_texture_overlap(u8* tlut, u8* texture, Vtx* arg2, UNUSED s32
 void func_8004747C(u8* tlut, u8* texture, Vtx* arg2, UNUSED s32 arg3, s32 arg4, s32 width, s32 height, s32 someMask) {
     s32 heightIndex;
     s32 vertexIndex = 0;
+#ifdef VERSION_CN
+    u8* img;
+#else
     u8* img = texture;
+#endif
 
     gDPLoadTLUT_pal256(gDisplayListHead++, tlut);
+#ifdef VERSION_CN
+    img = texture;
+#endif
     for (heightIndex = 0; heightIndex < arg4 / height; heightIndex++) {
         rsp_load_texture_mask(img, width, height, someMask);
         gSPVertex(gDisplayListHead++, &arg2[vertexIndex], 4, 0);
@@ -731,9 +771,16 @@ void func_8004747C(u8* tlut, u8* texture, Vtx* arg2, UNUSED s32 arg3, s32 arg4, 
 void func_8004768C(u8* tlut, u8* texture, Vtx* arg2, s32 arg3, s32 width, s32 height) {
     s32 heightIndex;
     s32 vertexIndex = 0;
+#ifdef VERSION_CN
+    u8* img;
+#else
     u8* img = texture;
+#endif
 
     gDPLoadTLUT_pal256(gDisplayListHead++, tlut);
+#ifdef VERSION_CN
+    img = texture;
+#endif
     for (heightIndex = 0; heightIndex < arg3 / height; heightIndex++) {
         // Something seems off about arguments here, but if it matches it matches
         rsp_load_texture(img, height, width);
@@ -1344,27 +1391,44 @@ void func_8004A630(Collision* arg0, Vec3f arg1, f32 arg2) {
 }
 
 void func_8004A6EC(s32 objectIndex, f32 scale) {
+#ifndef VERSION_CN
     Object* object;
 
+#endif
     if ((is_obj_flag_status_active(objectIndex, 0x00000020) != 0) &&
         (is_obj_flag_status_active(objectIndex, 0x00800000) != 0)) {
+#ifdef VERSION_CN
+        D_80183E50[0] = gObjectList[objectIndex].pos[0];
+        D_80183E50[1] = gObjectList[objectIndex].surfaceHeight + 0.8;
+        D_80183E50[2] = gObjectList[objectIndex].pos[2];
+        rsp_set_matrix_transformation(D_80183E50, gObjectList[objectIndex].unk_0B8, scale);
+#else
         object = &gObjectList[objectIndex];
         D_80183E50[0] = object->pos[0];
         D_80183E50[1] = object->surfaceHeight + 0.8;
         D_80183E50[2] = object->pos[2];
         rsp_set_matrix_transformation(D_80183E50, object->unk_0B8, scale);
+#endif
         gSPDisplayList(gDisplayListHead++, D_0D007B20);
     }
 }
 
 void func_8004A7AC(s32 objectIndex, f32 arg1) {
+#ifndef VERSION_CN
     Object* object;
 
+#endif
     if (is_obj_flag_status_active(objectIndex, 0x00000020) != 0) {
+#ifdef VERSION_CN
+        D_80183E50[0] = gObjectList[objectIndex].pos[0];
+        D_80183E50[1] = gObjectList[objectIndex].surfaceHeight + 0.8;
+        D_80183E50[2] = gObjectList[objectIndex].pos[2];
+#else
         object = &gObjectList[objectIndex];
         D_80183E50[0] = object->pos[0];
         D_80183E50[1] = object->surfaceHeight + 0.8;
         D_80183E50[2] = object->pos[2];
+#endif
         D_80183E98[0] = 0x4000;
         D_80183E98[1] = 0;
         D_80183E98[2] = 0;
@@ -1375,15 +1439,24 @@ void func_8004A7AC(s32 objectIndex, f32 arg1) {
 
 void func_8004A870(s32 objectIndex, f32 arg1) {
     Mat4 sp30;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     if ((is_obj_flag_status_active(objectIndex, 0x00000020) != 0) &&
         (is_obj_flag_status_active(objectIndex, 0x00800000) != 0)) {
+#ifdef VERSION_CN
+        D_80183E50[0] = gObjectList[objectIndex].pos[0];
+        D_80183E50[1] = gObjectList[objectIndex].surfaceHeight + 0.8;
+        D_80183E50[2] = gObjectList[objectIndex].pos[2];
+        set_transform_matrix(sp30, gObjectList[objectIndex].unk_01C, D_80183E50, 0U, arg1);
+#else
         object = &gObjectList[objectIndex];
         D_80183E50[0] = object->pos[0];
         D_80183E50[1] = object->surfaceHeight + 0.8;
         D_80183E50[2] = object->pos[2];
         set_transform_matrix(sp30, object->unk_01C, D_80183E50, 0U, arg1);
+#endif
         convert_to_fixed_point_matrix(&gGfxPool->mtxHud[gMatrixHudCount], sp30);
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxHud[gMatrixHudCount++]),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -1567,6 +1640,7 @@ void func_8004B72C(u32 primRed, u32 primGreen, u32 primBlue, u32 envRed, u32 env
 
 void render_texture_rectangle(s32 x, s32 y, s32 width, s32 height, s32 s, s32 w, s32 mode) {
 
+#ifndef VERSION_CN
     s32 xh = (((x + width) - 1) << 2);
     s32 yh = (((y + height) - 1) << 2);
     s32 xl = ((x * 4));
@@ -1575,13 +1649,24 @@ void render_texture_rectangle(s32 x, s32 y, s32 width, s32 height, s32 s, s32 w,
     s32 xh2 = (((x + width)) << 2);
     s32 yh2 = ((y + height) << 2);
 
+#endif
     // If no cycle mode is set, render texture rectangle in copy mode
     if (mode == 0) {
+#ifdef VERSION_CN
+        gSPTextureRectangle(gDisplayListHead++, x * 4, y * 4, ((x + width) - 1) << 2, ((y + height) - 1) << 2,
+                            G_TX_RENDERTILE, s << 5, (w << 5), 4 << 10, 1 << 10);
+#else
         gSPTextureRectangle(gDisplayListHead++, xl, yl, xh, yh, G_TX_RENDERTILE, s << 5, (w << 5), 4 << 10, 1 << 10);
+#endif
         return;
     }
     // Render texture rectangle in default cycle mode (1 cycle or 2 cycle)
+#ifdef VERSION_CN
+    gSPTextureRectangle(gDisplayListHead++, x * 4, y * 4, (x + width) << 2, (y + height) << 2, G_TX_RENDERTILE,
+                        s << 5, (w << 5), 1 << 10, 1 << 10);
+#else
     gSPTextureRectangle(gDisplayListHead++, xl, yl, xh2, yh2, G_TX_RENDERTILE, s << 5, (w << 5), 1 << 10, 1 << 10);
+#endif
 }
 
 void render_texture_rectangle_wrap(s32 x, s32 y, s32 width, s32 height, s32 mode) {
@@ -1685,6 +1770,10 @@ void func_8004BB3C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     s32 var_t1;
     s32 xl;
     s32 yl;
+#ifdef VERSION_CN
+    s32 xh;
+    s32 yh;
+#endif
     UNUSED s32 thing0;
     UNUSED s32 thing1;
 
@@ -1692,22 +1781,41 @@ void func_8004BB3C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     var_t1 = (arg3 * 4 * arg4) + 0.5;
     xl = (arg0 * 4) - (var_t0 / 2);
     yl = (arg1 * 4) - (var_t1 / 2);
+#ifdef VERSION_CN
+    temp_t9 = (1024.0f / arg4) + 0.5;
+#endif
     if (-var_t0 < xl) {
         t = 0;
         if (-var_t1 < yl) {
             s = 0;
             if (xl < 0) {
-                var_t0 += xl;
+#ifdef VERSION_CN
                 s = (-xl * 8) / arg4;
+#endif
+                var_t0 += xl;
+#ifndef VERSION_CN
+                s = (-xl * 8) / arg4;
+#endif
                 xl = 0;
             }
             if (yl < 0) {
-                var_t1 += yl;
+#ifdef VERSION_CN
                 t = (-yl * 8) / arg4;
+#endif
+                var_t1 += yl;
+#ifndef VERSION_CN
+                t = (-yl * 8) / arg4;
+#endif
                 yl = 0;
             }
+#ifdef VERSION_CN
+            xh = xl + var_t0;
+            yh = yl + var_t1;
+            gSPTextureRectangle(gDisplayListHead++, xl, yl, xh, yh, 0, s, t, temp_t9, temp_t9);
+#else
             temp_t9 = (1024.0f / arg4) + 0.5;
             gSPTextureRectangle(gDisplayListHead++, xl, yl, xl + var_t0, yl + var_t1, 0, s, t, temp_t9, temp_t9);
+#endif
         }
     }
 }
@@ -1775,39 +1883,75 @@ UNUSED void func_8004C35C() {
 }
 
 void draw_hud_2d_texture(s32 x, s32 y, u32 width, u32 height, u8* texture) {
+#ifdef VERSION_CN
+    s32 posX = x - (width >> 1);
+    s32 posY = y - (height >> 1);
+
+#endif
     gSPDisplayList(gDisplayListHead++, D_0D008108);
     gSPDisplayList(gDisplayListHead++, D_0D007EF8);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
     load_texture_block_rgba16_mirror(texture, width, height);
+#ifdef VERSION_CN
+    func_8004B97C(posX, posY, width, height, 0);
+#else
     func_8004B97C(x - (width >> 1), y - (height >> 1), width, height, 0);
+#endif
     gSPDisplayList(gDisplayListHead++, D_0D007EB8);
 }
 
 void func_8004C450(s32 x, s32 y, u32 width, u32 height, u8* texture) {
+#ifdef VERSION_CN
+    s32 centerX;
+    s32 centerY;
+
+    centerX = x - (width >> 1);
+    centerY = y - (height >> 1);
+#endif
 
     gSPDisplayList(gDisplayListHead++, D_0D007F38);
     func_8004B614(D_801656C0, D_801656D0, D_801656E0, 0x80, 0x80, 0x80, 0xFF);
     load_texture_block_rgba16_mirror(texture, width, height);
+#ifdef VERSION_CN
+    func_8004B97C(centerX, centerY, width, height, 1);
+#else
     func_8004B97C(x - (width >> 1), y - (height >> 1), width, height, 1);
+#endif
     gSPDisplayList(gDisplayListHead++, D_0D007EB8);
 }
 
 UNUSED void func_8004C53C(s32 arg0, s32 arg1, u32 arg2, u32 arg3, u8* texture) {
+#ifdef VERSION_CN
+    s32 posX = arg0 - (arg2 >> 1);
+    s32 posY = arg1 - (arg3 >> 1);
+#endif
 
     gSPDisplayList(gDisplayListHead++, D_0D008108);
     gSPDisplayList(gDisplayListHead++, D_0D007EF8);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
     load_texture_tile_rgba16_nomirror(texture, arg2, arg3);
+#ifdef VERSION_CN
+    func_8004B97C(posX, posY, arg2, arg3, 0);
+#else
     func_8004B97C(arg0 - (arg2 >> 1), arg1 - (arg3 >> 1), arg2, arg3, 0);
+#endif
     gSPDisplayList(gDisplayListHead++, D_0D007EB8);
 }
 
 void func_8004C628(s32 arg0, s32 arg1, u32 arg2, u32 arg3, u8* texture) {
+#ifdef VERSION_CN
+    s32 posX = arg0 - (arg2 >> 1);
+    s32 posY = arg1 - (arg3 >> 1);
+#endif
 
     gSPDisplayList(gDisplayListHead++, D_0D007EF8);
     gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
     load_texture_block_rgba32_nomirror(texture, arg2, arg3);
+#ifdef VERSION_CN
+    func_8004B97C(posX, posY, arg2, arg3, 1);
+#else
     func_8004B97C(arg0 - (arg2 >> 1), arg1 - (arg3 >> 1), arg2, arg3, 1);
+#endif
     gSPDisplayList(gDisplayListHead++, D_0D007EB8);
 }
 
@@ -2043,15 +2187,26 @@ void func_8004D210(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4, s32 arg5
     s32 var_s3;
     u8* img;
     s32 i;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     var_s3 = arg1 - (arg8 / 2);
     img = texture;
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
+#ifdef VERSION_CN
+    /* cn: the column is computed once, ahead of the loop */
+    column = arg0 - (width / 2);
+#endif
     func_8004B35C(arg3, arg4, arg5, arg6);
 
     for (i = 0; i < arg8 / height; i++) {
         func_80044924(img, width, height);
+#ifdef VERSION_CN
+        func_8004B97C(column, var_s3, width, height, 1);
+#else
         func_8004B97C(arg0 - (width / 2), var_s3, width, height, 1);
+#endif
         img += (width * height) / 2;
         var_s3 += height;
     }
@@ -2062,15 +2217,26 @@ void func_8004D37C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4, s32 arg5
     s32 var_s3;
     u8* img;
     s32 i;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     var_s3 = arg1 - (arg8 / 2);
     img = texture;
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
+#ifdef VERSION_CN
+    /* cn: the column is computed once, ahead of the loop */
+    column = arg0 - (width / 2);
+#endif
     func_8004B414(arg3, arg4, arg5, arg6);
 
     for (i = 0; i < arg8 / height; i++) {
         func_80044F34(img, width, height);
+#ifdef VERSION_CN
+        func_8004B97C(column, var_s3, width, height, 1);
+#else
         func_8004B97C(arg0 - (width / 2), var_s3, width, height, 1);
+#endif
         img += (width * height) / 2;
         var_s3 += height;
     }
@@ -2081,15 +2247,26 @@ void func_8004D4E8(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4, s32 arg5
     s32 var_s3;
     u8* img;
     s32 i;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     var_s3 = arg1 - (arg8 / 2);
     img = texture;
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
+#ifdef VERSION_CN
+    /* cn: the column is computed once, ahead of the loop */
+    column = arg0 - (width / 2);
+#endif
     func_8004B414(arg3, arg4, arg5, arg6);
 
     for (i = 0; i < arg8 / height; i++) {
         func_800450C8(img, width, height);
+#ifdef VERSION_CN
+        func_8004BA08(column, var_s3, width, height, 1);
+#else
         func_8004BA08(arg0 - (width / 2), var_s3, width, height, 1);
+#endif
         img += (width * height) / 2;
         var_s3 += height;
     }
@@ -2114,7 +2291,11 @@ void func_8004D654(s32 arg0, s32 arg1, u8* texture, f32 arg3, s32 arg4, s32 arg5
 }
 
 void func_8004D7B4(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
+#ifdef VERSION_CN
+    s32 base;
+#else
     s32 sp5C;
+#endif
     f32 temp_f20;
     s16 temp_s7;
     s16 var_s1;
@@ -2122,28 +2303,47 @@ void func_8004D7B4(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
     s32 temp_s5;
     s32 var_s3;
     u8* img;
+#ifndef VERSION_CN
     UNUSED s32 test[3];
+#endif
     s32 i;
 
     D_801656B0 += D_80165710;
-    temp_f20 = D_8018D00C;
+#ifdef VERSION_CN
+    base = arg0 - (arg3 / 2);
     temp_s7 = D_80165708;
+#endif
+    temp_f20 = D_8018D00C;
+#ifndef VERSION_CN
+    temp_s7 = D_80165708;
+#endif
     var_s1 = D_801656B0;
     img = texture;
     var_s3 = arg1 - (arg4 / 2);
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
 
+#ifndef VERSION_CN
     sp5C = arg3 * 2;
+#endif
     for (i = 0; i < arg4; i++) {
         temp_s0 = var_s1;
+#ifdef VERSION_CN
+        temp_s5 = (s32) ((f32) base + (temp_f20 * sins(temp_s0)));
+#else
         temp_s5 = (s32) ((sins(temp_s0) * temp_f20) + (f32) (arg0 - (arg3 / 2)));
+#endif
         sins(temp_s0);
         load_texture_block_ia16_nomirror(img, arg3, 1);
         func_8004B97C(temp_s5, var_s3, arg3, 1, 1);
 
         var_s1 += temp_s7;
+#ifdef VERSION_CN
+        img += arg3 * 2;
+#endif
         var_s3 += 1;
+#ifndef VERSION_CN
         img += sp5C;
+#endif
     }
 }
 
@@ -2157,20 +2357,35 @@ void func_8004D93C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
     u8* img;
     s32 i;
     s32 var;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     D_801656B0 += D_80165710;
-    temp_f20 = D_8018D00C;
+#ifdef VERSION_CN
     temp_s7 = D_80165708;
+#endif
+    temp_f20 = D_8018D00C;
+#ifndef VERSION_CN
+    temp_s7 = D_80165708;
+#endif
     var_s1 = D_801656B0;
     img = texture;
     var = arg3 / 2;
     var_s4 = arg1 - (arg4 / 2);
+#ifdef VERSION_CN
+    column = arg0 - var;
+#endif
 
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
 
     for (i = 0; i < arg4; i++) {
         temp_s0 = var_s1;
+#ifdef VERSION_CN
+        temp_s6 = (s32) ((f32) (column) + (temp_f20 * sins(temp_s0)));
+#else
         temp_s6 = (s32) ((sins(temp_s0) * temp_f20) + (f32) (arg0 - (var)));
+#endif
         sins(temp_s0);
         load_texture_block_ia8_nomirror(img, arg3, 1);
         func_8004B97C(temp_s6, var_s4, arg3, 1, 1);
@@ -2190,19 +2405,34 @@ UNUSED void func_8004DAB8(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
     s32 var_s4;
     s32 var;
     s32 i;
+#ifdef VERSION_CN
+    s32 temp;
+#endif
 
     D_801656B0 += D_80165710;
-    temp_f20 = D_8018D00C;
+#ifdef VERSION_CN
     temp_s7 = D_80165708;
+#endif
+    temp_f20 = D_8018D00C;
+#ifndef VERSION_CN
+    temp_s7 = D_80165708;
+#endif
     var_s1 = (s16) D_801656B0;
     img = texture;
     var = arg3 / 2;
+#ifdef VERSION_CN
+    temp = arg0 - var;
+#endif
     var_s4 = arg1 - (arg4 / 2);
 
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
     for (i = 0; i < arg4; i++) {
         temp_s0 = var_s1;
+#ifdef VERSION_CN
+        temp_s6 = (s32) ((f32) temp + (temp_f20 * sins(temp_s0)));
+#else
         temp_s6 = (s32) ((sins(temp_s0) * temp_f20) + (f32) (arg0 - (var)));
+#endif
         sins(temp_s0);
         func_80044924(img, arg3, 1);
         func_8004B97C(temp_s6, var_s4, arg3, 1, 1);
@@ -2310,18 +2540,33 @@ void func_8004E06C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
     u32 temp_s6;
     s32 i;
     s32 var;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     D_801656B0 += D_80165710;
+#ifdef VERSION_CN
+    temp_s7 = D_80165708;
+#endif
     temp_f20 = D_8018D00C;
     var_s1 = (s16) D_801656B0;
+#ifndef VERSION_CN
     temp_s7 = D_80165708;
+#endif
     img = texture;
     var = arg3 / 2;
     var_s4 = arg1 - (arg4 / 2);
+#ifdef VERSION_CN
+    column = arg0 - var;
+#endif
 
     for (i = 0; i < arg4; i++) {
         temp_s0 = var_s1;
+#ifdef VERSION_CN
+        temp_s6 = (u32) ((f32) (column) + (temp_f20 * sins(temp_s0)));
+#else
         temp_s6 = (u32) ((sins(temp_s0) * temp_f20) + (f32) (arg0 - var));
+#endif
         sins(temp_s0);
         rsp_load_texture(img, arg3, 1);
         func_8004B97C(temp_s6, var_s4, arg3, 1, 1);
@@ -2408,30 +2653,54 @@ UNUSED void func_8004E604(s32 arg0, s32 arg1, u8* tlut, u8* texture) {
 
 void draw_item_window(s32 playerId) {
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
     hud_player* temp_v0;
 
     objectIndex = gItemWindowObjectByPlayerId[playerId];
+#ifdef VERSION_CN
+    if (gObjectList[objectIndex].state >= 2) {
+#else
     object = &gObjectList[objectIndex];
     if (object->state >= 2) {
+#endif
         temp_v0 = &playerHUD[playerId];
+#ifdef VERSION_CN
+        func_8004E4CC(temp_v0->itemBoxX + temp_v0->slideItemBoxX, temp_v0->itemBoxY + temp_v0->slideItemBoxY,
+                      (u8*) gObjectList[objectIndex].activeTLUT, gObjectList[objectIndex].activeTexture);
+#else
         func_8004E4CC(temp_v0->slideItemBoxX + temp_v0->itemBoxX, temp_v0->slideItemBoxY + temp_v0->itemBoxY,
                       (u8*) object->activeTLUT, object->activeTexture);
+#endif
     }
 }
 
 void func_8004E6C4(s32 playerId) {
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
     hud_player* temp_v0;
 
     objectIndex = gItemWindowObjectByPlayerId[playerId];
+#ifdef VERSION_CN
+    if (gObjectList[objectIndex].state >= 2) {
+#else
     object = &gObjectList[objectIndex];
     if (object->state >= 2) {
+#endif
         temp_v0 = &playerHUD[playerId];
+#ifdef VERSION_CN
+        func_80047910(temp_v0->itemBoxX + temp_v0->slideItemBoxX, temp_v0->itemBoxY + temp_v0->slideItemBoxY, 0U,
+                      temp_v0->unknownScaling, (u8*) gObjectList[objectIndex].activeTLUT,
+                      (u8*) gObjectList[objectIndex].activeTexture, D_0D005C30, 0x00000028, 0x00000020, 0x00000028,
+                      0x00000020);
+#else
         func_80047910(temp_v0->slideItemBoxX + temp_v0->itemBoxX, temp_v0->slideItemBoxY + temp_v0->itemBoxY, 0U,
                       temp_v0->unknownScaling, (u8*) object->activeTLUT, (u8*) object->activeTexture, D_0D005C30,
                       0x00000028, 0x00000020, 0x00000028, 0x00000020);
+#endif
     }
 }
 
@@ -2506,6 +2775,13 @@ void func_8004EB30(UNUSED s32 arg0) {
 #endif
 
 void func_8004EB38(s32 playerId) {
+#ifdef VERSION_CN
+    if ((u8) playerHUD[playerId].unk_7B != 0) {
+        func_8004C9D8(playerHUD[playerId].lap1CompletionTimeX - 0x13, playerHUD[playerId].timerY + 8, 0x00000080,
+                      (u8*) common_texture_hud_time, 0x00000020, 0x00000010, 0x00000020, 0x00000010);
+        func_8004F950((s32) playerHUD[playerId].lap1CompletionTimeX, (s32) playerHUD[playerId].timerY, 0x00000080,
+                      (s32) playerHUD[playerId].someTimer);
+#else
     hud_player* temp_s0;
 
     temp_s0 = &playerHUD[playerId];
@@ -2513,23 +2789,46 @@ void func_8004EB38(s32 playerId) {
         func_8004C9D8(temp_s0->lap1CompletionTimeX - 0x13, temp_s0->timerY + 8, 0x00000080,
                       (u8*) common_texture_hud_time, 0x00000020, 0x00000010, 0x00000020, 0x00000010);
         func_8004F950((s32) temp_s0->lap1CompletionTimeX, (s32) temp_s0->timerY, 0x00000080, (s32) temp_s0->someTimer);
+#endif
     }
+#ifdef VERSION_CN
+    if ((u8) playerHUD[playerId].unk_7C != 0) {
+        func_8004C9D8(playerHUD[playerId].lap2CompletionTimeX - 0x13, playerHUD[playerId].timerY + 8, 0x00000050,
+                      (u8*) common_texture_hud_time, 0x00000020, 0x00000010, 0x00000020, 0x00000010);
+        func_8004F950((s32) playerHUD[playerId].lap2CompletionTimeX, (s32) playerHUD[playerId].timerY, 0x00000050,
+                      (s32) playerHUD[playerId].someTimer);
+#else
     if ((u8) temp_s0->unk_7C != 0) {
         func_8004C9D8(temp_s0->lap2CompletionTimeX - 0x13, temp_s0->timerY + 8, 0x00000050,
                       (u8*) common_texture_hud_time, 0x00000020, 0x00000010, 0x00000020, 0x00000010);
         func_8004F950((s32) temp_s0->lap2CompletionTimeX, (s32) temp_s0->timerY, 0x00000050, (s32) temp_s0->someTimer);
+#endif
     }
+#ifdef VERSION_CN
+    if ((u8) playerHUD[playerId].unk_7E != 0) {
+        func_8004C9D8((s32) playerHUD[playerId].lapAfterImage1X, (s32) playerHUD[playerId].lapY, 0x00000080,
+                      (u8*) gHudLapTextures[playerHUD[playerId].alsoLapCount], 0x00000020, 0x00000010, 0x00000020,
+                      0x00000010);
+#else
     if ((u8) temp_s0->unk_7E != 0) {
         func_8004C9D8((s32) temp_s0->lapAfterImage1X, temp_s0->lapY + 3, 0x00000080, (u8*) common_texture_hud_lap,
                       0x00000020, 8, 0x00000020, 8);
         func_8004C9D8(temp_s0->lapAfterImage1X + 0x1C, (s32) temp_s0->lapY, 0x00000080,
                       (u8*) gHudLapTextures[temp_s0->alsoLapCount], 0x00000020, 0x00000010, 0x00000020, 0x00000010);
+#endif
     }
+#ifdef VERSION_CN
+    if ((u8) playerHUD[playerId].unk_7F != 0) {
+        func_8004C9D8((s32) playerHUD[playerId].lapAfterImage2X, (s32) playerHUD[playerId].lapY, 0x00000050,
+                      (u8*) gHudLapTextures[playerHUD[playerId].alsoLapCount], 0x00000020, 0x00000010, 0x00000020,
+                      0x00000010);
+#else
     if ((u8) temp_s0->unk_7F != 0) {
         func_8004C9D8((s32) temp_s0->lapAfterImage2X, temp_s0->lapY + 3, 0x00000050, (u8*) common_texture_hud_lap,
                       0x00000020, 8, 0x00000020, 8);
         func_8004C9D8(temp_s0->lapAfterImage2X + 0x1C, (s32) temp_s0->lapY, 0x00000050,
                       (u8*) gHudLapTextures[temp_s0->alsoLapCount], 0x00000020, 0x00000010, 0x00000020, 0x00000010);
+#endif
     }
 }
 
@@ -2742,19 +3041,43 @@ void print_timer_rainbow(s32 arg0, s32 arg1, s32 arg2) {
 
 void render_hud_timer(s32 playerId) {
     s32 var_s0;
+#ifdef VERSION_CN
+    s32 next;
+#endif
 
     if ((gModeSelection != 2) && (gModeSelection != 3)) {
+#ifdef VERSION_CN
+        if (playerHUD[playerId].lapCount == D_8018D320) {
+#else
         if (D_8018D320 == playerHUD[playerId].lapCount) {
+#endif
             if (D_8015F890 == 0) {
+#ifdef VERSION_CN
+                for (var_s0 = 0; var_s0 < 3; var_s0 = next) {
+                    next = var_s0 + 1;
+#else
                 for (var_s0 = 0; var_s0 < 3; var_s0++) {
+#endif
                     if (D_80165658[var_s0] == 0) {
+#ifdef VERSION_CN
+                        print_timer((&playerHUD[playerId].lapCompletionTimeXs[next])[-1],
+                                    playerHUD[playerId].timerY + (var_s0 * 0x10),
+                                    playerHUD[playerId].lapDurations[var_s0]);
+#else
                         print_timer(playerHUD[playerId].lapCompletionTimeXs[var_s0],
                                     playerHUD[playerId].timerY + (var_s0 * 0x10),
                                     playerHUD[playerId].lapDurations[var_s0]);
+#endif
                     } else {
+#ifdef VERSION_CN
+                        print_timer_rainbow((&playerHUD[playerId].lapCompletionTimeXs[next])[-1],
+                                            playerHUD[playerId].timerY + (var_s0 * 0x10),
+                                            playerHUD[playerId].lapDurations[var_s0]);
+#else
                         print_timer_rainbow(playerHUD[playerId].lapCompletionTimeXs[var_s0],
                                             playerHUD[playerId].timerY + (var_s0 * 0x10),
                                             playerHUD[playerId].lapDurations[var_s0]);
+#endif
                     }
                 }
                 draw_hud_2d_texture_32x16(playerHUD[playerId].totalTimeX - 0x13, playerHUD[playerId].timerY + 0x38,
@@ -2773,6 +3096,13 @@ void render_hud_timer(s32 playerId) {
                                           (u8*) common_texture_hud_time);
                 print_timer(playerHUD[playerId].timerX, playerHUD[playerId].timerY, playerHUD[playerId].someTimer);
             } else {
+#ifdef VERSION_CN
+                if (D_801657E3 == 0) {
+                    if (playerHUD[playerId].blinkState == 0) {
+                        print_timer(playerHUD[playerId].timerX, playerHUD[playerId].timerY,
+                                    playerHUD[playerId].someTimer1);
+                    }
+#else
                 draw_hud_2d_texture_32x16(playerHUD[playerId].timerX - 0x13, playerHUD[playerId].timerY + 8,
                                           (u8*) common_texture_hud_lap_time);
                 if (D_801657E3 != 0) {
@@ -2780,6 +3110,7 @@ void render_hud_timer(s32 playerId) {
                                         playerHUD[playerId].someTimer1);
                 } else if (playerHUD[playerId].blinkState == 0) {
                     print_timer(playerHUD[playerId].timerX, playerHUD[playerId].timerY, playerHUD[playerId].someTimer1);
+#endif
                 }
             }
         }
@@ -2978,6 +3309,9 @@ void func_800508C0(void) {
     u16 var_s0_2;
     u16 var_s1;
     u16 var_s2;
+#ifdef VERSION_CN
+    u16 alpha;
+#endif
 
     if (gModeSelection == TIME_TRIALS) {
         var_s0 = gPrevPlayerIdByRank[0];
@@ -2991,21 +3325,37 @@ void func_800508C0(void) {
             var_s0_2 = 0;
             var_s1 = 0;
             var_s2 = 0x000000FF;
+#ifdef VERSION_CN
+            alpha = 0x000000FF;
+#endif
         } else {
             if (temp_v1 == 2) {
                 var_s0_2 = 0x00FF;
                 var_s1 = 0x000000FF;
                 var_s2 = 0;
+#ifdef VERSION_CN
+                alpha = 0x000000FF;
+#endif
             } else {
                 var_s0_2 = 0x00FF;
                 var_s1 = 0;
                 var_s2 = 0;
+#ifdef VERSION_CN
+                alpha = 0x000000FF;
+#endif
             }
         }
+#ifdef VERSION_CN
+        func_8004C024(0x0020, 0x0012, 0x0104, var_s0_2, var_s1, var_s2, alpha);
+        func_8004C148(0x0124, 0x0012, 0x00CC, var_s0_2, var_s1, var_s2, alpha);
+        func_8004C024(0x0020, 0x00DE, 0x0104, var_s0_2, var_s1, var_s2, alpha);
+        func_8004C148(0x0020, 0x0012, 0x00CC, var_s0_2, var_s1, var_s2, alpha);
+#else
         func_8004C024(0x0020, 0x0012, 0x0104, var_s0_2, var_s1, var_s2, 0x000000FF);
         func_8004C148(0x0124, 0x0012, 0x00CC, var_s0_2, var_s1, var_s2, 0x000000FF);
         func_8004C024(0x0020, 0x00DE, 0x0104, var_s0_2, var_s1, var_s2, 0x000000FF);
         func_8004C148(0x0020, 0x0012, 0x00CC, var_s0_2, var_s1, var_s2, 0x000000FF);
+#endif
     }
     if ((temp_v1 < 0) || (temp_v1 >= 3)) {
         return;
@@ -3083,7 +3433,11 @@ void func_80050E34(s32 playerId, s32 arg1) {
     s32 characterId;
     s32 spB8;
     s32 temp_v0_2;
+#ifdef VERSION_CN
+    s32 rank;
+#else
     Object* object;
+#endif
     Player *player = &gPlayerOne[playerId];
 
     lapCount = gLapCountByPlayerId[playerId];
@@ -3107,11 +3461,18 @@ void func_80050E34(s32 playerId, s32 arg1) {
         gSPDisplayList(gDisplayListHead++, D_0D007DB8);
         gDPLoadTLUT_pal256(gDisplayListHead++, common_tlut_portrait_bomb_kart_and_question_mark);
         rsp_load_texture(common_texture_portrait_question_mark, 0x00000020, 0x00000020);
+#ifdef VERSION_CN
+        gObjectList[objectIndex].pos[0] = ((f32) (spD0 + 0x20)) + gObjectList[objectIndex].offset[0];
+        gObjectList[objectIndex].pos[1] = ((f32) (spC4 + spCC)) + gObjectList[objectIndex].offset[1];
+        gObjectList[objectIndex].pos[2] = gObjectList[objectIndex].offset[2];
+        rsp_set_matrix_transformation(gObjectList[objectIndex].pos, gObjectList[objectIndex].direction_angle, gObjectList[objectIndex].sizeScaling);
+#else
         object = &gObjectList[objectIndex];
         object->pos[0] = object->offset[0] + ((f32) (spD0 + 0x20));
         object->pos[1] = object->offset[1] + ((f32) (spC4 + spCC));
         object->pos[2] = object->offset[2];
         rsp_set_matrix_transformation(object->pos, object->direction_angle, object->sizeScaling);
+#endif
         gSPDisplayList(gDisplayListHead++, D_0D0069E0);
     } else {
         gDPLoadTLUT_pal256(gDisplayListHead++, gPortraitTLUTs[characterId]);
@@ -3123,18 +3484,30 @@ void func_80050E34(s32 playerId, s32 arg1) {
             set_transparency((s32) gObjectList[objectIndex].primAlpha);
         }
         rsp_load_texture(gPortraitTextures[characterId], 0x00000020, 0x00000020);
+#ifdef VERSION_CN
+        gObjectList[objectIndex].pos[0] = ((f32) (spD0 + 0x20)) + gObjectList[objectIndex].offset[0];
+        gObjectList[objectIndex].pos[1] = ((f32) (spC4 + spCC)) + gObjectList[objectIndex].offset[1];
+        gObjectList[objectIndex].pos[2] = gObjectList[objectIndex].offset[2];
+        rsp_set_matrix_transformation(gObjectList[objectIndex].pos, gObjectList[objectIndex].direction_angle, gObjectList[objectIndex].sizeScaling);
+#else
         object = &gObjectList[objectIndex];
         object->pos[0] = object->offset[0] + ((f32) (spD0 + 0x20));
         object->pos[1] = object->offset[1] + ((f32) (spC4 + spCC));
         object->pos[2] = object->offset[2];
         rsp_set_matrix_transformation(object->pos, object->direction_angle, object->sizeScaling);
+#endif
         if (spB8 != 0) {
             gSPDisplayList(gDisplayListHead++, D_0D0069F8);
         } else {
             gSPDisplayList(gDisplayListHead++, D_0D0069E0);
         }
         gDPLoadTLUT_pal256(gDisplayListHead++, common_tlut_hud_type_C_rank_tiny_font);
+#ifdef VERSION_CN
+        rank = arg1 + 1;
+        rsp_load_texture(common_texture_hud_type_C_rank_tiny_font[rank], 8, 8);
+#else
         rsp_load_texture(common_texture_hud_type_C_rank_tiny_font[arg1 + 1], 8, 8);
+#endif
         if (spB8 != 0) {
             func_80042330(spD0 + 0x26, (spC4 + spCC) + 4, 0U, 1.0f);
         } else {
@@ -3145,7 +3518,11 @@ void func_80050E34(s32 playerId, s32 arg1) {
             gSPDisplayList(gDisplayListHead++, D_0D007A40);
             func_8004B35C(D_8018D3E4, D_8018D3E8, D_8018D3EC, 0x000000FF);
             func_80044924(common_texture_character_portrait_border, 0x00000020, 0x00000020);
+#ifdef VERSION_CN
+            rsp_set_matrix_transformation(gObjectList[objectIndex].pos, gObjectList[objectIndex].direction_angle, gObjectList[objectIndex].sizeScaling);
+#else
             rsp_set_matrix_transformation(object->pos, object->direction_angle, object->sizeScaling);
+#endif
             gSPDisplayList(gDisplayListHead++, D_0D0069E0);
         }
     }
@@ -3250,23 +3627,39 @@ void func_800519D4(s32 objectIndex, s16 arg1, s16 arg2) {
 void func_80051ABC(s16 arg0, s32 arg1) {
     s32 var_s0;
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     D_8018D228 = 0xFF;
     gSPDisplayList(gDisplayListHead++, D_0D007A60);
+#ifdef VERSION_CN
+    if ((D_8018D230 & 0xFF) != 0) {
+#else
     if ((u8) D_8018D230 != 0) {
+#endif
         func_8004B414(0x000000FF, 0x000000FF, 0x000000FF, 0x000000FF);
         for (var_s0 = 0; var_s0 < D_8018D1F0; var_s0++) {
+#ifdef VERSION_CN
+            objectIndex = D_8018CC80[var_s0 + arg1];
+            func_800519D4(objectIndex, gObjectList[objectIndex].unk_09C, arg0 - gObjectList[objectIndex].unk_09E);
+#else
             objectIndex = D_8018CC80[arg1 + var_s0];
             object = &gObjectList[objectIndex];
             func_800519D4(objectIndex, object->unk_09C, arg0 - object->unk_09E);
+#endif
         }
     } else {
         func_8004B6C4(0x000000FF, 0x000000FF, 0x000000FF);
         for (var_s0 = 0; var_s0 < D_8018D1F0; var_s0++) {
+#ifdef VERSION_CN
+            objectIndex = D_8018CC80[var_s0 + arg1];
+            func_800518F8(objectIndex, gObjectList[objectIndex].unk_09C, arg0 - gObjectList[objectIndex].unk_09E);
+#else
             objectIndex = D_8018CC80[arg1 + var_s0];
             object = &gObjectList[objectIndex];
             func_800518F8(objectIndex, object->unk_09C, arg0 - object->unk_09E);
+#endif
         }
     }
 }
@@ -3294,19 +3687,35 @@ void func_80051C60(s16 arg0, s32 arg1) {
     }
     D_8018D228 = 0xFF;
     gSPDisplayList(gDisplayListHead++, D_0D007A60);
+#ifdef VERSION_CN
+    if (*(u8*) &D_8018D230 != 0) {
+#else
     if ((u8) D_8018D230 != 0) {
+#endif
         func_8004B414(0x000000FF, 0x000000FF, 0x000000FF, 0x000000FF);
         for (var_s0 = 0; var_s0 < D_8018D1F0; var_s0++) {
+#ifdef VERSION_CN
+            objectIndex = D_8018CC80[var_s0 + arg1];
+            func_800519D4(objectIndex, gObjectList[objectIndex].unk_09C,
+                          (var_s5 - gObjectList[objectIndex].unk_09E) / 2);
+#else
             objectIndex = D_8018CC80[arg1 + var_s0];
             object = &gObjectList[objectIndex];
             func_800519D4(objectIndex, object->unk_09C, (var_s5 - object->unk_09E) / 2);
+#endif
         }
     } else {
         func_8004B6C4(0x000000FF, 0x000000FF, 0x000000FF);
         for (var_s0 = 0; var_s0 < D_8018D1F0; var_s0++) {
+#ifdef VERSION_CN
+            objectIndex = D_8018CC80[var_s0 + arg1];
+            func_800518F8(objectIndex, gObjectList[objectIndex].unk_09C,
+                          (var_s5 - gObjectList[objectIndex].unk_09E) / 2);
+#else
             objectIndex = D_8018CC80[arg1 + var_s0];
             object = &gObjectList[objectIndex];
             func_800518F8(objectIndex, object->unk_09C, (var_s5 - object->unk_09E) / 2);
+#endif
         }
     }
 }
@@ -3378,10 +3787,19 @@ void func_8005217C(UNUSED s32 arg0) {
     s32 temp_a3;
 
     temp_a3 = indexObjectList2[0];
+#ifdef VERSION_CN
+    if (gObjectList[temp_a3].state >= 2) {
+#else
     object = &gObjectList[temp_a3];
     if (object->state >= 2) {
+#endif
         if (is_obj_flag_status_active(temp_a3, 0x00000010) != 0) {
+#ifdef VERSION_CN
+            rsp_set_matrix_transformation(gObjectList[temp_a3].pos, gObjectList[temp_a3].direction_angle,
+                                          gObjectList[temp_a3].sizeScaling);
+#else
             rsp_set_matrix_transformation(object->pos, object->direction_angle, object->sizeScaling);
+#endif
             func_800520C0(temp_a3);
 
             gSPDisplayList(gDisplayListHead++, D_0D007828);
@@ -3402,16 +3820,31 @@ void func_8005217C(UNUSED s32 arg0) {
 }
 
 void func_800523B8(s32 objectIndex, s32 arg1, u32 arg2) {
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
     Object* object;
+#endif
     Camera* camera = &camera1[arg1];
 
+#ifdef VERSION_CN
+    gObjectList[objectIndex].orientation[1] =
+        func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+    func_800484BC(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                  gObjectList[objectIndex].sizeScaling, gObjectList[objectIndex].primAlpha,
+                  (u8*) gObjectList[objectIndex].activeTLUT, gObjectList[objectIndex].activeTexture,
+                  gObjectList[objectIndex].vertex, 0x00000030, 0x00000028, 0x00000030, 0x00000028);
+#else
     object = &gObjectList[objectIndex];
     object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
     func_800484BC(object->pos, object->orientation, object->sizeScaling, object->primAlpha, (u8*) object->activeTLUT,
                   object->activeTexture, object->vertex, 0x00000030, 0x00000028, 0x00000030, 0x00000028);
+#endif
     if ((is_obj_flag_status_active(objectIndex, 0x00000020) != 0) && (arg2 < 0x15F91U)) {
+#ifdef VERSION_CN
+        func_8004A630(&D_8018C830, gObjectList[objectIndex].pos, 0.4f);
+#else
         func_8004A630(&D_8018C830, object->pos, 0.4f);
+#endif
     }
 }
 
@@ -3477,14 +3910,22 @@ void render_object_bat(s32 cameraId) {
 
 void render_object_trash_bin(s32 cameraId) {
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     objectIndex = indexObjectList1[1];
     func_8008A364(objectIndex, cameraId, 0x5555U, 0x00000320);
     if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
+#ifdef VERSION_CN
+        if (gObjectList[objectIndex].state >= 2) {
+            func_80043220(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                          gObjectList[objectIndex].sizeScaling, gObjectList[objectIndex].model);
+#else
         object = &gObjectList[objectIndex];
         if (object->state >= 2) {
             func_80043220(object->pos, object->orientation, object->sizeScaling, object->model);
+#endif
         }
     }
 }
@@ -3505,7 +3946,9 @@ void func_8005285C(s32 arg0) {
 void func_800528EC(s32 arg0) {
     s32 var_s3;
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     D_80183E80[0] = D_8016582C[0];
     D_80183E80[1] = D_8016582C[1];
@@ -3522,9 +3965,14 @@ void func_800528EC(s32 arg0) {
         for (var_s3 = 0; var_s3 < gObjectParticle2_SIZE; var_s3++) {
             objectIndex = gObjectParticle2[var_s3];
             if (objectIndex != NULL_OBJECT_ID) {
+#ifdef VERSION_CN
+                if (gObjectList[objectIndex].state > 0) {
+                    rsp_set_matrix_transformation(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling);
+#else
                 object = &gObjectList[objectIndex];
                 if (object->state > 0) {
                     rsp_set_matrix_transformation(object->pos, D_80183E80, object->sizeScaling);
+#endif
                     gSPVertex(gDisplayListHead++, D_0D005BD0, 3, 0);
                     gSPDisplayList(gDisplayListHead++, D_0D006930);
                 }
@@ -3534,9 +3982,14 @@ void func_800528EC(s32 arg0) {
         for (var_s3 = 0; var_s3 < gObjectParticle2_SIZE; var_s3++) {
             objectIndex = gObjectParticle2[var_s3];
             if (objectIndex != NULL_OBJECT_ID) {
+#ifdef VERSION_CN
+                if ((gObjectList[objectIndex].state > 0) && (gObjectList[objectIndex].unk_084[7] == arg0) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+                    rsp_set_matrix_transformation(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling);
+#else
                 object = &gObjectList[objectIndex];
                 if ((object->state > 0) && (arg0 == object->unk_084[7]) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
                     rsp_set_matrix_transformation(object->pos, D_80183E80, object->sizeScaling);
+#endif
                     gSPVertex(gDisplayListHead++, D_0D005BD0, 3, 0);
                     gSPDisplayList(gDisplayListHead++, D_0D006930);
                 }
@@ -3607,7 +4060,9 @@ void func_80052E30(UNUSED s32 arg0) {
 }
 
 void render_object_snowmans_list_2(s32 cameraId) {
+#ifndef VERSION_CN
     UNUSED s32 stackPadding[2];
+#endif
     Camera* sp44;
     s32 someIndex;
     s32 objectIndex;
@@ -3622,7 +4077,12 @@ void render_object_snowmans_list_2(s32 cameraId) {
             if (object->state > 0) {
                 func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000001F4);
                 if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
+#ifdef VERSION_CN
+                    object->orientation[1] = func_800418AC(gObjectList[objectIndex].pos[0],
+                                                           gObjectList[objectIndex].pos[2], sp44->pos);
+#else
                     object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], sp44->pos);
+#endif
                     rsp_set_matrix_gObjectList(objectIndex);
                     gSPDisplayList(gDisplayListHead++, D_0D0069E0);
                 }
@@ -3681,23 +4141,54 @@ void render_lakitu(s32 cameraId) {
     objectIndex = gIndexLakituList[cameraId];
     camera = &camera1[cameraId];
     if (is_obj_flag_status_active(objectIndex, 0x00000010) != 0) {
+#ifdef VERSION_CN
+        gObjectList[objectIndex].orientation[0] = 0;
+        gObjectList[objectIndex].orientation[1] =
+            func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+        gObjectList[objectIndex].orientation[2] = 0x8000;
+#else
         object = &gObjectList[objectIndex];
         object->orientation[0] = 0;
         object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
         object->orientation[2] = 0x8000;
+#endif
         if (func_80072354(objectIndex, 2) != 0) {
+#ifdef VERSION_CN
+            draw_2d_texture_at(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                               gObjectList[objectIndex].sizeScaling, (u8*) gObjectList[objectIndex].activeTLUT,
+                               gObjectList[objectIndex].activeTexture, gObjectList[objectIndex].vertex,
+                               (s32) gObjectList[objectIndex].textureWidth,
+                               (s32) gObjectList[objectIndex].textureHeight,
+                               (s32) gObjectList[objectIndex].textureWidth,
+                               (s32) gObjectList[objectIndex].textureHeight / 2);
+#else
             draw_2d_texture_at(object->pos, object->orientation, object->sizeScaling, (u8*) object->activeTLUT,
                                object->activeTexture, object->vertex, (s32) object->textureWidth,
                                (s32) object->textureHeight, (s32) object->textureWidth,
                                (s32) object->textureHeight / 2);
+#endif
         } else {
+#ifdef VERSION_CN
+            func_800485C4(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                          gObjectList[objectIndex].sizeScaling, (s32) gObjectList[objectIndex].primAlpha,
+                          (u8*) gObjectList[objectIndex].activeTLUT, gObjectList[objectIndex].activeTexture,
+                          gObjectList[objectIndex].vertex, (s32) gObjectList[objectIndex].textureWidth,
+                          (s32) gObjectList[objectIndex].textureHeight, (s32) gObjectList[objectIndex].textureWidth,
+                          (s32) gObjectList[objectIndex].textureHeight / 2);
+#else
             func_800485C4(object->pos, object->orientation, object->sizeScaling, (s32) object->primAlpha,
                           (u8*) object->activeTLUT, object->activeTexture, object->vertex, (s32) object->textureWidth,
                           (s32) object->textureHeight, (s32) object->textureWidth, (s32) object->textureHeight / 2);
+#endif
         }
         if (gScreenModeSelection == SCREEN_MODE_1P) {
+#ifdef VERSION_CN
+            var_f0 = gObjectList[objectIndex].pos[0] - D_8018CF14->pos[0];
+            var_f2 = gObjectList[objectIndex].pos[2] - D_8018CF14->pos[2];
+#else
             var_f0 = object->pos[0] - D_8018CF14->pos[0];
             var_f2 = object->pos[2] - D_8018CF14->pos[2];
+#endif
             if (var_f0 < 0.0f) {
                 var_f0 = -var_f0;
             }
@@ -3705,7 +4196,11 @@ void render_lakitu(s32 cameraId) {
                 var_f2 = -var_f2;
             }
             if ((var_f0 + var_f2) <= 200.0) {
+#ifdef VERSION_CN
+                func_8004A630(&D_8018C0B0[cameraId], gObjectList[objectIndex].pos, 0.35f);
+#else
                 func_8004A630(&D_8018C0B0[cameraId], object->pos, 0.35f);
+#endif
             }
         }
     }
@@ -3802,9 +4297,16 @@ void render_object_thwomps(s32 cameraId) {
     for (i = 0; i < gObjectParticle3_SIZE; i++) {
         objectIndex = gObjectParticle3[i];
         if (objectIndex != NULL_OBJECT_ID) {
+#ifdef VERSION_CN
+            if ((gObjectList[objectIndex].state > 0) && (gObjectList[objectIndex].unk_0D5 == 3) &&
+                (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+                rsp_set_matrix_transformation(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                                              gObjectList[objectIndex].sizeScaling);
+#else
             object = &gObjectList[objectIndex];
             if ((object->state > 0) && (object->unk_0D5 == 3) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
                 rsp_set_matrix_transformation(object->pos, object->orientation, object->sizeScaling);
+#endif
                 gSPVertex(gDisplayListHead++, D_0D005C00, 3, 0);
                 gSPDisplayList(gDisplayListHead++, D_0D006930);
             }
@@ -3821,11 +4323,21 @@ void render_object_thwomps(s32 cameraId) {
     for (i = 0; i < gObjectParticle2_SIZE; i++) {
         objectIndex = gObjectParticle2[i];
         if (objectIndex != NULL_OBJECT_ID) {
+#ifdef VERSION_CN
+            if ((gObjectList[objectIndex].state >= 2) && (gObjectList[objectIndex].unk_0D5 == 2) &&
+                (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+                func_8004B138(0x000000FF, 0x000000FF, 0x000000FF, (s32) gObjectList[objectIndex].primAlpha);
+                D_80183E80[1] =
+                    func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+                func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling,
+                              D_0D005AE0);
+#else
             object = &gObjectList[objectIndex];
             if ((object->state >= 2) && (object->unk_0D5 == 2) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
                 func_8004B138(0x000000FF, 0x000000FF, 0x000000FF, (s32) object->primAlpha);
                 D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
                 func_800431B0(object->pos, D_80183E80, object->sizeScaling, D_0D005AE0);
+#endif
             }
         }
     }
@@ -3982,18 +4494,35 @@ void render_object_paddle_boat_smoke_particles(s32 cameraId) {
 
 void render_object_bowser_flame_particle(s32 objectIndex, s32 cameraId) {
     Camera* camera;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     camera = &camera1[cameraId];
     if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
+#ifdef VERSION_CN
+        if (gObjectList[objectIndex].unk_0D5 == 9) {
+            func_8004B72C(0xFF, (s32) gObjectList[objectIndex].type, 0, (s32) gObjectList[objectIndex].unk_0A2, 0, 0,
+                          (s32) gObjectList[objectIndex].primAlpha);
+#else
         object = &gObjectList[objectIndex];
         if (object->unk_0D5 == 9) {
             func_8004B72C(0xFF, (s32) object->type, 0, (s32) object->unk_0A2, 0, 0, (s32) object->primAlpha);
+#endif
         } else {
+#ifdef VERSION_CN
+            func_8004B138(0xFF, (s32) gObjectList[objectIndex].type, 0, (s32) gObjectList[objectIndex].primAlpha);
+#else
             func_8004B138(0xFF, (s32) object->type, 0, (s32) object->primAlpha);
+#endif
         }
+#ifdef VERSION_CN
+        D_80183E80[1] = func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+        func_800431B0(gObjectList[objectIndex].pos, D_80183E80, gObjectList[objectIndex].sizeScaling, D_0D005AE0);
+#else
         D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
         func_800431B0(object->pos, D_80183E80, object->sizeScaling, D_0D005AE0);
+#endif
     }
 }
 
@@ -4038,11 +4567,15 @@ void func_8005477C(s32 objectIndex, u8 arg1, Vec3f arg2) {
 }
 
 void render_object_smoke_particles(s32 cameraId) {
+#ifndef VERSION_CN
     UNUSED s32 stackPadding[2];
+#endif
     Camera* sp54;
     s32 var_s0;
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     sp54 = &camera1[cameraId];
     gSPDisplayList(gDisplayListHead++, D_0D007AE0);
@@ -4053,15 +4586,24 @@ void render_object_smoke_particles(s32 cameraId) {
     for (var_s0 = 0; var_s0 < gObjectParticle4_SIZE; var_s0++) {
         objectIndex = gObjectParticle4[var_s0];
         if (objectIndex != NULL_OBJECT_ID) {
+#ifdef VERSION_CN
+            if (gObjectList[objectIndex].state >= 2) {
+                if (gObjectList[objectIndex].unk_0D8 == 3) {
+#else
             object = &gObjectList[objectIndex];
             if (object->state >= 2) {
                 if (object->unk_0D8 == 3) {
+#endif
                     func_8008A364(objectIndex, cameraId, 0x4000U, 0x00000514);
                 } else {
                     func_8008A364(objectIndex, cameraId, 0x4000U, 0x000001F4);
                 }
                 if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
+#ifdef VERSION_CN
+                    func_8005477C(objectIndex, gObjectList[objectIndex].unk_0D8, sp54->pos);
+#else
                     func_8005477C(objectIndex, object->unk_0D8, sp54->pos);
+#endif
                 }
             }
         }
@@ -4143,18 +4685,29 @@ void func_80054F04(s32 cameraId) {
     s32 var_s2;
     s32 objectIndex;
     Camera* sp44;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     sp44 = &camera1[cameraId];
     gSPDisplayList(gDisplayListHead++, D_0D0079C8);
     load_texture_block_rgba16_mirror(d_course_moo_moo_farm_mole_dirt, 0x00000010, 0x00000010);
     for (var_s2 = 0; var_s2 < gObjectParticle2_SIZE; var_s2++) {
         objectIndex = gObjectParticle2[var_s2];
+#ifdef VERSION_CN
+        if (gObjectList[objectIndex].state > 0) {
+#else
         object = &gObjectList[objectIndex];
         if (object->state > 0) {
+#endif
             func_8008A364(objectIndex, cameraId, 0x2AABU, 0x000000C8);
             if ((is_obj_flag_status_active(objectIndex, VISIBLE) != 0) && (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX)) {
+#ifdef VERSION_CN
+                gObjectList[objectIndex].orientation[1] = func_800418AC(
+                    gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], sp44->pos);
+#else
                 object->orientation[1] = func_800418AC(object->pos[0], object->pos[2], sp44->pos);
+#endif
                 rsp_set_matrix_gObjectList(objectIndex);
                 gSPDisplayList(gDisplayListHead++, D_0D006980);
             }
@@ -4312,30 +4865,61 @@ UNUSED void func_800557AC() {
 
 void func_800557B4(s32 objectIndex, u32 arg1, u32 arg2) {
     Vec3f sp34;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
+#ifdef VERSION_CN
+    if (gObjectList[objectIndex].state >= 2) {
+#else
     object = &gObjectList[objectIndex];
     if (object->state >= 2) {
+#endif
         if (is_obj_flag_status_active(objectIndex, 0x00000020) != 0) {
             if (func_80072320(objectIndex, 4) != 0) {
                 if (arg2 >= arg1) {
+#ifdef VERSION_CN
+                    sp34[0] = gObjectList[objectIndex].pos[0];
+                    sp34[1] = gObjectList[objectIndex].pos[1] - 1.0;
+                    sp34[2] = gObjectList[objectIndex].pos[2];
+                    rsp_set_matrix_transformation_inverted_x_y_orientation(sp34, gObjectList[objectIndex].orientation,
+                                                                           gObjectList[objectIndex].sizeScaling);
+#else
                     sp34[0] = object->pos[0];
                     sp34[1] = object->pos[1] - 1.0;
                     sp34[2] = object->pos[2];
                     rsp_set_matrix_transformation_inverted_x_y_orientation(sp34, object->orientation,
                                                                            object->sizeScaling);
+#endif
                     gSPDisplayList(gDisplayListHead++, D_0D0077D0);
+#ifdef VERSION_CN
+                    render_animated_model((Armature*) gObjectList[objectIndex].model,
+                                          (Animation**) gObjectList[objectIndex].vertex,
+                                          (s16) gObjectList[objectIndex].unk_0D8,
+                                          (s16) gObjectList[objectIndex].textureListIndex);
+#else
                     render_animated_model((Armature*) object->model, (Animation**) object->vertex,
                                           (s16) object->unk_0D8, (s16) object->textureListIndex);
+#endif
                 }
             } else if (arg1 < 0x15F91U) {
                 func_8004A7AC(objectIndex, 1.5f);
             }
         }
+#ifdef VERSION_CN
+        rsp_set_matrix_transformation(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                                      gObjectList[objectIndex].sizeScaling);
+#else
         rsp_set_matrix_transformation(object->pos, object->orientation, object->sizeScaling);
+#endif
         gSPDisplayList(gDisplayListHead++, D_0D0077D0);
+#ifdef VERSION_CN
+        render_animated_model((Armature*) gObjectList[objectIndex].model, (Animation**) gObjectList[objectIndex].vertex,
+                              (s16) gObjectList[objectIndex].unk_0D8, (s16) gObjectList[objectIndex].textureListIndex);
+#else
         render_animated_model((Armature*) object->model, (Animation**) object->vertex, (s16) object->unk_0D8,
                               (s16) object->textureListIndex);
+#endif
     }
 }
 
@@ -4358,13 +4942,24 @@ void render_object_train_penguins(s32 cameraId) {
         objectIndex = indexObjectList1[i];
         if (gObjectList[objectIndex].state >= 2) {
             if (gPlayerCountSelection1 == 1) {
+#ifndef VERSION_CN
                 var_s1 = 0x4000;
+#endif
                 if (i == 0) {
                     var_a3 = 0x000005DC;
+#ifdef VERSION_CN
+                    var_s1 = 0x4000;
+#endif
                 } else if (func_80072320(objectIndex, 8) != 0) {
                     var_a3 = 0x00000320;
+#ifdef VERSION_CN
+                    var_s1 = 0x4000;
+#endif
                 } else {
                     var_a3 = 0x000003E8;
+#ifdef VERSION_CN
+                    var_s1 = 0x4000;
+#endif
                 }
             } else {
                 if (func_80072320(objectIndex, 8) != 0) {
@@ -4467,11 +5062,17 @@ void render_object_hot_air_balloon(s32 arg0) {
 }
 
 void func_80055EF4(s32 objectIndex, UNUSED s32 arg1) {
+#ifdef VERSION_CN
+    if (gObjectList[objectIndex].state >= 2) {
+        func_80043220(gObjectList[objectIndex].pos, gObjectList[objectIndex].direction_angle,
+                      gObjectList[objectIndex].sizeScaling, gObjectList[objectIndex].model);
+#else
     Object* object;
 
     object = &gObjectList[objectIndex];
     if (object->state >= 2) {
         func_80043220(object->pos, object->direction_angle, object->sizeScaling, object->model);
+#endif
     }
 }
 
@@ -4486,20 +5087,36 @@ void func_80055F48(s32 arg0) {
 void func_80055FA0(s32 objectIndex, UNUSED s32 arg1) {
     Mat4 someMatrix1;
     Mat4 someMatrix2;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
+#ifdef VERSION_CN
+    if (gObjectList[objectIndex].state >= 2) {
+#else
     object = &gObjectList[objectIndex];
     if (object->state >= 2) {
+#endif
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxPersp[0]),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxLookAt[0]),
                   G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+#ifdef VERSION_CN
+        mtxf_set_matrix_transformation(someMatrix1, gObjectList[objectIndex].pos,
+                                       gObjectList[objectIndex].direction_angle,
+                                       gObjectList[objectIndex].sizeScaling);
+#else
         mtxf_set_matrix_transformation(someMatrix1, object->pos, object->direction_angle, object->sizeScaling);
+#endif
         convert_to_fixed_point_matrix(&gGfxPool->mtxHud[gMatrixHudCount], someMatrix1);
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxHud[gMatrixHudCount++]),
                   G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gDisplayListHead++, D_0D0077A0);
+#ifdef VERSION_CN
+        gSPDisplayList(gDisplayListHead++, gObjectList[objectIndex].model);
+#else
         gSPDisplayList(gDisplayListHead++, object->model);
+#endif
         gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxLookAt[0]),
                   G_MTX_NOPUSH | G_MTX_MUL | G_MTX_PROJECTION);
         mtxf_identity(someMatrix2);
@@ -4515,12 +5132,24 @@ void render_object_neon(s32 cameraId) {
     Camera* camera;
     s32 var_s2;
     s32 objectIndex;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     camera = &camera1[cameraId];
     for (var_s2 = 0; var_s2 < 10; var_s2++) {
         objectIndex = indexObjectList1[var_s2];
         if (D_8018E838[cameraId] == 0) {
+#ifdef VERSION_CN
+            if ((gObjectList[objectIndex].state >= 2) &&
+                (is_obj_index_flag_status_inactive(objectIndex, 0x00080000) != 0) &&
+                (is_object_visible_on_camera(objectIndex, camera, 0x2AABU) != 0)) {
+                gObjectList[objectIndex].orientation[1] = angle_between_object_camera(objectIndex, camera);
+                draw_2d_texture_at(gObjectList[objectIndex].pos, gObjectList[objectIndex].orientation,
+                                   gObjectList[objectIndex].sizeScaling, (u8*) gObjectList[objectIndex].activeTLUT,
+                                   gObjectList[objectIndex].activeTexture, common_vtx_hedgehog, 0x00000040,
+                                   0x00000040, 0x00000040, 0x00000020);
+#else
             object = &gObjectList[objectIndex];
             if ((object->state >= 2) && (is_obj_index_flag_status_inactive(objectIndex, 0x00080000) != 0) &&
                 (is_object_visible_on_camera(objectIndex, camera, 0x2AABU) != 0)) {
@@ -4528,6 +5157,7 @@ void render_object_neon(s32 cameraId) {
                 draw_2d_texture_at(object->pos, object->orientation, object->sizeScaling, (u8*) object->activeTLUT,
                                    object->activeTexture, common_vtx_hedgehog, 0x00000040, 0x00000040, 0x00000040,
                                    0x00000020);
+#endif
             }
         }
     }
@@ -4547,18 +5177,36 @@ void func_800562E4(s32 arg0, s32 arg1, s32 arg2) {
 void func_800563DC(s32 objectIndex, s32 cameraId, s32 arg2) {
     s32 temp_s0;
     s32 temp_v0;
+#ifdef VERSION_CN
+    s32 m3;
+    s32 m4;
+#endif
     s32 residue;
     Camera* camera;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     camera = &camera1[cameraId];
+#ifndef VERSION_CN
     object = &gObjectList[objectIndex];
+#endif
     residue = D_801655CC % 4U;
+#ifdef VERSION_CN
+    D_80183E40[0] = gObjectList[objectIndex].pos[0];
+    D_80183E40[1] = gObjectList[objectIndex].pos[1] + 1.0;
+    D_80183E40[2] = gObjectList[objectIndex].pos[2];
+#else
     D_80183E40[0] = object->pos[0];
     D_80183E40[1] = object->pos[1] + 1.0;
     D_80183E40[2] = object->pos[2];
+#endif
     D_80183E80[0] = 0;
+#ifdef VERSION_CN
+    D_80183E80[1] = func_800418AC(gObjectList[objectIndex].pos[0], gObjectList[objectIndex].pos[2], camera->pos);
+#else
     D_80183E80[1] = func_800418AC(object->pos[0], object->pos[2], camera->pos);
+#endif
     D_80183E80[2] = 0x8000;
     rsp_set_matrix_transformation(D_80183E40, D_80183E80, 0.2f);
     gSPDisplayList(gDisplayListHead++, D_0D007E98);
@@ -4569,14 +5217,38 @@ void func_800563DC(s32 objectIndex, s32 cameraId, s32 arg2) {
     gSPDisplayList(gDisplayListHead++, D_0D007B00);
     func_8004B414(0, 0, 0, arg2);
     D_80183E40[1] = D_80183E40[1] + 4.0;
+#ifdef VERSION_CN
+    m3 = temp_s0 % 3;
+    m4 = temp_s0 % 4;
+#endif
     D_80183E80[2] = 0;
+#ifdef VERSION_CN
+    func_800562E4(m3, m4, arg2);
+#else
     func_800562E4(temp_s0 % 3, temp_s0 % 4, arg2);
+#endif
     temp_v0 = temp_s0 + 1;
+#ifdef VERSION_CN
+    m3 = temp_v0 % 3;
+    m4 = temp_v0 % 4;
+#endif
     D_80183E80[2] = 0x6000;
+#ifdef VERSION_CN
+    func_800562E4(m3, m4, arg2);
+#else
     func_800562E4(temp_v0 % 3, temp_v0 % 4, arg2);
+#endif
     temp_v0 = temp_s0 + 2;
+#ifdef VERSION_CN
+    m3 = temp_v0 % 3;
+    m4 = temp_v0 % 4;
+#endif
     D_80183E80[2] = 0xA000;
+#ifdef VERSION_CN
+    func_800562E4(m3, m4, arg2);
+#else
     func_800562E4(temp_v0 % 3, temp_v0 % 4, arg2);
+#endif
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
@@ -4647,18 +5319,32 @@ void render_object_bomb_kart(s32 cameraId) {
     s32 temp_s1;
     s32 temp_s0;
     s32 payerId;
+#ifndef VERSION_CN
     Object* object;
+#endif
 
     for (payerId = 0; payerId < NUM_BOMB_KARTS_BATTLE; payerId++) {
         temp_s0 = gIndexObjectBombKart[payerId];
+#ifdef VERSION_CN
+        if (gObjectList[temp_s0].state != 0) {
+#else
         object = &gObjectList[temp_s0];
         if (object->state != 0) {
             temp_s1 = object->primAlpha;
+#endif
             temp_v0 = &gPlayerOne[payerId];
+#ifdef VERSION_CN
+            gObjectList[temp_s0].pos[0] = temp_v0->pos[0];
+            gObjectList[temp_s0].pos[1] = temp_v0->pos[1] - 2.0;
+            gObjectList[temp_s0].pos[2] = temp_v0->pos[2];
+            gObjectList[temp_s0].surfaceHeight = temp_v0->unk_074;
+            temp_s1 = gObjectList[temp_s0].primAlpha;
+#else
             object->pos[0] = temp_v0->pos[0];
             object->pos[1] = temp_v0->pos[1] - 2.0;
             object->pos[2] = temp_v0->pos[2];
             object->surfaceHeight = temp_v0->unk_074;
+#endif
             func_800563DC(temp_s0, cameraId, temp_s1);
             func_8005669C(temp_s0, cameraId, temp_s1);
             func_800568A0(temp_s0, cameraId);
@@ -4762,12 +5448,20 @@ void func_80056E24(s32 bombIndex, Vec3f arg1) {
 
 void func_80056FCC(s32 bombIndex) {
     Mat4 mat;
+#ifndef VERSION_CN
     BombKart* temp_v0;
+#endif
 
+#ifdef VERSION_CN
+    D_80183E50[0] = gBombKarts[bombIndex].bombPos[0];
+    D_80183E50[1] = gBombKarts[bombIndex].yPos + 1.0;
+    D_80183E50[2] = gBombKarts[bombIndex].bombPos[2];
+#else
     temp_v0 = &gBombKarts[bombIndex];
     D_80183E50[0] = temp_v0->bombPos[0];
     D_80183E50[1] = temp_v0->yPos + 1.0;
     D_80183E50[2] = temp_v0->bombPos[2];
+#endif
     set_transform_matrix(mat, D_80164038[bombIndex].orientationVector, D_80183E50, 0U, 0.5f);
     convert_to_fixed_point_matrix(&gGfxPool->mtxHud[gMatrixHudCount], mat);
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxHud[gMatrixHudCount++]),
@@ -4812,7 +5506,11 @@ void func_80057114(s32 cameraId) {
             if (is_obj_flag_status_active(objectIndex, VISIBLE) != 0) {
                 set_object_flag_status_true(objectIndex, 0x00200000);
                 D_80183E80[0] = 0;
+#ifdef VERSION_CN
+                D_80183E80[1] = func_800418AC(var_s1_2->bombPos[0], gBombKarts[i].bombPos[2], camera->pos);
+#else
                 D_80183E80[1] = func_800418AC(var_s1_2->bombPos[0], var_s1_2->bombPos[2], camera->pos);
+#endif
                 D_80183E80[2] = 0x8000;
                 func_800563DC(objectIndex, cameraId, 0x000000FF);
                 func_80056E24(i, camera->pos);

@@ -2461,15 +2461,28 @@ f64 menu_exponential(f64 arg0) {
     s32 temp_f10;
     f64 temp_f2;
     f64 temp_f0;
+#ifdef VERSION_CN
+    f64 temp_f6;
+#endif
     s32 i;
 
     temp_f10 = ((arg0 >= 0.0) ? 0.5 : -0.5) + (arg0 / 0.6931471805599453);
     arg0 -= (temp_f10 * 0.6931471805599453);
+#ifdef VERSION_CN
+    temp_f6 = SQ(arg0);
+#else
     temp_f2 = SQ(arg0);
+#endif
 
+#ifdef VERSION_CN
+    temp_f0 = temp_f6 / 22;
+    for (i = 18; i >= 6; i -= 4) {
+        temp_f0 = temp_f6 / (temp_f0 + i);
+#else
     temp_f0 = temp_f2 / 22;
     for (i = 0; i < 4; i++) {
         temp_f0 = temp_f2 / ((18 - 4 * i) + temp_f0);
+#endif
     }
 
     temp_f2 = 2 + temp_f0;
@@ -9016,6 +9029,39 @@ void menu_item_data_course_selectable(MenuItem* arg0) {
     func_800A66A8(arg0, (Unk_D_800E70A0*) &sp78);
 }
 
+#ifdef VERSION_CN
+void func_800A1DE0(MenuItem* arg0) {
+    UNUSED s32 stackPadding0;
+    UNUSED s32 stackPadding1;
+    UNUSED s32 stackPadding2;
+    UNUSED s32 stackPadding3;
+    Unk_D_800E70A0 sp58;
+    s32 var_a0;
+    UNUSED s32 var_s0;
+    s32 var_s1;
+    f32 scale = 0.65f;
+
+    set_text_color(TEXT_GREEN);
+    for (var_s1 = 0; var_s1 < 3; var_s1++) {
+        print_text_mode_1(0x0000001B, 0x3C + (0xD * var_s1),
+                          gEraseBestGhostText[(gCourseRecordsMenuSelection - 1) * 3 + var_s1], 0, scale, scale);
+    }
+
+    for (var_s1 = 0; var_s1 < ARRAY_COUNT(D_800E7840); var_s1++) {
+        if (var_s1 == gCourseRecordsSubMenuSelection) {
+            var_a0 = 5;
+        } else {
+            var_a0 = 1;
+        }
+        set_text_color(var_a0);
+        print_text_mode_1(0x00000043, 0x6E + (0xD * var_s1), D_800E7840[var_s1], 0, scale, scale);
+    }
+
+    sp58.column = 0x003B;
+    sp58.row = (gCourseRecordsSubMenuSelection * 0xD) + 0x66;
+    func_800A66A8(arg0, &sp58);
+}
+#else
 void func_800A1DE0(MenuItem* arg0) {
     UNUSED s32 stackPadding0;
     UNUSED s32 stackPadding1;
@@ -9060,6 +9106,7 @@ void func_800A1DE0(MenuItem* arg0) {
     sp58.row = (gCourseRecordsSubMenuSelection * 0xD) + 0x66;
     func_800A66A8(arg0, &sp58);
 }
+#endif
 
 void func_800A1F30(UNUSED MenuItem* unused) {
 #ifdef VERSION_CN
@@ -9980,6 +10027,9 @@ void func_800A2D1C(MenuItem* arg0) {
 
 void func_800A2EB8(MenuItem* arg0) {
     s8 sp70[8];
+#ifdef VERSION_CN
+    u32 new_var;
+#endif
     UNUSED s32 stackPadding0;
     char sp68[3];
     s32 temp_s0;
@@ -9993,7 +10043,11 @@ void func_800A2EB8(MenuItem* arg0) {
 #ifdef VERSION_JP
     print_text_mode_1(arg0->column + 0x25, arg0->row + 0x19, "result", 0, 1.0f, 1.0f);
 #else
+#ifdef VERSION_CN
+    print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x19, "results", 0, 1.0f, 1.0f);
+#else
     print_text_mode_1(arg0->column + 0x1E, arg0->row + 0x19, "results", 0, 1.0f, 1.0f);
+#endif
 #endif
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
     print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x28, "round", 0, 0.7f, 0.7f);
@@ -10006,7 +10060,11 @@ void func_800A2EB8(MenuItem* arg0) {
             var_a0 = TEXT_YELLOW;
         }
         set_text_color(var_a0);
+#ifdef VERSION_CN
+        func_800A32B4(arg0->column + 7, (arg0->row + 0x38) + (0x10 * var_s2), (s32) sp70[var_s2], var_s2);
+#else
         func_800A32B4(arg0->column + 7, arg0->row + (0x10 * var_s2) + 0x38, (s32) sp70[var_s2], var_s2);
+#endif
     }
     for (var_s2 = 4; var_s2 < 8; var_s2++) {
         if (gGPCurrentRacePlayerIdByRank[var_s2] < gPlayerCount) {
@@ -10015,7 +10073,11 @@ void func_800A2EB8(MenuItem* arg0) {
             var_a0 = TEXT_YELLOW;
         }
         set_text_color(var_a0);
+#ifdef VERSION_CN
+        func_800A32B4(0xBE - arg0->column, (arg0->row + 0x5A) + (0x10 * var_s2), sp70[var_s2], var_s2);
+#else
         func_800A32B4(0xBE - arg0->column, arg0->row + (0x10 * var_s2) + 0x5A, sp70[var_s2], var_s2);
+#endif
     }
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
 #ifdef VERSION_JP
@@ -10025,11 +10087,22 @@ void func_800A2EB8(MenuItem* arg0) {
                       0.7f, 0.7);
 #else
     temp_s0 = (s32) (((f32) (get_string_width(gCupNames[gCupSelection]) + 8) * 0.6f) / 2);
+#ifdef VERSION_CN
+    new_var = (s32) (((f32) (get_string_width(D_800E76CC[gCCSelection]) + 8) * 0.6f) / 2);
+#endif
     print_text1_center_mode_1(
+#ifdef VERSION_CN
+        (0xF5 - new_var) - arg0->column,
+#else
         (-(s32) (((f32) (get_string_width(D_800E76CC[gCCSelection]) + 8) * 0.6f) / 2) - arg0->column) + 0xF5,
+#endif
         arg0->row + 0xE1, gCupNames[D_800DC540], 0, 0.6f, 0.6f);
     print_text1_center_mode_1(
+#ifdef VERSION_CN
+        (temp_s0 + 0xF5) - arg0->column, arg0->row + 0xE1,
+#else
         (temp_s0 - arg0->column) + 0xF5, arg0->row + 0xE1,
+#endif
         D_800E76CC[gGameModeSubMenuColumn[gPlayerCount - 1][gGameModeMenuColumn[gPlayerCount - 1]]], 0, 0.6f, 0.6f);
 #endif
 }
@@ -10041,12 +10114,39 @@ void func_800A32B4(s32 arg0, s32 arg1, s32 characterId, s32 rank) {
     UNUSED s32 stackPadding2;
     UNUSED s32 stackPadding3;
     UNUSED s32 stackPadding4;
+#ifdef VERSION_CN
     char sp3C[4];
+    s32 mins;
+    s32 secs;
+    s32 cents;
+    f32 sc = 0.7f;
+#else
+    char sp3C[4];
+#endif
 
+#ifdef VERSION_CN
     sp50 = gTimePlayerLastTouchedFinishLine[gGPCurrentRacePlayerIdByRank[rank]];
+    mins = (s32) (sp50 / 60.0f);
+    secs = (s32) sp50 % 60;
+    cents = (s32) ((f64) sp50 * 100.0) % 100;
+#else
+    sp50 = gTimePlayerLastTouchedFinishLine[gGPCurrentRacePlayerIdByRank[rank]];
+#endif
     convert_number_to_ascii(rank + 1, sp3C);
     sp3C[2] = '.';
     sp3C[3] = '\0';
+#ifdef VERSION_CN
+    func_800939C8(arg0 - 1, arg1, &sp3C[1], -4, sc, sc);
+    print_text_mode_1(arg0 + 0xA, arg1, D_800E76A8[characterId], 0, 0.65f, sc);
+    convert_number_to_ascii(mins, sp3C);
+    func_800939C8(arg0 + 0x42, arg1, sp3C, 0, sc, sc);
+    convert_number_to_ascii(secs, sp3C);
+    print_text_mode_1(arg0 + 0x4E, arg1, "'", 0, sc, sc);
+    func_800939C8(arg0 + 0x56, arg1, sp3C, 0, sc, sc);
+    convert_number_to_ascii(cents, sp3C);
+    print_text_mode_1(arg0 + 0x62, arg1, "\"", 0, sc, sc);
+    func_800939C8(arg0 + 0x6A, arg1, sp3C, 0, sc, sc);
+#else
     func_800939C8(arg0 - 1, arg1, &sp3C[1], -4, 0.7f, 0.7f);
 #ifdef VERSION_JP
     print_text_mode_1(arg0 + 0xA, arg1, D_800E76A8[characterId], 0, 0.7f, 0.7f);
@@ -10061,6 +10161,7 @@ void func_800A32B4(s32 arg0, s32 arg1, s32 characterId, s32 rank) {
     convert_number_to_ascii((s32) ((f64) sp50 * 100.0) % 100, sp3C);
     print_text_mode_1(arg0 + 0x62, arg1, "\"", 0, 0.7f, 0.7f);
     func_800939C8(arg0 + 0x6A, arg1, sp3C, 0, 0.7f, 0.7f);
+#endif
 }
 
 #ifdef VERSION_JP
@@ -10169,6 +10270,13 @@ void func_800A34A8(MenuItem* arg0) {
     s32 var_v1;
     UNUSED s32 stackPadding2;
     s32 temp_s0_3;
+#ifdef VERSION_CN
+    s32 temp_y1;
+    s32 temp_y2;
+    s32 temp_x1;
+    s32 temp_x2;
+    s32 temp_w1;
+#endif
     s32 rank;
     s32 test;
 
@@ -10182,21 +10290,47 @@ void func_800A34A8(MenuItem* arg0) {
             func_800A3A10(gCharacterIdByGPOverallRank);
         }
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+#ifdef VERSION_CN
+        print_text_mode_1(arg0->column + 0x36, -arg0->row + 0x19, "driver's points", 0, 0.8f, 0.8f);
+#else
         print_text_mode_1(arg0->column + 0x19, 0x19 - arg0->row, "driver's points", 0, 0.8f, 0.8f);
+#endif
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
+#ifdef VERSION_CN
+        print_text_mode_1(arg0->column + 0x36, arg0->row + 0x28, "round", 0, 0.7f, 0.7f);
+#else
         print_text_mode_1(arg0->column + 0x36, 0x28 - arg0->row, "round", 0, 0.7f, 0.7f);
+#endif
         convert_number_to_ascii(gCourseIndexInCup + 1, sp78);
+#ifdef VERSION_CN
+        print_text_mode_1(arg0->column + 0x61, -arg0->row + 0x28, &sp78[1], 0, 0.7f, 0.7f);
+#else
         print_text_mode_1(arg0->column + 0x61, (0x28 & 0xFFFFFFFF) - arg0->row, &sp78[1], 0, 0.7f, 0.7f);
+#endif
         for (rank = 0; rank < 4; rank++) {
             test = arg0->state;
+#ifdef VERSION_CN
+            if (test >= 10) {
+#else
             if ((test != 8) && (test != 9)) {
+#endif
                 var_v0 = 0;
+#ifdef VERSION_CN
+            } else if (test < 8) {
+                var_v0 = 0;
+            } else if ((rank * 5) < arg0->param1) {
+                var_v0 = 1;
+#endif
             } else {
+#ifdef VERSION_CN
+                var_v0 = 0;
+#else
                 if ((rank * 5) < arg0->param1) {
                     var_v0 = 1;
                 } else {
                     var_v0 = 0;
                 }
+#endif
             }
             if (var_v0 == 0) {
                 if (arg0->state < 9) {
@@ -10212,20 +10346,39 @@ void func_800A34A8(MenuItem* arg0) {
                     var_a0 = 3;
                 }
                 set_text_color(var_a0);
+#ifdef VERSION_CN
+                temp_y1 = (rank * 0x10) + 0x38;
+                func_800A3ADC(arg0, arg0->column + var_v1 + 0x1C, temp_y1 - arg0->row, sp80[rank], rank, sp80);
+#else
                 func_800A3ADC(arg0, arg0->column + var_v1 + 0x1C, ((rank * 0x10) - arg0->row) + 0x38, sp80[rank], rank,
                               sp80);
+#endif
             }
         }
         for (rank = 4; rank < NUM_PLAYERS; rank++) {
             test = arg0->state;
+#ifdef VERSION_CN
+            if (test >= 10) {
+#else
             if ((test != 8) && (test != 9)) {
+#endif
                 var_v0 = 0;
+#ifdef VERSION_CN
+            } else if (test < 8) {
+                var_v0 = 0;
+            } else if ((rank * 5) < arg0->param1) {
+                var_v0 = 1;
+#endif
             } else {
+#ifdef VERSION_CN
+                var_v0 = 0;
+#else
                 if ((rank * 5) < arg0->param1) {
                     var_v0 = 1;
                 } else {
                     var_v0 = 0;
                 }
+#endif
             }
             if (var_v0 == 0) {
                 if (arg0->state < 9) {
@@ -10239,16 +10392,31 @@ void func_800A34A8(MenuItem* arg0) {
                     var_a0 = 3;
                 }
                 set_text_color(var_a0);
+#ifdef VERSION_CN
+                temp_y2 = (rank * 0x10) + 0x5A;
+                func_800A3ADC(arg0, 0xBE - arg0->column, arg0->row + temp_y2, sp80[rank], rank, sp80);
+#else
                 func_800A3ADC(arg0, 0xBE - arg0->column, arg0->row + (rank * 0x10) + 0x5A, sp80[rank], rank, sp80);
+#endif
             }
         }
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
         temp_s0_3 = ((get_string_width(gCupNames[gCupSelection]) + 8) * 0.6f) / 2;
+#ifdef VERSION_CN
+        temp_w1 = ((get_string_width(D_800E76CC[gCCSelection]) + 8) * 0.6f) / 2;
+        temp_x2 = 0xE6 - arg0->column;
+        print_text1_center_mode_1(temp_x2 - temp_w1, arg0->row + 0xE1, gCupNames[D_800DC540], 0, 0.6f, 0.6f);
+        temp_x1 = arg0->column - 0xE6;
+#endif
         print_text1_center_mode_1(
+#ifdef VERSION_CN
+            temp_s0_3 - temp_x1, arg0->row + 0xE1,
+#else
             (-(s32) (((get_string_width(D_800E76CC[gCCSelection]) + 8) * 0.6f) / 2) - arg0->column) + 0xE6,
             arg0->row + 0xE1, gCupNames[D_800DC540], 0, 0.6f, 0.6f);
         print_text1_center_mode_1(
             (temp_s0_3 - arg0->column) + 0xE6, arg0->row + 0xE1,
+#endif
             D_800E76CC[gGameModeSubMenuColumn[gPlayerCount - 1][gGameModeMenuColumn[gPlayerCount - 1]]], 0, 0.6f, 0.6f);
     }
 }
@@ -10265,17 +10433,30 @@ void func_800A3A10(s8* arg0) {
     for (var_v0 = 0; var_v0 < 8; var_v0++) {
         arg0[var_v0] = var_v0;
         for (var_a1 = var_v0; var_a1 > 0; var_a1--) {
+#ifdef VERSION_CN
+            temp_t1 = arg0[var_a1];
+#else
             new_var = &arg0[var_a1];
+#endif
             temp_a3 = arg0[var_a1 - 1];
+#ifdef VERSION_CN
+            if (gGPPointsByCharacterId[temp_t1] > gGPPointsByCharacterId[temp_a3]) {
+                arg0[var_a1] = arg0[var_a1 - 1];
+#else
             thing1 = gGPPointsByCharacterId[temp_a3];
             temp_t1 = arg0[var_a1];
             if (gGPPointsByCharacterId[temp_a3] < gGPPointsByCharacterId[temp_t1]) {
                 arg0[var_a1] = temp_a3;
+#endif
                 arg0[var_a1 - 1] = temp_t1;
             } else if (gGPPointsByCharacterId[temp_t1] == gGPPointsByCharacterId[temp_a3]) {
                 if ((gGetPlayerByCharacterId[temp_t1] < gPlayerCount) &&
                     (gGetPlayerByCharacterId[temp_t1] < gGetPlayerByCharacterId[temp_a3])) {
+#ifdef VERSION_CN
+                    arg0[var_a1] = arg0[var_a1 - 1];
+#else
                     arg0[var_a1] = temp_a3;
+#endif
                     arg0[var_a1 - 1] = temp_t1;
                 } else {
                     break;
@@ -10342,12 +10523,31 @@ void func_800A3ADC(MenuItem* arg0, s32 arg1, s32 arg2, s32 characterId, s32 arg4
     }
 }
 
+#ifdef VERSION_CN
 void time_trials_finish_text_render(MenuItem* arg0) {
     s32 recordType;
     s32 rowOffset;
+    f32 sc = 0.6f;
+    char** lapStrPtr;
+    UNUSED s32 pad[2];
+#else
+void time_trials_finish_text_render(MenuItem* arg0) {
+    s32 recordType;
+    s32 rowOffset;
+#endif
 
     // name of the course
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+#ifdef VERSION_CN
+    print_text1_center_mode_1(arg0->column + 0x43, arg0->row + 0x19,
+                              gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, sc, sc);
+
+    // lap time text
+    sc = 0.75f;
+    set_text_color(TEXT_YELLOW);
+    lapStrPtr = &gLapTimeText;
+    print_text1_center_mode_1(arg0->column + 0x46, arg0->row + 0x28, *lapStrPtr, 0, sc, sc);
+#else
 #ifdef VERSION_JP
     print_text1_center_mode_1(arg0->column + 0x46, arg0->row + 0x19,
                               gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, 0.75f, 0.75f);
@@ -10359,6 +10559,7 @@ void time_trials_finish_text_render(MenuItem* arg0) {
     // lap time text
     set_text_color(TEXT_YELLOW);
     print_text1_center_mode_1(arg0->column + 0x46, arg0->row + 0x28, gLapTimeText, 0, 0.75f, 0.75f);
+#endif
 
     // lap time
     for (recordType = 0, rowOffset = 0; recordType < TIME_TRIAL_3LAP_RECORD_5; recordType += 1, rowOffset += 0xF) {
@@ -10367,6 +10568,17 @@ void time_trials_finish_text_render(MenuItem* arg0) {
 
     // best record text
     set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+    print_text_mode_1(0xB4 - arg0->column, arg0->row + 0x86, gBestTimeText[0], 0, sc, sc);
+
+    // best record
+    for (recordType = 0; recordType < TIME_TRIAL_1LAP_RECORD; recordType += 1) {
+        set_text_color(TEXT_RED);
+        render_lap_times(recordType, 0xAA - arg0->column, arg0->row + (recordType * 0xD) + 0x92);
+    }
+    set_text_color(TEXT_YELLOW);
+    print_text_mode_1(0xB4 - arg0->column, arg0->row + 0xD5, gBestTimeText[1], 0, sc, sc);
+#else
     print_text_mode_1(0xB4 - arg0->column, arg0->row + 0x86, gBestTimeText[0], 0, 0.75f, 0.75f);
 
     // best record
@@ -10376,6 +10588,7 @@ void time_trials_finish_text_render(MenuItem* arg0) {
     }
     set_text_color(TEXT_YELLOW);
     print_text_mode_1(0xB4 - arg0->column, arg0->row + 0xD5, gBestTimeText[1], 0, 0.75f, 0.75f);
+#endif
     render_lap_times(TIME_TRIAL_1LAP_RECORD, 0xAA - arg0->column, arg0->row + 0xE1);
 }
 
@@ -10578,15 +10791,30 @@ void func_800A3E60(MenuItem* arg0) {
 void func_800A3E60(MenuItem* arg0) {
     UNUSED s32 stackPadding0;
     Unk_D_800E70A0 sp84;
+#ifdef VERSION_CN
+    UNUSED s32 stackPadding1[2];
+#else
     UNUSED s32 stackPadding1;
     UNUSED s32 stackPadding2;
     UNUSED s32 stackPadding3;
     UNUSED s32 stackPadding4;
+#endif
     s32 var_v0;
     s32 var_v1;
+#ifdef VERSION_CN
+    s32 ghostHighlight;
+#endif
     s32 var_s1;
+#ifdef VERSION_CN
+    s32 courseIdx;
+    s32 courseIdx2;
+    struct_8018EE10_entry* ghost;
+#endif
     Unk_D_800E70A0* var_v0_5;
     char sp60[3];
+#ifdef VERSION_CN
+    f32 scale;
+#endif
 
     var_v0 = arg0->state;
     if (var_v0 == 0) {
@@ -10597,10 +10825,22 @@ void func_800A3E60(MenuItem* arg0) {
     }
 
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+#ifdef VERSION_CN
+    scale = 0.6f;
+    print_text1_center_mode_1(arg0->column + 0x55, -arg0->row + 0x19,
+                              gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, scale, scale);
+    scale = 0.75f;
+#else
     print_text1_center_mode_1(arg0->column + 0x55, 0x19 - arg0->row,
                               gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, 0.6f, 0.6f);
+#endif
     set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+    /* cn: gBestTimeText[2] is gLapTimeText; the array spelling is what the ROM was built from */
+    print_text1_center_mode_1(arg0->column + 0x55, -arg0->row + 0x28, gBestTimeText[2], 0, scale, scale);
+#else
     print_text1_center_mode_1(arg0->column + 0x55, 0x28 - arg0->row, gLapTimeText, 0, 0.75f, 0.75f);
+#endif
     for (var_s1 = 0; var_s1 < 4; var_s1++) {
         render_lap_time(var_s1, arg0->column + 0x26, ((0xF * var_s1) - arg0->row) + 0x37);
     }
@@ -10631,11 +10871,21 @@ void func_800A3E60(MenuItem* arg0) {
                 if (var_v1 != 0) {
                     set_text_color(TEXT_BLUE);
                     gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, 0x96);
+#ifdef VERSION_CN
+                    print_text_mode_2(0xB7 - arg0->column, (arg0->row + 0x93) + (0xD * var_s1),
+                                      gTextPauseButton[var_s1 + 1], 0, scale, scale);
+#else
                     print_text_mode_2(0xB2 - arg0->column, arg0->row + (0xD * var_s1) + 0x93,
                                       gTextPauseButton[var_s1 + 1], 0, 0.75f, 0.75f);
+#endif
                 } else {
+#ifdef VERSION_CN
+                    print_text_mode_1(0xB7 - arg0->column, (arg0->row + 0x93) + (0xD * var_s1),
+                                      gTextPauseButton[var_s1 + 1], 0, scale, scale);
+#else
                     print_text_mode_1(0xB2 - arg0->column, arg0->row + (0xD * var_s1) + 0x93,
                                       gTextPauseButton[var_s1 + 1], 0, 0.75f, 0.75f);
+#endif
                 }
             }
             break;
@@ -10647,58 +10897,151 @@ void func_800A3E60(MenuItem* arg0) {
         case 16:
             set_text_color(TEXT_YELLOW);
             var_v1 = arg0->state - 11;
+#ifdef VERSION_CN
+            scale = 0.6f;
+#endif
             for (var_s1 = 0; var_s1 < 7; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000A2, 0x8C + (0xD * var_s1), D_800E798C[(var_v1 * 7) + var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000A2, 0x8C + (0xD * var_s1), D_800E798C[(var_v1 * 7) + var_s1], 0, 0.6f, 0.6f);
+#endif
             }
             break;
         case 17:
         case 18:
             set_text_color(TEXT_GREEN);
+#ifdef VERSION_CN
+            scale = 0.75f;
+#endif
             for (var_s1 = 0; var_s1 < 2; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000A5, (arg0->row + 0x8C) + (0xD * var_s1), D_800E7A3C[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000A5, arg0->row + (0xD * var_s1) + 0x8C, D_800E7A3C[var_s1], 0, 0.7f, 0.7f);
+#endif
             }
             for (var_s1 = 0; var_s1 < 2; var_s1++) {
+#ifdef VERSION_CN
+                ghostHighlight = 0;
+                ghost = &D_8018EE10[1 - var_s1];
+#endif
                 text_rainbow_effect(arg0->state - 0x11, var_s1, 1);
+#ifdef VERSION_CN
+                scale = 0.7f;
+                /* cn only: dim-blue backing when the other slot's ghost is for the course on screen */
+                if (ghost->ghostDataSaved != 0) {
+                    courseIdx = ghost->courseIndex;
+                    if ((courseIdx / 4 == gCupSelection) && (courseIdx % 4 == gCourseIndexInCup)) {
+                        set_text_color(TEXT_BLUE);
+                        gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, 0x96);
+                        ghostHighlight = 1;
+                    }
+                }
+#endif
                 convert_number_to_ascii(var_s1 + 1, sp60);
-                print_text_mode_1(0xB1 - arg0->column, 0xAA + (0x1E * var_s1), &sp60[1], 0, 0.6f, 0.6f);
-                if (D_8018EE10[var_s1].ghostDataSaved == 0) {
-                    print_text_mode_1(0xBB - arg0->column, 0xAA + (0x1E * var_s1), D_800E7A44, 0, 0.45f, 0.45f);
+#ifdef VERSION_CN
+                if (ghostHighlight != 0) {
+                    print_text_mode_2(0xB1 - arg0->column, 0xAA + (0x1E * var_s1), &sp60[1], 0, scale, scale);
                 } else {
+                    print_text_mode_1(0xB1 - arg0->column, 0xAA + (0x1E * var_s1), &sp60[1], 0, scale, scale);
+                }
+#else
+                print_text_mode_1(0xB1 - arg0->column, 0xAA + (0x1E * var_s1), &sp60[1], 0, 0.6f, 0.6f);
+#endif
+                if (D_8018EE10[var_s1].ghostDataSaved == 0) {
+#ifdef VERSION_CN
+                    scale = 0.7f;
+                    if (ghostHighlight != 0) {
+                        print_text_mode_2(0xC1 - arg0->column, 0xAA + (0x1E * var_s1), D_800E7A3C[2], 0, scale, scale);
+                    } else {
+                        print_text_mode_1(0xC1 - arg0->column, 0xAA + (0x1E * var_s1), D_800E7A3C[2], 0, scale, scale);
+                    }
+#else
+                    print_text_mode_1(0xBB - arg0->column, 0xAA + (0x1E * var_s1), D_800E7A44, 0, 0.45f, 0.45f);
+#endif
+                } else {
+#ifdef VERSION_CN
+                    scale = 0.7f;
+                    courseIdx2 = D_8018EE10[var_s1].courseIndex;
+                    if (ghostHighlight != 0) {
+                        print_text_mode_2(0xC1 - arg0->column, 0xAA + (0x1E * var_s1),
+                                          gCourseNamesDup2[gCupCourseOrder[courseIdx2 / 4][courseIdx2 % 4]], 0, scale,
+                                          scale);
+                    } else {
+                        print_text_mode_1(0xC1 - arg0->column, 0xAA + (0x1E * var_s1),
+                                          gCourseNamesDup2[gCupCourseOrder[courseIdx2 / 4][courseIdx2 % 4]], 0, scale,
+                                          scale);
+                    }
+#else
                     print_text_mode_1(0xBB - arg0->column, 0xAA + (0x1E * var_s1),
                                       gCourseNamesDup2[gCupCourseOrder[D_8018EE10[var_s1].courseIndex / 4]
                                                                       [D_8018EE10[var_s1].courseIndex % 4]],
                                       0, 0.45f, 0.45f);
+#endif
                 }
             }
             break;
         case 19:
             set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+            scale = 0.8f;
+#endif
             for (var_s1 = 0; var_s1 < 3; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000AA, (0xD * var_s1) + 0x93, D_800E7A48[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000AA, (0xD * var_s1) + 0x93, D_800E7A48[var_s1], 0, 0.8f, 0.8f);
+#endif
             }
             break;
         case 20:
         case 21:
             if (var_s1 && var_s1) {}
             set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+            scale = 0.67f;
+#endif
             for (var_s1 = 0; var_s1 < 3; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000A3, (arg0->row + 0x8C) + (0xD * var_s1), D_800E7A60[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000A3, arg0->row + (0xD * var_s1) + 0x8C, D_800E7A60[var_s1], 0, 0.67f, 0.67f);
+#endif
             }
+#ifdef VERSION_CN
+            scale = 0.75f;
+#endif
             for (var_s1 = 0; var_s1 < 2; var_s1++) {
                 text_rainbow_effect(arg0->state - 0x14, var_s1, 1);
+#ifdef VERSION_CN
+                print_text_mode_1(0xC8 - arg0->column, 0xB9 + (0xF * var_s1), D_800E7A6C[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0xC8 - arg0->column, 0xB9 + (0xF * var_s1), D_800E7A6C[var_s1], 0, 0.75f, 0.75f);
+#endif
             }
             break;
         case 25:
             set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+            scale = 0.67f;
+#endif
             for (var_s1 = 0; var_s1 < 3; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000A3, (0xD * var_s1) + 0x93, D_800E7A74[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000A3, (0xD * var_s1) + 0x93, D_800E7A74[var_s1], 0, 0.67f, 0.67f);
+#endif
             }
             break;
         case 26:
             set_text_color(TEXT_YELLOW);
             for (var_s1 = 0; var_s1 < 2; var_s1++) {
+#ifdef VERSION_CN
+                print_text_mode_1(0x000000AA, (0xD * var_s1) + 0x93, D_800E7A80[var_s1], 0, scale, scale);
+#else
                 print_text_mode_1(0x000000AA, (0xD * var_s1) + 0x93, D_800E7A80[var_s1], 0, 0.75f, 0.75f);
+#endif
             }
             break;
     }
@@ -10827,6 +11170,9 @@ void render_lap_times(s32 recordType, s32 column, s32 row) {
     char sp38[3];
     MenuItem* item;
     s32 sp30;
+#ifdef VERSION_CN
+    f32 scale;
+#endif
 
     if (gGamestate == RACING) {
         sp30 = 0;
@@ -10847,11 +11193,21 @@ void render_lap_times(s32 recordType, s32 column, s32 row) {
             timeRecord = func_800B4FB0(gTimeTrialDataCourseIndex);
         }
     }
+#ifdef VERSION_CN
+    scale = 0.65f;
+    temp_t0 = timeRecord & 0xFFFFF;
+    func_800939C8(column + 0x14, row, D_800E7744[recordType], 2, scale, scale);
+#else
     func_800939C8(column + 0x14, row, D_800E7744[recordType], 2, 0.65f, 0.65f);
+#endif
     if (sp30 == 0) {
         item = find_menu_items_dupe(0x000000BB);
         if (recordType < 5) {
+#ifdef VERSION_CN
+            if (item->param1 == recordType) {
+#else
             if (recordType == item->param1) {
+#endif
                 textColor = gGlobalTimer % 3;
             } else {
                 textColor = TEXT_YELLOW;
@@ -10865,21 +11221,41 @@ void render_lap_times(s32 recordType, s32 column, s32 row) {
         textColor = TEXT_YELLOW;
     }
     set_text_color(textColor);
+#ifndef VERSION_CN
     temp_t0 = timeRecord & 0xFFFFF;
+#endif
     get_time_record_minutes(temp_t0, sp38);
+#ifdef VERSION_CN
+    func_800939C8(column + 0x2A, row, sp38, 0, scale, scale);
+    print_text_mode_1(column + 0x35, row, "'", 0, scale, scale);
+#else
     func_800939C8(column + 0x27, row, sp38, 0, 0.65f, 0.65f);
     print_text_mode_1(column + 0x32, row, "'", 0, 0.65f, 0.65f);
+#endif
     get_time_record_seconds(temp_t0, sp38);
+#ifdef VERSION_CN
+    func_800939C8(column + 0x3E, row, sp38, 0, scale, scale);
+    print_text_mode_1(column + 0x49, row, "\"", 0, scale, scale);
+#else
     func_800939C8(column + 0x3B, row, sp38, 0, 0.65f, 0.65f);
     print_text_mode_1(column + 0x46, row, "\"", 0, 0.65f, 0.65f);
+#endif
     get_time_record_centiseconds(temp_t0, sp38);
+#ifdef VERSION_CN
+    func_800939C8(column + 0x53, row, sp38, 0, scale, scale);
+#else
     func_800939C8(column + 0x50, row, sp38, 0, 0.65f, 0.65f);
+#endif
     if ((u32) temp_t0 < 600000U) {
         textColor = timeRecord >> 0x14;
     } else {
         textColor = 8;
     }
+#ifdef VERSION_CN
+    print_text1_center_mode_1(column + 0x7D, row, D_800E76A8[textColor], 0, scale, scale);
+#else
     print_text1_center_mode_1(column + 0x78, row, D_800E76A8[textColor], 0, 0.65f, 0.65f);
+#endif
 }
 
 #ifdef VERSION_JP
@@ -10955,46 +11331,106 @@ void render_pause_menu_time_trials(MenuItem* arg0) {
     s32 temp_a0;
     s32 var_s0;
     s32 zero = 0; // ?
+#ifdef VERSION_CN
+    f32 scale;
+    Unk_D_800E70A0* new_var;
+#endif
 
+#ifdef VERSION_CN
+    scale = 1.0f;
+#endif
     gDisplayListHead = draw_box(gDisplayListHead, 0, 0, 0x0000013F, 0x000000EF, 0, 0, 0, 0x0000008C);
     set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+    print_text1_center_mode_1(0x000000A0, 0x00000050,
+                              gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, scale, scale);
+#else
     print_text1_center_mode_1(0x000000A0, 0x00000050,
                               gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, 1.0f, 1.0f);
+#endif
     set_text_color(TEXT_RED);
+#ifdef VERSION_CN
+    scale = 0.8f;
+#endif
 #ifdef VERSION_JP
     print_text1_center_mode_1(0x000000A0, 0x00000060, gBestTimeText[0], 0, 0.8f, 0.8f);
 #else
+#ifdef VERSION_CN
+    print_text1_center_mode_1(0x0000009D, 0x00000060, gBestTimeText[0], 0, scale, scale);
+#else
     print_text1_center_mode_1(0x0000009D, 0x00000060, gBestTimeText[0], 0, 0.8f, 0.8f);
+#endif
 #endif
     temp_a0 = func_800B4E24(TIME_TRIAL_3LAP_RECORD_1);
     temp_a0 &= 0xFFFFF;
     get_time_record_minutes(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x0000007F, 0x0000006D, sp68, 0, scale, scale);
+    print_text_mode_1(0x0000008E, 0x0000006D, "'", 0, scale, scale);
+#else
     func_800939C8(0x0000007F, 0x0000006D, sp68, 0, 0.8f, 0.8f);
     print_text_mode_1(0x0000008E, 0x0000006D, "'", 0, 0.8f, 0.8f);
+#endif
     get_time_record_seconds(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x00000098, 0x0000006D, sp68, 0, scale, scale);
+    print_text_mode_1(0x000000A7, 0x0000006D, "\"", 0, scale, scale);
+#else
     func_800939C8(0x00000098, 0x0000006D, sp68, 0, 0.8f, 0.8f);
     print_text_mode_1(0x000000A7, 0x0000006D, "\"", 0, 0.8f, 0.8f);
+#endif
     get_time_record_centiseconds(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x000000B3, 0x0000006D, sp68, 0, scale, scale);
+#else
     func_800939C8(0x000000B3, 0x0000006D, sp68, 0, 0.8f, 0.8f);
+#endif
 #ifdef VERSION_JP
     print_text1_center_mode_1(0x000000A0, 0x0000007C, gBestTimeText[1], 0, 0.8f, 0.8f);
 #else
+#ifdef VERSION_CN
+    print_text1_center_mode_1(0x0000009D, 0x0000007C, gBestTimeText[1], 0, scale, scale);
+#else
     print_text1_center_mode_1(0x0000009D, 0x0000007C, gBestTimeText[1], 0, 0.8f, 0.8f);
+#endif
 #endif
     temp_a0 = func_800B4F2C();
     temp_a0 &= 0xFFFFF;
     get_time_record_minutes(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x0000007F, 0x00000089, sp68, 0, scale, scale);
+    print_text_mode_1(0x0000008E, 0x00000089, "'", 0, scale, scale);
+#else
     func_800939C8(0x0000007F, 0x00000089, sp68, 0, 0.8f, 0.8f);
     print_text_mode_1(0x0000008E, 0x00000089, "'", 0, 0.8f, 0.8f);
+#endif
     get_time_record_seconds(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x00000098, 0x00000089, sp68, 0, scale, scale);
+    print_text_mode_1(0x000000A7, 0x00000089, "\"", 0, scale, scale);
+#else
     func_800939C8(0x00000098, 0x00000089, sp68, 0, 0.8f, 0.8f);
     print_text_mode_1(0x000000A7, 0x00000089, "\"", 0, 0.8f, 0.8f);
+#endif
     get_time_record_centiseconds(temp_a0, sp68);
+#ifdef VERSION_CN
+    func_800939C8(0x000000B3, 0x00000089, sp68, 0, scale, scale);
+    new_var = D_800E8538 + zero;
+#else
     func_800939C8(0x000000B3, 0x00000089, sp68, 0, 0.8f, 0.8f);
+#endif
     for (var_s0 = 0; var_s0 < 5; var_s0++) {
+#ifdef VERSION_CN
+        scale = 0.75f;
+#endif
         text_rainbow_effect(arg0->state - 11, var_s0, TEXT_GREEN);
+#ifdef VERSION_CN
+        print_text_mode_1(new_var->column, new_var->row + (13 * var_s0), gTextPauseButton[var_s0], 0, scale,
+                          scale);
+#else
         print_text_mode_1(D_800E8538[zero].column, D_800E8538[zero].row + (13 * var_s0), gTextPauseButton[var_s0], 0,
                           0.75f, 0.75f);
+#endif
     }
 }
 
@@ -11007,6 +11443,9 @@ void render_pause_menu_versus(MenuItem* arg0) {
     s32 var_s1;
     Unk_D_800E70A0* temp_s3;
     struct UnkStruct_800DC5EC* temp_v0;
+#ifdef VERSION_CN
+    UNUSED s32 pad[2];
+#endif
 
     temp_v0 = &D_8015F480[gIsGamePaused - 1];
     temp_v1 = temp_v0->screenStartX;
@@ -11015,7 +11454,11 @@ void render_pause_menu_versus(MenuItem* arg0) {
     temp_t4 = temp_v0->screenHeight / 2;
     gDisplayListHead = draw_box(gDisplayListHead, temp_v1 - temp_t3, temp_t0 - temp_t4, temp_v1 + temp_t3,
                                 temp_t0 + temp_t4, 0, 0, 0, 0x0000008C);
+#ifdef VERSION_CN
+    temp_s3 = &D_800E8540[(gScreenModeSelection * 4) + gIsGamePaused - 1];
+#else
     temp_s3 = &D_800E8540[(gScreenModeSelection * 4) + (gIsGamePaused - 1)];
+#endif
     for (var_s0 = 0; var_s0 < 4; var_s0++) {
         if (var_s0 > 0) {
             var_s1 = var_s0 + 1;
@@ -11102,6 +11545,9 @@ void render_pause_battle(MenuItem* arg0) {
     s32 var_a1;
     s32 var_s1;
     Unk_D_800E70A0* temp_s3;
+#ifdef VERSION_CN
+    UNUSED s32 pad[2];
+#endif
 
     temp_v0 = &D_8015F480[gIsGamePaused - 1];
     temp_v1 = temp_v0->screenStartX;
@@ -11110,7 +11556,11 @@ void render_pause_battle(MenuItem* arg0) {
     temp_t4 = temp_v0->screenHeight / 2;
     gDisplayListHead = draw_box(gDisplayListHead, temp_v1 - temp_t3, temp_t0 - temp_t4, temp_v1 + temp_t3,
                                 temp_t0 + temp_t4, 0, 0, 0, 0x0000008C);
+#ifdef VERSION_CN
+    temp_s3 = &D_800E8600[(gScreenModeSelection * 4) + gIsGamePaused - 1];
+#else
     temp_s3 = &D_800E8600[(gScreenModeSelection * 4) + (gIsGamePaused - 1)];
+#endif
     for (var_a1 = 0; var_a1 < 4; var_a1++) {
         if (var_a1 > 0) {
             var_s1 = var_a1 + 1;
@@ -11547,6 +11997,220 @@ void render_menu_item_end_course_option(MenuItem* arg0) {
 }
 #endif
 #else
+#ifdef VERSION_CN
+void render_menu_item_end_course_option(MenuItem* arg0) {
+    Unk_D_800E70A0 sp98;
+    UNUSED s32 stackPadding0;
+    UNUSED s32 stackPadding1;
+    UNUSED s32 stackPadding2;
+    f32 why;
+    char sp84[3];
+    UNUSED s32 stackPadding3;
+    UNUSED s32 stackPadding4;
+    s32 temp_a0;
+    UNUSED s32 var_v1;
+    s32 var_s1;
+    s32 var_s2;
+    s32 temp_v0;
+    Unk_D_800E70A0* var_v0_9;
+    char sp5C[3];
+    f32 someScale;
+    s32 highlight;
+    s32 ghostCourse;
+    char** ghostNamePtr;
+    s32 ghostCourse2;
+    struct_8018EE10_entry* ghost;
+
+    if (arg0->state == 0) {
+        if ((arg0->param1 >= 0x1E) && ((gGlobalTimer / 16) % 2)) {
+            someScale = 0.8f;
+            why = get_string_width(gTextPauseButton[REPLAY]) * someScale;
+            temp_v0 = (s32) why;
+            gDisplayListHead =
+                draw_box(gDisplayListHead, 0x000000C0, 0x00000021, temp_v0 + 0xC6, 0x00000032, 0, 0, 0, 0x00000096);
+            set_text_color(TEXT_GREEN);
+            print_text_mode_1(0x000000C4, 0x0000002F, gTextPauseButton[REPLAY], 0, someScale, someScale);
+        }
+    } else {
+        if (arg0->state == 1) {
+            var_s1 = arg0->param1;
+            var_s2 = (s32) (arg0->param1 * 0xFF) / 140;
+        } else {
+            var_s1 = 0x0000008C;
+            var_s2 = 0x000000FF;
+        }
+        someScale = 1.0f;
+        gDisplayListHead = draw_box(gDisplayListHead, 0, 0, 0x0000013F, 0x000000EF, 0, 0, 0, var_s1);
+        gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, var_s2);
+        set_text_color(TEXT_YELLOW);
+        print_text1_center_mode_2(0x000000A0, 0x00000050,
+                                  gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, someScale,
+                                  someScale);
+        someScale = 0.8f;
+        switch (arg0->state) {
+            case 1:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+                someScale = 0.8f;
+                set_text_color(TEXT_RED);
+                print_text1_center_mode_2(0x0000009D, 0x00000060, gBestTimeText[0], 0, someScale, someScale);
+                temp_a0 = func_800B4E24(0);
+                temp_a0 &= 0xFFFFF;
+                get_time_record_minutes(temp_a0, sp84);
+                text_draw(0x0000007F, 0x0000006D, sp84, 0, someScale, someScale);
+                print_text_mode_2(0x0000008E, 0x0000006D, "'", 0, someScale, someScale);
+                get_time_record_seconds(temp_a0, sp84);
+                text_draw(0x00000098, 0x0000006D, sp84, 0, someScale, someScale);
+                print_text_mode_2(0x000000A7, 0x0000006D, "\"", 0, someScale, someScale);
+                get_time_record_centiseconds(temp_a0, sp84);
+                text_draw(0x000000B3, 0x0000006D, sp84, 0, someScale, someScale);
+                print_text1_center_mode_2(0x0000009D, 0x0000007C, gBestTimeText[1], 0, someScale, someScale);
+                temp_a0 = func_800B4F2C();
+                temp_a0 &= 0xFFFFF;
+                get_time_record_minutes(temp_a0, sp84);
+                text_draw(0x0000007F, 0x00000089, sp84, 0, someScale, someScale);
+                print_text_mode_2(0x0000008E, 0x00000089, "'", 0, someScale, someScale);
+                get_time_record_seconds(temp_a0, sp84);
+                text_draw(0x00000098, 0x00000089, sp84, 0, someScale, someScale);
+                print_text_mode_2(0x000000A7, 0x00000089, "\"", 0, someScale, someScale);
+                get_time_record_centiseconds(temp_a0, sp84);
+                text_draw(0x000000B3, 0x00000089, sp84, 0, someScale, someScale);
+                someScale = 0.75f;
+                var_v0_9 = &D_800E8538[0];
+                for (var_s1 = 0; var_s1 < 6; var_s1++) {
+                    text_rainbow_effect(arg0->state - 0xB, var_s1, TEXT_GREEN);
+                    print_text_mode_2(var_v0_9->column, var_v0_9->row + (0xD * var_s1),
+                                      gTextPauseButton[var_s1 + 1], 0, someScale, someScale);
+                }
+                break;
+            case 21:
+            case 22:
+            case 23:
+            case 24:
+            case 25:
+            case 26:
+                someScale = 0.8f;
+                set_text_color(TEXT_YELLOW);
+                temp_v0 = arg0->state - 0x15;
+                for (var_s1 = 0; var_s1 < 7; var_s1++) {
+                    print_text_mode_1(0x0000004D, 0x6E + (0xD * var_s1), D_800E798C[(temp_v0 * 7) + var_s1], 0,
+                                      someScale, someScale);
+                }
+                break;
+            case 30:
+            case 31:
+                set_text_color(TEXT_GREEN);
+                for (var_s1 = 0; var_s1 < 2; var_s1++) {
+                    print_text_mode_1(0x0000005A, arg0->row + 0x6E + (0xD * var_s1), D_800E7A3C[var_s1], 0, someScale,
+                                      someScale);
+                }
+                someScale = 0.75f;
+                for (var_s1 = 0; var_s1 < 2; var_s1++) {
+                    ghost = &D_8018EE10[1 - var_s1];
+                    text_rainbow_effect(arg0->state - 0x1E, var_s1, TEXT_GREEN);
+                    highlight = 0;
+                    if (ghost->ghostDataSaved != 0) {
+                        ghostCourse = ghost->courseIndex;
+                        if (((ghostCourse / 4) == gCupSelection) && ((ghostCourse % 4) == gCourseIndexInCup)) {
+                            set_text_color(TEXT_BLUE);
+                            highlight = 1;
+                            gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, 0x96);
+                        }
+                    }
+                    convert_number_to_ascii(var_s1 + 1, sp5C);
+                    if (highlight != 0) {
+                        print_text_mode_2(0x5A - arg0->column, (0x96 + (0x14 * var_s1)), &sp5C[1], 0, someScale,
+                                          someScale);
+                    } else {
+                        print_text_mode_1(0x5A - arg0->column, (0x96 + (0x14 * var_s1)), &sp5C[1], 0, someScale,
+                                          someScale);
+                    }
+                    if (D_8018EE10[var_s1].ghostDataSaved == 0) {
+                        ghostNamePtr = &D_800E7A44;
+                        if (highlight != 0) {
+                            print_text_mode_2(0x70 - arg0->column, (0x96 + (0x14 * var_s1)), *ghostNamePtr, 0,
+                                              someScale, someScale);
+                        } else {
+                            print_text_mode_1(0x70 - arg0->column, (0x96 + (0x14 * var_s1)), *ghostNamePtr, 0,
+                                              someScale, someScale);
+                        }
+                    } else {
+                        ghostCourse2 = D_8018EE10[var_s1].courseIndex;
+                        if (highlight != 0) {
+                            print_text_mode_2(0x70 - arg0->column, (0x96 + (0x14 * var_s1)),
+                                              gCourseNamesDup2[gCupCourseOrder[ghostCourse2 / 4][ghostCourse2 % 4]], 0,
+                                              someScale, someScale);
+                        } else {
+                            print_text_mode_1(0x70 - arg0->column, (0x96 + (0x14 * var_s1)),
+                                              gCourseNamesDup2[gCupCourseOrder[ghostCourse2 / 4][ghostCourse2 % 4]], 0,
+                                              someScale, someScale);
+                        }
+                    }
+                }
+                break;
+            case 32:
+                set_text_color(TEXT_YELLOW);
+                for (var_s1 = 0; var_s1 < 3; var_s1++) {
+                    print_text_mode_1(0x00000064, (0xD * var_s1) + 0x6E, D_800E7A48[var_s1], 0, someScale, someScale);
+                }
+                break;
+            case 35:
+            case 36:
+                set_text_color(TEXT_YELLOW);
+                for (var_s1 = 0; var_s1 < 3; var_s1++) {
+                    print_text_mode_1(0x00000055, arg0->row + 0x6E + (0xD * var_s1), D_800E7A60[var_s1], 0, someScale,
+                                      someScale);
+                }
+                for (var_s1 = 0; var_s1 < 2; var_s1++) {
+                    text_rainbow_effect(arg0->state - 0x23, var_s1, TEXT_GREEN);
+                    print_text_mode_1(0x7D - arg0->column, 0x9B + (0xF * var_s1), D_800E7A6C[var_s1], 0, someScale,
+                                      someScale);
+                }
+                break;
+            case 40:
+                set_text_color(TEXT_YELLOW);
+                for (var_s1 = 0; var_s1 < 3; var_s1++) {
+                    print_text_mode_1(0x00000055, (0xD * var_s1) + 0x6E, D_800E7A74[var_s1], 0, someScale, someScale);
+                }
+                break;
+            case 41:
+                set_text_color(TEXT_YELLOW);
+                for (var_s1 = 0; var_s1 < 2; var_s1++) {
+                    print_text_mode_1(0x0000005D, (0xD * var_s1) + 0x6E, D_800E7A80[var_s1], 0, someScale, someScale);
+                }
+                break;
+        }
+        switch (arg0->state) { /* switch 2 */
+            case 11:           /* switch 2 */
+            case 12:           /* switch 2 */
+            case 13:           /* switch 2 */
+            case 14:           /* switch 2 */
+            case 15:           /* switch 2 */
+            case 16:           /* switch 2 */
+                var_v0_9 = &D_800E73E0[arg0->state - 11];
+                break;
+            case 30: /* switch 2 */
+            case 31: /* switch 2 */
+                var_v0_9 = &D_800E7410[arg0->state - 30];
+                break;
+            case 35: /* switch 2 */
+            case 36: /* switch 2 */
+                if (0) {} // wtf?
+                var_v0_9 = &D_800E7420[arg0->state - 35];
+                break;
+            default:
+                return;
+        }
+        sp98.column = var_v0_9->column;
+        sp98.row = var_v0_9->row;
+        func_800A66A8(arg0, &sp98);
+    }
+}
+#else
 void render_menu_item_end_course_option(MenuItem* arg0) {
     Unk_D_800E70A0 sp98;
     UNUSED s32 stackPadding0;
@@ -11712,6 +12376,7 @@ void render_menu_item_end_course_option(MenuItem* arg0) {
         func_800A66A8(arg0, &sp98);
     }
 }
+#endif
 
 #endif
 #ifdef VERSION_JP
@@ -11759,24 +12424,44 @@ void func_800A6154(MenuItem* arg0) {
     UNUSED s32 stackPadding3;
     s32 var_s0;
     s32 var_s1;
+#ifdef VERSION_CN
+    f32 sc = 1.0f;
+#endif
 
     if (arg0->state == 0) {
         gDisplayListHead = draw_box(gDisplayListHead, 0, 0, 0x0000013F, 0x000000EF, 0, 0, 0, arg0->param1);
         set_text_color(TEXT_YELLOW);
         gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, (arg0->param1 * 0xFF) / 100);
+#ifdef VERSION_CN
+        for (var_s1 = 0; var_s1 < 2; var_s1++) {
+            print_text_mode_2(0x0000008C, (var_s1 * 0x14) + 0x96, gTextPauseButton[(var_s1 * 3) + 1], 0, sc, sc);
+#else
         for (var_s1 = 0, var_s0 = 0x96; var_s0 < 0xBE; var_s1++, var_s0 += 0x14) {
             print_text_mode_2(0x0000008C, var_s0, gTextPauseButton[(var_s1 * 3) + 1], 0, 1.0f, 1.0f);
+#endif
         }
     } else {
         gDisplayListHead = draw_box(gDisplayListHead, 0, 0, 0x0000013F, 0x000000EF, 0, 0, 0, 0x00000064);
+#ifdef VERSION_CN
+        for (var_s1 = 0; var_s1 < 2; var_s1++) {
+#else
         for (var_s1 = 0, var_s0 = 0x96; var_s1 < 2; var_s1++, var_s0 += 0x14) {
+#endif
             text_rainbow_effect(arg0->state - 0xB, var_s1, TEXT_YELLOW);
+#ifdef VERSION_CN
+            print_text_mode_1(0x0000008C, (var_s1 * 0x14) + 0x96, gTextPauseButton[(var_s1 * 3) + 1], 0, sc, sc);
+#else
             print_text_mode_1(0x0000008C, var_s0, gTextPauseButton[(var_s1 * 3) + 1], 0, 1.0f, 1.0f);
+#endif
         }
     }
     if (arg0->state >= 0xB) {
         sp6C.column = 0x0084;
+#ifdef VERSION_CN
+        sp6C.row = ((arg0->state - 0xB) * 0x14) + 0x8E;
+#else
         sp6C.row = (arg0->state * 0x14) - 0x4E;
+#endif
         func_800A66A8(arg0, &sp6C);
     }
     if (arg0->param2 > 0) {
@@ -11925,24 +12610,46 @@ void func_800A69C8(UNUSED MenuItem* arg0) {
     s32 var_s0;
     char sp74[5];
     s32 var_v1;
+#ifdef VERSION_CN
+    char* temp_s3;
+    u8 var_s4;
+    f32 sc = 1.0f;
+#else
     char* temp_s3;
     u8* var_s4;
+#endif
 
     for (var_s0 = 0; var_s0 < gPlayerCount; var_s0++) {
+#ifdef VERSION_CN
+        thing = &D_800E7300[var_s0];
+        var_v1 = 0;
+#else
         var_v1 = 0;
         thing = &D_800E7300[var_s0];
+#endif
         switch (gModeSelection) { /* irregular */
             case VERSUS:
                 if (gGPCurrentRaceRankByPlayerId[var_s0] != 0) {
                     var_v1 = 1;
                 }
+#ifdef VERSION_CN
+                var_s4 = nmi_gVersusResults2P[var_s0];
+#else
                 var_s4 = &nmi_gVersusResults2P[var_s0];
+#endif
                 break;
             case BATTLE:
+#ifdef VERSION_CN
+                if (gPlayerWinningIndex != var_s0) {
+                    var_v1 = 1;
+                }
+                var_s4 = gNmiUnknown4[var_s0];
+#else
                 if (var_s0 != gPlayerWinningIndex) {
                     var_v1 = 1;
                 }
                 var_s4 = &gNmiUnknown4[var_s0];
+#endif
                 break;
         }
         temp_s3 = gWinLoseText[var_v1];
@@ -11951,6 +12658,12 @@ void func_800A69C8(UNUSED MenuItem* arg0) {
         } else {
             set_text_color((s32) gGlobalTimer % 3);
         }
+#ifdef VERSION_CN
+        func_800A79F4(var_s4, sp74);
+        text_draw(thing->column + 0x10, thing->row + 0x75, sp74, 0, sc, sc);
+        thing = &D_800E7380[var_s0];
+        print_text1_center_mode_2(thing->column, thing->row, temp_s3, 0, 0.65f, sc);
+#else
         func_800A79F4(var_s4[0], sp74);
         text_draw(thing->column + 0x10, thing->row + 0x75, sp74, 0, 1.0f, 1.0f);
 #ifdef VERSION_JP
@@ -11958,10 +12671,13 @@ void func_800A69C8(UNUSED MenuItem* arg0) {
 #else
         print_text1_center_mode_2(D_800E7380[var_s0].column, D_800E7380[var_s0].row, temp_s3, 0, 0.65f, 1.0f);
 #endif
+#endif
     }
+#ifndef VERSION_CN
     set_text_color(TEXT_BLUE);
     // Not a hyphen, that is an EUC-JP character
     text_draw(0x0000009E, D_800E7300[0].row + 0x6D, "ー", 0, 1.0f, 1.0f);
+#endif
 }
 
 void func_800A6BEC(UNUSED MenuItem* arg0) {
@@ -12115,14 +12831,24 @@ void func_800A70E8(MenuItem* arg0) {
     s32 alpha;
     s32 loopIndex;
     s32 stringIndex;
+#ifdef VERSION_CN
+    char** ptr;
+    f32 scale = 0.45f;
+#endif
 
     if (arg0->state == 1) {
+#ifdef VERSION_CN
+        ptr = D_800E7A34;
+        var_s0 = get_string_width(ptr[0]) * scale;
+        temp_f6 = get_string_width(ptr[1]) * scale;
+#else
 #ifdef VERSION_JP
         var_s0 = get_string_width(D_800E7A34[0]) * 0.5f;
         temp_f6 = get_string_width(D_800E7A34[1]) * 0.5f;
 #else
         var_s0 = get_string_width(D_800E7A34[0]) * 0.45f;
         temp_f6 = get_string_width(D_800E7A34[1]) * 0.45f;
+#endif
 #endif
         if (var_s0 < temp_f6) {
             var_s0 = temp_f6;
@@ -12135,11 +12861,16 @@ void func_800A70E8(MenuItem* arg0) {
         }
         gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, alpha);
         set_text_color(TEXT_RED);
+#ifdef VERSION_CN
+        for (stringIndex = 0; stringIndex < 2; stringIndex++) {
+            print_text_mode_2(0x000000C0, 0x2C + stringIndex * 0xA, ptr[stringIndex], 0, scale, scale);
+#else
         for (loopIndex = 0x2C, stringIndex = 0; loopIndex < 0x40; loopIndex += 0xA, stringIndex++) {
 #ifdef VERSION_JP
             print_text_mode_2(0x000000C3, loopIndex, D_800E7A34[stringIndex], 0, 0.5f, 0.5f);
 #else
             print_text_mode_2(0x000000C0, loopIndex, D_800E7A34[stringIndex], 0, 0.45f, 0.45f);
+#endif
 #endif
         }
     }
@@ -12197,6 +12928,9 @@ void func_800A7448(MenuItem* arg0) {
 
 void func_800A75A0(MenuItem* arg0) {
     UNUSED s32 pad;
+#ifdef VERSION_CN
+    f32 scale = 1.3f;
+#endif
     s32 topThree;
 
     if (D_802874D8.unk1D < 3) {
@@ -12206,7 +12940,11 @@ void func_800A75A0(MenuItem* arg0) {
     }
 
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+#ifdef VERSION_CN
+    print_text1_center_mode_1(arg0->column + 10, arg0->row, D_800E7A9C[topThree], 0, scale, scale);
+#else
     print_text1_center_mode_1(arg0->column, arg0->row, D_800E7A9C[topThree], 0, 1.3f, 1.3f);
+#endif
 }
 
 void func_800A761C(MenuItem* arg0) {
@@ -12216,17 +12954,41 @@ void func_800A761C(MenuItem* arg0) {
     UNUSED s32 stackPadding1;
     char sp3C[3];
     s32 temp_a0;
+#ifdef VERSION_CN
+    f32 scale;
+#endif
 
     temp_a0 = D_802874D8.unk1D + 1;
+#ifdef VERSION_CN
+    scale = 1.2f;
+#endif
     func_800A79F4(temp_a0, sp3C);
+#ifdef VERSION_CN
+    sp48 = ((get_string_width(gPlaceText[0]) + 5) * scale) / 2;
+    sp44 = ((get_string_width(gPlaceText[temp_a0]) + 5) * scale) / 2;
+#else
     sp48 = ((get_string_width(gPlaceText[0]) + 5) * 1.2f) / 2;
     sp44 = ((get_string_width(gPlaceText[temp_a0]) + 5) * 1.2f) / 2;
+#endif
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
+#ifdef VERSION_CN
+    print_text1_center_mode_1((arg0->column - sp44) + 40, arg0->row, gPlaceText[0], 0, scale, scale);
+#else
     print_text1_center_mode_1(arg0->column - sp44, arg0->row, gPlaceText[0], 0, 1.2f, 1.2f);
+#endif
     set_text_color((s32) gGlobalTimer % 3);
+#ifdef VERSION_CN
+    print_text1_center_mode_1((arg0->column + sp48) + 40, arg0->row, gPlaceText[temp_a0], 0, scale, scale);
+#else
     print_text1_center_mode_1(arg0->column + sp48, arg0->row, gPlaceText[temp_a0], 0, 1.2f, 1.2f);
+#endif
     convert_number_to_ascii(temp_a0, sp3C);
+#ifdef VERSION_CN
+    scale = 2.0f;
+    func_800939C8((arg0->column + sp48) + 10, arg0->row, &sp3C[1], 0, scale, scale);
+#else
     func_800939C8((arg0->column + sp48) - 0x18, arg0->row, &sp3C[1], 0, 2.0f, 2.0f);
+#endif
 }
 
 #ifdef VERSION_JP
@@ -12391,6 +13153,21 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
     for (i = 0; i < ARRAY_COUNT(gMenuItems); i++) {
         isRendered = false;
         entry = &gMenuItems[i];
+#ifdef VERSION_CN
+        switch (entry->type) {
+            case MENU_ITEM_UI_NO_CONTROLLER:
+            case MENU_ITEM_UI_START_RECORD_TIME:
+            case MENU_ITEM_PAUSE:
+                if (priSpecial != 0) {
+                    isRendered = true;
+                }
+                break;
+            default:
+                if (priSpecial == 0) {
+                    isRendered = true;
+                }
+                break;
+#else
         type = entry->type;
         if ((type == MENU_ITEM_UI_NO_CONTROLLER) || (type == MENU_ITEM_UI_START_RECORD_TIME) ||
             (type == MENU_ITEM_PAUSE)) {
@@ -12399,11 +13176,16 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
             }
         } else if (priSpecial == 0) {
             isRendered = true;
+#endif
         }
 
         if (isRendered == false) {
             continue;
         }
+#ifdef VERSION_CN
+
+        type = entry->type;
+#endif
 
         switch (type) {                   /* switch 8; irregular */
             case MENU_ITEM_UI_LOGO_INTRO: /* switch 8 */
@@ -12775,10 +13557,30 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
 
     for (j = 0; j < MENU_ITEM_PRIORITY_MAX; j++) {
         for (i = 0; i < ARRAY_COUNT(gMenuItems); i++) {
+#ifdef VERSION_CN
+            entry = &gMenuItems[i];
+#endif
             isRendered = false;
+#ifndef VERSION_CN
             entry = &gMenuItems[i];
             if (entry && entry) {} // ?
+#endif
             type = entry->type;
+#ifdef VERSION_CN
+            switch (type) {
+                case MENU_ITEM_UI_NO_CONTROLLER:
+                case MENU_ITEM_UI_START_RECORD_TIME:
+                case MENU_ITEM_PAUSE:
+                    if (priSpecial != 0) {
+                        isRendered = true;
+                    }
+                    break;
+                default:
+                    if (priSpecial == 0) {
+                        isRendered = true;
+                    }
+                    break;
+#else
             if ((type == MENU_ITEM_UI_NO_CONTROLLER) || (type == MENU_ITEM_UI_START_RECORD_TIME) ||
                 (type == MENU_ITEM_PAUSE)) {
                 if (priSpecial != 0) {
@@ -12786,6 +13588,7 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
                 }
             } else if (priSpecial == 0) {
                 isRendered = true;
+#endif
             }
             if ((isRendered != 0) && (j == (s8) entry->priority)) {
                 render_menus(entry);
@@ -12859,15 +13662,29 @@ void func_800A8564(MenuItem* arg0) {
     switch (arg0->type) { /* irregular */
         case 0xF:
             var_a0 = D_0200487C;
+#ifdef VERSION_CN
+            if (gMainMenuSelection <= MAIN_MENU_OK_SELECT_GO_BACK) {
+                if (gMainMenuSelection >= MAIN_MENU_OK_SELECT) {
+                    var_a1 = 1;
+                }
+#else
             if ((gMainMenuSelection == MAIN_MENU_OK_SELECT) || (gMainMenuSelection == MAIN_MENU_OK_SELECT_GO_BACK)) {
                 var_a1 = 1;
+#endif
             }
             break;
         case 0x33:
             var_a0 = D_02004B74;
+#ifdef VERSION_CN
+            if (gPlayerSelectMenuSelection <= PLAYER_SELECT_MENU_OK_GO_BACK) {
+                if (gPlayerSelectMenuSelection >= PLAYER_SELECT_MENU_OK) {
+                    var_a1 = 1;
+                }
+#else
             if ((gPlayerSelectMenuSelection == PLAYER_SELECT_MENU_OK) ||
                 (gPlayerSelectMenuSelection == PLAYER_SELECT_MENU_OK_GO_BACK)) {
                 var_a1 = 1;
+#endif
             }
             break;
         case 0x5D:
@@ -12880,16 +13697,32 @@ void func_800A8564(MenuItem* arg0) {
             return;
     }
     if (arg0->param1 < 0x20) {
+#ifdef VERSION_CN
+        sp34 = arg0->param1 / 2;
+#else
         sp34 = (arg0->param1 << 5) / 64;
+#endif
         var_a0 = segmented_to_virtual_dupe(var_a0);
         temp_t0 = arg0->column + var_a0->dX;
         temp_a2 = arg0->row + var_a0->dY;
         if (var_a1 != 0) {
+#ifdef VERSION_CN
+            s32 temp = sp34 - 0x1E;
+            gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t0 + sp34, temp_a2,
+                                                           temp_t0 - temp, temp_a2 + 0x12);
+#else
             gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t0 + sp34, temp_a2,
                                                            (temp_t0 - sp34) + 0x1E, temp_a2 + 0x12);
+#endif
         } else {
+#ifdef VERSION_CN
+            s32 temp = sp34 - 0x1E;
+            gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t0 + sp34, temp_a2, temp_t0 - temp,
+                                             temp_a2 + 0x12, 1, 1, 1, 0x000000FF);
+#else
             gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t0 + sp34, temp_a2, (temp_t0 - sp34) + 0x1E,
                                              temp_a2 + 0x12, 1, 1, 1, 0x000000FF);
+#endif
         }
     }
 }
@@ -12906,12 +13739,28 @@ void func_800A874C(MenuItem* arg0) {
     UNUSED s32 stackPadding1;
     UNUSED s32 stackPadding2;
     s32 temp_s1;
+#ifdef VERSION_CN
     UNUSED u32 var_v0;
     u32 var_s2;
+    f32 scX = 0.6f;
+    f32 scY = 0.65f;
+#else
+    UNUSED u32 var_v0;
+    u32 var_s2;
+#endif
     set_text_color(TEXT_GREEN);
     var_s2 = arg0->type == MENU_ITEM_TYPE_065 ? func_800B4E24(0) : func_800B4F2C();
     temp_s1 = var_s2 & 0xFFFFF;
     get_time_record_minutes((temp_s1 ^ 0), buffer);
+#ifdef VERSION_CN
+    text_draw(arg0->column + 5, arg0->row + 0x21, buffer, 0, scX, scY);
+    print_text_mode_1(arg0->column + 0xE, arg0->row + 0x21, "'", 0, scX, scY);
+    get_time_record_seconds(temp_s1, buffer);
+    text_draw(arg0->column + 0x16, arg0->row + 0x21, buffer, 0, scX, scY);
+    print_text_mode_1(arg0->column + 0x20, arg0->row + 0x21, "\"", 0, scX, scY);
+    get_time_record_centiseconds(temp_s1, buffer);
+    text_draw(arg0->column + 0x29, arg0->row + 0x21, buffer, 0, scX, scY);
+#else
     text_draw(arg0->column + 5, arg0->row + 0x21, buffer, 0, 0.6f, 0.65f);
     print_text_mode_1(arg0->column + 0xE, arg0->row + 0x21, "'", 0, 0.6f, 0.65f);
     get_time_record_seconds(temp_s1, buffer);
@@ -12919,11 +13768,16 @@ void func_800A874C(MenuItem* arg0) {
     print_text_mode_1(arg0->column + 0x20, arg0->row + 0x21, "\"", 0, 0.6f, 0.65f);
     get_time_record_centiseconds(temp_s1, buffer);
     text_draw(arg0->column + 0x29, arg0->row + 0x21, buffer, 0, 0.6f, 0.65f);
+#endif
     var_s2 = (u32) temp_s1 < 0x927C0U ? var_s2 >> 0x14 : 8;
+#ifdef VERSION_CN
+    print_text1_left(arg0->column + 0x66, arg0->row + 0x21, D_800E76A8[var_s2], 0, scX, scY);
+#else
 #ifdef VERSION_JP
     print_text1_left(arg0->column + 0x62, arg0->row + 0x21, D_800E76A8[var_s2], 0, 0.6f, 0.65f);
 #else
     print_text1_left(arg0->column + 0x60, arg0->row + 0x21, D_800E76A8[var_s2], 0, 0.6f, 0.65f);
+#endif
 #endif
 }
 
@@ -12942,15 +13796,33 @@ void func_800A890C(s32 arg0, MenuItem* arg1) {
         gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
         if (arg0 == gCupSelection) {
             if (gSubMenuSelection == SUB_MENU_MAP_SELECT_CUP) {
+#ifdef VERSION_CN
+                s32 temp = temp_t7 - 64;
+                gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t1 + temp_t7, temp_a2,
+                                                               temp_t1 - temp, temp_a2 + 39);
+#else
                 gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t1 + temp_t7, temp_a2,
                                                                (temp_t1 - temp_t7) + 64, temp_a2 + 39);
+#endif
             } else {
+#ifdef VERSION_CN
+                s32 temp = temp_t7 - 64;
+                gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, temp_t1 - temp,
+                                                 temp_a2 + 39, 255, 249, 220, 255);
+#else
                 gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, (temp_t1 - temp_t7) + 64,
                                                  temp_a2 + 39, 255, 249, 220, 255);
+#endif
             }
         } else {
+#ifdef VERSION_CN
+            s32 temp = temp_t7 - 64;
+            gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, temp_t1 - temp,
+                                             temp_a2 + 39, 1, 1, 1, 255);
+#else
             gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, (temp_t1 - temp_t7) + 64,
                                              temp_a2 + 39, 1, 1, 1, 255);
+#endif
         }
     }
 }
@@ -13402,13 +14274,20 @@ const s8 D_800F0CA8[] = { 0x03, 0x02, 0x00 };
 const s8 D_800F0CAC[] = { 0x03, 0x03, 0x02 };
 
 void update_ok_menu_item(MenuItem* arg0) {
+#ifndef VERSION_CN
     s32 sp4;
+#endif
     s32 var_v0;
+#ifdef VERSION_CN
+    s32 temp;
+#endif
 
     switch (arg0->type) {
+#ifndef VERSION_CN
         default:
             var_v0 = sp4; // wut?
             break;
+#endif
         case MENU_ITEM_UI_OK:
             var_v0 = D_800F0CA0[gMainMenuSelection - 1];
             break;
@@ -13428,7 +14307,12 @@ void update_ok_menu_item(MenuItem* arg0) {
             break;
         case 2:
             if (arg0->param1 > 0) {
+#ifdef VERSION_CN
+                temp = arg0->param1 - 2;
+                arg0->param1 = temp - (arg0->param1 / 12);
+#else
                 arg0->param1 = (arg0->param1 - (arg0->param1 / 12)) - 2;
+#endif
                 if (arg0->param1 < 0) {
                     arg0->param1 = 0;
                 }
@@ -13456,7 +14340,12 @@ void func_800A9B9C(MenuItem* arg0) {
             /* fallthrough */
         case 4:
             if (arg0->param1 > 0) {
+#ifdef VERSION_CN
+                s32 temp = arg0->param1 - 2;
+                arg0->param1 = temp - (arg0->param1 / 12);
+#else
                 arg0->param1 = (arg0->param1 - (arg0->param1 / 12)) - 2;
+#endif
                 if (arg0->param1 < 0) {
                     arg0->param1 = 0;
                 }
@@ -13478,14 +14367,22 @@ void func_800A9C40(MenuItem* arg0) {
     switch (arg0->state) {
         case 0:
             func_800AA280(arg0);
+#ifdef VERSION_CN
+            if ((gPlayerCount - 1) == (arg0->type - MENU_ITEM_UI_1P_GAME)) {
+#else
             if ((gPlayerCount + 0xA) == arg0->type) {
+#endif
                 arg0->state = 2;
             } else {
                 arg0->state = 1;
             }
             break;
         case 4:
+#ifdef VERSION_CN
+            if ((gPlayerCount - 1) == (arg0->type - MENU_ITEM_UI_1P_GAME)) {
+#else
             if ((gPlayerCount + 0xA) == arg0->type) {
+#endif
                 arg0->state = 2;
                 arg0->param1 = 0;
                 break;
@@ -13493,6 +14390,18 @@ void func_800A9C40(MenuItem* arg0) {
             arg0->state = 1;
         case 1:
             func_800AA280(arg0);
+#ifdef VERSION_CN
+            if (gMainMenuSelection <= MAIN_MENU_MODE_SUB_SELECT_GO_BACK) {
+                if (gMainMenuSelection >= MAIN_MENU_OK_SELECT_GO_BACK) {
+                    arg0->param1 = 0x00000020;
+                    break;
+                }
+            }
+            if (arg0->param1 < 0x20) {
+                arg0->param1 += 2;
+                if (arg0->param1 >= 0x20) {
+                    arg0->param1 = 0x00000020;
+#else
             if ((gMainMenuSelection == MAIN_MENU_OK_SELECT_GO_BACK) ||
                 (gMainMenuSelection == MAIN_MENU_MODE_SUB_SELECT_GO_BACK)) {
                 arg0->param1 = 0x00000020;
@@ -13502,11 +14411,16 @@ void func_800A9C40(MenuItem* arg0) {
                     if (arg0->param1 >= 0x20) {
                         arg0->param1 = 0x00000020;
                     }
+#endif
                 }
             }
             break;
         case 3:
+#ifdef VERSION_CN
+            if ((gPlayerCount - 1) == (arg0->type - MENU_ITEM_UI_1P_GAME)) {
+#else
             if ((gPlayerCount + 0xA) == arg0->type) {
+#endif
                 arg0->state = 2;
             }
             break;
@@ -13519,7 +14433,11 @@ void func_800A9C40(MenuItem* arg0) {
 void func_800A9D5C(MenuItem* arg0) {
     Unk_D_800E70A0* temp_v0;
 
+#ifdef VERSION_CN
+    if ((gPlayerCount - 1) == (arg0->type - 0xB)) {
+#else
     if ((gPlayerCount + 0xA) == arg0->type) {
+#endif
         arg0->priority = 0x0A;
     } else {
         arg0->priority = 6;
@@ -13527,10 +14445,20 @@ void func_800A9D5C(MenuItem* arg0) {
 
     switch (arg0->state) {
         case 2:
+#ifdef VERSION_CN
+            if (gMainMenuSelection <= MAIN_MENU_MODE_SUB_SELECT_GO_BACK) {
+                if (gMainMenuSelection >= MAIN_MENU_OK_SELECT_GO_BACK) {
+                    arg0->column = 0x00000080;
+                    arg0->row = 0x0000003E;
+                } else {
+                    func_800A91D8(arg0, 0x00000080, 0x0000003E);
+                }
+#else
             if ((gMainMenuSelection == MAIN_MENU_OK_SELECT_GO_BACK) ||
                 (gMainMenuSelection == MAIN_MENU_MODE_SUB_SELECT_GO_BACK)) {
                 arg0->column = 0x00000080;
                 arg0->row = 0x0000003E;
+#endif
             } else {
                 func_800A91D8(arg0, 0x00000080, 0x0000003E);
             }
@@ -13909,14 +14837,24 @@ void func_800AA69C(MenuItem* arg0) {
             }
             break;
         case 1:
+#ifdef VERSION_CN
+            if ((D_8018DEE0 + arg0->D_8018DEE0_index)->sequenceIndex >= D_800E8440[temp_a0]) {
+#else
             if (D_8018DEE0[arg0->D_8018DEE0_index].sequenceIndex >= D_800E8440[temp_a0]) {
+#endif
                 arg0->subState = 2;
                 func_8009A594(arg0->D_8018DEE0_index, 0, segmented_to_virtual_dupe_2(D_800E83A0[temp_a0]));
             } else if ((gCharacterGridIsSelected[temp_v0] == 0) && (var_a0 != 0)) {
                 arg0->subState = 3;
+#ifdef VERSION_CN
+                func_8009A594(arg0->D_8018DEE0_index,
+                              D_800E8460[temp_a0] - (D_8018DEE0 + arg0->D_8018DEE0_index)->sequenceIndex,
+                              segmented_to_virtual_dupe_2(gCharacterDeselectAnimation[temp_a0]));
+#else
                 func_8009A594(arg0->D_8018DEE0_index,
                               D_800E8460[temp_a0] - D_8018DEE0[arg0->D_8018DEE0_index].sequenceIndex,
                               segmented_to_virtual_dupe_2(gCharacterDeselectAnimation[temp_a0]));
+#endif
             }
             break;
         case 2:
@@ -13927,14 +14865,24 @@ void func_800AA69C(MenuItem* arg0) {
             }
             break;
         case 3:
+#ifdef VERSION_CN
+            if ((D_8018DEE0 + arg0->D_8018DEE0_index)->sequenceIndex >= D_800E8460[temp_a0]) {
+#else
             if (D_8018DEE0[arg0->D_8018DEE0_index].sequenceIndex >= D_800E8460[temp_a0]) {
+#endif
                 arg0->subState = 0;
                 func_8009A594(arg0->D_8018DEE0_index, 0, segmented_to_virtual_dupe_2(D_800E8360[temp_a0]));
             } else if ((gCharacterGridIsSelected[temp_v0] != 0) && (var_a0 != 0)) {
                 arg0->subState = 1;
+#ifdef VERSION_CN
+                func_8009A594(arg0->D_8018DEE0_index,
+                              D_800E8460[temp_a0] - (D_8018DEE0 + arg0->D_8018DEE0_index)->sequenceIndex,
+                              segmented_to_virtual_dupe_2(gCharacterCelebrateAnimation[temp_a0]));
+#else
                 func_8009A594(arg0->D_8018DEE0_index,
                               D_800E8460[temp_a0] - D_8018DEE0[arg0->D_8018DEE0_index].sequenceIndex,
                               segmented_to_virtual_dupe_2(gCharacterCelebrateAnimation[temp_a0]));
+#endif
             }
             break;
         case 4:
@@ -13949,7 +14897,11 @@ void func_800AA69C(MenuItem* arg0) {
                 } else {
                     var_v0 = D_800E84A0[temp_a0];
                 }
+#ifdef VERSION_CN
+                if ((D_8018DEE0 + arg0->D_8018DEE0_index)->sequenceIndex >= var_v0) {
+#else
                 if (D_8018DEE0[arg0->D_8018DEE0_index].sequenceIndex >= var_v0) {
+#endif
                     arg0->subState = 0;
                     func_8009A594(arg0->D_8018DEE0_index, 0, segmented_to_virtual_dupe_2(D_800E8360[temp_a0]));
                 }
@@ -14009,7 +14961,12 @@ void func_800AAB90(MenuItem* arg0) {
             break;
         case 3:
             if (arg0->param1 > 0) {
+#ifdef VERSION_CN
+                s32 temp = arg0->param1 - 2;
+                arg0->param1 = temp - (arg0->param1 / 12);
+#else
                 arg0->param1 = (arg0->param1 - (arg0->param1 / 12)) - 2;
+#endif
                 if (arg0->param1 < 0) {
                     arg0->param1 = 0;
                 }
@@ -14050,9 +15007,14 @@ void func_800AAC18(MenuItem* arg0) {
             }
         case 1:
         case 3:
+#ifdef VERSION_CN
+            arg0->column = (s32) D_800E7108[0][temp_a1].column;
+            arg0->row = (s32) D_800E7108[0][temp_a1].row;
+#else
             var_t0 = &D_800E7108[0][temp_a1];
             arg0->column = (s32) var_t0->column;
             arg0->row = (s32) var_t0->row;
+#endif
             break;
         case 2:
         case 4:
@@ -14273,7 +15235,12 @@ void func_800AB020(MenuItem* arg0) {
             /* fallthrough */
         case 4:
             if (arg0->param1 > 0) {
+#ifdef VERSION_CN
+                s32 temp = arg0->param1 - 2;
+                arg0->param1 = temp - (arg0->param1 / 12);
+#else
                 arg0->param1 = (arg0->param1 - (arg0->param1 / 12)) - 2;
+#endif
                 if (arg0->param1 < 0) {
                     arg0->param1 = 0;
                 }
@@ -14295,14 +15262,22 @@ void func_800AB020(MenuItem* arg0) {
 void func_800AB098(MenuItem* arg0) {
     switch (arg0->state) {
         case 0:
+#ifdef VERSION_CN
+            if (gCupSelection == (arg0->type - 0x53)) {
+#else
             if ((gCupSelection + 0x53) == arg0->type) {
+#endif
                 arg0->state = 2;
             } else {
                 arg0->state = 1;
             }
             break;
         case 4:
+#ifdef VERSION_CN
+            if (gCupSelection == (arg0->type - 0x53)) {
+#else
             if ((gCupSelection + 0x53) == arg0->type) {
+#endif
                 arg0->state = 2;
                 arg0->param1 = 0;
                 break;
@@ -14319,7 +15294,11 @@ void func_800AB098(MenuItem* arg0) {
             }
             break;
         case 3:
+#ifdef VERSION_CN
+            if (gCupSelection == (arg0->type - 0x53)) {
+#else
             if ((gCupSelection + 0x53) == arg0->type) {
+#endif
                 arg0->state = 2;
             }
             break;
@@ -14330,9 +15309,17 @@ void func_800AB098(MenuItem* arg0) {
 }
 
 void func_800AB164(MenuItem* arg0) {
+#ifdef VERSION_CN
+    Unk_D_800E70A0* thing;
+#else
     Unk_D_800E70A0* thing = &D_800E7148[arg0->type - 0x53];
+#endif
 
+#ifdef VERSION_CN
+    if (gCupSelection == (arg0->type - 0x53)) {
+#else
     if ((gCupSelection + 0x53) == arg0->type) {
+#endif
         arg0->priority = 0x0A;
     } else {
         arg0->priority = 4;
@@ -14526,10 +15513,18 @@ void func_800AB9B0(MenuItem* arg0) {
     if (arg0->param1 != gCupSelection) {
         arg0->param1 = gCupSelection;
         arg0->param2 = func_800B54C0((s32) gCupSelection, gCCSelection);
+#ifdef VERSION_CN
+        func_8009A594(arg0->D_8018DEE0_index, 0,
+                      segmented_to_virtual_dupe_2(D_800E7E20[(((gCCSelection / 2) * 4) | 3) - arg0->param2]));
+        temp_v1 = D_800E7268;
+        arg0->column = (s32) temp_v1->column;
+        arg0->row = temp_v1->row;
+#else
         func_8009A594(arg0->D_8018DEE0_index, 0,
                       segmented_to_virtual_dupe_2(D_800E7E20[((gCCSelection / 2) * 4) - arg0->param2]));
         arg0->column = (s32) D_800E7268->column;
         arg0->row = D_800E7268->row;
+#endif
     }
     temp_v1 = &D_800E7268[arg0->state];
     switch (arg0->state) { /* irregular */
@@ -15117,14 +16112,26 @@ void func_800ACF40(MenuItem* arg0) {
     s32 somePlayerIndex;
     s32 temp_a1;
     s32 var_v1;
+#ifdef VERSION_CN
+    s32 varA1;
+#endif
     UNUSED s32 stackPadding0;
 
     somePlayerIndex = arg0->type - 0xB1;
+#ifdef VERSION_CN
+    varA1 = somePlayerIndex;
+#endif
     temp_a1 = D_800EFD64[gCharacterSelections[arg0->type - 0xB1]];
     switch (arg0->state) {
         case 0:
+#ifdef VERSION_CN
+            temp_v0_2 = &D_800E72F8;
+            arg0->column = temp_v0_2->column;
+            arg0->row = temp_v0_2->row;
+#else
             arg0->column = D_800E72F8.column;
             arg0->row = D_800E72F8.row;
+#endif
             arg0->state = 1;
             break;
         case 1:
@@ -15145,7 +16152,11 @@ void func_800ACF40(MenuItem* arg0) {
                     }
                     break;
                 case 3:
+#ifdef VERSION_CN
+                    if (gPlayerWinningIndex != varA1) {
+#else
                     if (somePlayerIndex != gPlayerWinningIndex) {
+#endif
                         var_v1 = 1;
                     }
                     break;
@@ -16171,7 +17182,13 @@ void func_800AF270(MenuItem* arg0) {
 void func_800AF480(MenuItem* arg0) {
     s32 idx = arg0->type - 0x190;
 
+#ifdef VERSION_CN
+    if (gCreditsTextRenderInfo[idx].slideDirection == 0) {
+        func_800AF4DC(arg0);
+    } else if (gCreditsTextRenderInfo[idx].slideDirection != 1) {
+#else
     if ((gCreditsTextRenderInfo[idx].slideDirection == 0) || (gCreditsTextRenderInfo[idx].slideDirection != 1)) {
+#endif
         func_800AF4DC(arg0);
     } else {
         func_800AF740(arg0);

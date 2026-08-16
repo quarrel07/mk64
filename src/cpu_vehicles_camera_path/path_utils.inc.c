@@ -85,13 +85,19 @@ void calculate_track_offset_position(u16 pathPointIndex, f32 lerpFactor, f32 off
     f32 pathPointOneZ;
     f32 pathPointTwoX;
     f32 pathPointTwoZ;
+#ifdef VERSION_CN
+    f32 halfLerpFactor;
+#else
     UNUSED s32 pad2;
+#endif
     f32 xdiff;
     f32 zdiff;
     f32 segmentLength;
+#ifndef VERSION_CN
     UNUSED f32 temp_f12;
     UNUSED f32 temp_f2_2;
     UNUSED TrackPathPoint* path;
+#endif
     TrackPathPoint* pathPointTwo;
     TrackPathPoint* pathPointOne;
 
@@ -99,13 +105,19 @@ void calculate_track_offset_position(u16 pathPointIndex, f32 lerpFactor, f32 off
     pathPointOneX = pathPointOne->posX;
     pathPointOneZ = pathPointOne->posZ;
     pathPointTwo = &gTrackPaths[pathIndex][(pathPointIndex + 1) % gSelectedPathCount];
+#ifdef VERSION_CN
+    // 0.50f, not 0.5f: iQue's IDO 7.1 keys constant reuse on the literal's spelling.
+    halfLerpFactor = lerpFactor * 0.50f;
+#endif
     pathPointTwoX = pathPointTwo->posX;
     pathPointTwoZ = pathPointTwo->posZ;
 
     // Calculate vector between path point
     zdiff = pathPointTwoZ - pathPointOneZ;
     xdiff = pathPointTwoX - pathPointOneX;
+#ifndef VERSION_CN
     if (xdiff && xdiff) {}
+#endif
 
     segmentLength = sqrtf((xdiff * xdiff) + (zdiff * zdiff));
     if (segmentLength < 0.01f) {
@@ -113,11 +125,21 @@ void calculate_track_offset_position(u16 pathPointIndex, f32 lerpFactor, f32 off
         gOffsetPosition[2] = pathPointTwoZ;
     } else {
         gOffsetPosition[0] =
+#ifdef VERSION_CN
+            ((0.5f - halfLerpFactor) * (((offsetDistance * zdiff) / segmentLength) + pathPointOneX)) +
+            ((1.0f - (0.5f - halfLerpFactor)) * (((offsetDistance * -zdiff) / segmentLength) + pathPointOneX));
+#else
             ((0.5f - (lerpFactor * 0.5f)) * (((offsetDistance * zdiff) / segmentLength) + pathPointOneX)) +
             ((1.0f - (0.5f - (lerpFactor * 0.5f))) * (((offsetDistance * -zdiff) / segmentLength) + pathPointOneX));
+#endif
         gOffsetPosition[2] =
+#ifdef VERSION_CN
+            ((0.5f - halfLerpFactor) * (((offsetDistance * -xdiff) / segmentLength) + pathPointOneZ)) +
+            ((1.0f - (0.5f - halfLerpFactor)) * (((offsetDistance * xdiff) / segmentLength) + pathPointOneZ));
+#else
             ((0.5f - (lerpFactor * 0.5f)) * (((offsetDistance * -xdiff) / segmentLength) + pathPointOneZ)) +
             ((1.0f - (0.5f - (lerpFactor * 0.5f))) * (((offsetDistance * xdiff) / segmentLength) + pathPointOneZ));
+#endif
     }
 }
 

@@ -152,7 +152,7 @@ char external_unused_string_eu_02[] = "************** SE Fadeout ***************
 char external_unused_string_eu_03[] = "SE FADE OUT TIME %d\n";
 #endif
 
-#if defined(VERSION_EU) || defined(VERSION_JP) || defined(VERSION_CN)
+#if defined(VERSION_EU) || defined(VERSION_JP)
 #define AUDIO_LEFT_TYRE FRONT_LEFT
 #define AUDIO_RIGHT_TYRE FRONT_RIGHT
 #else

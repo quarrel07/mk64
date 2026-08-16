@@ -2084,7 +2084,11 @@ void func_8002D028(Player* player, s8 playerIndex) {
 
     temp_f18 = sqrtf((sp4C[0] - player->pos[0]) * (sp4C[0] - player->pos[0]) +
                      (sp4C[2] - player->pos[2]) * (sp4C[2] - player->pos[2]));
+#ifdef VERSION_CN
+    if (temp_f18 <= thing0) {
+#else
     if (temp_f18 <= 8.0f) {
+#endif
         adjust_angle(&player->rotation[1], -DEGREES(180), DEGREES(2));
         if ((player->rotation[1] <= (-179 * DEGREES(1))) || (player->rotation[1] >= (179 * DEGREES(1)))) {
             player->type &= ~PLAYER_STAGING;
@@ -2723,7 +2727,13 @@ void control_cpu_movement(Player* player, UNUSED Camera* camera, s8 screenId, s8
     f32 sp7C;
     UNUSED s32 pad4[2];
     Vec3f newVelocity;
+#ifdef VERSION_CN
+    UNUSED f32 pad5[5];
+    f32 posX;
+    f32 posZ;
+#else
     UNUSED f32 pad5[7];
+#endif
     f32 toSqrt;
     f32 topSpeedMultiplier;
     f32 nextY;
@@ -2746,11 +2756,23 @@ void control_cpu_movement(Player* player, UNUSED Camera* camera, s8 screenId, s8
     newVelocity[2] = player->velocity[2];
     newVelocity[0] += (((spF4[0] + sp84) + spD0[0]) - (newVelocity[0] * (0.12 * player->kartFriction))) / 6000.0;
     newVelocity[2] += (((spF4[2] + sp7C) + spD0[2]) - (newVelocity[2] * (0.12 * player->kartFriction))) / 6000.0;
+#ifdef VERSION_CN
+    posX = player->pos[0];
+    posZ = player->pos[2];
+    player->oldPos[0] = posX;
+#else
     player->oldPos[0] = player->pos[0];
+#endif
     player->oldPos[1] = nextY;
+#ifdef VERSION_CN
+    player->oldPos[2] = posZ;
+    nextX = player->velocity[0] + posX;
+    nextZ = player->velocity[2] + posZ;
+#else
     player->oldPos[2] = player->pos[2];
     nextX = player->pos[0] + player->velocity[0];
     nextZ = player->pos[2] + player->velocity[2];
+#endif
     player->unk_0C0 = 0;
     player->kartHopJerk = 0;
     player->kartHopAcceleration = 0;
@@ -2841,8 +2863,13 @@ void func_8002F730(Player* player, UNUSED Camera* camera, UNUSED s8 screenId, s8
     nextY += player->kartHopVelocity;
     actor_terrain_collision(&player->collision, player->boundingBoxSize, nextX, nextY, nextZ, player->oldPos[0],
                             player->oldPos[1], player->oldPos[2]);
-    player->unk_058 = 0.0f;
+#ifdef VERSION_CN
     player->unk_05C = 1.0f;
+#endif
+    player->unk_058 = 0.0f;
+#ifndef VERSION_CN
+    player->unk_05C = 1.0f;
+#endif
     player->unk_060 = 0.0f;
     calculate_orientation_matrix(player->orientationMatrix, 0.0f, 1.0f, 0.0f, (s16) (s32) player->rotation[1]);
     player->effects &= ~MIDAIR_EFFECT;
