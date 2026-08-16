@@ -1906,12 +1906,24 @@ UNUSED void func_8004CE8C(s32 arg0, s32 arg1, u8* texture, s32 width, s32 arg4, 
     s32 i;
     u8* img = texture;
 
+#ifdef VERSION_CN
+    /* cn: the column is computed once, ahead of the loop */
+    s32 column = arg0 - (width / 2);
+
+    for (i = 0; i < arg4 / height; i++) {
+        load_texture_block_ia8_nomirror(img, width, height);
+        func_8004B97C(column, var_s0, width, height, 1);
+        img += width * height;
+        var_s0 += height;
+    }
+#else
     for (i = 0; i < arg4 / height; i++) {
         load_texture_block_ia8_nomirror(img, width, height);
         func_8004B97C(arg0 - (width / 2), var_s0, width, height, 1);
         img += width * height;
         var_s0 += height;
     }
+#endif
 }
 
 UNUSED void func_8004CF9C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4, UNUSED s32 arg5, s32 arg6) {
@@ -2193,13 +2205,24 @@ void func_8004DF5C(s32 arg0, s32 arg1, u8* texture, s32 width, s32 arg4, s32 hei
     s32 var_s0 = var_s0 = arg1 - (arg4 / 2);
     u8* img = texture;
     s32 i;
+#ifdef VERSION_CN
+    /* cn: the column is computed once, and the advance precedes the draw */
+    s32 column = arg0 - (width / 2);
 
+    for (i = 0; i < arg4 / height; i++) {
+        rsp_load_texture(img, width, height);
+        img += width * height;
+        func_8004B97C(column, var_s0, width, height, 1);
+        var_s0 += height;
+    }
+#else
     for (i = 0; i < arg4 / height; i++) {
         rsp_load_texture(img, width, height);
         func_8004B97C(arg0 - (width / 2), var_s0, width, height, 1);
         img += width * height;
         var_s0 += height;
     }
+#endif
 }
 
 void func_8004E06C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {

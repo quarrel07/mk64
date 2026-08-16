@@ -8205,6 +8205,9 @@ void render_menu_item_data_course_info(MenuItem* arg0) {
     s16 courseId;
     s32 recordType;
     s32 rowOffset;
+#ifdef VERSION_CN
+    f32 scale;
+#endif
 
     courseId = gCupCourseOrder[gTimeTrialDataCourseIndex / 4][gTimeTrialDataCourseIndex % 4];
     arg0->column = 0x14;
@@ -8228,7 +8231,12 @@ void render_menu_item_data_course_info(MenuItem* arg0) {
 
     // best lap record
     set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+    scale = 0.75f;
+    print_text_mode_1(0xA0, arg0->row + 0x86, gBestTimeText[0], 0, scale, 0.75f);
+#else
     print_text_mode_1(0xA0, arg0->row + 0x86, gBestTimeText[0], 0, 0.75f, 0.75f);
+#endif
     // Print the 3 Lap Time Trial records
     for (recordType = TIME_TRIAL_3LAP_RECORD_1, rowOffset = 0; recordType < TIME_TRIAL_1LAP_RECORD;
          recordType++, rowOffset += 0xD) {
@@ -8236,7 +8244,11 @@ void render_menu_item_data_course_info(MenuItem* arg0) {
         render_lap_times(recordType, 0x96, arg0->row + rowOffset + 0x92);
     }
     set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+    print_text_mode_1(0xA0, arg0->row + 0xD5, gBestTimeText[1], 0, scale, scale);
+#else
     print_text_mode_1(0xA0, arg0->row + 0xD5, gBestTimeText[1], 0, 0.75f, 0.75f);
+#endif
     render_lap_times(TIME_TRIAL_1LAP_RECORD, 0x96, arg0->row + 0xE1);
 }
 
@@ -13202,14 +13214,23 @@ void func_800AB9B0(MenuItem* arg0) {
 
 void func_800ABAE8(MenuItem* arg0) {
     s32 index;
+#ifdef VERSION_CN
+    /* cn: the table base is in a register before the type is read */
+    Unk_D_800E70A0* table = D_800E7430;
+#endif
 
     if (arg0->type == 0x8C) {
         index = 4;
     } else {
         index = arg0->type - 0x78;
     }
+#ifdef VERSION_CN
+    arg0->column = table[index].column;
+    arg0->row = table[index].row;
+#else
     arg0->column = D_800E7430[index].column;
     arg0->row = D_800E7430[index].row;
+#endif
 }
 
 void func_800ABB24(MenuItem* arg0) {
