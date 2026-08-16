@@ -6873,6 +6873,10 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
     s8 temp_a1;
     s32 i;
     MkAnimation* var_a0;
+#ifdef VERSION_CN
+    /* cn: the background entry is addressed once, through a pointer */
+    RGBA16* bg;
+#endif
 
     i = 0;
     menuItem = MENU_ITEMS;
@@ -6994,8 +6998,13 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
             load_menu_img_comp_type(gMenuTexturesBackground[has_unlocked_extra_mode()], LOAD_MENU_IMG_TKMK00_ONCE);
             load_menu_img_comp_type(D_02004B74, LOAD_MENU_IMG_TKMK00_ONCE);
             convert_img_to_greyscale(0, 0x00000019);
+#ifdef VERSION_CN
+            bg = &gBackgroundColor[type - MAIN_MENU_BACKGROUND];
+            adjust_img_colour(0, SCREEN_WIDTH * SCREEN_HEIGHT, bg->red, bg->green, bg->blue);
+#else
             adjust_img_colour(0, SCREEN_WIDTH * SCREEN_HEIGHT, gBackgroundColor[type - MAIN_MENU_BACKGROUND].red,
                               gBackgroundColor[type - MAIN_MENU_BACKGROUND].green, gBackgroundColor[type - MAIN_MENU_BACKGROUND].blue);
+#endif
             break;
         case MENU_ITEM_UI_OK:
             menuItem->param1 = 0x20;
@@ -7085,8 +7094,15 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
         case MENU_ITEM_TYPE_067:
             menuItem->param1 = (s32) gCupSelection;
             menuItem->param2 = func_800B54C0(gCupSelection, gCCSelection);
+#ifdef VERSION_CN
+            /* cn: the row index carries the low two bits set - iQue's table
+               starts three entries further in */
+            menuItem->D_8018DEE0_index = animate_character_select_menu(
+                segmented_to_virtual_dupe_2(D_800E7E20[(((gCCSelection / 2) * 4) | 3) - menuItem->param2]));
+#else
             menuItem->D_8018DEE0_index = animate_character_select_menu(
                 segmented_to_virtual_dupe_2(D_800E7E20[((gCCSelection / 2) * 4) - menuItem->param2]));
+#endif
             menuItem->column = D_800E7268[0].column;
             menuItem->row = D_800E7268[0].row;
             break;
@@ -7165,7 +7181,11 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
                     }
                     break;
                 case BATTLE:
+#ifdef VERSION_CN
+                    if (gPlayerWinningIndex != (type - MENU_ITEM_TYPE_0B1)) {
+#else
                     if ((type - MENU_ITEM_TYPE_0B1) != gPlayerWinningIndex) {
+#endif
                         var_v1_3 = true;
                     }
                     break;
