@@ -2380,10 +2380,19 @@ void func_8004E6C4(s32 playerId) {
 }
 
 void draw_simplified_lap_count(s32 playerId) {
+#ifdef VERSION_CN
+    /* cn: the offsets move between the two draws - the LAP label sits 0x20 to
+       the right at the plain row, and the counter sits at the label's column */
+    draw_hud_2d_texture_32x8(playerHUD[playerId].lapX + 0x20, (s32) playerHUD[playerId].lapY,
+                             (u8*) common_texture_hud_lap);
+    draw_hud_2d_texture_32x16((s32) playerHUD[playerId].lapX, (s32) playerHUD[playerId].lapY,
+                              (u8*) gHudLapTextures[playerHUD[playerId].alsoLapCount]);
+#else
     draw_hud_2d_texture_32x8((s32) playerHUD[playerId].lapX, playerHUD[playerId].lapY + 3,
                              (u8*) common_texture_hud_lap);
     draw_hud_2d_texture_32x16(playerHUD[playerId].lapX + 0x1C, (s32) playerHUD[playerId].lapY,
                               (u8*) gHudLapTextures[playerHUD[playerId].alsoLapCount]);
+#endif
 }
 
 void func_8004E800(s32 playerId) {
