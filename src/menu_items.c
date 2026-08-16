@@ -5530,7 +5530,19 @@ void func_80099AEC(void) {
 }
 
 void func_80099E54(void) {
+#ifdef VERSION_CN
+    /* cn stores the same null four times over; the index never reaches the
+       address, so this is a count, not a walk over the table. */
+    s32 i;
+    struct_8018E0E8_entry* p;
+
+    p = D_8018E0E8;
+    for (i = 0; i < 4; i++) {
+        p[0].mk64Texture = NULL;
+    }
+#else
     D_8018E0E8[0].mk64Texture = NULL;
+#endif
 }
 
 void func_80099E60(MenuTexture* arg0, s32 arg1, s32 arg2) {
@@ -6598,61 +6610,10 @@ Gfx* func_8009C434(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s
     return arg0;
 }
 
-#ifdef VERSION_CN
-Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s32 arg4, UNUSED s32 arg5) {
-    s32 var_t0;
-    s32 var_t1;
-    TextureMap* map;
-    MenuTexture* var_s0;
-
-    var_s0 = segmented_to_virtual_dupe(arg1->textureSequence[arg1->sequenceIndex].mk64Texture);
-    while (var_s0->textureData != NULL) {
-        var_t1 = 0;
-        switch (var_s0->type) { /* irregular */
-            case 0:
-                gSPDisplayList(arg0++, D_02007708);
-                break;
-            case 1:
-                gSPDisplayList(arg0++, D_02007728);
-                break;
-            case 3:
-                gSPDisplayList(arg0++, D_02007768);
-                var_t1 = 3;
-                break;
-            default:
-                gSPDisplayList(arg0++, D_02007728);
-                break;
-        }
-        if (arg1->unk14 != 0) {
-            map = &sMenuTextureMap[arg1->menuTextureIndex];
-            var_t0 = map[1].offset;
-        } else {
-            map = &sMenuTextureMap[arg1->menuTextureIndex];
-            var_t0 = map->offset;
-        }
-        if (arg4 >= 0) {
-            arg0 =
-                func_80097E58(arg0, var_t1, 0, 0U, var_s0->width, var_s0->height, arg2 + var_s0->dX, arg3 + var_s0->dY,
-                              (u8*) &gMenuTextureBuffer[var_t0], var_s0->width, var_s0->height, (u32) arg4);
-        } else {
-            switch (arg4) {
-                case -1:
-                    arg0 = func_80095E10(arg0, var_t1, 0x00000400, 0x00000400, 0, 0, var_s0->width, var_s0->height,
-                                         arg2 + var_s0->dX, arg3 + var_s0->dY, (u8*) &gMenuTextureBuffer[var_t0],
-                                         var_s0->width, var_s0->height);
-                    break;
-                case -2:
-                    arg0 = func_800963F0(arg0, var_t1, 0x00000400, 0x00000400, 0.5f, 0.5f, 0, 0, var_s0->width,
-                                         var_s0->height, arg2 + var_s0->dX, arg3 + var_s0->dY,
-                                         (u8*) &gMenuTextureBuffer[var_t0], var_s0->width, var_s0->height);
-                    break;
-            }
-        }
-        var_s0++;
-    }
-    return arg0;
-}
-#else
+/* Not version-gated: the iQue cart's body here is the n64 shape - it indexes
+   D_802BFB80 and keeps the type-2 case, neither of which a cn-only variant
+   had. The cn variant was a copy of func_8009C434, which is why the two
+   compiled identically and ique-verify aliased one onto the other's home. */
 Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 var_t0;
     UNUSED s32 thing;
@@ -6691,7 +6652,6 @@ Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s
     }
     return arg0;
 }
-#endif
 
 void func_8009C918(void) {
     s32 someIndex;
@@ -13356,37 +13316,27 @@ void menu_item_credits_render(MenuItem* arg0) {
 
 // Originally func_800A7894
 // Presumes that "number" is a 2 digit number. Convert it to a string
-#ifdef VERSION_CN
-/* iQue writes digit GLYPH PAIRS: 0xA3 prefix + (digit | 0x80) - the glyph
-   LUT maps 0xB0-0xB9 to the digit art (cart body at 0xA78E0) */
+/* Not version-gated: the iQue cart's body here is the same plain ascii routine
+   the n64 builds use. The glyph-pair form belongs to func_800A79F4 below, which
+   compiles to the same bytes - that is why a cn variant of this function
+   appeared to match, 0x1AC bytes past its own home. */
 void convert_number_to_ascii(s32 number, char* buffer) {
 #ifdef VERSION_CN
-    /* cn: each digit lands in a register of its own before the glyph offset */
+    /* cn: each digit lands in a register of its own before the ascii offset */
     s32 digit;
 
-    buffer[0] = -93;
-    buffer[2] = -93;
-    buffer[4] = 0;
     digit = number / 0xA;
-    buffer[1] = digit - 80;
+    buffer[0] = digit + 0x30;
     digit = number % 0xA;
-    buffer[3] = digit - 80;
+    buffer[1] = digit + 0x30;
+    buffer[2] = 0;
 #else
-    buffer[0] = -93;
-    buffer[2] = -93;
-    buffer[4] = 0;
-    buffer[1] = (number / 0xA) - 80;
-    buffer[3] = (number % 0xA) - 80;
-#endif
-}
-#else
-void convert_number_to_ascii(s32 number, char* buffer) {
     buffer[0] = (number / 0xA) + 0x30;
     buffer[1] = (number % 0xA) + 0x30;
     // Terminator
     buffer[2] = 0;
-}
 #endif
+}
 
 // Originally func_800A78E0
 // MK 64 doesn't show more then 2 digits for any given time
