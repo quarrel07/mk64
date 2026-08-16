@@ -213,6 +213,17 @@ def main():
 
         for (asset, pos, meta) in assets:
             print("extracting", asset)
+            # A cn.v5 asset can need a MIO0 slot exactly as it sits in the ROM: the
+            # compressed block plus the stale bytes iQue left behind when it wrote a
+            # shorter Chinese blob into the slot the US art had. Decoding the block
+            # throws that tail away, so take the ROM bytes straight.
+            if meta.get("raw"):
+                size = int(meta["size"], 0)
+                input = roms[lang][rom_offset + pos : rom_offset + pos + size]
+                os.makedirs(os.path.dirname(asset), exist_ok=True)
+                with open(asset, "wb") as f:
+                    f.write(input)
+                continue
             if "size" in meta:
                 # TODO: hack for extracting raw binary from MIO0 block
                 # hack to build common_textures. Requires more altering to use .bin in general in a mio0 file.

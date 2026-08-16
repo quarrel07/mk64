@@ -9,11 +9,23 @@
 
 .balign 4, 0x00
 glabel gTextureSignShellShot0
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignShellShot0.bin"
+.else
 .incbin "textures/standalone/sign_shell_shot_0.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignShellShot1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignShellShot1.bin"
+.else
 .incbin "textures/standalone/sign_shell_shot_1.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureGrayCheckerboard
@@ -37,7 +49,13 @@ glabel gTexture642978
 
 .balign 4, 0x00
 glabel gTextureSignBlue64
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignBlue64.bin"
+.else
 .incbin "textures/standalone/sign_blue_64.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureCheckerboardYellowPink
@@ -169,11 +187,23 @@ glabel gTextureGrass2
 
 .balign 4, 0x00
 glabel gTextureMooMooFarmSignLeft
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMooMooFarmSignLeft.bin"
+.else
 .incbin "assets/courses/moo_moo_farm/gTextureMooMooFarmSignLeft.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureMooMooFarmSignRight
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMooMooFarmSignRight.bin"
+.else
 .incbin "assets/courses/moo_moo_farm/gTextureMooMooFarmSignRight.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTexture64ACAC
@@ -497,11 +527,23 @@ glabel gTexture6646B8
 
 .balign 4, 0x00
 glabel gTextureSignKoopaAir0
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignKoopaAir0.bin"
+.else
 .incbin "textures/standalone/sign_koopa_air_0.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignKoopaAir1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignKoopaAir1.bin"
+.else
 .incbin "textures/standalone/sign_koopa_air_1.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureBricksRed
@@ -593,19 +635,43 @@ glabel gTextureSignLuigiFace1
 
 .balign 4, 0x00
 glabel gTextureSignLuigis0
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignLuigis0.bin"
+.else
 .incbin "textures/standalone/sign_luigis_0.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignLuigis1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignLuigis1.bin"
+.else
 .incbin "textures/standalone/sign_luigis_1.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignMarioStar0
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignMarioStar0.bin"
+.else
 .incbin "textures/standalone/sign_mario_star_0.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignMarioStar1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignMarioStar1.bin"
+.else
 .incbin "textures/standalone/sign_mario_star_1.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTexture66C7A8
@@ -965,11 +1031,23 @@ glabel gTexture67FE0C
 
 .balign 4, 0x00
 glabel gTextureSignWelcome0
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignWelcome0.bin"
+.else
 .incbin "textures/standalone/sign_welcome_0.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignWelcome1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignWelcome1.bin"
+.else
 .incbin "textures/standalone/sign_welcome_1.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureSignWoodenBack0
@@ -1125,11 +1203,23 @@ glabel gTexture68CDA0
 
 .balign 4, 0x00
 glabel gTextureSignYoshi
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureSignYoshi.bin"
+.else
 .incbin "textures/standalone/sign_yoshi.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureCheckerboardBlueGray
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureCheckerboardBlueGray.bin"
+.else
 .incbin "textures/standalone/checkerboard_blue_gray.rgba16.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTexture68D834
@@ -1330,35 +1420,83 @@ glabel gTextureCactus3
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner1.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner1.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner2
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner2.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner2.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner3
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner3.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner3.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner4
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner4.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner4.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner5
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner5.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner5.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner6
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner6.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner6.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner7
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner7.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner7.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureFinishLineBanner8
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureFinishLineBanner8.bin"
+.else
 .incbin "assets/finish_line_banner/gTextureFinishLineBanner8.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTexturePiranhaPlant1
@@ -1410,7 +1548,13 @@ glabel gTextureDksJungleParkwayKiwanoFruit2
 
 .balign 4, 0x00
 glabel gTextureDksJungleParkwayKiwanoFruit3
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureDksJungleParkwayKiwanoFruit3.bin"
+.else
 .incbin "assets/courses/dks_jungle_parkway/gTextureDksJungleParkwayKiwanoFruit3.mio0"
+.endif
 
 .balign 16, 0x00
 glabel gTextureKartShadow
@@ -1438,7 +1582,13 @@ glabel gTextureSpeechBubble
 
 .balign 4, 0x00
 glabel gTextureBoingExclamation
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureBoingExclamation.bin"
+.else
 .incbin "textures/standalone/boing_exclamation.ia8.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTexture69BE6C
@@ -1534,27 +1684,63 @@ glabel gTexture69EFE0
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaCrash1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaCrash1.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaCrash1.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaCrash2
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaCrash2.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaCrash2.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaWhrrrr1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaWhrrrr1.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaWhrrrr1.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaWhrrrr2
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaWhrrrr2.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaWhrrrr2.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaPoomp1
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaPoomp1.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaPoomp1.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureOnomatopoeiaPoomp2
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureOnomatopoeiaPoomp2.bin"
+.else
 .incbin "assets/onomatopoeia/gTextureOnomatopoeiaPoomp2.mio0"
+.endif
 
 .balign 4, 0x00
 glabel gTextureBalloon1
@@ -2066,7 +2252,13 @@ glabel gTextureExhaust5
 
 .balign 4, 0x00
 glabel logo_mario_kart_64
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/logo_mario_kart_64.bin"
+.else
 .incbin "textures/standalone/logo_mario_kart_64.rgba32.mio0"
+.endif
 
 .balign 4, 0x00
 glabel minimap_mario_raceway
@@ -2146,4 +2338,10 @@ glabel minimap_dks_jungle_parkway
 
 .balign 4, 0x00
 glabel minimap_big_donut
+/* cn: iQue wrote its Chinese art into the US slot and left the old
+   blob's tail behind it, so the slot is the US one, not the new blob. */
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/minimap_big_donut.bin"
+.else
 .incbin "assets/course_outlines/minimap_big_donut.mio0"
+.endif
