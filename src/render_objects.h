@@ -244,7 +244,11 @@ void func_800552BC(s32);
 void func_800450C8(u8*, s32, s32);
 void func_80044F34(u8*, s32, s32);
 void func_8004D044(s32, s32, u8*, s32, s32, s32, s32, s32, s32, s32, s32);
+#ifdef VERSION_CN
+void func_8004D0CC(s32, s32, u8*, s32, s32, s32);
+#else
 void func_8004D0CC(void);
+#endif
 void func_8004D0D4(s32, s32, u8*, s32, s32, s32);
 void func_8004D210(s32, s32, u8*, s32, s32, s32, s32, s32, s32, s32, s32);
 void func_8004D37C(s32, s32, u8*, s32, s32, s32, s32, s32, s32, s32, s32);
@@ -267,11 +271,16 @@ void func_8004DEEC(s32, s32, u8*);
 void func_8004DF24(s32, s32, u8*);
 
 void func_8004F6D0(s32);
+#ifdef VERSION_CN
+void func_8004E238(s32, s32, u8*, s32, s32);
+void func_8004E3B8(s32, s32, u8*, u8*, s32, s32);
+#else
 void func_8004E238(void);
+void func_8004E3B8(void);
+#endif
 void func_8004E240(s32, s32, u8*, u8*, s32, s32, s32);
 void func_8004E2B8(s32, s32, s32, u8*, u8*, s32, s32, s32);
 void func_8004E338(s32, s32, u8*, u8*, s32, s32);
-void func_8004E3B8(void);
 void func_8004E3C0(s32, s32, u8*, u8*, s32, s32, s32, s32);
 void func_8004E3F4(s32, s32, s32, u8*, u8*, s32, s32, s32, s32);
 void func_8004E430(s32, s32, u8*, u8*);
@@ -374,7 +383,11 @@ void draw_crabs(s32, s32);
 void render_object_crabs(s32);
 void func_800555BC(s32, s32);
 void render_object_hedgehogs(s32);
+#ifdef VERSION_CN
+void func_800557AC(s32);
+#else
 void func_800557AC(void);
+#endif
 void func_800557B4(s32, u32, u32);
 void render_object_train_penguins(s32);
 void func_80055AB8(s32, s32);
@@ -413,7 +426,11 @@ void func_800573E4(s32, s32, s8);
 void debug_wrap_text(s32*, s32*);
 void debug_print_string(s32*, s32*, char*);
 void debug_print_number(s32*, s32*, s32, u32);
+#ifdef VERSION_CN
+void func_80057708(s32);
+#else
 void func_80057708(void);
+#endif
 void load_debug_font(void);
 void func_80057778(void);
 void debug_print_str2(s32, s32, char*);
