@@ -107,6 +107,11 @@ UNUSED void func_80043668(Vec3f arg0, Vec3su arg1, f32 arg2, Gfx* gfx) {
 }
 
 UNUSED void func_800436D0(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     func_80042330(arg0, arg1, arg2, arg3);
     gSPDisplayList(gDisplayListHead++, D_0D0078A0);
     gSPVertex(gDisplayListHead++, vtx, 3, 0);
@@ -114,6 +119,11 @@ UNUSED void func_800436D0(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx) {
 }
 
 UNUSED void func_80043764(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     func_80042330(arg0, arg1, arg2, arg3);
     gSPDisplayList(gDisplayListHead++, D_0D0078A0);
     gSPVertex(gDisplayListHead++, vtx, 4, 0);
@@ -121,6 +131,11 @@ UNUSED void func_80043764(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx) {
 }
 
 UNUSED void func_800437F8(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx, s32 arg5) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     func_80042330(arg0, arg1, arg2, arg3);
     gSPDisplayList(gDisplayListHead++, D_0D0078A0);
 
@@ -134,6 +149,11 @@ UNUSED void func_800437F8(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx, s32 
 }
 
 UNUSED void func_800438C4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx, s32 arg5) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     vtx[1].v.ob[0] = arg5;
     vtx[2].v.ob[0] = arg5;
     func_80042330(arg0, arg1, arg2, arg3);
@@ -144,6 +164,11 @@ UNUSED void func_800438C4(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx, s32 
 }
 
 UNUSED void func_8004398C(s32 arg0, s32 arg1, u16 arg2, f32 arg3, Vtx* vtx, s32 arg5) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     vtx[0].v.ob[0] = arg5;
     vtx[3].v.ob[0] = arg5;
     func_80042330(arg0, arg1, arg2, arg3);
@@ -373,6 +398,11 @@ void func_80045B74(Vtx* arg0) {
 }
 
 UNUSED void func_80045BBC(Vec3f arg0, Vec3su arg1, f32 arg2, Vtx* arg3) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     rsp_set_matrix_transformation(arg0, arg1, arg2);
     gSPDisplayList(gDisplayListHead++, D_0D0078A0);
     gSPVertex(gDisplayListHead++, arg3, 4, 0);
@@ -380,6 +410,11 @@ UNUSED void func_80045BBC(Vec3f arg0, Vec3su arg1, f32 arg2, Vtx* arg3) {
 }
 
 UNUSED void func_80045C48(Vec3f arg0, Vec3su arg1, f32 arg2, Vtx* arg3) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     rsp_set_matrix_transformation(arg0, arg1, arg2);
     gSPDisplayList(gDisplayListHead++, D_0D0078D0);
     gSPClearGeometryMode(gDisplayListHead++, G_CULL_BOTH);
@@ -1294,6 +1329,11 @@ UNUSED void func_8004A5E4(Vec3f arg0, Vec3su arg1, f32 arg2, u8* texture, Vtx* a
 }
 
 void func_8004A630(Collision* arg0, Vec3f arg1, f32 arg2) {
+#ifdef VERSION_CN
+    /* cn: the cart reserves 64 bytes of frame this body never touches;
+       EGCS keeps an unused ARRAY on the stack where it drops a scalar */
+    UNUSED s32 pad[16];
+#endif
     if (func_80041924(arg0, arg1) != 0) {
         D_80183E50[0] = arg1[0];
         D_80183E50[1] = calculate_surface_height(arg1[0], 0.0f, arg1[2], arg0->meshIndexZX) + 0.8;
