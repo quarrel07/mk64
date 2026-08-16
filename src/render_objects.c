@@ -1969,17 +1969,31 @@ UNUSED void func_8004D0D4(s32 arg0, s32 arg1, u8* texture, s32 width, s32 arg4, 
     s32 var_s0;
     u8* img;
     s32 i;
+#ifdef VERSION_CN
+    s32 column;
+#endif
 
     var_s0 = arg1 - (arg4 / 2);
     img = texture;
     gSPDisplayList(gDisplayListHead++, D_0D007FE0);
+#ifdef VERSION_CN
+    /* cn: the column is computed once, ahead of the loop */
+    column = arg0 - (width / 2);
 
+    for (i = 0; i < arg4 / height; i++) {
+        func_80044924(img, width, height);
+        func_8004B97C(column, var_s0, width, height, 1);
+        img += width * height;
+        var_s0 += height;
+    }
+#else
     for (i = 0; i < arg4 / height; i++) {
         func_80044924(img, width, height);
         func_8004B97C(arg0 - (width / 2), var_s0, width, height, 1);
         img += width * height;
         var_s0 += height;
     }
+#endif
 }
 
 void func_8004D210(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 width, s32 arg8,
