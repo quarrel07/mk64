@@ -627,6 +627,8 @@ SECTIONS
       BUILD_DIR/asm/os/__osException.o(.data*);
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
       BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);
+      /* cart 0x00E9270: 16 bytes of fill before this object */
+      . += 0x10;
       BUILD_DIR/src/os/osInitialize.o(.data*);
       BUILD_DIR/src/os/__osViInit.o(.data*);
       BUILD_DIR/src/os/osViData.o(.data*);
@@ -676,6 +678,10 @@ SECTIONS
       BUILD_DIR/src/effects.o(.rodata*);
       BUILD_DIR/src/code_80091440.o(.rodata*);
       BUILD_DIR/src/menu_items.jp.o(.rodata*);
+#ifdef VERSION_CN
+      /* cart 0x00F06E0: 208 bytes of fill before this object */
+      . += 0xD0;
+#endif
       BUILD_DIR/src/code_800AF9B0.o(.rodata*);
       BUILD_DIR/src/menus.o(.rodata*);
       BUILD_DIR/src/save.o(.rodata*);
@@ -698,6 +704,11 @@ SECTIONS
       BUILD_DIR/src/os/guLookAtF.o(.rodata*);
       BUILD_DIR/src/os/osAiSetFrequency.o(.rodata*);
       BUILD_DIR/asm/os/__osException.o(.rodata*);
+#ifdef VERSION_CN
+      /* the cart puts osSetIntMask's rodata here, between __osException and
+         __osDevMgrMain, not down with the printf helpers */
+      BUILD_DIR/asm/os/osSetIntMask.o(.rodata);
+#endif
       BUILD_DIR/src/os/__osViSwapContext.o(.rodata*);
       BUILD_DIR/src/os/__osDevMgrMain.o(.rodata*);
       BUILD_DIR/src/os/guMtxF2L.o(.rodata*);
@@ -717,7 +728,9 @@ SECTIONS
       #ifndef VERSION_CN
       BUILD_DIR/src/os/_Printf.o(.rodata*);
       #endif
+#ifndef VERSION_CN
       BUILD_DIR/asm/os/osSetIntMask.o(.rodata);
+#endif
       #ifndef VERSION_CN
       BUILD_DIR/src/os/_Ldtob.o(.rodata*);
       #endif
