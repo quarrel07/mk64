@@ -228,14 +228,22 @@ void validate_save_data(void) {
 void populate_time_trial_record(u8* timeTrialRecord, u32 time, s32 characterId) {
     u32 timeRightShift8 = time >> 8;
     u32 timeRightShift16 = timeRightShift8 >> 8;
+#ifdef VERSION_CN
+    u16 timeRightShift8Duplicate;
+#else
     s16 timeRightShift8Duplicate;
     u16 timeRightShift16Duplicate;
 
     timeRightShift16Duplicate = timeRightShift16;
+#endif
 
     timeTrialRecord[0] = time & 0xFF;
     timeTrialRecord[1] = (timeRightShift8Duplicate = timeRightShift8);
+#ifdef VERSION_CN
+    timeTrialRecord[2] = (timeRightShift16 & 0xF) + ((characterId & 7) << 4);
+#else
     timeTrialRecord[2] = (timeRightShift16Duplicate & 0xF) + ((characterId & 7) << 4);
+#endif
 }
 
 // combine time trial record u8[3] into the lower 24 bits of a word [xx221100]
@@ -737,7 +745,11 @@ u8 func_800B60E8(s32 page) {
     for (i = 0, addr = (u8*) &((u8*) gReplayGhostCompressed)[page * 256]; i < 256; i++) {
         checksum += (*addr++ * (page + 1) + i);
     }
+#ifdef VERSION_CN
+    return checksum & 0xFF;
+#else
     return checksum;
+#endif
 }
 
 s32 func_800B6178(s32 arg0) {
@@ -923,6 +935,9 @@ void func_800B6708(void) {
 
 void func_800B6798(void) {
     s32 temp_s0;
+#ifdef VERSION_CN
+    struct_8018EE10_entry* entry;
+#endif
     u8* tmp;
 
     tmp = (u8*) gSomeDLBuffer;
@@ -930,12 +945,18 @@ void func_800B6798(void) {
     osPfsReadWriteFile(&gControllerPak2FileHandle, gControllerPak2FileNote, PFS_READ, 0,
                        0x100 /*  2*sizeof(struct_8018EE10_entry) ? */, tmp);
 
+#ifdef VERSION_CN
+    for (temp_s0 = 0, entry = (struct_8018EE10_entry*) tmp; temp_s0 < 2; ++temp_s0, entry++) {
+        if (entry->checksum != func_800B68F4(temp_s0)) {
+            entry->ghostDataSaved = 0;
+#else
     for (temp_s0 = 0; temp_s0 < 2; ++temp_s0) {
         // if (gSomeDLBuffer[temp_s0]->checksum != func_800B68F4(temp_s0)) {
         //     gSomeDLBuffer[temp_s0]->ghostDataSaved = 0;
         // }
         if (((struct_8018EE10_entry*) (tmp + (temp_s0 << 7)))->checksum != func_800B68F4(temp_s0)) {
             ((struct_8018EE10_entry*) (tmp + (temp_s0 << 7)))->ghostDataSaved = 0;
+#endif
         }
     }
 }
@@ -947,7 +968,11 @@ u8 func_800B6828(s32 arg0) {
     for (i = 0; i < 0x43; i++) {
         checksum += ((addr[i] * (arg0 + 1)) + i);
     }
+#ifdef VERSION_CN
+    return checksum & 0xFF;
+#else
     return checksum;
+#endif
 }
 
 u8 func_800B68F4(s32 arg0) {
@@ -960,7 +985,11 @@ u8 func_800B68F4(s32 arg0) {
         checksum += (addr[i] * (arg0 + 1)) + i;
     }
     
+#ifdef VERSION_CN
+    return checksum & 0xFF;
+#else
     return checksum;
+#endif
 }
 
 s32 func_800B69BC(s32 arg0) {

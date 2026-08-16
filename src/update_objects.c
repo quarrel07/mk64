@@ -1247,7 +1247,11 @@ void func_8007466C(s32 objectIndex, uintptr_t arg1) {
     if ((gObjectList[objectIndex].status & 1) != 0) {
         // I have no idea why this typecase works
         gObjectList[objectIndex].activeTLUT =
+#ifdef VERSION_CN
+            (u8*) ((u32*) gObjectList[objectIndex].tlutList + (gObjectList[objectIndex].unk_0D3 * 128));
+#else
             (u8*) ((u32*) gObjectList[objectIndex].tlutList + (gObjectList[objectIndex].unk_0D3 << 7));
+#endif
         gObjectList[objectIndex].status ^= 2;
         phi_a1 = 0;
         if ((gObjectList[objectIndex].status & 2) != 0) {
@@ -2815,8 +2819,13 @@ void update_clouds(s32 arg0, Camera* arg1, CloudData* cloudList) {
     CloudData* cloud;
 
     for (cloudIndex = 0; cloudIndex < D_8018D1F0; cloudIndex++) {
-        cloud = &cloudList[cloudIndex];
+#ifdef VERSION_CN
         objectIndex = D_8018CC80[arg0 + cloudIndex];
+#endif
+        cloud = &cloudList[cloudIndex];
+#ifndef VERSION_CN
+        objectIndex = D_8018CC80[arg0 + cloudIndex];
+#endif
         func_800788F8(objectIndex, cloud->rotY, arg1);
     }
 }
@@ -2827,8 +2836,13 @@ void update_stars(s32 arg0, Camera* camera, StarData* starList) {
     StarData* star;
 
     for (starIndex = 0; starIndex < D_8018D1F0; starIndex++) {
-        star = &starList[starIndex];
+#ifdef VERSION_CN
         objectIndex = D_8018CC80[arg0 + starIndex];
+#endif
+        star = &starList[starIndex];
+#ifndef VERSION_CN
+        objectIndex = D_8018CC80[arg0 + starIndex];
+#endif
         func_800788F8(objectIndex, star->rotY, camera);
         switch (starIndex % 5U) {
             case 0:
@@ -7933,8 +7947,13 @@ void func_80085F74(s32 objectIndex) {
 
 void func_80086074(s32 objectIndex, s32 arg1) {
     set_obj_origin_pos(objectIndex, D_800E6734[arg1 * 3 + 0] * xOrientation, D_800E6734[arg1 * 3 + 1], D_800E6734[arg1 * 3 + 2]);
+#ifdef VERSION_CN
+    init_texture_object(objectIndex, d_course_rainbow_road_static_tluts + arg1 * 256,
+                        &d_course_rainbow_road_static_textures[arg1], 64, 64);
+#else
     init_texture_object(objectIndex, &d_course_rainbow_road_static_tluts[arg1 * 256],
                         &d_course_rainbow_road_static_textures[arg1], 64, 64);
+#endif
     func_80085BB4(objectIndex);
 }
 
