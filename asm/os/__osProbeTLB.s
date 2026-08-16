@@ -14,7 +14,7 @@
 glabel __osProbeTLB
     mfc0  $t0, C0_ENTRYHI
     andi  $t1, $t0, TLBHI_PIDMASK
-    lui   $at, %hi(0xFFFFE000)  # iQue's as keeps the 2-word unsigned form
+    lui   $at, 0xFFFF  # literal: %hi would round the low half up to 0x0000
     ori   $at, $at, 0xE000
     and   $t2, $a0, $at
     or    $t1, $t1, $t2
@@ -64,7 +64,6 @@ glabel __osProbeTLB
     jr    $ra
      nop
 
-    nop
     nop
 
 

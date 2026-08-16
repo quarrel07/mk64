@@ -814,7 +814,8 @@ ifeq ($(VERSION),cn.v5)
                       __osSiRawStartDma __osViInit __osDevMgrMain \
                       osEPiRawWriteIo osEPiRawReadIo osEPiRawStartDma \
                       osPiRawStartDma __osSpRawStartDma __osSpSetPc guMtxCatL \
-                      contramread contramwrite osSpTaskYield
+                      contramread contramwrite osSpTaskYield \
+                      __osViGetCurrentContext
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
@@ -825,7 +826,7 @@ ifeq ($(VERSION),cn.v5)
                          osGetTime osSetTime osVirtualToPhysical __osResetGlobalIntMask \
                          osSendMesg osRecvMesg osCreateThread osStartThread \
                          osDestroyThread osSetTimer osSetEventMesg __osSetGlobalIntMask \
-                         __osViGetCurrentContext osInitialize
+                         osInitialize
   CN_EGCS_LIB_O0_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_O0_SRCS))) \
                          $(BUILD_DIR)/src/os/math/llmuldiv.o
   $(CN_EGCS_LIB_O0_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
