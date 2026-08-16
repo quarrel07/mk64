@@ -8061,6 +8061,10 @@ void func_800A12BC(MenuItem* arg0, MenuTexture* arg1) {
 
 void func_800A1350(MenuItem* arg0) {
     s32 thing;
+#ifdef VERSION_CN
+    /* cn: the cart carries the box width in a register rather than folding it */
+    s32 width;
+#endif
     if (func_800AAFCC(arg0->type - 0x2B) < 0) {
         switch (arg0->state) {
             case 0:
@@ -8071,9 +8075,17 @@ void func_800A1350(MenuItem* arg0) {
                 break;
             case 1:
             case 3:
+#ifdef VERSION_CN
+                width = 0x40;
+                thing = arg0->param1;
+                gDisplayListHead = draw_box(gDisplayListHead, arg0->column + thing, arg0->row,
+                                            arg0->column - (thing - width), arg0->row + 0x4C, 0, 0, 0,
+                                            0x00000064);
+#else
                 thing = arg0->param1;
                 gDisplayListHead = draw_box(gDisplayListHead, arg0->column + thing, arg0->row,
                                             arg0->column - (thing - 0x40), arg0->row + 0x4C, 0, 0, 0, 0x00000064);
+#endif
                 break;
         }
     }
@@ -11100,11 +11112,26 @@ void get_time_record_centiseconds(s32 timeRecord, char* buffer) {
 
 // Converts a 2-digit number to EUC-JP by the looks of it
 void func_800A79F4(s32 arg0, char* arg1) {
+#ifdef VERSION_CN
+    /* cn: the quotient is in hand before the first glyph is stored */
+    s32 digit;
+    u32 glyph;
+
+    digit = arg0 / 0xA;
+    arg1[0] = 0xA3;
+    glyph = digit - 0x50;
+    arg1[1] = glyph;
+    arg1[2] = 0xA3;
+    digit = arg0 % 0xA;
+    arg1[3] = digit - 0x50;
+    arg1[4] = '\0';
+#else
     arg1[0] = 0xA3;
     arg1[1] = (arg0 / 0xA) - 0x50;
     arg1[2] = 0xA3;
     arg1[3] = (arg0 % 0xA) - 0x50;
     arg1[4] = '\0';
+#endif
 }
 
 void handle_menus_with_pri_arg(s32 priSpecial) {
@@ -11757,10 +11784,19 @@ void render_battle_introduction(UNUSED MenuItem* arg0) {
 #endif
 
 void func_800A8EC0(MenuItem* arg0) {
+#ifdef VERSION_CN
+    /* cn: both scale arguments come from one live float */
+    f32 scale = 0.7f;
+#endif
+
     if (arg0->param2 != 0) {
         func_8009A76C(arg0->D_8018DEE0_index, arg0->column, arg0->row, -1);
         set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+        print_text_mode_1(arg0->column + 0x20, arg0->row + 0x28, gCupText[arg0->param2], 0, scale, scale);
+#else
         print_text_mode_1(arg0->column + 0x20, arg0->row + 0x28, gCupText[arg0->param2], 0, 0.7f, 0.7f);
+#endif
     }
 }
 
