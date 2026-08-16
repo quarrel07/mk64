@@ -5823,7 +5823,7 @@ Gfx* print_letter(Gfx* arg0, MenuTexture* glyphTexture, f32 arg2, f32 arg3, s32 
     while (var_s0->textureData != NULL) {
         var_v0 = 0;
 
-        thing0 = var_s0->dX + arg2;
+        thing0 = arg2 + var_s0->dX;
         if (thing0 > 320.0f) {
             var_v0 = 1;
         }
@@ -5831,7 +5831,7 @@ Gfx* print_letter(Gfx* arg0, MenuTexture* glyphTexture, f32 arg2, f32 arg3, s32 
         if (thing0 < 0.0f) {
             var_v0 += 1;
         }
-        thing1 = var_s0->dY + arg3;
+        thing1 = arg3 + var_s0->dY;
         if (thing1 < 0.0f) {
             var_v0 += 1;
         }
@@ -5848,12 +5848,12 @@ Gfx* print_letter(Gfx* arg0, MenuTexture* glyphTexture, f32 arg2, f32 arg3, s32 
                 switch (mode) { /* irregular */
                     case 1:
                         gSPDisplayList(arg0++, D_020077F8);
-                        arg0 = func_80095BD0(arg0, temp_v0_2, var_s0->dX + arg2, var_s0->dY + arg3, var_s0->width,
+                        arg0 = func_80095BD0(arg0, temp_v0_2, arg2 + var_s0->dX, arg3 + var_s0->dY, var_s0->width,
                                              var_s0->height, scaleX, scaleY);
                         break;
                     case 2:
                         gSPDisplayList(arg0++, D_02007818);
-                        arg0 = func_80095BD0(arg0, temp_v0_2, var_s0->dX + arg2, var_s0->dY + arg3, var_s0->width,
+                        arg0 = func_80095BD0(arg0, temp_v0_2, arg2 + var_s0->dX, arg3 + var_s0->dY, var_s0->width,
                                              var_s0->height, scaleX, scaleY);
                         break;
                 }
