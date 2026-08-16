@@ -2549,9 +2549,13 @@ void func_80091B78(void) {
         if (osEepromProbe(&gSIEventMesgQueue) != 0) {
             load_save_data();
         }
+#ifndef VERSION_CN
+        // iQue has no controller pak - its pak layer is a BB kernel stub - and
+        // the cart never switches to that menu here.
         if (func_80091D74() != 0) {
             gMenuSelection = CONTROLLER_PAK_MENU;
         }
+#endif
     }
     if (gMenuSelection == LOGO_INTRO_MENU) {
         gNextFreeMemoryAddress = gFreeMemoryResetAnchor;
