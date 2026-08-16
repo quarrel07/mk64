@@ -5925,7 +5925,7 @@ void func_8009A7EC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     if (temp->visible & 0x80000000) {
         func_8009A944(temp, arg3);
 #ifdef VERSION_CN
-        gDisplayListHead = func_8009C708(gDisplayListHead, temp, arg1, arg2, arg4);
+        gDisplayListHead = func_8009C708(gDisplayListHead, temp, arg1, arg2, arg3, arg4);
 #else
         gDisplayListHead = func_8009C708(gDisplayListHead, temp, arg1, arg2, arg3, arg4);
 #endif
@@ -6599,7 +6599,7 @@ Gfx* func_8009C434(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s
 }
 
 #ifdef VERSION_CN
-Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s32 arg4) {
+Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s32 arg4, UNUSED s32 arg5) {
     s32 var_t0;
     s32 var_t1;
     TextureMap* map;
