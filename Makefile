@@ -293,6 +293,11 @@ include $(MAKEFILE_SPLIT)
 # UTF-8 versions getting compiled
 EUC_JP_FILES := src/ending/credits.c src/cpu_vehicles_camera_path.c src/menu_items.c
 C_FILES := $(filter-out %.inc.c,$(filter-out $(EUC_JP_FILES),$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))))
+# code_8005D290.c is the second half of code_80057C60.c, which is one object on
+# every cart but iQue's. Everywhere else it would define the same functions twice.
+ifneq ($(VERSION),cn.v5)
+  C_FILES := $(filter-out src/code_8005D290.c,$(C_FILES))
+endif
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
 # Include source files in courses/course_name/files.c but exclude .inc.c files.
 COURSE_FILES := $(foreach dir,$(COURSE_DIRS),$(filter-out %.inc.c,$(wildcard $(dir)/*.c)))
@@ -775,7 +780,7 @@ ifeq ($(VERSION),cn.v5)
   IDO71_ROOT := $(TOOLS_DIR)/ido-recomp-7.1/$(DETECTED_OS)
   CN_IDO71_SRCS := main camera effects menus replays save spawn_players kart_dma \
                    math_util_2 render_player player_controller update_objects \
-                   code_80057C60 code_80086E70 code_80091440 animation \
+                   code_80057C60 code_8005D290 code_80086E70 code_80091440 animation \
                    code_8003DC40 crash_screen code_800AF9B0 code_800029B0 profiler code_8006E9C0
   CN_IDO71_OBJS := $(addprefix $(BUILD_DIR)/src/,$(addsuffix .o,$(CN_IDO71_SRCS)))
   # The racing overlay is 7.1 on iQue too - measured per file: race_logic and

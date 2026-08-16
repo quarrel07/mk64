@@ -40,6 +40,12 @@
 //! @warning this macro is undef'd at the end of this file
 #define MAKE_RGB(r, g, b) (((r) << 0x10) | ((g) << 0x08) | (b << 0x00))
 
+// iQue built this file as two translation units, splitting at func_8005D290 -
+// the cart pads the first object's .text to 16 bytes and starts the second on
+// the boundary. src/code_8005D290.c compiles the half below that point as the
+// second object, so the source itself stays in one place.
+#ifndef CODE_80057C60_TAIL
+
 s32 D_80165590;
 s32 D_80165594;
 s32 D_80165598;
@@ -2742,6 +2748,10 @@ void func_8005D1F4(s32 arg0) {
         }
     }
 }
+
+#endif // !CODE_80057C60_TAIL
+
+#if !defined(VERSION_CN) || defined(CODE_80057C60_TAIL)
 
 // Appears to load GP Mode race staging balloons and kart shadows.
 void func_8005D290(void) {
@@ -6929,5 +6939,7 @@ void func_8006E940(Player* player, s8 arg1, s8 arg2) {
 /* Just a random 10 laying around in data, nothing to see here */
 /***************************************************************/
 s32 some_unused_data = 10;
+
+#endif // !VERSION_CN || CODE_80057C60_TAIL
 
 #undef MAKE_RGB
