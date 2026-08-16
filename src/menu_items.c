@@ -6197,11 +6197,27 @@ void func_8009CE1C(void) {
 void func_8009CE64(s32 arg0) {
     s32 thing;
     s32 var_a1;
+#ifdef VERSION_CN
+    /* cn: EGCS drops an unused scalar but keeps an unused array, so the pad has
+       to be an array to reserve the cart's extra 8 bytes of frame */
+    UNUSED s32 stackPadding0[2];
+#else
     UNUSED s32 stackPadding0;
+#endif
     MenuItem* temp_v0;
 
     var_a1 = 0;
     if (gGamestate == 5) {
+#ifdef VERSION_CN
+        /* cn: the CC range is two signed compares, not one folded unsigned one,
+           and the cup test lands in the flag as a value rather than a branch */
+        thing = gCCSelection;
+        if ((thing < 4) && (gCCSelection >= 2)) {
+            if (D_802874D8.unk1D < 3) {
+                var_a1 = (gCupSelection == 3);
+            }
+        }
+#else
         if (2 != gCCSelection) {
             thing = gCCSelection;
             if (thing != 3) {
@@ -6214,6 +6230,7 @@ void func_8009CE64(s32 arg0) {
             var_a1 = 1;
         }
     func_8009CE64_label1:
+#endif
         if (var_a1) {
             gGotoMenu = 9;
             gCreditsCourseId = 8;
@@ -6245,7 +6262,6 @@ void func_8009CE64(s32 arg0) {
                             break;
                     }
                 } else {
-                    var_a1 = 0;
                     temp_v0 = find_menu_items(0x000000AC);
                     if (temp_v0 != NULL) {
                         switch (temp_v0->state) { /* switch 7; irregular */
@@ -6259,7 +6275,6 @@ void func_8009CE64(s32 arg0) {
                                 break;
                         }
                     } else {
-                        var_a1 = 0;
                         temp_v0 = find_menu_items(0x000000C7);
                         if (temp_v0 != NULL) {
                             switch (temp_v0->state) {
@@ -6484,8 +6499,13 @@ void func_8009CE64(s32 arg0) {
                     gModeSelection = 3;
                     if (gPlayerCountSelection1 == 1) {
                         gPlayerCount = 2;
+#ifdef VERSION_CN
+                        gPlayerCountSelection1 = gPlayerCount;
+                        gScreenModeSelection = 1;
+#else
                         gScreenModeSelection = 1;
                         gPlayerCountSelection1 = gPlayerCount;
+#endif
                     }
                     break;
                 default:
@@ -11031,6 +11051,44 @@ void func_800A6D94(s32 arg0, s32 arg1, u8* arg2) {
 
 // The ｓ/ｎ/ｒ/ー are not ASCII characters, they're EUC-JP characters
 void func_800A6E94(s32 playerCount, s32 playerId, u8* placeAry) {
+#ifdef VERSION_CN
+/* cn: one live 0.8f for every label, and the place bytes indexed at each
+   use - holding the pointer in a local shifts the whole register file */
+    UNUSED s32 stackPadding0;
+    Unk_D_800E70A0* temp_s0;
+    char sp40[3];
+    s32 rank;
+    // Everything about this variable is bizarre
+    s32 rankIdx = -1;
+    f32 scale = 0.8f;
+
+    temp_s0 = &D_800E7300[((playerCount - 2) * 4) + playerId];
+    rank = gGPCurrentRaceRankByPlayerId[playerId];
+    if (rank == ++rankIdx) {
+        set_text_color(gGlobalTimer % 3);
+    } else {
+        set_text_color(TEXT_YELLOW);
+    }
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x5A, "1 ｓ ー", 0, scale, scale);
+    convert_number_to_ascii(placeAry[playerId * 3], sp40);
+    text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x5A, sp40, 0, scale, scale);
+    if (rank == ++rankIdx) {
+        set_text_color(gGlobalTimer % 3);
+    } else {
+        set_text_color(TEXT_BLUE);
+    }
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x69, "2 ｎ ー", 0, scale, scale);
+    convert_number_to_ascii(placeAry[(playerId * 3) + 1], sp40);
+    text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x69, sp40, 0, scale, scale);
+    if (++rankIdx == rank) {
+        set_text_color(gGlobalTimer % 3);
+    } else {
+        set_text_color(TEXT_RED);
+    }
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x78, "3 ｒ ー", 0, scale, scale);
+    convert_number_to_ascii(placeAry[(playerId * 3) + 2], sp40);
+    text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x78, sp40, 0, scale, scale);
+#else
     UNUSED s32 stackPadding0;
     u8* temp_v0;
     Unk_D_800E70A0* temp_s0;
@@ -11066,6 +11124,7 @@ void func_800A6E94(s32 playerCount, s32 playerId, u8* placeAry) {
     text_draw(temp_s0->column + 4, temp_s0->row + 0x78, "3 ｒ ー", 0, 0.8f, 0.8f);
     convert_number_to_ascii(temp_v0[2], sp40);
     text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x78, sp40, 0, 0.8f, 0.8f);
+#endif
 }
 
 void func_800A70E8(MenuItem* arg0) {
@@ -13554,11 +13613,19 @@ void func_800ABCF4(MenuItem* arg0) {
 }
 
 void func_800ABEAC(MenuItem* arg0) {
+#ifndef VERSION_CN
+    /* cn: no local here - a local that only ever holds 1 is forced into a
+       callee-saved register and costs the save/restore pair */
     s32 why = 1;
+#endif
     func_800ABF68(arg0);
     switch (D_80164A28) {
         case 1:
+#ifdef VERSION_CN
+            arg0->visible = 1;
+#else
             arg0->visible = why;
+#endif
             break;
         case 2:
             if (arg0->row < 0x104) {
@@ -13568,7 +13635,11 @@ void func_800ABEAC(MenuItem* arg0) {
             }
             break;
         default:
+#ifdef VERSION_CN
+            if ((gModeSelection != GRAND_PRIX) || (gPlayerCountSelection1 != 1) || (gDemoUseController != 0)) {
+#else
             if ((gModeSelection != GRAND_PRIX) || (gPlayerCountSelection1 != why) || (gDemoUseController != 0)) {
+#endif
                 arg0->type = 0;
             } else {
                 if (arg0->row < 0x104) {

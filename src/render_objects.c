@@ -4740,6 +4740,48 @@ void render_object_bomb_kart(s32 cameraId) {
 }
 
 void func_80056BF0(s32 bombIndex) {
+#ifdef VERSION_CN
+/* cn: the mod-6 index gets its own local - reusing temp_v0 welds it to the
+   later temp_s0 + 1/+2 values into one live range - and both modulo
+   arguments are evaluated before the store, because the cart puts that
+   store after the branch the % 4 expansion generates */
+    UNUSED s32 stackPadding;
+    u8 thing;
+    s32 temp_s0;
+    s32 temp_v0;
+    s32 idx;
+    s32 m3;
+    s32 m4;
+    u8* bombFrame;
+    BombKart sp40 = gBombKarts[bombIndex];
+
+    idx = D_801655CC % 6U;
+    thing = D_800E471C[idx];
+    bombFrame = common_texture_bomb[thing];
+    D_80183E40[0] = sp40.bombPos[0];
+    D_80183E40[1] = sp40.bombPos[1] + 1.0;
+    D_80183E40[2] = sp40.bombPos[2];
+    draw_2d_texture_at(D_80183E40, D_80183E80, 0.25f, (u8*) common_tlut_bomb, bombFrame, D_0D005AE0, 0x20, 0x20, 0x20,
+                       0x20);
+    temp_s0 = D_8018D400;
+    gSPDisplayList(gDisplayListHead++, D_0D007B00);
+    func_8004B414(0, 0, 0, 0xFF);
+    D_80183E40[1] = sp40.bombPos[1] + 5.0;
+    m3 = temp_s0 % 3;
+    m4 = temp_s0 % 4;
+    D_80183E80[2] = 0;
+    func_800562E4(m3, m4, 0xFFU);
+    temp_v0 = temp_s0 + 1;
+    m3 = temp_v0 % 3;
+    m4 = temp_v0 % 4;
+    D_80183E80[2] = 0x6000;
+    func_800562E4(m3, m4, 0xFFU);
+    temp_v0 = temp_s0 + 2;
+    m3 = temp_v0 % 3;
+    m4 = temp_v0 % 4;
+    D_80183E80[2] = 0xA000;
+    func_800562E4(m3, m4, 0xFFU);
+#else
     UNUSED s32 stackPadding;
     u8 thing;
     s32 temp_s0;
@@ -4767,6 +4809,7 @@ void func_80056BF0(s32 bombIndex) {
     temp_v0 = temp_s0 + 2;
     D_80183E80[2] = 0xA000;
     func_800562E4(temp_v0 % 3, temp_v0 % 4, 0xFFU);
+#endif
 }
 
 void func_80056E24(s32 bombIndex, Vec3f arg1) {
@@ -4967,10 +5010,20 @@ void func_8005762C(s32* x, s32* y, s32 pathCount, u32 numDigits) {
         *++ptr = 0;
     }
 
+#ifdef VERSION_CN
+    /* cn: the count local doubles as the -1 sentinel, which keeps it live
+       across the loop's calls and in one callee-saved register throughout */
+    do {
+        func_800573E4(*x, *y, *ptr--);
+        debug_wrap_text(x, y);
+        count = -1;
+    } while (*ptr != count);
+#else
     do {
         func_800573E4(*x, *y, *ptr--);
         debug_wrap_text(x, y);
     } while (*ptr != -1);
+#endif
 }
 
 UNUSED void func_80057708() {
