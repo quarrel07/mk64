@@ -5504,6 +5504,9 @@ MenuTexture* func_8009A878(struct_8018DEE0_entry* arg0) {
 MenuTexture* func_8009A944(struct_8018DEE0_entry* arg0, s32 arg1) {
     MkAnimation* temp_v1;
     MkAnimation* var_v0;
+#ifdef VERSION_CN
+    void* empty;
+#endif
     MkAnimation* test;
     MenuTexture* temp_a0;
 
@@ -5513,6 +5516,17 @@ MenuTexture* func_8009A944(struct_8018DEE0_entry* arg0, s32 arg1) {
         arg0->frameCountDown = 0;
     }
     arg0->frameCountDown--;
+#ifdef VERSION_CN
+    /* cn: the null is live from before the branch, and the entry address is
+       formed by subtracting the negated index */
+    empty = NULL;
+    if (arg0->frameCountDown <= 0) {
+        arg0->sequenceIndex++;
+        if (((test = temp_v1) + arg0->sequenceIndex)->mk64Texture == empty) {
+            arg0->sequenceIndex = 0;
+        }
+        var_v0 = test - (-arg0->sequenceIndex);
+#else
     if (arg0->frameCountDown <= 0) {
         arg0->sequenceIndex++;
         var_v0 = ((test = temp_v1) + arg0->sequenceIndex);
@@ -5520,6 +5534,7 @@ MenuTexture* func_8009A944(struct_8018DEE0_entry* arg0, s32 arg1) {
             arg0->sequenceIndex = 0;
         }
         var_v0 = (test + arg0->sequenceIndex);
+#endif
         arg0->frameCountDown = var_v0->frame_length;
         temp_a0 = segmented_to_virtual_dupe(var_v0->mk64Texture);
         arg0->unk14 ^= 1;
@@ -10985,11 +11000,20 @@ void func_800A7448(MenuItem* arg0) {
     s32 sp40;
     s32 sp3C;
     s32 thing = D_802874D8.unk1D;
+#ifdef VERSION_CN
+    /* cn: one live 0.75f feeds the first width computation */
+    f32 scale = 0.75f;
+#endif
+
     if (thing >= 3) {
         set_text_color(TEXT_YELLOW);
         print_text1_center_mode_1(arg0->column, arg0->row, D_800E7A98, 0, 0.75f, 0.75f);
     } else {
+#ifdef VERSION_CN
+        sp40 = (s32) (((f32) (get_string_width(D_800E7A88[0]) + 5) * scale) / 2);
+#else
         sp40 = (s32) (((f32) (get_string_width(D_800E7A88[0]) + 5) * 0.75f) / 2);
+#endif
         sp3C = (s32) (((f32) (get_string_width(D_800E7A88[thing + 1]) + 5) * 0.75f) / 2);
         set_text_color(TEXT_YELLOW);
         print_text1_center_mode_1(arg0->column - sp3C, arg0->row, D_800E7A88[0], 0, 0.75f, 0.75f);
