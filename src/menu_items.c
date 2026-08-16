@@ -11940,10 +11940,22 @@ void render_battle_introduction(UNUSED MenuItem* arg0) {
 }
 #else
 void render_battle_introduction(UNUSED MenuItem* arg0) {
+#ifdef VERSION_CN
+    /* cn: each scale is live in a register across its call */
+    f32 scale;
+
+    set_text_color(TEXT_YELLOW);
+    scale = 1.0f;
+    print_text1_center_mode_1(0x98, 0x44, gTextBattleIntroduction[0], 0, scale, scale);
+    scale = 0.7f;
+    print_text_mode_1(0x17, 0x58, gTextBattleIntroduction[1], 0, scale, 0.8f);
+    print_text_mode_1(0x17, 0x6A, gTextBattleIntroduction[2], 0, 0.7f, 0.8f);
+#else
     set_text_color(TEXT_YELLOW);
     print_text1_center_mode_1(0x98, 0x44, gTextBattleIntroduction[0], 0, 1.0f, 1.0f);
     print_text_mode_1(0x17, 0x58, gTextBattleIntroduction[1], 0, 0.7f, 0.8f);
     print_text_mode_1(0x17, 0x6A, gTextBattleIntroduction[2], 0, 0.7f, 0.8f);
+#endif
 }
 #endif
 
