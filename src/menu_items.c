@@ -5311,14 +5311,26 @@ void func_8009A238(MenuTexture* arg0, s32 arg1) {
 
 void func_8009A2F0(struct_8018E0E8_entry* arg0) {
     MenuTexture* var_a0;
+#ifdef VERSION_CN
+    s32 atEnd;
+#endif
     struct_8018E0E8_entry* temp_v0;
 
     temp_v0 = segmented_to_virtual_dupe_2(arg0);
     var_a0 = temp_v0->mk64Texture;
     while (var_a0 != NULL) {
+#ifdef VERSION_CN
+        /* cn: the cart tests the pointer twice; the result has to land
+           somewhere or EGCS drops the second test */
+        atEnd = (var_a0 == NULL);
+        if (atEnd) {
+            break;
+        }
+#else
         if (var_a0 == NULL) {
             break;
         }
+#endif
         load_menu_img_comp_type(var_a0, LOAD_MENU_IMG_TKMK00_ONCE);
         if (1) {}
         temp_v0++;
