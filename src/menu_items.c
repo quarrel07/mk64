@@ -6849,10 +6849,10 @@ void func_8009E2F0(s32 arg0) {
     struct UnkStruct_8018E7E8* temp_t0;
     struct UnkStruct_8018E7E8* temp_t1;
 
+    temp_t1 = &D_8018E7E8[arg0];
+    temp_t0 = &D_8018E810[arg0];
     temp_t7 = D_800F0B28[D_8018E840[arg0]];
     if (temp_t7 != 0) {
-        temp_t1 = &D_8018E7E8[arg0];
-        temp_t0 = &D_8018E810[arg0];
         temp_v0 = &D_800E7AC8[temp_t7];
         if ((u32) D_8018E840[arg0] < 0x1BU) {
             gDisplayListHead = draw_box(gDisplayListHead, temp_t1->x - (temp_t0->x / 2), temp_t1->y - (temp_t0->y / 2),
@@ -14837,7 +14837,7 @@ void func_800AEC54(MenuItem* arg0) {
             // Purposeful fallthrough
         case 3:
             func_800A94C8(arg0, 0x000000A0, -1);
-            if (((arg0->column + 0x14) == -(get_string_width(gTextMenuAnnounceGhost) / 2)) && (arg0->state == 3)) {
+            if ((arg0->column == (-0x14 - (get_string_width(gTextMenuAnnounceGhost) / 2))) && (arg0->state == 3)) {
                 arg0->state = 4;
             }
             break;
