@@ -413,12 +413,16 @@ ASFLAGS = -march=vr4300 -mabi=32 -I include -I $(BUILD_DIR) $(VERSION_ASFLAGS) $
 
 # Fills end of rom. An iQue image is a flash file trimmed to its own length
 # rather than a cartridge padded to a power-of-two size, so cn pads to 0xBF4000.
+# A flash file is also zero filled where a cartridge is 0xFF filled, which is
+# what the space before the image's own trailing descriptor is made of.
 ifeq ($(VERSION),cn.v5)
   ROM_END := 0xBF4000
+  ROM_GAP_FILL := 0x00
 else
   ROM_END := 0xC00000
+  ROM_GAP_FILL := 0xFF
 endif
-OBJCOPYFLAGS = --pad-to=$(ROM_END) --gap-fill=0xFF
+OBJCOPYFLAGS = --pad-to=$(ROM_END) --gap-fill=$(ROM_GAP_FILL)
 
 LDFLAGS = -T undefined_syms.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/$(TARGET).map --no-check-sections
 

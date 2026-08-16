@@ -1261,6 +1261,17 @@ SECTIONS
    }
    END_SEG(instrument_sets)
 
+#ifdef VERSION_CN
+   /* The iQue image closes with a descriptor of its own, sitting at the very
+      end with only zero fill between it and the last segment. */
+   __romPos = 0xBF4000 - 0x50;
+   BEGIN_SEG(ique_footer, .)
+   {
+      BUILD_DIR/asm/ique_rom_footer_cn.o(.data);
+   }
+   END_SEG(ique_footer)
+#endif
+
    /* Discard everything not specifically mentioned above. */
    /DISCARD/ :
    {
