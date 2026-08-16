@@ -780,13 +780,13 @@ ifeq ($(VERSION),cn.v5)
   CN_EGCS_OBJS := $(BUILD_DIR)/src/render_objects.o
   $(BUILD_DIR)/src/menu_items.jp.o: CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(BUILD_DIR)/src/menu_items.jp.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
-    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
   $(BUILD_DIR)/src/ending/credits.jp.o: CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(BUILD_DIR)/src/ending/credits.jp.o: CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
-    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+    -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
   $(CN_EGCS_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
-    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mips3 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
+    -fno-common -Wa,--strip-local-absolute -O2 -mcpu=r4300 -mgp32 -mfp32 -fsigned-char -w $(DEF_INC_CFLAGS)
 
   # iQue's libultra C is the same EGCS compiler at -mips2 (SDK library build),
   # with per-file opt levels mirroring sm64's measured cn table: the core
