@@ -2170,8 +2170,31 @@ UNUSED void func_8004D044(s32 arg0, s32 arg1, u8* texture, s32 red, s32 green, s
     func_8004CE8C(arg0, arg1, texture, arg7, arg8, argA);
 }
 
+#ifdef VERSION_CN
+/* cn only; the n64 builds leave this an empty stub. Same body as func_8004D0D4
+   below, drawing through load_texture_tile_ia8_nomirror instead of func_80044924. */
+void func_8004D0CC(s32 arg0, s32 arg1, u8* texture, s32 width, s32 arg4, s32 height) {
+    s32 var_s0;
+    u8* img;
+    s32 i;
+    s32 column;
+
+    var_s0 = arg1 - (arg4 / 2);
+    img = texture;
+    gSPDisplayList(gDisplayListHead++, D_0D007FE0);
+    column = arg0 - (width / 2);
+
+    for (i = 0; i < arg4 / height; i++) {
+        load_texture_tile_ia8_nomirror(img, width, height);
+        func_8004B97C(column, var_s0, width, height, 1);
+        img += width * height;
+        var_s0 += height;
+    }
+}
+#else
 UNUSED void func_8004D0CC(void) {
 }
+#endif
 
 UNUSED void func_8004D0D4(s32 arg0, s32 arg1, u8* texture, s32 width, s32 arg4, s32 height) {
     s32 var_s0;
@@ -2598,8 +2621,16 @@ void func_8004E06C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
     }
 }
 
+#ifdef VERSION_CN
+/* cn only. Body still to be written; the cart carries 153 words here. The
+   signature is settled though - func_8004E3B8 calls it exactly as
+   func_8004E338 calls func_8004E06C. */
+void func_8004E238(UNUSED s32 arg0, UNUSED s32 arg1, UNUSED u8* texture, UNUSED s32 arg3, UNUSED s32 arg4) {
+}
+#else
 UNUSED void func_8004E238(void) {
 }
+#endif
 
 void func_8004E240(s32 arg0, s32 arg1, u8* tlut, u8* texture, s32 arg4, s32 arg5, s32 arg6) {
     gSPDisplayList(gDisplayListHead++, D_0D007CB8);
@@ -2621,8 +2652,18 @@ void func_8004E338(s32 arg0, s32 arg1, u8* tlut, u8* texture, s32 arg4, s32 arg5
     func_8004E06C(arg0, arg1, texture, arg4, arg5);
 }
 
+#ifdef VERSION_CN
+/* cn only; func_8004E338 above with func_8004E238 as the draw call. */
+void func_8004E3B8(s32 arg0, s32 arg1, u8* tlut, u8* texture, s32 arg4, s32 arg5) {
+    gSPDisplayList(gDisplayListHead++, D_0D007DB8);
+    set_transparency(D_8016589C);
+    func_8004B05C(tlut);
+    func_8004E238(arg0, arg1, texture, arg4, arg5);
+}
+#else
 UNUSED void func_8004E3B8(void) {
 }
+#endif
 
 UNUSED void func_8004E3C0(s32 arg0, s32 arg1, u8* tlut, u8* texture, s32 arg4, s32 arg5, UNUSED s32 arg6, s32 arg7) {
     func_8004E240(arg0, arg1, tlut, texture, arg4, arg5, arg7);
@@ -4882,8 +4923,20 @@ void render_object_hedgehogs(s32 arg0) {
     }
 }
 
+#ifdef VERSION_CN
+/* cn only; the n64 builds leave this an empty stub. */
+void func_800557AC(s32 objectIndex) {
+    if (func_80072320(objectIndex, 32) != 0) {
+        gSPSetGeometryMode(gDisplayListHead++, G_SHADE | G_SHADING_SMOOTH);
+        gSPClearGeometryMode(gDisplayListHead++, G_LIGHTING);
+    } else {
+        gSPSetGeometryMode(gDisplayListHead++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+    }
+}
+#else
 UNUSED void func_800557AC() {
 }
+#endif
 
 void func_800557B4(s32 objectIndex, u32 arg1, u32 arg2) {
     Vec3f sp34;
@@ -5669,8 +5722,26 @@ void func_8005762C(s32* x, s32* y, s32 pathCount, u32 numDigits) {
 #endif
 }
 
+#ifdef VERSION_CN
+/* cn only. The digit half of func_8005762C above, with the divisor fixed at ten
+   and the write cursor handed back through D_801657DA instead of being drawn. */
+extern s8* D_801657DA;
+
+void func_80057708(s32 count) {
+    s8* ptr;
+
+    *D_801657B8 = -1;
+    ptr = D_801657B8;
+    while (count != 0) {
+        *++ptr = count % 10;
+        count = count / 10;
+    }
+    D_801657DA = ptr;
+}
+#else
 UNUSED void func_80057708() {
 }
+#endif
 
 void load_debug_font(void) {
     gSPDisplayList(gDisplayListHead++, D_0D008108);
