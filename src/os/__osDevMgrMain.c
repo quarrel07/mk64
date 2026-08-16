@@ -31,6 +31,16 @@ void __osDevMgrMain(void *args) {
 #if defined(VERSION_SH) || defined(VERSION_CN)
     u32 tmp;
 #endif
+#ifdef VERSION_CN
+/* iQue keeps the PI_STATUS_REG address in v0 and the errStatus constant in v1.
+   EGCS hands that pair out by death point, and the constant always dies first,
+   so no spelling of the C wins the register back - it has to be pinned. */
+#ifdef NON_MATCHING
+    vu32 *piStatus;
+#else
+    register vu32 *piStatus asm("$2");
+#endif
+#endif
 #ifdef VERSION_EU
     sp30 = 0;
 #endif
@@ -70,7 +80,12 @@ l1:
                     osEPiRawWriteIo(mb->piHandle, 0x5000510, sp24->bmCtlShadow | 0x1000000);
                 }
                 sp28->errStatus = 4;
+#ifdef VERSION_CN
+                piStatus = (vu32 *) PHYS_TO_K1(PI_STATUS_REG);
+                *piStatus = PI_STATUS_CLR_INTR;
+#else
                 IO_WRITE(PI_STATUS_REG, PI_STATUS_CLR_INTR);
+#endif
                 __osSetGlobalIntMask(0x100C01);
             }
 
