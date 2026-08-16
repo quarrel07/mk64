@@ -48,6 +48,11 @@ SECTIONS
       BUILD_DIR/src/main.o(.text*);
       BUILD_DIR/src/code_800029B0.o(.text*);
       BUILD_DIR/src/profiler.o(.text*);
+#ifdef VERSION_CN
+      /* The cart carries 16 bytes of zero fill here: our profiler.o .text ends
+         at cart 0x0004C90 but crash_screen.o starts at 0x0004CA0. */
+      . = . + 0x10;
+#endif
 // JP links several translation units in a different order from us. The same
 // applies to the .data, .rodata and .bss blocks further down.
 #ifdef VERSION_JP
@@ -79,6 +84,10 @@ SECTIONS
       BUILD_DIR/src/math_util_2.o(.text*);
       BUILD_DIR/src/render_objects.o(.text*);
       BUILD_DIR/src/code_80057C60.o(.text*);
+#ifdef VERSION_CN
+      /* 8 bytes of zero fill the cart has between this object and the next. */
+      . = . + 0x8;
+#endif
       BUILD_DIR/src/code_8006E9C0.o(.text*);
       BUILD_DIR/src/update_objects.o(.text*);
       BUILD_DIR/src/code_80086E70.o(.text*);
@@ -682,6 +691,10 @@ SECTIONS
    {
       BUILD_DIR/src/racing/race_logic.o(.text*);
       BUILD_DIR/src/racing/render_courses.o(.text*);
+#ifdef VERSION_CN
+      /* Same 16 bytes of zero fill the cart has after profiler.o. */
+      . = . + 0x10;
+#endif
       BUILD_DIR/src/racing/actors.o(.text*);
       BUILD_DIR/src/racing/skybox_and_splitscreen.o(.text*);
       BUILD_DIR/src/racing/memory.o(.text*);
