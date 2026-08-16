@@ -13323,11 +13323,20 @@ void func_800ABB24(MenuItem* arg0) {
 void func_800ABBCC(MenuItem* arg0) {
     s32 temp_v0;
     Unk_D_800E70A0* temp_v1;
+#ifdef VERSION_CN
+    /* cn: the row offset is a value of its own before it meets the table row */
+    s32 offset;
+#endif
 
     temp_v0 = arg0->type - 0x7C;
     temp_v1 = &D_800E7430[temp_v0 / 4];
     arg0->column = (s32) temp_v1->column;
+#ifdef VERSION_CN
+    offset = ((temp_v0 % 4) * 0x32) + 0x14;
+    arg0->row = temp_v1->row + offset;
+#else
     arg0->row = temp_v1->row + ((temp_v0 % 4) * 0x32) + 0x14;
+#endif
 }
 
 void func_800ABC38(MenuItem* arg0) {
