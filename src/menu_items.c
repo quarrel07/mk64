@@ -10860,7 +10860,13 @@ void func_800A66A8(MenuItem* arg0, Unk_D_800E70A0* arg1) {
     if (x2) {}; if (y2) {}; if (z2) {};
     // clang-format on
 
+#ifdef VERSION_CN
+    /* cn: the three scale arguments come from one live float */
+    tmp = 1.2f;
+    guScale(mtx, tmp, tmp, tmp);
+#else
     guScale(mtx, 1.2f, 1.2f, 1.2f);
+#endif
     guRotate(mtx + 1, y2, 0.0f, 1.0f, 0.0f);
     guMtxCatL(mtx, mtx + 1, mtx);
     guRotate(mtx + 1, z2, 0.0f, 0.0f, 1.0f);
@@ -15009,6 +15015,10 @@ void func_800AF480(MenuItem* arg0) {
 }
 
 void func_800AF4DC(MenuItem* arg0) {
+#ifdef VERSION_CN
+    /* cn: the credits entry is addressed once, ahead of the switch */
+    char** cnText;
+#endif
 #ifndef VERSION_JP  /* JP's textPtr already occupies the slot this pad reserves */
     UNUSED s32 pad;
 #endif
@@ -15027,6 +15037,9 @@ void func_800AF4DC(MenuItem* arg0) {
     }
 #endif
     temp_v1 = &gCreditsTextRenderInfo[temp_v0];
+#ifdef VERSION_CN
+    cnText = &gCreditsText[temp_v0];
+#endif
     arg0->row = temp_v1->row;
     switch (arg0->state) {
         case 0:
@@ -15035,7 +15048,11 @@ void func_800AF4DC(MenuItem* arg0) {
             #ifdef VERSION_JP
             arg0->param2 = temp_v1->columnExtra + (get_string_width(*textPtr) * temp_v1->textScaling / 2);
 #else
+#ifdef VERSION_CN
+            arg0->param2 = temp_v1->columnExtra + ((get_string_width(*cnText) * temp_v1->textScaling) / 2);
+#else
             arg0->param2 = temp_v1->columnExtra + (get_string_width(gCreditsText[temp_v0]) * temp_v1->textScaling / 2);
+#endif
 #endif
             /* fallthrough */
         case 1:
@@ -15077,6 +15094,10 @@ void func_800AF4DC(MenuItem* arg0) {
 }
 
 void func_800AF740(MenuItem* arg0) {
+#ifdef VERSION_CN
+    /* cn: the credits entry is addressed once, ahead of the switch */
+    char** cnText;
+#endif
 #ifndef VERSION_JP  /* JP's textPtr already occupies the slot this pad reserves */
     UNUSED s32 pad;
 #endif
@@ -15095,6 +15116,9 @@ void func_800AF740(MenuItem* arg0) {
     }
 #endif
     temp_v1 = &gCreditsTextRenderInfo[temp_v0];
+#ifdef VERSION_CN
+    cnText = &gCreditsText[temp_v0];
+#endif
     arg0->row = temp_v1->row;
     switch (arg0->state) {
         case 0:
@@ -15103,7 +15127,11 @@ void func_800AF740(MenuItem* arg0) {
             #ifdef VERSION_JP
             arg0->param2 = temp_v1->columnExtra - (get_string_width(*textPtr) * temp_v1->textScaling / 2);
 #else
+#ifdef VERSION_CN
+            arg0->param2 = temp_v1->columnExtra - ((get_string_width(*cnText) * temp_v1->textScaling) / 2);
+#else
             arg0->param2 = temp_v1->columnExtra - (get_string_width(gCreditsText[temp_v0]) * temp_v1->textScaling / 2);
+#endif
 #endif
             /* fallthrough */
         case 1:
