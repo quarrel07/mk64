@@ -3163,7 +3163,7 @@ s32 func_80092EE4(char* character) {
             }
             break;
         default: /* switch 3 */
-            var_v1 = 2;
+            break;
     }
     return var_v1;
 }
@@ -5059,8 +5059,20 @@ void func_80099958(MenuTexture* addr, s32 arg1, s32 arg2) {
 // Possibly a debug print function?
 void func_80099A70(void) {
     s32 i;
+#ifdef VERSION_CN
+    /* cn: the store sits in the loop, off a hoisted entry pointer and value */
+    void* empty;
+    struct_8018E060_entry* entry;
+
+    entry = &D_8018E060[0];
+    empty = NULL;
+    for (i = 0; i < D_8018E060_SIZE; i++) {
+        entry->texture = empty;
+    }
+#else
     D_8018E060[0].texture = NULL;
     for (i = 0; i < D_8018E060_SIZE; i++) {}
+#endif
 }
 
 void func_80099A94(MenuTexture* arg0, s32 arg1) {
