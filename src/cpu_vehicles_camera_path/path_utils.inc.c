@@ -779,7 +779,8 @@ void determine_ideal_cpu_position_offset(s32 playerId, u16 pathPoint) {
     set_track_offset_position(pathPoint, sp2C, gPlayerPathIndex);
     sp48 = gOffsetPosition[0];
     sp44 = gOffsetPosition[2];
-    set_track_offset_position(((pathPoint + 1) % gSelectedPathCount) & 0xFFFF, sp2C, gPlayerPathIndex);
+    pathPoint = (pathPoint + 1) % gSelectedPathCount;
+    set_track_offset_position(pathPoint, sp2C, gPlayerPathIndex);
     stackPadding5 = gOffsetPosition[0];
     gOffsetPosition[0] = (sp48 + stackPadding5) * 0.5f;
     stackPadding4 = gOffsetPosition[2];

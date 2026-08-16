@@ -1,4 +1,13 @@
+/* This file calls libm sqrtf out of line; see include/libc/math.h. */
+#define SQRTF_NOT_INTRINSIC 1
+
+#ifdef VERSION_CN
+#define SQRTF_NOT_INTRINSIC 1
+
 #include <ultra64.h>
+#else
+#include <ultra64.h>
+#endif
 #include <macros.h>
 #include <defines.h>
 #include <mk64.h>

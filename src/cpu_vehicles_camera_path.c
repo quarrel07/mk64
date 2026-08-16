@@ -1174,7 +1174,11 @@ bool func_800088D8(s32 playerId, s16 arg1, s16 arg2) {
 
     var_v0 = 0;
     for (i = 0; i < 2; i++) {
+#ifdef VERSION_CN
+        if (gGPCurrentRaceRankByPlayerId[D_80163344[i]] < arg2) {
+#else
         if (gGPCurrentRaceRankByPlayerId[D_80163344[i] & 0xFFFF] < arg2) {
+#endif
             var_v0++;
         }
     }
@@ -1186,9 +1190,16 @@ bool func_800088D8(s32 playerId, s16 arg1, s16 arg2) {
         }
     }
 
+#ifdef VERSION_CN
+    var_t1 = arg2;
+    if (var_t1) {};
+    var_t1 -= var_v0;
+    var_t1 -= var_a0_4;
+#else
     // FAKE
     var_t1 = (arg2 - (var_v0 & 0xFFFF)) - var_a0_4;
     arg2 -= var_v0;
+#endif
 
     if ((var_v0 > 0) || (var_a0_4 > 0)) {
         var_t1++;
@@ -3082,7 +3093,11 @@ void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 
     temp_f0 = sqrtf(((sp80 * sp80) + (sp7C * sp7C)) + (sp78 * sp78));
 
     if (temp_f0 != 0.0) {
+#ifdef VERSION_CN
+        sp98 = D_801645F8[cameraId] + ((D_80164648[cameraId] * sp80) / temp_f0);
+#else
         sp98 = D_801645F8[cameraId] + (((stackPadding9 = D_80164648[cameraId]) * sp80) / temp_f0);
+#endif
         sp94 = D_80164618[cameraId] + ((D_80164648[cameraId] * sp7C) / temp_f0);
         sp90 = D_80164638[cameraId] + ((D_80164648[cameraId] * sp78) / temp_f0);
     } else {
@@ -3091,9 +3106,15 @@ void func_80017054(Camera* camera, UNUSED Player* player, UNUSED s32 index, s32 
         sp90 = D_80164638[cameraId];
     }
 
+#ifdef VERSION_CN
+    if (sp98 < -10000.0 || sp98 > 10000.0) {
+        if (sp90 < -10000.0 || sp90 > 10000.0) {}
+    }
+#else
     if (sp98 < -10000.0 || sp98 > 10000.0) {
         if (sp8C < -10000.0 || sp8C > 10000.0) {}
     }
+#endif
     camera->pos[0] = sp98;
     camera->pos[2] = sp90;
     camera->pos[1] = sp94 + 10.0;
