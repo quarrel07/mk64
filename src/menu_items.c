@@ -5685,16 +5685,34 @@ void adjust_img_colour(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     u16* color;
 
     color = &gMenuTextureBuffer[sMenuTextureMap[arg0].offset];
+#ifdef VERSION_CN
+    /* cn: the loop runs on an unsigned less-than, and each channel takes the
+       incoming level on the left of the multiply */
+    for (var_v1 = 0; var_v1 < (u32) arg1; var_v1++) {
+#else
     for (var_v1 = 0; var_v1 != arg1; var_v1++) {
+#endif
         red = ((*color & 0xF800) >> 0xB) * 0x4D;
         green = ((*color & 0x7C0) >> 6) * 0x96;
         blue = ((*color & 0x3E) >> 1) * 0x1D;
         alpha = *color & 0x1;
         temp_t9 = red + green + blue;
         temp_t9 = temp_t9 / 256;
+#ifdef VERSION_CN
+        newred = ((arg2 * temp_t9) / 256) << 0xB;
+#else
         newred = ((temp_t9 * arg2) / 256) << 0xB;
+#endif
+#ifdef VERSION_CN
+        newgreen = ((arg3 * temp_t9) / 256) << 6;
+#else
         newgreen = ((temp_t9 * arg3) / 256) << 6;
+#endif
+#ifdef VERSION_CN
+        newblue = ((arg4 * temp_t9) / 256) << 1;
+#else
         newblue = ((temp_t9 * arg4) / 256) << 1;
+#endif
         *color++ = newred + newgreen + newblue + alpha;
     }
 }
