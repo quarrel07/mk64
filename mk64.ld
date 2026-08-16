@@ -112,6 +112,174 @@ SECTIONS
          BUILD_DIR/src/os/sprintf.o(.text*);
          BUILD_DIR/src/os/is_debug.o(.text*);
       #endif
+#ifdef VERSION_CN
+      /* iQue links the libultra objects in its own order. 88 of 123 move;
+         the run is a permutation so it costs no space, but with our order
+         ~45KB of otherwise byte-correct code sits at the wrong offsets. */
+      BUILD_DIR/src/os/osAiGetLength.o(.text*);
+      BUILD_DIR/src/os/osAiSetFrequency.o(.text*);
+      BUILD_DIR/src/os/osAiSetNextBuffer.o(.text*);
+      BUILD_DIR/asm/os/osInvalDCache.o(.text);
+      BUILD_DIR/asm/os/osInvalICache.o(.text);
+      BUILD_DIR/asm/os/osWritebackDCacheAll.o(.text);
+      BUILD_DIR/src/os/osContStartReadData.o(.text*);
+      BUILD_DIR/src/os/osContInit.o(.text*);
+      BUILD_DIR/src/os/osVirtualToPhysical.o(.text*);
+      BUILD_DIR/asm/os/sqrtf.o(.text);
+      BUILD_DIR/src/os/guLookAtF.o(.text*);
+      BUILD_DIR/src/os/guOrthoF.o(.text*);
+      BUILD_DIR/src/os/guPerspectiveF.o(.text*);
+      BUILD_DIR/src/os/math/sinf.o(.text*);
+      BUILD_DIR/asm/os/bzero.o(.text);
+      BUILD_DIR/src/os/math/llmuldiv.o(.text*);
+      /* iQue stubs both printfs here (cart 0x800CBE60); the ANSI formatter
+         subtree (_Printf/_Litob/_Ldtob/string/ldiv) is never linked */
+      BUILD_DIR/src/os/osSyncPrintf.o(.text*);
+      BUILD_DIR/src/os/osCreateMesgQueue.o(.text*);
+      BUILD_DIR/src/os/osRecvMesg.o(.text*);
+      BUILD_DIR/src/os/osSendMesg.o(.text*);
+      BUILD_DIR/src/os/osSetEventMesg.o(.text*);
+      BUILD_DIR/asm/os/osGetCount.o(.text);
+      BUILD_DIR/src/os/osSpTaskLoadGo.o(.text*);
+      BUILD_DIR/src/os/osSpTaskYield.o(.text*);
+      BUILD_DIR/src/os/osSpTaskYielded.o(.text*);
+      BUILD_DIR/src/os/__osSiRawStartDma.o(.text*);
+      BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.text*);
+      BUILD_DIR/src/os/osCreateThread.o(.text);
+      BUILD_DIR/src/os/osSetThreadPri.o(.text*);
+      BUILD_DIR/src/os/osStartThread.o(.text*);
+      BUILD_DIR/src/os/__osDequeueThread.o(.text*);
+      BUILD_DIR/src/os/__osGetCurrFaultedThread.o(.text*);
+      BUILD_DIR/src/os/osGetTime.o(.text*);
+      BUILD_DIR/src/os/osSetTime.o(.text*);
+      BUILD_DIR/src/os/osSetTimer.o(.text*);
+      BUILD_DIR/src/os/osTimer.o(.text*);
+      BUILD_DIR/asm/os/__osProbeTLB.o(.text);
+      BUILD_DIR/src/os/osCreateViManager.o(.text*);
+      BUILD_DIR/src/os/osViSetEvent.o(.text*);
+      BUILD_DIR/src/os/osViSetMode.o(.text*);
+      BUILD_DIR/src/os/osViSetSpecialFeatures.o(.text*);
+      BUILD_DIR/src/os/osViSwapBuffer.o(.text*);
+      BUILD_DIR/src/os/__osViSwapContext.o(.text*);
+      BUILD_DIR/src/os/osViBlack.o(.text*);
+      BUILD_DIR/asm/os/guMtxIdentF_cn.o(.text);
+      BUILD_DIR/asm/os/guMtxF2L_cn.o(.text);
+      BUILD_DIR/src/os/guMtxF2L.o(.text*);
+      BUILD_DIR/src/os/guScaleF.o(.text*);
+      BUILD_DIR/asm/os/guScale_cn.o(.text);
+      BUILD_DIR/src/os/guTranslateF.o(.text*);
+      BUILD_DIR/asm/os/guTranslate_cn.o(.text);
+      BUILD_DIR/src/os/guMtxCatL.o(.text*);
+      BUILD_DIR/src/os/guRotateF.o(.text*);
+      BUILD_DIR/src/os/osEepromProbe.o(.text*);
+      BUILD_DIR/src/os/osEepromLongWrite.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.text*);
+      BUILD_DIR/src/os/osEepromLongRead.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/conteeplongread.o(.text*);
+      BUILD_DIR/asm/os/__osException.o(.text);
+      BUILD_DIR/asm/os/__osDisableInt.o(.text);
+      BUILD_DIR/asm/os/__osRestoreInt.o(.text);
+      BUILD_DIR/asm/os/osSetIntMask.o(.text);
+      BUILD_DIR/src/os/osCreatePiManager.o(.text*);
+      BUILD_DIR/src/os/osEPiRawStartDma.o(.text*);
+      BUILD_DIR/src/os/__osDevMgrMain.o(.text*);
+      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.text*);
+      BUILD_DIR/src/os/osPiStartDma.o(.text*);
+      /* iQue OS trap stubs, cart 0x800CFBB0..0x800CFDFC */
+      BUILD_DIR/asm/os/iQueKernelCalls.o(.text);
+      /* iQue string object, cart 0x800CFE00..0x800CFF30. Only strcmp is
+         transcribed; memset (0x800CFE50), an unsigned n-compare (0x800CFE74)
+         and strncmp (0x800CFEAC) are still missing - 224 bytes */
+      BUILD_DIR/asm/os/strcmp_cn.o(.text);
+      BUILD_DIR/src/os/osPfsInit.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsinit.o(.text*);
+      BUILD_DIR/src/os/osPfsAllocateFile.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.text*);
+      BUILD_DIR/src/os/osPfsDeleteFile.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsdeletefile.o(.text*);
+      BUILD_DIR/src/os/osPfsReadWriteFile.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsreadwritefile.o(.text*);
+      BUILD_DIR/src/os/osPfsFileState.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsfilestate.o(.text*);
+      BUILD_DIR/src/os/osPfsSearchFile.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfssearchfile.o(.text*);
+      BUILD_DIR/src/os/osPfsIsPlug.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.text*);
+      BUILD_DIR/src/os/osPfsFreeBlocks.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsfreeblocks.o(.text*);
+      BUILD_DIR/src/os/osPfsNumFiles.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsnumfiles.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsgetstatus.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.text*);
+      BUILD_DIR/src/os/contpfs.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.text*);
+      BUILD_DIR/src/os/contramread.o(.text*);
+      BUILD_DIR/src/os/contramwrite.o(.text*);
+      /* cart 0x800D1F40..0x800D1FB0 is 0x70 of zeros. parameters.o's nops
+         supply 0x40 of it; the remaining 0x30 is not yet identified */
+      BUILD_DIR/asm/os/parameters.o(.text);
+      . += 0x30;
+      BUILD_DIR/src/os/osInitialize.o(.text*);
+      BUILD_DIR/src/os/__osAiDeviceBusy.o(.text*);
+      BUILD_DIR/asm/os/osWritebackDCache.o(.text);
+      BUILD_DIR/src/os/math/cosf.o(.text*);
+      /* 2.0L bcmp, cart 0x800D2710 */
+      BUILD_DIR/asm/os/bcmp_cn.o(.text);
+      BUILD_DIR/asm/os/bcopy.o(.text);
+      BUILD_DIR/src/os/osJamMesg.o(.text*);
+      /* cart stub run 0x800D2CC0..0x800D2D10 */
+      BUILD_DIR/asm/os/__osGetCause_cn.o(.text);
+      BUILD_DIR/asm/os/__osGetSR.o(.text);
+      BUILD_DIR/asm/os/__osSetFpcCsr.o(.text);
+      BUILD_DIR/asm/os/__osSetSR.o(.text);
+      BUILD_DIR/asm/os/__osSetWatchLo_cn.o(.text);
+      BUILD_DIR/asm/os/__osSetCompare.o(.text);
+      BUILD_DIR/src/os/__osSpDeviceBusy.o(.text*);
+      BUILD_DIR/src/os/__osSpGetStatus.o(.text*);
+      BUILD_DIR/src/os/__osSpSetStatus.o(.text*);
+      BUILD_DIR/src/os/__osSpSetPc.o(.text*);
+      BUILD_DIR/src/os/__osSpRawStartDma.o(.text*);
+      BUILD_DIR/src/os/__osSiRawReadIo.o(.text*);
+      BUILD_DIR/src/os/__osSiRawWriteIo.o(.text*);
+      BUILD_DIR/src/os/osDestroyThread.o(.text*);
+      BUILD_DIR/src/os/osGetThreadPri.o(.text*);
+      BUILD_DIR/src/os/osYieldThread.o(.text*);
+      BUILD_DIR/asm/os/osMapTLBRdb.o(.text);
+      BUILD_DIR/asm/os/osUnmapTLBAll_cn.o(.text);
+      BUILD_DIR/src/os/__osViInit.o(.text*);
+      /* cart 0x800D3300 is a FOUR-word leaf; ours is a 12-word body */
+      BUILD_DIR/src/os/__osViGetCurrentContext.o(.text*);
+      /* cart 0x0D3F10: 16 bytes of fill after this object */
+      . += 0x10;
+      BUILD_DIR/asm/os/guMtxL2F_cn.o(.text);
+      BUILD_DIR/src/os/guMtxCatF.o(.text*);
+      BUILD_DIR/asm/os/guMtxCatF_cn.o(.text);
+      BUILD_DIR/src/os/guNormalize.o(.text*);
+      BUILD_DIR/asm/os/guNormalize_cn.o(.text);
+      BUILD_DIR/src/os/osEepromRead.o(.text*);
+      BUILD_DIR/src/os/osEepromWrite.o(.text*);
+      BUILD_DIR/src/os/__osSetGlobalIntMask.o(.text*);
+      BUILD_DIR/src/os/__osResetGlobalIntMask.o(.text*);
+      BUILD_DIR/src/os/osPiRawStartDma.o(.text*);
+      BUILD_DIR/src/os/osPiGetCmdQueue.o(.text*);
+      BUILD_DIR/src/os/osEPiRawReadIo.o(.text*);
+      BUILD_DIR/src/os/osEPiRawWriteIo.o(.text*);
+      BUILD_DIR/src/os/osPfsChecker.o(.text*);
+      BUILD_DIR/src/os/ique_pfs/pfschecker.o(.text*);
+      BUILD_DIR/src/os/__osSiDeviceBusy.o(.text*);
+      BUILD_DIR/src/os/libgcc/_divdi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_moddi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_udivdi3.o(.text*);
+      BUILD_DIR/src/os/libgcc/_umoddi3.o(.text*);
+      /* iQue links none of these (zero-size .text under VERSION_CN); kept so a
+         future non-empty build cannot become an orphan section */
+      BUILD_DIR/src/os/osPiRawReadIo.o(.text*);
+      BUILD_DIR/src/os/__osEPiRawWriteIo.o(.text*);
+      BUILD_DIR/src/os/__osSetHWIntrRoutine.o(.text*);
+      BUILD_DIR/src/os/__osLeoInterrupt.o(.text*);
+      BUILD_DIR/src/os/osLeoDiskInit.o(.text*);
+      BUILD_DIR/src/os/crc.o(.text*);
+#else
       BUILD_DIR/src/os/osCreateThread.o(.text);
       #ifdef VERSION_EU
          . += 0x40;
@@ -370,6 +538,7 @@ SECTIONS
       BUILD_DIR/src/os/libgcc/_udivdi3.o(.text*);
       BUILD_DIR/src/os/libgcc/_umoddi3.o(.text*);
       #endif
+#endif
       BUILD_DIR/data/rsp.o(.text);
       #ifdef VERSION_JP
          /* JP .data head order recovered by content-anchor scan vs real ROM */
