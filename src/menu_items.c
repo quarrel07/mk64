@@ -6085,8 +6085,15 @@ void draw_fade_in(s32 arg0, s32 arg1, s32 arg2) {
     UNUSED s32 pad[3];
     struct UnkStruct_800DC5EC* unk;
     struct UnkStruct_8018E7E8 *size, *start;
+#ifdef VERSION_CN
+    /* cn: the range test reads the mode twice, which is what keeps EGCS from
+       folding the pair into one unsigned compare the way retail's does */
+    s32 mode = gModeSelection;
 
+    if ((mode < 2) && (gModeSelection >= GRAND_PRIX)) {
+#else
     if ((gModeSelection == GRAND_PRIX) || (gModeSelection == TIME_TRIALS)) {
+#endif
         start = &(D_8018E7E8[arg0]);
         size = &(D_8018E810[arg0]);
         x = start->x;
@@ -6109,8 +6116,13 @@ void draw_fade_in(s32 arg0, s32 arg1, s32 arg2) {
     }
     color = &D_800E7AE8[arg2];
     gDisplayListHead =
+#ifdef VERSION_CN
+        draw_box(gDisplayListHead, x - (w / 2), y - (h / 2), x + (w / 2), y + (h / 2), color->red, color->green,
+                 color->blue, 0xFF - (gCurrentTransitionTime[arg0] * 0xFF / gTransitionDuration[arg0]));
+#else
         draw_box(gDisplayListHead, x - (w / 2), y - (h / 2), (w / 2) + x, (h / 2) + y, color->red, color->green,
                  color->blue, 0xFF - (gCurrentTransitionTime[arg0] * 0xFF / gTransitionDuration[arg0]));
+#endif
 
     if ((arg1 == 0) &&
         (gCurrentTransitionTime[arg0] += 1, (gCurrentTransitionTime[arg0] >= gTransitionDuration[arg0]))) {
