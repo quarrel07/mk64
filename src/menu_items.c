@@ -5418,7 +5418,12 @@ void func_8009A640(s32 arg0, s32 arg1, s32 arg2, MkAnimation* arg3) {
 UNUSED void func_8009A6D4(void) {
     s32 index;
     for (index = 0; index < D_8018DEE0_SIZE; index++) {
+#ifdef VERSION_CN
+        /* cn: the pointer form is what EGCS compiles to the cart's addressing */
+        if (((D_8018DEE0 + index)->visible & 0x80000000) != 0) {
+#else
         if ((D_8018DEE0[index].visible & 0x80000000) != 0) {
+#endif
             func_8009A878(&D_8018DEE0[index]);
             gDisplayListHead = func_8009C434(gDisplayListHead, &D_8018DEE0[index], 0, 0, 0);
         }
