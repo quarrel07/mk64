@@ -7998,7 +7998,11 @@ void func_800A0EB8(UNUSED MenuItem* arg0, s32 arg1) {
         }
     } else {
         thing = gControllerPakMenuSelection; // ?
+#ifdef VERSION_CN
+        if ((thing < CONTROLLER_PAK_MENU_QUIT + 1) && (gControllerPakMenuSelection >= CONTROLLER_PAK_MENU_ERASE)) {
+#else
         if ((thing == CONTROLLER_PAK_MENU_ERASE) || (thing == CONTROLLER_PAK_MENU_QUIT)) {
+#endif
             var_t1 = ((arg1 * 2) + gControllerPakMenuSelection) - CONTROLLER_PAK_MENU_ERASE;
         } else {
             return;
@@ -12421,10 +12425,18 @@ void func_800A9E58(MenuItem* arg0) {
 
 void func_800AA280(MenuItem* arg0) {
     Unk_D_800E70A0* temp_v0;
+#ifdef VERSION_CN
+    /* cn: reading the selection twice keeps EGCS from folding the pair */
+    s32 sel = gMainMenuSelection;
+#endif
 
     temp_v0 = &D_800E70A0[arg0->type - 0xA];
+#ifdef VERSION_CN
+    if ((sel < MAIN_MENU_MODE_SUB_SELECT_GO_BACK + 1) && (gMainMenuSelection >= MAIN_MENU_OK_SELECT_GO_BACK)) {
+#else
     if ((gMainMenuSelection == MAIN_MENU_OK_SELECT_GO_BACK) ||
         (gMainMenuSelection == MAIN_MENU_MODE_SUB_SELECT_GO_BACK)) {
+#endif
         arg0->column = temp_v0->column;
         arg0->row = temp_v0->row;
     } else {
