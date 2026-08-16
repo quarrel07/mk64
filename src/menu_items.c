@@ -2599,7 +2599,11 @@ void func_80091B78(void) {
 
 s32 func_80091D74(void) {
     u8 sp67;
+#ifdef VERSION_CN
+    UNUSED s32 pad[8];
+#else
     UNUSED s32 pad[10];
+#endif
     s32 i;
 
     if (!gControllerBits) {
@@ -4158,15 +4162,11 @@ func_80095BD0_label1:
     return displayListHead;
 func_80095BD0_label2:
     func_80095AE0((void*) sp28, arg2, arg3, arg6, arg7);
-    gSPMatrix(displayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),
+    gSPMatrix(displayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount++]),
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gMatrixEffectCount += 1;
     gDPLoadTextureTile_4b(displayListHead++, arg1, G_IM_FMT_I, arg4, 0, 0, 0, arg4, arg5, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     switch (arg4) {
-        default:
-            var_a1 = D_02007CD8;
-            break;
         case 16:
             var_a1 = D_02007CD8;
             break;
@@ -4175,6 +4175,9 @@ func_80095BD0_label2:
             break;
         case 30:
             var_a1 = D_02007DF8;
+            break;
+        default:
+            var_a1 = D_02007CD8;
             break;
     }
 
@@ -5573,17 +5576,18 @@ void func_8009A9FC(s32 arg0, s32 arg1, u32 arg2, s32 arg3) {
     color0 = &gMenuTextureBuffer[sMenuTextureMap[arg0].offset];
     color1 = &gMenuTextureBuffer[sMenuTextureMap[arg1].offset];
     for (var_t1 = 0; (u32) var_t1 < arg2; var_t1++) {
-        temp_a0 = *color0++;
+        temp_a0 = *color0;
         red = (temp_a0 & 0xF800) >> 0xB;
         green = (temp_a0 & 0x7C0) >> 6;
         blue = (temp_a0 & 0x3E) >> 1;
         alpha = temp_a0 & 0x1;
         if (alpha) {}
         temp_t9 = ((red * 0x4D) + (green * 0x96) + (blue * 0x1D)) >> 8;
-        newred = (((((temp_t9 - red) * arg3) >> 8) + red) << 0xB);
-        newgreen = (((((((temp_t9 * 7) / 8) - green) * arg3) >> 8) + green) << 6);
-        newblue = (((((((temp_t9 * 6) / 8) - blue) * arg3) >> 8) + blue) << 1);
-        *color1++ = newblue + newgreen + newred + alpha;
+        newred = ((((temp_t9 - red) * arg3) >> 8) + red);
+        newgreen = ((((((temp_t9 * 7) / 8) - green) * arg3) >> 8) + green);
+        newblue = ((((((temp_t9 * 6) / 8) - blue) * arg3) >> 8) + blue);
+        color0++;
+        *color1++ = (newblue << 1) + (newgreen << 6) + (newred << 0xB) + alpha;
     }
 }
 
@@ -6146,7 +6150,9 @@ void func_8009CA6C(s32 arg0) {
 void draw_fade_in(s32 arg0, s32 arg1, s32 arg2) {
     RGBA16* color;
     s16 x, y, w, h;
+#ifndef VERSION_CN
     UNUSED s32 pad[3];
+#endif
     struct UnkStruct_800DC5EC* unk;
     struct UnkStruct_8018E7E8 *size, *start;
 #ifdef VERSION_CN
@@ -8344,6 +8350,8 @@ void render_menu_item_data_course_info(MenuItem* arg0) {
     s32 rowOffset;
 #ifdef VERSION_CN
     f32 scale;
+    /* cn: 8 bytes of frame the cart reserves and never touches */
+    UNUSED s32 stackPadding[2];
 #endif
 
     courseId = gCupCourseOrder[gTimeTrialDataCourseIndex / 4][gTimeTrialDataCourseIndex % 4];
@@ -10163,8 +10171,14 @@ void render_pause_grand_prix(MenuItem* arg0) {
     s32 temp_t4;
     s32 var_s0;
     Unk_D_800E70A0* temp_s3;
+#ifdef VERSION_CN
     struct UnkStruct_800DC5EC* temp_v0;
     f32 one = 1.0f;
+    f32 scale;
+#else
+    struct UnkStruct_800DC5EC* temp_v0;
+    f32 one = 1.0f;
+#endif
 
     temp_v0 = &D_8015F480[gIsGamePaused - 1];
     temp_v1 = temp_v0->screenStartX;
@@ -10173,8 +10187,28 @@ void render_pause_grand_prix(MenuItem* arg0) {
     temp_t4 = temp_v0->screenHeight / 2;
     gDisplayListHead = draw_box(gDisplayListHead, temp_v1 - temp_t3, temp_t0 - temp_t4, temp_v1 + temp_t3,
                                 temp_t0 + temp_t4, 0, 0, 0, 140);
+#ifdef VERSION_CN
+    temp_s3 = &D_800E85C0[(gScreenModeSelection * 4) + gIsGamePaused - 1];
+#else
     temp_s3 = &D_800E85C0[(gScreenModeSelection * 4) + (gIsGamePaused - 1)];
+#endif
     temp_s0 = ((get_string_width(gCupNames[gCupSelection]) * one) + 10.0f) / 2;
+#ifdef VERSION_CN
+    temp_s1 = ((get_string_width(D_800E76CC[gCCSelection]) * one) + 10.0f) / 2;
+    scale = 1.0f;
+    set_text_color(TEXT_YELLOW);
+    print_text1_center_mode_1(160 - temp_s1, temp_s3->row - 50, gCupNames[gCupSelection], 0, scale, scale);
+    set_text_color(TEXT_YELLOW);
+    print_text1_center_mode_1(160 + temp_s0, temp_s3->row - 50, D_800E76CC[gCCSelection], 0, scale, scale);
+    set_text_color(TEXT_YELLOW);
+    print_text1_center_mode_1(160, temp_s3->row - 30,
+                              gCourseNamesDup[gCupCourseOrder[gCupSelection][gCourseIndexInCup]], 0, scale, scale);
+    scale = 0.75f;
+    for (var_s0 = 0; var_s0 < 2; var_s0++) {
+        text_rainbow_effect(arg0->state - 31, var_s0, TEXT_YELLOW);
+        print_text_mode_1(temp_s3->column, temp_s3->row + (var_s0 * 13), gTextPauseButton[var_s0 * 4], 0, scale, scale);
+    }
+#else
     temp_s1 = ((get_string_width(D_800E76CC[gCCSelection]) * one) + 10.0f) / 2;
     set_text_color(TEXT_YELLOW);
     print_text1_center_mode_1(160 - temp_s1, temp_s3->row - 50, gCupNames[gCupSelection], 0, 1.0f, 1.0f);
@@ -10187,6 +10221,7 @@ void render_pause_grand_prix(MenuItem* arg0) {
         text_rainbow_effect(arg0->state - 31, var_s0, TEXT_YELLOW);
         print_text_mode_1(temp_s3->column, temp_s3->row + (var_s0 * 13), gTextPauseButton[var_s0 * 4], 0, 0.75f, 0.75f);
     }
+#endif
 }
 
 void render_pause_battle(MenuItem* arg0) {
@@ -10859,6 +10894,9 @@ void func_800A638C(MenuItem* arg0) {
     UNUSED s32 var_s0;
     s32 var_s1;
     UNUSED s8** var_s2;
+#ifdef VERSION_CN
+    f32 sc;
+#endif
 
     if (arg0->state == 0) {
         gDisplayListHead = draw_box(gDisplayListHead, 0, 0, 0x0000013F, 0x000000EF, 0, 0, 0, arg0->param1);
@@ -10870,6 +10908,17 @@ void func_800A638C(MenuItem* arg0) {
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
         print_text1_center_mode_1(0x000000A0, arg0->row + 0x1E, D_800E7778[gModeSelection / 3], 0, 1.0f, 1.0f);
     }
+#ifdef VERSION_CN
+    if (arg0->state < 0) {
+        var_a1 = 0x000000FF;
+    } else if (arg0->state < 2) {
+        var_a1 = 0;
+    } else if (arg0->state == 2) {
+        var_a1 = arg0->param1;
+    } else {
+        var_a1 = 0x000000FF;
+    }
+#else
     switch (arg0->state) { /* irregular */
         default:
             var_a1 = 0x000000FF;
@@ -10882,6 +10931,7 @@ void func_800A638C(MenuItem* arg0) {
             var_a1 = arg0->param1;
             break;
     }
+#endif
     gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x00, 0x00, 0x00, var_a1);
     switch (gPlayerCount) {
         case 2:
@@ -10897,10 +10947,15 @@ void func_800A638C(MenuItem* arg0) {
             break;
     }
     if (arg0->state >= 10) {
+#ifdef VERSION_CN
+        sc = 0.8f;
+#endif
         for (var_s1 = 0; var_s1 < 4; var_s1++) {
             text_rainbow_effect(arg0->state - 0xA, var_s1, TEXT_GREEN);
 #ifdef VERSION_JP
             print_text_mode_1(0x00000082, 0xAE + (0xF * var_s1), gTextPauseButton[var_s1 + 1], 0, 0.8f, 0.8f); // Where Retry, course change, etc printed
+#elif defined(VERSION_CN)
+            print_text_mode_1(0x00000069, 0xAE + (0xF * var_s1), gTextPauseButton[var_s1 + 1], 0, sc, sc); // Where Retry, course change, etc printed
 #else
             print_text_mode_1(0x00000069, 0xAE + (0xF * var_s1), gTextPauseButton[var_s1 + 1], 0, 0.8f, 0.8f); // Where Retry, course change, etc printed
 #endif
@@ -12583,17 +12638,29 @@ void func_800A9E58(MenuItem* arg0) {
     Unk_D_800E70A0* temp_v1_2;
     s32 sp24;
     s32 sp20;
+#ifdef VERSION_CN
+    s32 sp1C;
+    s32 sp18;
+    s32 temp_a1;
+#else
     s32 sp1C;
     s32 temp_a1;
+#endif
 
     switch (arg0->type) {
         case 18:
         case 19:
         case 20:
         case 21:
+#ifdef VERSION_CN
+            sp24 = 18;
+            sp20 = 0;
+            sp1C = 2;
+#else
             sp24 = 18;
             sp1C = 2;
             sp20 = 0;
+#endif
             break;
         case 22:
         case 23:
@@ -12623,7 +12690,12 @@ void func_800A9E58(MenuItem* arg0) {
                         arg0->visible = 1;
                         temp_v0 = get_menu_item_player_count();
                         arg0->column = temp_v0->column;
+#ifdef VERSION_CN
+                        sp18 = (gGameModeMenuColumn[gPlayerCount - 1] * 0x12) + 0x41;
+                        arg0->row = temp_v0->row + sp18;
+#else
                         arg0->row = (gGameModeMenuColumn[gPlayerCount - 1] * 0x12) + temp_v0->row + 0x41;
+#endif
                         arg0->param1 = 0;
                         arg0->state = 1;
                         break;
@@ -12632,7 +12704,11 @@ void func_800A9E58(MenuItem* arg0) {
                         temp_v0 = get_menu_item_player_count();
                         temp_v1_2 = &D_800E70E8[arg0->type - sp24];
                         arg0->column = temp_v0->column + temp_v1_2->column;
+#ifdef VERSION_CN
+                        arg0->row = temp_v0->row + temp_v1_2->row + (gGameModeMenuColumn[gPlayerCount - 1] * 0x12);
+#else
                         arg0->row = (gGameModeMenuColumn[gPlayerCount - 1] * 0x12) + temp_v0->row + temp_v1_2->row;
+#endif
                         arg0->param1 = arg0->row - temp_v0->row;
                         arg0->visible = 1;
                         arg0->state = 2;
@@ -12654,11 +12730,19 @@ void func_800A9E58(MenuItem* arg0) {
                         arg0->visible = 0;
                         arg0->state = 0;
                     } else {
+#ifdef VERSION_CN
+                        if (gGameModeMenuColumn[gPlayerCount - 1] != arg0->param2) {
+                            arg0->state = 0;
+                        }
+                        temp_v0 = get_menu_item_player_count();
+                        arg0->column = temp_v0->column + arg0->param1;
+#else
                         if (arg0->param2 != gGameModeMenuColumn[gPlayerCount - 1]) {
                             arg0->state = 0;
                         }
                         temp_v0 = get_menu_item_player_count();
                         arg0->column = temp_v0->column + arg0->param1;
+#endif
                         temp_v1_2 = &D_800E70E8[arg0->type - sp24];
                         func_800A92E8(arg0, temp_v0->column + temp_v1_2->column);
                         arg0->param1 = arg0->column - temp_v0->column;
@@ -12685,15 +12769,28 @@ void func_800A9E58(MenuItem* arg0) {
                         arg0->visible = 0;
                         arg0->state = 0;
                     } else {
+#ifdef VERSION_CN
+                        if (gGameModeMenuColumn[gPlayerCount - 1] != arg0->param2) {
+                            arg0->state = 0;
+                        }
+                        temp_v0 = get_menu_item_player_count();
+                        temp_v1_2 = &D_800E70E8[arg0->type - sp24];
+#else
                         if (arg0->param2 != gGameModeMenuColumn[gPlayerCount - 1]) {
                             arg0->state = 0;
                         }
                         temp_v0 = get_menu_item_player_count();
                         temp_v1_2 = &D_800E70E8[arg0->type - sp24];
+#endif
                         arg0->column = temp_v0->column + temp_v1_2->column;
                         arg0->row = temp_v0->row + arg0->param1;
+#ifdef VERSION_CN
+                        func_800A91D8(arg0, arg0->column,
+                                      temp_v0->row + temp_v1_2->row + (gGameModeMenuColumn[gPlayerCount - 1] * 0x12));
+#else
                         func_800A91D8(arg0, arg0->column,
                                       (gGameModeMenuColumn[gPlayerCount - 1] * 0x12) + temp_v0->row + temp_v1_2->row);
+#endif
                         arg0->param1 = arg0->row - temp_v0->row;
                     }
                     break;
@@ -13359,7 +13456,9 @@ void func_800AB290(MenuItem* arg0) {
 
 void func_800AB314(MenuItem* item) {
     s32 i;
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
+#endif
     MenuItem* _items[4]; // Added _ to help distinguish between the function argument and this
 
     for (i = 0; i < 4; i++) {
