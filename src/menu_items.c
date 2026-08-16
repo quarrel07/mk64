@@ -11910,17 +11910,30 @@ void func_800A90D4(UNUSED s32 arg0, MenuItem* arg1) {
     s32 temp_a2;
     s32 temp_t1;
     s32 temp_t7;
+#ifdef VERSION_CN
+    /* cn: the inset is a value of its own, computed before the display list
+       macros, and the right edge is the column minus it */
+    s32 inset;
+#endif
 
     if (arg1->param1 < 0x20) {
         if (1) {}
         temp_t7 = (arg1->param1 * 0x41) / 0x40;
         temp_t1 = arg1->column;
         temp_a2 = arg1->row;
+#ifdef VERSION_CN
+        inset = temp_t7 - 0x40;
+#endif
         gDPPipeSync(gDisplayListHead++);
         gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+#ifdef VERSION_CN
+        gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, temp_t1 - inset,
+                                         temp_a2 + 0x27, 1, 1, 1, 0xFF);
+#else
         gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t7, temp_a2, (temp_t1 - temp_t7) + 0x40,
                                          temp_a2 + 0x27, 1, 1, 1, 0xFF);
+#endif
     }
 }
 
