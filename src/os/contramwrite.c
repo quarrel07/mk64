@@ -14,6 +14,7 @@ extern u32 __osBbPakSize;
 s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int force) {
     s32 ret = 0;
     int i;
+    u32 pakAddr;
 
     if (force != 1 && address < 7 && address != 0) {
         return 0;
@@ -22,7 +23,8 @@ s32 __osContRamWrite(OSMesgQueue* mq, int channel, u16 address, u8* buffer, int 
     if (__osBbPakAddress[channel] != 0) {
         if ((address << 5) <= __osBbPakSize - 0x20) {
             for (i = 0; i < 0x20; i++) {
-                *(u8*) ((address << 5) + __osBbPakAddress[channel] + i) = buffer[i];
+                pakAddr = __osBbPakAddress[channel];
+                *(u8*) ((address << 5) + pakAddr + i) = buffer[i];
             }
         }
     } else {

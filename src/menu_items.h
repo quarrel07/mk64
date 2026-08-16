@@ -452,9 +452,11 @@ Gfx* print_letter(Gfx*, MenuTexture*, f32, f32, s32, f32, f32);
 Gfx* func_8009C204(Gfx*, MenuTexture*, s32, s32, s32);
 Gfx* func_8009C434(Gfx*, struct_8018DEE0_entry*, s32, s32, s32);
 #ifdef VERSION_CN
-/* iQue's is a different function, not a tweak of ours: it drops the index
-   parameter, so the retail arm's arg5 render mode becomes its arg4. */
-Gfx* func_8009C708(Gfx*, struct_8018DEE0_entry*, s32, s32, s32);
+/* iQue takes six arguments like retail, but reads its render mode from the
+   FIFTH incoming slot (0x78(sp), frame 0x68), so the sixth is unused. The
+   unused one has to be LAST: making it the fifth moves the render-mode load to
+   0x7c(sp) and costs func_8009C708 a word. */
+Gfx* func_8009C708(Gfx*, struct_8018DEE0_entry*, s32, s32, s32, s32);
 #else
 Gfx* func_8009C708(Gfx*, struct_8018DEE0_entry*, s32, s32, s32, s32);
 #endif
