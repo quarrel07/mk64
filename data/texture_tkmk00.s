@@ -11,18 +11,30 @@
 # bin/jp/ and selected with .ifdef VERSION_JP.
 
 glabel texture_player_select
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_player_select.rgba16.tkmk00"
+.else
 .incbin "bin/texture_player_select.rgba16.tkmk00"
+.endif
 glabel texture_player_select_end
 
 glabel texture_option
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_option.rgba16.tkmk00"
+.else
 .incbin "bin/texture_option.rgba16.tkmk00"
+.endif
 glabel texture_option_end
 
 glabel texture_name_dk
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_dk.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_dk.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_dk.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_dk_end
 
@@ -30,7 +42,11 @@ glabel texture_name_toad
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_toad.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_toad.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_toad.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_toad_end
 
@@ -38,7 +54,11 @@ glabel texture_name_bowser
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_bowser.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_bowser.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_bowser.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_bowser_end
 
@@ -46,7 +66,11 @@ glabel texture_name_luigi
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_luigi.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_luigi.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_luigi.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_luigi_end
 
@@ -54,7 +78,11 @@ glabel texture_name_mario
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_mario.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_mario.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_mario.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_mario_end
 
@@ -62,7 +90,11 @@ glabel texture_name_peach
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_peach.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_peach.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_peach.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_peach_end
 
@@ -70,7 +102,11 @@ glabel texture_name_wario
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_wario.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_wario.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_wario.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_wario_end
 
@@ -78,7 +114,11 @@ glabel texture_name_yoshi
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_name_yoshi.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_name_yoshi.rgba16.tkmk00"
+.else
 .incbin "bin/texture_name_yoshi.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_name_yoshi_end
 
@@ -86,7 +126,11 @@ glabel gTextureTitleMarioRaceway
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleMarioRaceway.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleMarioRaceway.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleMarioRaceway.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleMarioRaceway_end
 
@@ -94,7 +138,11 @@ glabel gTextureTitleChocoMountain
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleChocoMountain.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleChocoMountain.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleChocoMountain.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleChocoMountain_end
 
@@ -102,7 +150,11 @@ glabel gTextureTitleBowsersCastle
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleBowsersCastle.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleBowsersCastle.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleBowsersCastle.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleBowsersCastle_end
 
@@ -110,7 +162,11 @@ glabel gTextureTitleBansheeBoardwalk
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleBansheeBoardwalk.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleBansheeBoardwalk.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleBansheeBoardwalk.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleBansheeBoardwalk_end
 
@@ -118,7 +174,11 @@ glabel gTextureTitleYoshiValley
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleYoshiValley.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleYoshiValley.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleYoshiValley.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleYoshiValley_end
 
@@ -126,7 +186,11 @@ glabel gTextureTitleFrappeSnowland
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleFrappeSnowland.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleFrappeSnowland.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleFrappeSnowland.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleFrappeSnowland_end
 
@@ -134,7 +198,11 @@ glabel gTextureTitleKoopaTroopaBeach
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleKoopaTroopaBeach.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleKoopaTroopaBeach.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleKoopaTroopaBeach.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleKoopaTroopaBeach_end
 
@@ -142,7 +210,11 @@ glabel gTextureTitleRoyalRaceway
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleRoyalRaceway.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleRoyalRaceway.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleRoyalRaceway.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleRoyalRaceway_end
 
@@ -150,7 +222,11 @@ glabel gTextureTitleLuigiRaceway
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleLuigiRaceway.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleLuigiRaceway.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleLuigiRaceway.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleLuigiRaceway_end
 
@@ -158,7 +234,11 @@ glabel gTextureTitleMooMooFarm
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleMooMooFarm.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleMooMooFarm.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleMooMooFarm.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleMooMooFarm_end
 
@@ -166,7 +246,11 @@ glabel gTextureTitleToadsTurnpike
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleToadsTurnpike.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleToadsTurnpike.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleToadsTurnpike.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleToadsTurnpike_end
 
@@ -174,7 +258,11 @@ glabel gTextureTitleKalimariDesert
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleKalimariDesert.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleKalimariDesert.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleKalimariDesert.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleKalimariDesert_end
 
@@ -182,7 +270,11 @@ glabel gTextureTitleSherbetLand
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleSherbetLand.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleSherbetLand.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleSherbetLand.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleSherbetLand_end
 
@@ -190,7 +282,11 @@ glabel gTextureTitleRainbowRoad
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleRainbowRoad.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleRainbowRoad.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleRainbowRoad.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleRainbowRoad_end
 
@@ -198,7 +294,11 @@ glabel gTextureTitleWarioStadium
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleWarioStadium.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleWarioStadium.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleWarioStadium.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleWarioStadium_end
 
@@ -206,7 +306,11 @@ glabel gTextureTitleBlockFort
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleBlockFort.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleBlockFort.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleBlockFort.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleBlockFort_end
 
@@ -214,7 +318,11 @@ glabel gTextureTitleSkyscraper
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleSkyscraper.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleSkyscraper.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleSkyscraper.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleSkyscraper_end
 
@@ -222,7 +330,11 @@ glabel gTextureTitleDoubleDeck
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleDoubleDeck.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleDoubleDeck.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleDoubleDeck.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleDoubleDeck_end
 
@@ -230,7 +342,11 @@ glabel gTextureTitleDKsJungleParkway
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleDKsJungleParkway.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleDKsJungleParkway.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleDKsJungleParkway.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleDKsJungleParkway_end
 
@@ -238,59 +354,107 @@ glabel gTextureTitleBigDonut
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureTitleBigDonut.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureTitleBigDonut.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureTitleBigDonut.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureTitleBigDonut_end
 
 glabel gTextureMapSelect
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMapSelect.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMapSelect.rgba16.tkmk00"
+.endif
 glabel gTextureMapSelect_end
 
 glabel gTextureMenuFlowerCup
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuFlowerCup.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuFlowerCup.rgba16.tkmk00"
+.endif
 glabel gTextureMenuFlowerCup_end
 
 glabel gTextureMenuMushroomCup
 .ifdef VERSION_JP
 .incbin "bin/jp/gTextureMenuMushroomCup.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuMushroomCup.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuMushroomCup.rgba16.tkmk00"
+.endif
 .endif
 glabel gTextureMenuMushroomCup_end
 
 glabel gTextureMenuStarCup
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuStarCup.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuStarCup.rgba16.tkmk00"
+.endif
 glabel gTextureMenuStarCup_end
 
 glabel gTextureMenuSpecialCup
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuSpecialCup.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuSpecialCup.rgba16.tkmk00"
+.endif
 glabel gTextureMenuSpecialCup_end
 
 glabel texture_game_select
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_game_select.rgba16.tkmk00"
+.else
 .incbin "bin/texture_game_select.rgba16.tkmk00"
+.endif
 glabel texture_game_select_end
 
 glabel texture_menu_1p_game
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_menu_1p_game.rgba16.tkmk00"
+.else
 .incbin "bin/texture_menu_1p_game.rgba16.tkmk00"
+.endif
 glabel texture_menu_1p_game_end
 
 glabel texture_menu_2p_game
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_menu_2p_game.rgba16.tkmk00"
+.else
 .incbin "bin/texture_menu_2p_game.rgba16.tkmk00"
+.endif
 glabel texture_menu_2p_game_end
 
 glabel texture_menu_3p_game
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_menu_3p_game.rgba16.tkmk00"
+.else
 .incbin "bin/texture_menu_3p_game.rgba16.tkmk00"
+.endif
 glabel texture_menu_3p_game_end
 
 glabel texture_menu_4p_game
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_menu_4p_game.rgba16.tkmk00"
+.else
 .incbin "bin/texture_menu_4p_game.rgba16.tkmk00"
+.endif
 glabel texture_menu_4p_game_end
 
 glabel texture_mode_battle
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_mode_battle.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_mode_battle.rgba16.tkmk00"
+.else
 .incbin "bin/texture_mode_battle.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_mode_battle_end
 
@@ -298,7 +462,11 @@ glabel texture_mode_time_trials
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_mode_time_trials.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_mode_time_trials.rgba16.tkmk00"
+.else
 .incbin "bin/texture_mode_time_trials.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_mode_time_trials_end
 
@@ -306,7 +474,11 @@ glabel texture_mode_mario_gp
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_mode_mario_gp.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_mode_mario_gp.rgba16.tkmk00"
+.else
 .incbin "bin/texture_mode_mario_gp.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_mode_mario_gp_end
 
@@ -314,7 +486,11 @@ glabel texture_mode_vs
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_mode_vs.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_mode_vs.rgba16.tkmk00"
+.else
 .incbin "bin/texture_mode_vs.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_mode_vs_end
 
@@ -322,7 +498,11 @@ glabel texture_l_option
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_l_option.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_l_option.rgba16.tkmk00"
+.else
 .incbin "bin/texture_l_option.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_l_option_end
 
@@ -330,7 +510,11 @@ glabel texture_r_data
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_r_data.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_r_data.rgba16.tkmk00"
+.else
 .incbin "bin/texture_r_data.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_r_data_end
 
@@ -350,23 +534,39 @@ glabel texture_extra
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_extra.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_extra.rgba16.tkmk00"
+.else
 .incbin "bin/texture_extra.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_extra_end
 
 glabel gTextureMenuWithoutItem
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuWithoutItem.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuWithoutItem.rgba16.tkmk00"
+.endif
 glabel gTextureMenuWithoutItem_end
 
 glabel gTextureMenuWithItem
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/gTextureMenuWithItem.rgba16.tkmk00"
+.else
 .incbin "bin/gTextureMenuWithItem.rgba16.tkmk00"
+.endif
 glabel gTextureMenuWithItem_end
 
 glabel texture_begin
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_begin.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_begin.rgba16.tkmk00"
+.else
 .incbin "bin/texture_begin.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_begin_end
 
@@ -374,7 +574,11 @@ glabel texture_menu_ghost
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_menu_ghost.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_menu_ghost.rgba16.tkmk00"
+.else
 .incbin "bin/texture_menu_ghost.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_menu_ghost_end
 
@@ -382,7 +586,11 @@ glabel texture_data
 .ifdef VERSION_JP
 .incbin "bin/jp/texture_data.rgba16.tkmk00"
 .else
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/texture_data.rgba16.tkmk00"
+.else
 .incbin "bin/texture_data.rgba16.tkmk00"
+.endif
 .endif
 glabel texture_data_end
 

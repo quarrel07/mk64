@@ -12,12 +12,20 @@ glabel rspF3DBootEnd
 
 # 0x800D9040 D9C40-DB020
 glabel gspF3DEXTextStart
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/F3DEX.bin"
+.else
 .incbin "bin/lib/PR/f3d/F3DEX.bin"
+.endif
 glabel gspF3DEXTextEnd
 
  # 0x800DA420 DB020-DC430
 glabel gspF3DLXTextStart
+.ifdef VERSION_CN
+.incbin "bin/cn.v5/F3DLX.bin"
+.else
 .incbin "bin/lib/PR/f3d/F3DLX.bin"
+.endif
 glabel gspF3DLXTextEnd
 
 # 0x800DB830 DC430-DD0A0
