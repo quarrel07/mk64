@@ -7697,6 +7697,11 @@ MkAnimation D_02007540[11] = {
     { D_020061E0, 0x00000001 }, { D_020061B8, 0x0000000a }, { NULL, 0x00000000 },
 };
 
+#ifdef VERSION_CN
+/* iQue emits these two from data_segment2.c instead, which leaves this
+   object's .data ending 16-aligned; ours would otherwise round up and
+   push everything behind it 8 bytes late. */
+#else
 /**
  * @brief unknown MkAnimation
  * Wario face ?
@@ -7718,3 +7723,5 @@ MkAnimation D_02007640[2] = {
     { D_02006438, 0x00000032 },
     { NULL, 0x00000000 },
 };
+
+#endif
