@@ -3,7 +3,7 @@
 # The png output in assets/courses/ is from the identical .json extraction file
 :config:
   segments:
-    - [0x06, 0x831440]
+    - [0x06, 0x87E7E0]
   header:
     code:
     - '#include <macros.h>'

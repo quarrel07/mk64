@@ -461,6 +461,15 @@ ifeq ($(COMPILER),gcc)
   EXTRACT_DATA_FOR_MIO := $(OBJCOPY) -O binary --only-section=.data
 endif
 
+# extract_data_for_mio trims IDO's 16-byte .data section padding, which is what
+# the n64 carts want. The iQue build kept that padding: six course_data blobs and
+# ceremony_data end eight zero bytes longer there. objcopy emits the whole section.
+# Gate on VERSION, not ASSET_VERSION: eu borrows us assets but keeps the trim.
+EXTRACT_DATA_PADDED := $(EXTRACT_DATA_FOR_MIO)
+ifeq ($(VERSION),cn.v5)
+  EXTRACT_DATA_PADDED := $(OBJCOPY) -O binary --only-section=.data
+endif
+
 # Common build print status function
 define print
   @$(PRINT) "$(GREEN)$(1) $(YELLOW)$(2)$(GREEN) -> $(BLUE)$(3)$(NO_COL)\n"
@@ -706,7 +715,7 @@ $(COURSE_DISPLAYLIST_OFILES): $(BUILD_DIR)/%/course_data.o: %/course_textures.li
 	$(V)$(LD) -t -e 0 -Ttext=06000000 -Map $@.map -R $*/course_displaylists.inc.elf -o $@ $< --no-check-sections
 
 %/course_data.bin: %/course_data.elf
-	$(V)$(EXTRACT_DATA_FOR_MIO) $< $@
+	$(V)$(EXTRACT_DATA_PADDED) $< $@
 
 %/course_data.mio0: %/course_data.bin
 	@$(PRINT) "$(GREEN)Compressing Course Data:  $(BLUE)$@ $(NO_COL)\n"
@@ -903,7 +912,7 @@ LDFLAGS += -R $(BUILD_DIR)/$(ASSET_CODE_DIR)/ceremony_data/ceremony_data.elf
 	$(V)$(LD) -t -e 0 -Ttext=0B000000 -Map $@.map -o $@ $< --no-check-sections
 
 %/ceremony_data.bin: %/ceremony_data.elf
-	$(V)$(EXTRACT_DATA_FOR_MIO) $< $@
+	$(V)$(EXTRACT_DATA_PADDED) $< $@
 
 %/ceremony_data.mio0: %/ceremony_data.bin
 	@$(PRINT) "$(GREEN)Compressing Trophy Model:  $(BLUE)$@ $(NO_COL)\n"
