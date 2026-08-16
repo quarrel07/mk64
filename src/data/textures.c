@@ -2500,6 +2500,1136 @@ MenuTexture seg2_textureFontNumberNine[2] = {
     { 0, NULL, 0, 0, 0, 0, 0, 0 },
 };
 
+#ifdef VERSION_CN
+/* cn only. One MenuTexture per Chinese glyph, in the same 26x16 shape as
+   the latin letters above and sitting directly behind them, exactly as the
+   cart has it: 281 records between font_number_nine and D_02002824. */
+MenuTexture seg2_textureFontCn000[2] = {
+    { 5, font_cn_000, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn001[2] = {
+    { 5, font_cn_001, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn002[2] = {
+    { 5, font_cn_002, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn003[2] = {
+    { 5, font_cn_003, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn004[2] = {
+    { 5, font_cn_004, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn005[2] = {
+    { 5, font_cn_005, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn006[2] = {
+    { 5, font_cn_006, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn007[2] = {
+    { 5, font_cn_007, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn008[2] = {
+    { 5, font_cn_008, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn009[2] = {
+    { 5, font_cn_009, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn010[2] = {
+    { 5, font_cn_010, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn011[2] = {
+    { 5, font_cn_011, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn012[2] = {
+    { 5, font_cn_012, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn013[2] = {
+    { 5, font_cn_013, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn014[2] = {
+    { 5, font_cn_014, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn015[2] = {
+    { 5, font_cn_015, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn016[2] = {
+    { 5, font_cn_016, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn017[2] = {
+    { 5, font_cn_017, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn018[2] = {
+    { 5, font_cn_018, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn019[2] = {
+    { 5, font_cn_019, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn020[2] = {
+    { 5, font_cn_020, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn021[2] = {
+    { 5, font_cn_021, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn022[2] = {
+    { 5, font_cn_022, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn023[2] = {
+    { 5, font_cn_023, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn024[2] = {
+    { 5, font_cn_024, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn025[2] = {
+    { 5, font_cn_025, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn026[2] = {
+    { 5, font_cn_026, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn027[2] = {
+    { 5, font_cn_027, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn028[2] = {
+    { 5, font_cn_028, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn029[2] = {
+    { 5, font_cn_029, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn030[2] = {
+    { 5, font_cn_030, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn031[2] = {
+    { 5, font_cn_031, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn032[2] = {
+    { 5, font_cn_032, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn033[2] = {
+    { 5, font_cn_033, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn034[2] = {
+    { 5, font_cn_034, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn035[2] = {
+    { 5, font_cn_035, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn036[2] = {
+    { 5, font_cn_036, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn037[2] = {
+    { 5, font_cn_037, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn038[2] = {
+    { 5, font_cn_038, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn039[2] = {
+    { 5, font_cn_039, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn040[2] = {
+    { 5, font_cn_040, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn041[2] = {
+    { 5, font_cn_041, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn042[2] = {
+    { 5, font_cn_042, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn043[2] = {
+    { 5, font_cn_043, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn044[2] = {
+    { 5, font_cn_044, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn045[2] = {
+    { 5, font_cn_045, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn046[2] = {
+    { 5, font_cn_046, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn047[2] = {
+    { 5, font_cn_047, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn048[2] = {
+    { 5, font_cn_048, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn049[2] = {
+    { 5, font_cn_049, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn050[2] = {
+    { 5, font_cn_050, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn051[2] = {
+    { 5, font_cn_051, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn052[2] = {
+    { 5, font_cn_052, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn053[2] = {
+    { 5, font_cn_053, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn054[2] = {
+    { 5, font_cn_054, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn055[2] = {
+    { 5, font_cn_055, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn056[2] = {
+    { 5, font_cn_056, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn057[2] = {
+    { 5, font_cn_057, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn058[2] = {
+    { 5, font_cn_058, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn059[2] = {
+    { 5, font_cn_059, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn060[2] = {
+    { 5, font_cn_060, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn061[2] = {
+    { 5, font_cn_061, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn062[2] = {
+    { 5, font_cn_062, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn063[2] = {
+    { 5, font_cn_063, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn064[2] = {
+    { 5, font_cn_064, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn065[2] = {
+    { 5, font_cn_065, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn066[2] = {
+    { 5, font_cn_066, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn067[2] = {
+    { 5, font_cn_067, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn068[2] = {
+    { 5, font_cn_068, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn069[2] = {
+    { 5, font_cn_069, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn070[2] = {
+    { 5, font_cn_070, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn071[2] = {
+    { 5, font_cn_071, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn072[2] = {
+    { 5, font_cn_072, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn073[2] = {
+    { 5, font_cn_073, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn074[2] = {
+    { 5, font_cn_074, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn075[2] = {
+    { 5, font_cn_075, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn076[2] = {
+    { 5, font_cn_076, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn077[2] = {
+    { 5, font_cn_077, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn078[2] = {
+    { 5, font_cn_078, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn079[2] = {
+    { 5, font_cn_079, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn080[2] = {
+    { 5, font_cn_080, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn081[2] = {
+    { 5, font_cn_081, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn082[2] = {
+    { 5, font_cn_082, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn083[2] = {
+    { 5, font_cn_083, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn084[2] = {
+    { 5, font_cn_084, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn085[2] = {
+    { 5, font_cn_085, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn086[2] = {
+    { 5, font_cn_086, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn087[2] = {
+    { 5, font_cn_087, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn088[2] = {
+    { 5, font_cn_088, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn089[2] = {
+    { 5, font_cn_089, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn090[2] = {
+    { 5, font_cn_090, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn091[2] = {
+    { 5, font_cn_091, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn092[2] = {
+    { 5, font_cn_092, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn093[2] = {
+    { 5, font_cn_093, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn094[2] = {
+    { 5, font_cn_094, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn095[2] = {
+    { 5, font_cn_095, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn096[2] = {
+    { 5, font_cn_096, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn097[2] = {
+    { 5, font_cn_097, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn098[2] = {
+    { 5, font_cn_098, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn099[2] = {
+    { 5, font_cn_099, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn100[2] = {
+    { 5, font_cn_100, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn101[2] = {
+    { 5, font_cn_101, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn102[2] = {
+    { 5, font_cn_102, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn103[2] = {
+    { 5, font_cn_103, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn104[2] = {
+    { 5, font_cn_104, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn105[2] = {
+    { 5, font_cn_105, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn106[2] = {
+    { 5, font_cn_106, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn107[2] = {
+    { 5, font_cn_107, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn108[2] = {
+    { 5, font_cn_108, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn109[2] = {
+    { 5, font_cn_109, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn110[2] = {
+    { 5, font_cn_110, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn111[2] = {
+    { 5, font_cn_111, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn112[2] = {
+    { 5, font_cn_112, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn113[2] = {
+    { 5, font_cn_113, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn114[2] = {
+    { 5, font_cn_114, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn115[2] = {
+    { 5, font_cn_115, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn116[2] = {
+    { 5, font_cn_116, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn117[2] = {
+    { 5, font_cn_117, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn118[2] = {
+    { 5, font_cn_118, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn119[2] = {
+    { 5, font_cn_119, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn120[2] = {
+    { 5, font_cn_120, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn121[2] = {
+    { 5, font_cn_121, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn122[2] = {
+    { 5, font_cn_122, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn123[2] = {
+    { 5, font_cn_123, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn124[2] = {
+    { 5, font_cn_124, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn125[2] = {
+    { 5, font_cn_125, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn126[2] = {
+    { 5, font_cn_126, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn127[2] = {
+    { 5, font_cn_127, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn128[2] = {
+    { 5, font_cn_128, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn129[2] = {
+    { 5, font_cn_129, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn130[2] = {
+    { 5, font_cn_130, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn131[2] = {
+    { 5, font_cn_131, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn132[2] = {
+    { 5, font_cn_132, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn133[2] = {
+    { 5, font_cn_133, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn134[2] = {
+    { 5, font_cn_134, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn135[2] = {
+    { 5, font_cn_135, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn136[2] = {
+    { 5, font_cn_136, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn137[2] = {
+    { 5, font_cn_137, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn138[2] = {
+    { 5, font_cn_138, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn139[2] = {
+    { 5, font_cn_139, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn140[2] = {
+    { 5, font_cn_140, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn141[2] = {
+    { 5, font_cn_141, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn142[2] = {
+    { 5, font_cn_142, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn143[2] = {
+    { 5, font_cn_143, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn144[2] = {
+    { 5, font_cn_144, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn145[2] = {
+    { 5, font_cn_145, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn146[2] = {
+    { 5, font_cn_146, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn147[2] = {
+    { 5, font_cn_147, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn148[2] = {
+    { 5, font_cn_148, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn149[2] = {
+    { 5, font_cn_149, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn150[2] = {
+    { 5, font_cn_150, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn151[2] = {
+    { 5, font_cn_151, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn152[2] = {
+    { 5, font_cn_152, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn153[2] = {
+    { 5, font_cn_153, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn154[2] = {
+    { 5, font_cn_154, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn155[2] = {
+    { 5, font_cn_155, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn156[2] = {
+    { 5, font_cn_156, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn157[2] = {
+    { 5, font_cn_157, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn158[2] = {
+    { 5, font_cn_158, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn159[2] = {
+    { 5, font_cn_159, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn160[2] = {
+    { 5, font_cn_160, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn161[2] = {
+    { 5, font_cn_161, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn162[2] = {
+    { 5, font_cn_162, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn163[2] = {
+    { 5, font_cn_163, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn164[2] = {
+    { 5, font_cn_164, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn165[2] = {
+    { 5, font_cn_165, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn166[2] = {
+    { 5, font_cn_166, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn167[2] = {
+    { 5, font_cn_167, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn168[2] = {
+    { 5, font_cn_168, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn169[2] = {
+    { 5, font_cn_169, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn170[2] = {
+    { 5, font_cn_170, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn171[2] = {
+    { 5, font_cn_171, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn172[2] = {
+    { 5, font_cn_172, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn173[2] = {
+    { 5, font_cn_173, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn174[2] = {
+    { 5, font_cn_174, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn175[2] = {
+    { 5, font_cn_175, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn176[2] = {
+    { 5, font_cn_176, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn177[2] = {
+    { 5, font_cn_177, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn178[2] = {
+    { 5, font_cn_178, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn179[2] = {
+    { 5, font_cn_179, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn180[2] = {
+    { 5, font_cn_180, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn181[2] = {
+    { 5, font_cn_181, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn182[2] = {
+    { 5, font_cn_182, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn183[2] = {
+    { 5, font_cn_183, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn184[2] = {
+    { 5, font_cn_184, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn185[2] = {
+    { 5, font_cn_185, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn186[2] = {
+    { 5, font_cn_186, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn187[2] = {
+    { 5, font_cn_187, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn188[2] = {
+    { 5, font_cn_188, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn189[2] = {
+    { 5, font_cn_189, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn190[2] = {
+    { 5, font_cn_190, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn191[2] = {
+    { 5, font_cn_191, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn192[2] = {
+    { 5, font_cn_192, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn193[2] = {
+    { 5, font_cn_193, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn194[2] = {
+    { 5, font_cn_194, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn195[2] = {
+    { 5, font_cn_195, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn196[2] = {
+    { 5, font_cn_196, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn197[2] = {
+    { 5, font_cn_197, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn198[2] = {
+    { 5, font_cn_198, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn199[2] = {
+    { 5, font_cn_199, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn200[2] = {
+    { 5, font_cn_200, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn201[2] = {
+    { 5, font_cn_201, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn202[2] = {
+    { 5, font_cn_202, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn203[2] = {
+    { 5, font_cn_203, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn204[2] = {
+    { 5, font_cn_204, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn205[2] = {
+    { 5, font_cn_205, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn206[2] = {
+    { 5, font_cn_206, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn207[2] = {
+    { 5, font_cn_207, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn208[2] = {
+    { 5, font_cn_208, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn209[2] = {
+    { 5, font_cn_209, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn210[2] = {
+    { 5, font_cn_210, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn211[2] = {
+    { 5, font_cn_211, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn212[2] = {
+    { 5, font_cn_212, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn213[2] = {
+    { 5, font_cn_213, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn214[2] = {
+    { 5, font_cn_214, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn215[2] = {
+    { 5, font_cn_215, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn216[2] = {
+    { 5, font_cn_216, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn217[2] = {
+    { 5, font_cn_217, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn218[2] = {
+    { 5, font_cn_218, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn219[2] = {
+    { 5, font_cn_219, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn220[2] = {
+    { 5, font_cn_220, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn221[2] = {
+    { 5, font_cn_221, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn222[2] = {
+    { 5, font_cn_222, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn223[2] = {
+    { 5, font_cn_223, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn224[2] = {
+    { 5, font_cn_224, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn225[2] = {
+    { 5, font_cn_225, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn226[2] = {
+    { 5, font_cn_226, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn227[2] = {
+    { 5, font_cn_227, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn228[2] = {
+    { 5, font_cn_228, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn229[2] = {
+    { 5, font_cn_229, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn230[2] = {
+    { 5, font_cn_230, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn231[2] = {
+    { 5, font_cn_231, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn232[2] = {
+    { 5, font_cn_232, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn233[2] = {
+    { 5, font_cn_233, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn234[2] = {
+    { 5, font_cn_234, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn235[2] = {
+    { 5, font_cn_235, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn236[2] = {
+    { 5, font_cn_236, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn237[2] = {
+    { 5, font_cn_237, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn238[2] = {
+    { 5, font_cn_238, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn239[2] = {
+    { 5, font_cn_239, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn240[2] = {
+    { 5, font_cn_240, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn241[2] = {
+    { 5, font_cn_241, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn242[2] = {
+    { 5, font_cn_242, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn243[2] = {
+    { 5, font_cn_243, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn244[2] = {
+    { 5, font_cn_244, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn245[2] = {
+    { 5, font_cn_245, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn246[2] = {
+    { 5, font_cn_246, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn247[2] = {
+    { 5, font_cn_247, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn248[2] = {
+    { 5, font_cn_248, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn249[2] = {
+    { 5, font_cn_249, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn250[2] = {
+    { 5, font_cn_250, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn251[2] = {
+    { 5, font_cn_251, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn252[2] = {
+    { 5, font_cn_252, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn253[2] = {
+    { 5, font_cn_253, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn254[2] = {
+    { 5, font_cn_254, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn255[2] = {
+    { 5, font_cn_255, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn256[2] = {
+    { 5, font_cn_256, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn257[2] = {
+    { 5, font_cn_257, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn258[2] = {
+    { 5, font_cn_258, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn259[2] = {
+    { 5, font_cn_259, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn260[2] = {
+    { 5, font_cn_260, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn261[2] = {
+    { 5, font_cn_261, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn262[2] = {
+    { 5, font_cn_262, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn263[2] = {
+    { 5, font_cn_263, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn264[2] = {
+    { 5, font_cn_264, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn265[2] = {
+    { 5, font_cn_265, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn266[2] = {
+    { 5, font_cn_266, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn267[2] = {
+    { 5, font_cn_267, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn268[2] = {
+    { 5, font_cn_268, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn269[2] = {
+    { 5, font_cn_269, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn270[2] = {
+    { 5, font_cn_270, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn271[2] = {
+    { 5, font_cn_271, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn272[2] = {
+    { 5, font_cn_272, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn273[2] = {
+    { 5, font_cn_273, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn274[2] = {
+    { 5, font_cn_274, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn275[2] = {
+    { 5, font_cn_275, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn276[2] = {
+    { 5, font_cn_276, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn277[2] = {
+    { 5, font_cn_277, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn278[2] = {
+    { 5, font_cn_278, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn279[2] = {
+    { 5, font_cn_279, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+MenuTexture seg2_textureFontCn280[2] = {
+    { 5, font_cn_280, 26, 16, 0, 0, 0x0, 0 },
+    { 0, NULL, 0, 0, 0, 0, 0, 0 },
+};
+#endif
+
 /**
  * @brief unknown MenuTexture
  *
