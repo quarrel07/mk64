@@ -9772,6 +9772,51 @@ void func_800A3E60(MenuItem* arg0) {
 }
 #endif
 
+#ifdef VERSION_CN
+/* cn: one live 0.7f serves every label, materialized at the first use */
+void render_lap_time(s32 lapNumber, s32 column, s32 row) {
+    UNUSED s32 stackPadding0;
+    s32 time;
+    UNUSED s32 stackPadding1;
+    s32 textColor;
+    char sp34[3];
+    MenuItem* temp_v0_2;
+    f32 scale;
+
+    if (lapNumber < 3) {
+        time = playerHUD[PLAYER_ONE].lapDurations[lapNumber];
+        set_text_color(TEXT_RED);
+    } else {
+        time = playerHUD[PLAYER_ONE].someTimer;
+        set_text_color(TEXT_GREEN);
+    }
+    scale = 0.7f;
+    print_text1_left(column + 0x21, row, gPrefixTimeText[lapNumber], 0, scale, scale);
+    temp_v0_2 = find_menu_items_dupe(MENU_ITEM_TYPE_0BB);
+    if (lapNumber < 3) {
+        if (temp_v0_2->param2 & (1 << lapNumber)) { // best lap
+            textColor = (s32) gGlobalTimer % 3;
+        } else {
+            textColor = TEXT_YELLOW;
+        }
+    } else {
+        if (temp_v0_2->param1 >= 0) {
+            textColor = (s32) gGlobalTimer % 3;
+        } else {
+            textColor = TEXT_YELLOW;
+        }
+    }
+    set_text_color(textColor);
+    get_time_record_minutes(time, sp34);
+    func_800939C8(column + 0x2C, row, sp34, 0, scale, scale);
+    print_text_mode_1(column + 0x37, row, "'", 0, scale, scale);
+    get_time_record_seconds(time, sp34);
+    func_800939C8(column + 0x40, row, sp34, 0, scale, scale);
+    print_text_mode_1(column + 0x4B, row, "\"", 0, scale, scale);
+    get_time_record_centiseconds(time, sp34);
+    func_800939C8(column + 0x55, row, sp34, 0, scale, scale);
+}
+#else
 void render_lap_time(s32 lapNumber, s32 column, s32 row) {
     UNUSED s32 stackPadding0;
     s32 time;
@@ -9812,6 +9857,7 @@ void render_lap_time(s32 lapNumber, s32 column, s32 row) {
     get_time_record_centiseconds(time, sp34);
     func_800939C8(column + 0x55, row, sp34, 0, 0.7f, 0.7f);
 }
+#endif
 
 void render_lap_times(s32 recordType, s32 column, s32 row) {
     UNUSED s32 pad;
