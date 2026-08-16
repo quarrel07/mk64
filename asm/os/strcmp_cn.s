@@ -32,4 +32,68 @@ glabel strcmp
     sra   $v0, $v0, 24
     jr    $ra
      subu  $v0, $v1, $v0
+
+/* iQue memset, cart 0x0D0A50 / vram 0x800CFE50 */
+glabel memset
+    .word 0x10C00006
+    .word 0x00003821
+    .word 0x00871021
+    .word 0x24E70001
+    .word 0x00E6182B
+    .word 0x1460FFFC
+    .word 0xA0450000
+    .word 0x03E00008
+    .word 0x00801021
+
+/* iQue unsigned n-byte compare, cart 0x0D0A74 / vram 0x800CFE74 */
+glabel func_800CFE74
+    j     .Lfunc_800CFE74_10
+    .word 0x00C01021
+    .word 0x90A30000
+    .word 0x24A50001
+    .word 0x90820000
+    .word 0x10430003
+    .word 0x24840001
+    .word 0x03E00008
+    .word 0x00431023
+    .word 0x00C01021
+.Lfunc_800CFE74_10:
+    .word 0x1440FFF7
+    .word 0x24C6FFFF
+    .word 0x03E00008
+    .word 0x00001021
+
+/* iQue strncmp, cart 0x0D0AAC / vram 0x800CFEAC */
+glabel strncmp
+    j     .Lstrncmp_16
+    .word 0x00004021
+    .word 0x0106102A
+    .word 0x10400011
+    .word 0x00000000
+    .word 0x15400005
+    .word 0x00000000
+    .word 0x1520000D
+    .word 0x00001021
+    .word 0x03E00008
+    .word 0x00000000
+    .word 0x10E00009
+    .word 0x00000000
+    .word 0x24840001
+    .word 0x24A50001
+    .word 0x25080001
+.Lstrncmp_16:
+    .word 0x90830000
+    .word 0x90A70000
+    .word 0x00605021
+    .word 0x1067FFEE
+    .word 0x00E04821
+    .word 0x11060006
+    .word 0x00031E00
+    .word 0x00031E03
+    .word 0x00071600
+    .word 0x00021603
+    .word 0x03E00008
+    .word 0x00621023
+    .word 0x03E00008
+    .word 0x00001021
 .endif
