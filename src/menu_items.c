@@ -6629,7 +6629,11 @@ Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s
                 gSPDisplayList(arg0++, D_02007708);
                 break;
             case 1:
+#ifdef VERSION_CN
+                gSPDisplayList(arg0++, D_02007728);
+#else
                 gSPDisplayList(arg0++, temp);
+#endif
                 break;
             case 2:
                 gSPDisplayList(arg0++, D_02007748);
@@ -6639,12 +6643,20 @@ Gfx* func_8009C708(Gfx* arg0, struct_8018DEE0_entry* arg1, s32 arg2, s32 arg3, s
                 var_t0 = 3;
                 break;
             default:
+#ifdef VERSION_CN
+                gSPDisplayList(arg0++, D_02007728);
+#else
                 gSPDisplayList(arg0++, temp);
+#endif
                 break;
         }
         if (arg5 >= 0) {
             arg0 =
+#ifdef VERSION_CN
+                func_80097E58(arg0, var_t0, 0, 0U, var_s1->width, var_s1->height, arg2 + var_s1->dX, arg3 + var_s1->dY,
+#else
                 func_80097E58(arg0, var_t0, 0, 0U, var_s1->width, var_s1->height, var_s1->dX + arg2, var_s1->dY + arg3,
+#endif
                               D_802BFB80.arraySize4[arg1->unk14][arg4 / 2][(arg4 % 2) + 2].pixel_index_array,
                               var_s1->width, var_s1->height, (u32) arg5);
         }
