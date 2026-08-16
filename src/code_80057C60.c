@@ -5935,7 +5935,11 @@ void render_battle_balloon(Player* player, s8 playerIndex, s16 balloonIndex, s8 
     s16 temp_t1;
     f32 xdiff;
     f32 zdiff;
+#ifdef VERSION_CN
+    UNUSED s32 pad;
+#else
     f32 var_f20;
+#endif
     s32 primColors[] = {
         MAKE_RGB(0xC8, 0x01, 0x00), MAKE_RGB(0x00, 0x70, 0x01), MAKE_RGB(0x10, 0x79, 0x51), MAKE_RGB(0x00, 0x59, 0x70),
         MAKE_RGB(0x70, 0x55, 0x00), MAKE_RGB(0x7A, 0x7E, 0x00), MAKE_RGB(0x77, 0x2C, 0x24), MAKE_RGB(0x30, 0x14, 0x58),
@@ -5953,6 +5957,25 @@ void render_battle_balloon(Player* player, s8 playerIndex, s16 balloonIndex, s8 
     envBlue = (envColors[player->characterId] >> 0x00) & 0xFF;
     temp_t1 = (((player->unk_048[screenId] + player->rotation[1] + player->unk_0C0) & 0xFFFF) / 128);
     temp_t1 <<= 7;
+#ifdef VERSION_CN
+    if (screenId == playerIndex) {
+        xdiff = 0.3f;
+    } else {
+        xdiff = player->pos[0] - cameras[screenId].pos[0];
+        zdiff = player->pos[2] - cameras[screenId].pos[2];
+        if (gActiveScreenMode != 3) {
+            xdiff = sqrtf((xdiff * xdiff) + (zdiff * zdiff)) / 300.0f;
+        } else {
+            xdiff = sqrtf((xdiff * xdiff) + (zdiff * zdiff)) / 200.0f;
+        }
+        if (xdiff >= 1.8) {
+            xdiff = 1.8f;
+        }
+        if (xdiff <= 0.3) {
+            xdiff = 0.3f;
+        }
+    }
+#else
     if (screenId == playerIndex) {
         var_f20 = 0.3f;
     } else {
@@ -5971,6 +5994,7 @@ void render_battle_balloon(Player* player, s8 playerIndex, s16 balloonIndex, s8 
             var_f20 = 0.3f;
         }
     }
+#endif
     sp134[0] = gPlayerBalloonPosX[playerIndex][balloonIndex];
     sp134[1] = gPlayerBalloonPosY[playerIndex][balloonIndex];
     sp134[2] = gPlayerBalloonPosZ[playerIndex][balloonIndex];
@@ -5980,7 +6004,11 @@ void render_battle_balloon(Player* player, s8 playerIndex, s16 balloonIndex, s8 
                (gPlayerBalloonRotation[playerIndex][balloonIndex] * coss(temp_t1)) -
                ((D_8018D890[playerIndex][balloonIndex] * 8) * sins(temp_t1));
     mtxf_translate_rotate(sp140, sp134, sp12C);
+#ifdef VERSION_CN
+    mtxf_scale2(sp140, xdiff);
+#else
     mtxf_scale2(sp140, var_f20);
+#endif
     convert_to_fixed_point_matrix(&gGfxPool->mtxEffect[gMatrixEffectCount], sp140);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gGfxPool->mtxEffect[gMatrixEffectCount]),

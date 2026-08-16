@@ -61,10 +61,9 @@ else ifeq ($(VERSION),jp.v11)
   GRUCODE   ?= f3dex_old
 else ifeq ($(VERSION),cn.v5)
   DEFINES += VERSION_CN=1 VERSION_CN_V5=1
-  # The iQue image does not carry the F3DEX/F3DLX microcode this repo ships:
-  # none of gspF3DEXText, gspF3DLXText, gspF3DEXData or gspF3DLXData appears
-  # anywhere in it. That, and the GRUCODE note above, put it on f3dex rather
-  # than f3dex_old. Not yet confirmed against generated code.
+  # The iQue image carries F3DEX/F3DLX 1.23, where us carries 0.95 (both cite
+  # their version in the ucode string). It is on f3dex rather than f3dex_old
+  # for that reason. Not yet confirmed against generated code.
   GRUCODE   ?= f3dex
 endif
 
@@ -258,8 +257,9 @@ ifneq ($(filter $(VERSION),eu.v10 eu.v11),)
 endif
 ASSET_CODE_DIR := assets/code/$(TORCH_VERSION)
 
-# The group asset maps carry us and jp.v11 entries only: none of their 12,521
-# assets has an eu offset, because EU art is US-identical and merely relocated.
+# No group asset carries an eu offset - of the 12,521, all 12,521 now have a
+# cn.v5 block and 12,408 a jp.v11 one, but none an eu: EU art is US-identical
+# and merely relocated.
 # So EU extracts the US assets out of the US cart, exactly as TORCH_VERSION above
 # builds EU on the US Torch output, and for the same reason. Without this, EU
 # reads the EU cart at US offsets and gets garbage.

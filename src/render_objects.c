@@ -2840,9 +2840,15 @@ void func_80050320(void) {
     s32 var_a0;
 
     if (D_801657E2 == 0) {
+#ifdef VERSION_CN
+        for (var_s0 = 0; var_s0 < 4; var_s0++) {
+            if (D_8018D050[var_s0] >= 0.0f) {
+                var_a0 = 0;
+#else
         for (var_s0 = 0; var_s0 < 4; var_s0++) {
             var_a0 = 0;
             if (D_8018D050[var_s0] >= 0.0f) {
+#endif
                 if (D_8018D078[var_s0] < 0.0) {
                     var_a0 = 1;
                 }
@@ -2859,9 +2865,15 @@ void func_80050320(void) {
             }
         }
     } else {
+#ifdef VERSION_CN
+        for (var_s0 = 0; var_s0 < 8; var_s0++) {
+            if (D_8018D050[var_s0] >= 0.0f) {
+                var_a0 = 0;
+#else
         for (var_s0 = 0; var_s0 < 8; var_s0++) {
             var_a0 = 0;
             if (D_8018D050[var_s0] >= 0.0f) {
+#endif
                 if (D_8018D078[var_s0] <= 0.0) {
                     var_a0 = 1;
                 }
@@ -4549,8 +4561,15 @@ void func_800563DC(s32 objectIndex, s32 cameraId, s32 arg2) {
     gSPTexture(gDisplayListHead++, 1, 1, 0, G_TX_RENDERTILE, G_OFF);
 }
 
+#ifdef VERSION_CN
+void func_8005669C(s32 objectIndex, UNUSED s32 arg1, s32 arg2) {
+    UNUSED f32 sp10[4];
+
+    gSPDisplayList(gDisplayListHead++, D_0D0079E8);
+#else
 void func_8005669C(s32 objectIndex, UNUSED s32 arg1, s32 arg2) {
     gSPDisplayList(gDisplayListHead++, D_0D0079E8);
+#endif
     func_8004B310(arg2);
     load_texture_block_rgba16_mirror((u8*) D_0D02AA58, 0x00000010, 0x00000010);
     D_80183E40[1] = gObjectList[objectIndex].pos[1] - 2.0;

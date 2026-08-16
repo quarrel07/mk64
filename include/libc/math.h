@@ -9,8 +9,10 @@ float cosf(float);
 double cos(double);
 
 float sqrtf(float);
-#ifdef VERSION_CN
-/* iQue's build emits sqrt.s inline everywhere ours calls libm */
+/* iQue inlines sqrt.s in most files (57 sites against the US ROM's 2), but not
+   in src/audio/external.c, which calls libm sqrtf out of line. That file opts
+   out by defining SQRTF_NOT_INTRINSIC ahead of its includes. */
+#if defined(VERSION_CN) && !defined(SQRTF_NOT_INTRINSIC)
 #pragma intrinsic (sqrtf)
 #endif
 

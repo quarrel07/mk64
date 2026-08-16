@@ -71,12 +71,20 @@ void calculate_track_boundaries(s32 pathIndex) {
         pathPoint = &gTrackPaths[pathIndex][0];
         var_s1 = &gTrackLeftPaths[pathIndex][0];
         var_s2 = &gTrackRightPaths[pathIndex][0];
+#ifdef VERSION_CN
+        for (pathPointIndex = 0; pathPointIndex < gPathCountByPathIndex[pathIndex];
+             pathPointIndex++, pathPoint++, var_s1++, var_s2++) {
+            x1 = pathPoint->posX;
+            y1 = pathPoint->posY;
+            z1 = pathPoint->posZ;
+#else
         for (pathPointIndex = 0; pathPointIndex < gPathCountByPathIndex[pathIndex];
              pathPointIndex++, var_s1++, var_s2++) {
             x1 = pathPoint->posX;
             y1 = pathPoint->posY;
             z1 = pathPoint->posZ;
             pathPoint++;
+#endif
             nextPathPoint = &gTrackPaths[pathIndex][(pathPointIndex + 1) % ((s32) gPathCountByPathIndex[pathIndex])];
             x2 = nextPathPoint->posX;
             y2 = nextPathPoint->posY;
@@ -115,6 +123,26 @@ void calculate_track_boundaries(s32 pathIndex) {
  * @return Normalized curvature value (-1 to 1)
  */
 f32 calculate_track_curvature(s32 pathIndex, u16 pathPointIndex) {
+#ifdef VERSION_CN
+    f32 secondVectorX;
+    f32 secondVectorZ;
+    f32 secondLength;
+    TrackPathPoint* pathPathPoints;
+    f32 x1;
+    f32 z1;
+    f32 x2;
+    f32 z2;
+    f32 x3;
+    f32 z3;
+    f32 firstVectorX;
+    f32 firstVectorZ;
+    s32 pathPointCount;
+    TrackPathPoint* pathPoint3;
+    f32 curvature;
+    TrackPathPoint* pathPoint2;
+    TrackPathPoint* pathPoint1;
+    f32 firstLength;
+#else
     f32 secondVectorX;
     f32 secondVectorZ;
     UNUSED f32 pad;
@@ -133,6 +161,7 @@ f32 calculate_track_curvature(s32 pathIndex, u16 pathPointIndex) {
     TrackPathPoint* pathPoint1;
     f32 secondLength;
     f32 firstLength;
+#endif
 
     if ((s32) GET_COURSE_AIMaximumSeparation < 0) {
         return 0.0f;
@@ -170,7 +199,12 @@ f32 calculate_track_curvature(s32 pathIndex, u16 pathPointIndex) {
 
     firstLength = sqrtf((firstVectorZ * firstVectorZ) + (firstVectorX * firstVectorX));
     secondLength = sqrtf((secondVectorX * secondVectorX) + (secondVectorZ * secondVectorZ));
+#ifdef VERSION_CN
+    curvature = -((firstVectorZ * secondVectorX) - (firstVectorX * secondVectorZ)) / (secondLength * firstLength);
+    return curvature;
+#else
     return -((firstVectorZ * secondVectorX) - (firstVectorX * secondVectorZ)) / (secondLength * firstLength);
+#endif
 }
 
 void analize_track_section(s32 pathIndex) {
@@ -486,8 +520,14 @@ s32 generate_2d_path(Path2D* pathDest, TrackPathPoint* pathSrc, s32 numPathPoint
     TrackPathPoint* point3;
     s32 i;
     f32 temp_f6 = 0.0f;
+#ifdef VERSION_CN
     s32 nbElement;
     f32 sp7C;
+    UNUSED s32 pad3;
+#else
+    s32 nbElement;
+    f32 sp7C;
+#endif
 
     spA8 = pathSrc[0].posX;
     spA0 = pathSrc[0].posZ;
@@ -523,10 +563,17 @@ s32 generate_2d_path(Path2D* pathDest, TrackPathPoint* pathSrc, s32 numPathPoint
                 } else {
                     pathDest->x = (s16) spA8;
                 }
+#ifdef VERSION_CN
+                pathDest->z = spA0;
+                temp_f6 = 0.0f;
+                pathDest++;
+                nbElement += 1;
+#else
                 pathDest->z = spA0;
                 nbElement += 1;
                 pathDest++;
                 temp_f6 = 0.0f;
+#endif
             }
         }
     }
