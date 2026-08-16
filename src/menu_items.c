@@ -11122,11 +11122,24 @@ void menu_item_credits_render(MenuItem* arg0) {
 /* iQue writes digit GLYPH PAIRS: 0xA3 prefix + (digit | 0x80) - the glyph
    LUT maps 0xB0-0xB9 to the digit art (cart body at 0xA78E0) */
 void convert_number_to_ascii(s32 number, char* buffer) {
+#ifdef VERSION_CN
+    /* cn: each digit lands in a register of its own before the glyph offset */
+    s32 digit;
+
+    buffer[0] = -93;
+    buffer[2] = -93;
+    buffer[4] = 0;
+    digit = number / 0xA;
+    buffer[1] = digit - 80;
+    digit = number % 0xA;
+    buffer[3] = digit - 80;
+#else
     buffer[0] = -93;
     buffer[2] = -93;
     buffer[4] = 0;
     buffer[1] = (number / 0xA) - 80;
     buffer[3] = (number % 0xA) - 80;
+#endif
 }
 #else
 void convert_number_to_ascii(s32 number, char* buffer) {
