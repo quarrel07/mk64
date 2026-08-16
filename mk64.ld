@@ -739,8 +739,11 @@ SECTIONS
 
    BEGIN_NOLOAD(main) {
       #ifdef VERSION_CN
-      /* iQue: menu_items' small commons lead the bss segment */
-      *(.scommon);
+      /* The cart's bss opens with this block and nothing before it: every
+         address in menu_sbss_cn.s is measured from the offset gControllers
+         backwards, so anything gathered ahead of it moves the whole segment.
+         The four small commons it does not define are collected at the end
+         of the segment instead, where they cost no other symbol its home. */
       BUILD_DIR/asm/menu_sbss_cn.o(.bss);
       #endif
       BUILD_DIR/src/main.o(.bss*);
@@ -864,6 +867,11 @@ SECTIONS
       BUILD_DIR/asm/menu_bss_cn.o(.bss);
       /* no ALIGN here: sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4
          on cart (not 16-aligned) */
+      /* The small commons the head block does not define. Their cart homes
+         are scattered through the segment and only two of them have more
+         than one reference to measure from, so they sit at the end where
+         they displace nothing. */
+      *(.scommon);
       #endif
    }
    END_NOLOAD(main)
