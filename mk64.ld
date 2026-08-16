@@ -109,7 +109,9 @@ SECTIONS
       #ifdef VERSION_EU
          . += 0x40;
       #endif
+#ifndef VERSION_CN
       BUILD_DIR/src/os/osInitialize.o(.text*);
+#endif
       BUILD_DIR/src/os/osStartThread.o(.text*);
       BUILD_DIR/src/os/osCreateViManager.o(.text*);
       BUILD_DIR/asm/os/parameters.o(.text);
@@ -125,7 +127,9 @@ SECTIONS
       BUILD_DIR/src/os/osCreateMesgQueue.o(.text*);
       BUILD_DIR/src/os/osViSetEvent.o(.text*);
       BUILD_DIR/src/os/osSetEventMesg.o(.text*);
+#ifndef VERSION_CN
       BUILD_DIR/src/os/osSpTaskLoadGo.o(.text*);
+#endif
       BUILD_DIR/src/os/osContInit.o(.text*);
       BUILD_DIR/src/os/osContStartReadData.o(.text*);
       BUILD_DIR/src/os/osRecvMesg.o(.text*);
@@ -140,6 +144,10 @@ SECTIONS
       BUILD_DIR/src/os/osSpTaskYielded.o(.text*);
       BUILD_DIR/src/os/osGetTime.o(.text*);
       BUILD_DIR/src/os/math/llmuldiv.o(.text*);
+#ifdef VERSION_CN
+      BUILD_DIR/src/os/osSpTaskLoadGo.o(.text*);
+      BUILD_DIR/src/os/osTimer.o(.text*);
+#endif
       #if GCC
          BUILD_DIR/asm/os/llmuldiv_gcc.o(.text);
       #endif
@@ -249,7 +257,9 @@ SECTIONS
       BUILD_DIR/src/os/osPiRawReadIo.o(.text*);
       BUILD_DIR/src/os/__osSetHWIntrRoutine.o(.text*);
       BUILD_DIR/src/os/__osLeoInterrupt.o(.text*);
+#ifndef VERSION_CN
       BUILD_DIR/src/os/osTimer.o(.text*);
+#endif
       BUILD_DIR/src/os/osGetThreadPri.o(.text*);
       BUILD_DIR/src/os/__osViInit.o(.text*);
       BUILD_DIR/src/os/__osViGetCurrentContext.o(.text*);
@@ -288,6 +298,9 @@ SECTIONS
       BUILD_DIR/src/os/contpfs.o(.text*);
       #ifdef VERSION_CN
       BUILD_DIR/src/os/ique_pfs/contpfs.o(.text*);
+#ifdef VERSION_CN
+      BUILD_DIR/src/os/osInitialize.o(.text*);
+#endif
       BUILD_DIR/src/os/ique_pfs/pfsselectbank.o(.text*);
       #endif
       BUILD_DIR/src/os/osPfsChecker.o(.text*);
