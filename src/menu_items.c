@@ -2423,7 +2423,11 @@ f64 menu_pow(f64 arg0, f64 arg1) {
         }
     }
     if (arg0 > 0.0) {
+#ifdef VERSION_CN
+        return menu_exponential(arg1 * menu_ln(arg0));
+#else
         return menu_exponential(menu_ln(arg0) * arg1);
+#endif
     }
     return 0.0;
 }
@@ -4313,7 +4317,11 @@ Gfx* func_800963F0(Gfx* displayListHead, s8 arg1, s32 arg2, s32 arg3, f32 arg4, 
     sp7C = argA;
     for (var_s3 = arg7; var_s3 < (u32) arg9; var_s3 += temp_lo) {
 
+#ifdef VERSION_CN
+        if ((u32) arg9 < var_s3 + temp_lo) {
+#else
         if ((u32) arg9 < temp_lo + var_s3) {
+#endif
             var_s4 = arg9 - var_s3;
             if (!var_s4) {
                 break;
@@ -4324,7 +4332,11 @@ Gfx* func_800963F0(Gfx* displayListHead, s8 arg1, s32 arg2, s32 arg3, f32 arg4, 
         b = var_s4 * arg5;
         for (var_a1_2 = arg6; var_a1_2 < (u32) arg8; var_a1_2 += var_t0) {
 
+#ifdef VERSION_CN
+            if ((u32) arg8 < (var_a1_2 + var_t0)) {
+#else
             if ((u32) arg8 < (var_t0 + var_a1_2)) {
+#endif
                 var_s2 = arg8 - var_a1_2;
                 if (!var_s2) {
                     break;
@@ -4419,9 +4431,15 @@ Gfx* func_80096CD8(Gfx* displayListHead, s32 xPos, s32 yPos, u32 width, u32 heig
 
     rnd = random_int(100);
     displayListHead = draw_box(displayListHead, xPos, yPos, xPos + width, yPos + height, 0, 0, 0, rnd);
+
+#ifdef VERSION_CN
+    gDPPipeSync(displayListHead++);
+    rnd += 150;
+#else
     rnd += 150;
 
     gDPPipeSync(displayListHead++);
+#endif
     gDPSetRenderMode(displayListHead++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
     gDPSetPrimColor(displayListHead++, 0, 0, rnd, rnd, rnd, rnd);
     gDPSetCombineMode(displayListHead++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
@@ -4853,7 +4871,7 @@ void load_menu_img(MenuTexture* addr) {
                     size = 0x1000;
                 }
                 if (size % 8) {
-                    size = ((size / 8) * 8) + 8;
+                    size = ((size / 8) + 1) * 8;
                 }
                 dma_copy_mio0_segment(texAddr->textureData, size, gMenuCompressedBuffer);
                 mio0decode((u8*) gMenuCompressedBuffer, (u8*) &gMenuTextureBuffer[sMenuTextureBufferIndex]);
@@ -4864,7 +4882,7 @@ void load_menu_img(MenuTexture* addr) {
             texMap[sMenuTextureEntries].textureData = texAddr->textureData;
             texMap[sMenuTextureEntries].offset = sMenuTextureBufferIndex;
             sMenuTextureBufferIndex += texAddr->height * texAddr->width;
-            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) * 8) + 8;
+            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) + 1) * 8;
             sMenuTextureEntries += 1;
         }
         texAddr++;
@@ -4895,7 +4913,7 @@ void func_80099394(MenuTexture* addr) {
             texMap[sMenuTextureEntries].textureData = texAddr->textureData;
             texMap[sMenuTextureEntries].offset = sMenuTextureBufferIndex;
             sMenuTextureBufferIndex += texAddr->height * texAddr->width;
-            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) * 8) + 8;
+            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) + 1) * 8;
             sMenuTextureEntries += 1;
         }
         texAddr++;
@@ -4924,7 +4942,7 @@ void func_8009952C(MenuTexture* addr) {
             texMap[sMenuTextureEntries].textureData = texAddr->textureData;
             texMap[sMenuTextureEntries].offset = sMenuTextureBufferIndex;
             sMenuTextureBufferIndex += texAddr->height * texAddr->width;
-            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) * 8) + 8;
+            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) + 1) * 8;
             sMenuTextureEntries += 1;
         }
         texAddr++;
@@ -4960,7 +4978,7 @@ void load_menu_img_comp_type(MenuTexture* addr, s32 compType) {
                 size = 0x1000;
             }
             if (size % 8) {
-                size = ((size / 8) * 8) + 8;
+                size = ((size / 8) + 1) * 8;
             }
             switch (compType) {
                 case LOAD_MENU_IMG_MIO0_ONCE:
@@ -4994,7 +5012,7 @@ void load_menu_img_comp_type(MenuTexture* addr, s32 compType) {
             texMap[sMenuTextureEntries].textureData = texAddr->textureData;
             texMap[sMenuTextureEntries].offset = sMenuTextureBufferIndex;
             sMenuTextureBufferIndex += texAddr->height * texAddr->width;
-            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) * 8) + 8;
+            sMenuTextureBufferIndex = ((sMenuTextureBufferIndex / 8) + 1) * 8;
             sMenuTextureEntries += 1;
         }
         texAddr++;
@@ -5014,7 +5032,7 @@ void func_80099958(MenuTexture* addr, s32 arg1, s32 arg2) {
         }
         if (size % 8) {
             // Round up to the next multiple of eight
-            size = ((size / 8) * 8) + 8;
+            size = ((size / 8) + 1) * 8;
         }
         dma_copy_mio0_segment(texAddr->textureData, size, gMenuCompressedBuffer);
         mio0decode((u8*) gMenuCompressedBuffer,
@@ -5179,7 +5197,7 @@ void func_80099EC4(void) {
         var_s0 = 0x1400;
     }
     if (var_s0 % 8) {
-        var_s0 = ((var_s0 / 8) * 8) + 8;
+        var_s0 = ((var_s0 / 8) + 1) * 8;
     }
     osInvalDCache((void*) gMenuCompressedBuffer, var_s0);
     osPiStartDma(&sp68, 0, 0, (u32) _textures_0aSegmentRomStart + SEGMENT_OFFSET(temp_s2->textureData),
@@ -5198,7 +5216,7 @@ void func_80099EC4(void) {
                 var_s0 = 0x1400;
             }
             if (var_s0 % 8) {
-                var_s0 = ((var_s0 / 8) * 8) + 8;
+                var_s0 = ((var_s0 / 8) + 1) * 8;
             }
             osInvalDCache(gMenuCompressedBuffer + 0x500, var_s0);
             osPiStartDma(&sp68, 0, 0, (u32) _textures_0aSegmentRomStart + SEGMENT_OFFSET(temp_s2->textureData),
@@ -5222,7 +5240,7 @@ void func_80099EC4(void) {
                 var_s0 = 0x1400;
             }
             if (var_s0 % 8) {
-                var_s0 = ((var_s0 / 8) * 8) + 8;
+                var_s0 = ((var_s0 / 8) + 1) * 8;
             }
             osInvalDCache(gMenuCompressedBuffer, var_s0);
             osPiStartDma(&sp68, 0, 0, (u32) _textures_0aSegmentRomStart + SEGMENT_OFFSET(temp_s2->textureData),
@@ -5665,7 +5683,7 @@ Gfx* func_8009B9D0(Gfx* displayListHead, MenuTexture* textures) {
 
     found = false;
     for (index = 0; index < D_8018E768_SIZE; index++) {
-        if (D_8018E768[index].textures == segmented_to_virtual_dupe(textures)) {
+        if (segmented_to_virtual_dupe(textures) == D_8018E768[index].textures) {
             displayList = D_8018E768[index].displayList;
             found = true;
             break;
@@ -5845,9 +5863,15 @@ Gfx* func_8009C204(Gfx* arg0, MenuTexture* arg1, s32 arg2, s32 arg3, s32 arg4) {
                                   var_s1->dX + arg2, var_s1->dY + arg3, temp_t0, var_s1->width, var_s1->height);
                 break;
             case 3:
+#ifdef VERSION_CN
+                arg0 = func_800963F0(arg0, var_s2, 0x00000400, 0x00000400, 0.457f, 0.5f, 0, 0, var_s1->width,
+                                     var_s1->height, arg2 + var_s1->dX, arg3 + var_s1->dY, temp_t0, var_s1->width,
+                                     var_s1->height);
+#else
                 arg0 = func_800963F0(arg0, var_s2, 0x00000400, 0x00000400, 0.457f, 0.5f, 0, 0, var_s1->width,
                                      var_s1->height, var_s1->dX + arg2, var_s1->dY + arg3, temp_t0, var_s1->width,
                                      var_s1->height);
+#endif
                 break;
         }
         var_s1++;
@@ -11888,7 +11912,7 @@ void func_800A940C(MenuItem* arg0, s32 columnTarget) {
 void func_800A94C8(MenuItem* arg0, s32 columnTarget, s32 arg2) {
     s32 step;
 
-    if (columnTarget == arg0->column) {
+    if (arg0->column == columnTarget) {
         arg0->column += arg2;
     } else {
         step = columnTarget - arg0->column;
@@ -12945,7 +12969,7 @@ void func_800AB314(MenuItem* item) {
             item->param2 = 0;
 
             for (i = 0; i < 4; i++) {
-                if (gCourseIndexInCup == i) {
+                if (i == gCourseIndexInCup) {
                     _items[i]->visible = 1;
                     if (item->param1 != i) {
                         item->param1 = i;
@@ -13021,7 +13045,7 @@ void func_800AB314(MenuItem* item) {
             case 0:
             case 1:
                 for (i = 0; i < 4; i++) {
-                    if ((item->param1 % 4) == i) {
+                    if (i == (item->param1 % 4)) {
                         _items[i]->visible = 1;
                     } else {
                         _items[i]->visible = 0;
@@ -13031,7 +13055,7 @@ void func_800AB314(MenuItem* item) {
                 break;
             case 2:
                 for (i = 0; i < 4; i++) {
-                    if ((item->param1 % 4) == i) {
+                    if (i == (item->param1 % 4)) {
                         _items[i]->priority = 6;
                     } else if (item->param2 < (i * 5)) {
                         _items[i]->priority = 4;
@@ -13928,7 +13952,12 @@ void func_800AD2E8(MenuItem* arg0) {
         case 17:
         case 18:
             arg0->param2 = arg0->state - 0x11;
+#ifdef VERSION_CN
+            /* cn: operand order flipped in iQue's source */
+            if (arg0->param2 != func_800B639C((gCupSelection * 4) + gCourseIndexInCup)) {
+#else
             if (func_800B639C((gCupSelection * 4) + gCourseIndexInCup) != arg0->param2) {
+#endif
                 if ((gControllerOne->buttonPressed | gControllerOne->stickPressed) & U_JPAD) {
                     if (arg0->state >= 0x12) {
                         arg0->state--;
@@ -14332,7 +14361,12 @@ void func_800AE218(MenuItem* arg0) {
         case 30:
         case 31:
             arg0->param2 = (u32) arg0->state - 0x1E;
+#ifdef VERSION_CN
+            /* cn: operand order flipped in iQue's source */
+            if (arg0->param2 != func_800B639C((gCupSelection * 4) + gCourseIndexInCup)) {
+#else
             if (func_800B639C((gCupSelection * 4) + gCourseIndexInCup) != arg0->param2) {
+#endif
                 if ((gControllerOne->buttonPressed | gControllerOne->stickPressed) & U_JPAD) {
                     if (arg0->state >= 0x1F) {
                         arg0->state--;
