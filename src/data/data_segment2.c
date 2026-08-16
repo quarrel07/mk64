@@ -3,6 +3,35 @@
 #include <PR/gbi.h>
 #include "data_segment2.h"
 #include <assets/startup_logo.h>
+#ifdef VERSION_CN
+/* for the MkAnimation objects moved here out of textures.c */
+#include "textures.h"
+#endif
+
+#ifdef VERSION_CN
+/* Moved out of textures.c so that object's .data ends 16-aligned. */
+/**
+ * @brief unknown MkAnimation
+ * Wario face ?
+ */
+MkAnimation D_02007598[21] = {
+    { D_020061E0, 0x00000001 }, { D_02006208, 0x00000001 }, { D_02006230, 0x00000001 }, { D_02006258, 0x00000001 },
+    { D_02006280, 0x00000001 }, { D_02006258, 0x00000001 }, { D_02006230, 0x00000001 }, { D_02006208, 0x00000001 },
+    { D_020061E0, 0x00000001 }, { D_020061B8, 0x00000001 }, { D_020061E0, 0x00000001 }, { D_02006208, 0x00000001 },
+    { D_02006230, 0x00000001 }, { D_02006258, 0x00000001 }, { D_02006280, 0x00000001 }, { D_02006258, 0x00000001 },
+    { D_02006230, 0x00000001 }, { D_02006208, 0x00000001 }, { D_020061E0, 0x00000001 }, { D_020061B8, 0x0000000a },
+    { NULL, 0x00000000 },
+};
+
+/**
+ * @brief unknown MkAnimation
+ * Wario face ?
+ */
+MkAnimation D_02007640[2] = {
+    { D_02006438, 0x00000032 },
+    { NULL, 0x00000000 },
+};
+#endif
 
 Gfx D_02007650[] = {
     gsDPPipeSync(),
@@ -305,6 +334,7 @@ Vtx D_02007BB8[] = {
     { { { 26, 0, 0 }, 0, { 1600, 960 }, { 0xff, 0x00, 0x00, 0xff } } },
     { { { 0, 0, 0 }, 0, { 0, 960 }, { 0xff, 0x00, 0x00, 0xff } } },
 };
+
 
 
 #ifdef VERSION_CN
