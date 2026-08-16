@@ -2706,10 +2706,46 @@ void func_8004E06C(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
 }
 
 #ifdef VERSION_CN
-/* cn only. Body still to be written; the cart carries 153 words here. The
-   signature is settled though - func_8004E3B8 calls it exactly as
-   func_8004E338 calls func_8004E06C. */
-void func_8004E238(UNUSED s32 arg0, UNUSED s32 arg1, UNUSED u8* texture, UNUSED s32 arg3, UNUSED s32 arg4) {
+/* cn only. func_8004E06C wobbles a row of one-pixel-tall strips; this walks the
+   other axis, drawing one-pixel-wide columns and wobbling the top and bottom
+   edge separately, so the rectangle goes out inline instead of through
+   func_8004B97C. bottom is declared ahead of temp_s7 because both spill and the
+   cart puts bottom in the lower slot. */
+void func_8004E238(s32 arg0, s32 arg1, u8* texture, s32 arg3, s32 arg4) {
+    f32 temp_f22;
+    s32 bottom;
+    s16 temp_s7;
+    s16 var_s1;
+    u16 temp_s0;
+    u32 temp_top;
+    u32 temp_bottom;
+    s32 column;
+    s32 var_row;
+    u8* img;
+    s32 i;
+    s32 var;
+
+    D_801656B0 += D_80165710;
+    temp_s7 = D_80165708;
+    temp_f22 = D_8018D00C;
+    var_s1 = (s16) D_801656B0;
+    img = texture;
+    var = arg3 / 2;
+    var_row = arg1 - (arg4 / 2);
+    column = arg0 - var;
+    bottom = var_row + arg4 - 1;
+
+    for (i = 0; i < arg3; i++) {
+        temp_s0 = var_s1;
+        temp_top = (u32) ((f32) (var_row) + (temp_f22 * sins(temp_s0)));
+        temp_bottom = (u32) ((f32) (bottom) + (temp_f22 * sins(temp_s0)));
+        rsp_load_texture(img, 1, arg4);
+        gSPTextureRectangle(gDisplayListHead++, column * 4, temp_top * 4, (column + 1) * 4, temp_bottom * 4, 0, 0, 0,
+                            0x400, 0x400);
+        img += arg4;
+        var_s1 += temp_s7;
+        column += 1;
+    }
 }
 #else
 UNUSED void func_8004E238(void) {
