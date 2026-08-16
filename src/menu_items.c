@@ -2487,8 +2487,8 @@ f64 menu_pow2(f64 value, s32 exponent) {
     if (exponent >= 0) {
         base = 2.0;
     } else {
-        exponent = -exponent;
         base = 0.5;
+        exponent = -exponent;
     }
 
     if (exponent != 0) {
