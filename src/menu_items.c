@@ -8326,6 +8326,10 @@ void menu_item_data_course_selectable(MenuItem* arg0) {
     s32 var_s2;
     UNUSED s32 thing;
     CourseTimeTrialRecords* temp_s6;
+#ifdef VERSION_CN
+    /* cn: the scale is live from the function's first word */
+    f32 scale = 0.6f;
+#endif
 
     temp_s6 = &gSaveData.allCourseTimeTrialRecords.cupRecords[gTimeTrialDataCourseIndex / 4]
                    .courseRecords[gTimeTrialDataCourseIndex % 4];
@@ -8359,10 +8363,18 @@ void menu_item_data_course_selectable(MenuItem* arg0) {
             print_text_mode_1(0x00000025, 0x46 + (0xD * i), gTextMenuOption[i], 0, 0.75f, 0.75f);
         }
 #else
+#ifdef VERSION_CN
+            print_text_mode_2(0x00000025, 0x3F + (0xD * i), gTextMenuOption[i], 0, scale, scale);
+#else
             print_text_mode_2(0x00000025, 0x3F + (0xD * i), gTextMenuOption[i], 0, 0.6f, 0.6f);
+#endif
         } else {
             set_text_color(var_s2);
+#ifdef VERSION_CN
+            print_text_mode_1(0x00000025, 0x3F + (0xD * i), gTextMenuOption[i], 0, scale, scale);
+#else
             print_text_mode_1(0x00000025, 0x3F + (0xD * i), gTextMenuOption[i], 0, 0.6f, 0.6f);
+#endif
         }
 #endif
     }
