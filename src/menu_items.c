@@ -12845,7 +12845,7 @@ s32 func_800AAFCC(s32 characterId) {
     bool ret = false;
 
     for (; someIndex < ARRAY_COUNT(gCharacterGridSelections); someIndex++) {
-        if ((characterId + 1) == gCharacterGridSelections[someIndex]) {
+        if (gCharacterGridSelections[someIndex] == (characterId + 1)) {
             ret = true;
             break;
         }
