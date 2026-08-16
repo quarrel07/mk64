@@ -14,6 +14,10 @@ typedef struct
    unsigned int uncomp_offset;
 } mio0_header_t;
 
+// When set, encode with the lazy-match rule iQue's compressor uses instead of
+// Nintendo's. See mio0_encode() in libmio0.c.
+extern int mio0_ique_lazy;
+
 // function prototypes
 
 // decode MIO0 header

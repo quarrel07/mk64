@@ -192,6 +192,13 @@ int mio0_decode(const unsigned char *in, unsigned char *out, unsigned int *end)
    return bytes_written;
 }
 
+// iQue recompressed two of the cart's MIO0 blobs with BroadOn's own tool. It
+// differs from Nintendo's in one decision: when the next byte starts a longer
+// match, it emits the literal and re-searches from there rather than committing
+// to the match it just looked ahead at, and it takes that branch whenever the
+// lookahead is longer at all (Nintendo's needs it longer by two).
+int mio0_ique_lazy = 0;
+
 int mio0_encode(const unsigned char *in, unsigned int length, unsigned char *out)
 {
    unsigned char *bit_buf;
@@ -234,8 +241,17 @@ int mio0_encode(const unsigned char *in, unsigned int length, unsigned char *out
          // lookahead to next byte to see if longer match
          int lookahead_length = MIN(length - bytes_proc - 1, 18);
          int lookahead_match = find_longest(in, bytes_proc + 1, lookahead_length, &lookahead_offset, lookbacks);
+         if (mio0_ique_lazy && longest_match < lookahead_match) {
+            // uncompressed byte, then start over from the next one
+            uncomp_buf[uncomp_idx] = in[bytes_proc];
+            uncomp_idx++;
+            PUT_BIT(bit_buf, bit_idx, 1);
+            bit_idx++;
+            bytes_proc++;
+            continue;
+         }
          // better match found, use uncompressed + lookahead compressed
-         if ((longest_match + 1) < lookahead_match) {
+         if (!mio0_ique_lazy && (longest_match + 1) < lookahead_match) {
             // uncompressed byte
             uncomp_buf[uncomp_idx] = in[bytes_proc];
             uncomp_idx++;
@@ -470,13 +486,14 @@ static arg_config default_config =
 
 static void print_usage(void)
 {
-   ERROR("Usage: mio0 [-c / -d] [-o OFFSET] FILE [OUTPUT]\n"
+   ERROR("Usage: mio0 [-c / -d] [-i] [-o OFFSET] FILE [OUTPUT]\n"
          "\n"
          "mio0 v" MIO0_VERSION ": MIO0 compression and decompression tool\n"
          "\n"
          "Optional arguments:\n"
          " -c           compress raw data into MIO0 (default: compress)\n"
          " -d           decompress MIO0 into raw data\n"
+         " -i           compress with iQue's lazy-match rule instead of Nintendo's\n"
          " -o OFFSET    starting offset in FILE (default: 0)\n"
          "\n"
          "File arguments:\n"
@@ -502,6 +519,9 @@ static void parse_arguments(int argc, char *argv[], arg_config *config)
                break;
             case 'd':
                config->compress = 0;
+               break;
+            case 'i':
+               mio0_ique_lazy = 1;
                break;
             case 'o':
                if (++i >= argc) {
