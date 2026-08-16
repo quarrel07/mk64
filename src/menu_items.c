@@ -10976,17 +10976,29 @@ void func_800A6D94(s32 arg0, s32 arg1, u8* arg2) {
     f32 otherThing;
     s32 thing;
 
+#ifdef VERSION_CN
+    /* cn: the entry address is formed before anything else, and the compare
+       takes the winning index on the left */
+    stackPadding1 = &D_800E7300[((arg0 - 2) * 4) + arg1];
+    var_v0 = 0;
+    if (gPlayerWinningIndex != arg1) {
+        var_v0 = 1;
+    }
+#else
     var_v0 = 0;
     if (arg1 != gPlayerWinningIndex) {
         var_v0 = 1;
     }
+#endif
     thing = arg2[arg1];
     if (var_v0 != 0) {
         set_text_color(TEXT_BLUE);
     } else {
         set_text_color(gGlobalTimer % 3);
     }
+#ifndef VERSION_CN
     stackPadding1 = &D_800E7300[((arg0 - 2) * 4) + arg1];
+#endif
     func_800A79F4(thing, sp30);
     otherThing = 0.75f;
     text_draw((stackPadding1->column + 0x20) - ((32.0f * otherThing) / 2), stackPadding1->row + 0x75, sp30, 0, 0.75f,
@@ -12744,7 +12756,13 @@ void func_800AA69C(MenuItem* arg0) {
                 func_8009A594(arg0->D_8018DEE0_index, 0,
                               segmented_to_virtual_dupe_2(gCharacterCelebrateAnimation[temp_a0]));
             } else {
+#ifdef VERSION_CN
+                /* cn: the roll lands in a variable before it is tested */
+                var_v0 = random_int(0x00C8U);
+                temp_v0 = var_v0;
+#else
                 temp_v0 = random_int(0x00C8U);
+#endif
                 if (temp_v0 >= 0xC6) {
                     arg0->subState = 4;
                     func_8009A594(arg0->D_8018DEE0_index, 0,
