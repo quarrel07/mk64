@@ -1675,7 +1675,9 @@ void render_texture_rectangle_wrap(s32 x, s32 y, s32 width, s32 height, s32 mode
 }
 
 void func_8004B97C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
+#endif
     s32 sp2C;
     s32 var_a1;
     s32 var_v0;
@@ -1699,7 +1701,9 @@ void func_8004B97C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 void func_8004BA08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
+#endif
     s32 sp2C;
     s32 phi_a1;
     s32 phi_v1;

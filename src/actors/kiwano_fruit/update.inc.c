@@ -16,6 +16,9 @@ void update_actor_kiwano_fruit(struct KiwanoFruit* fruit) {
     f32 temp_f14;
     f32 temp_f12;
     s32 nearestPathPoint;
+#ifdef VERSION_CN
+    f32 temp_f0;
+#endif
 
     player = &gPlayers[fruit->targetPlayer];
     if (((player->type & PLAYER_CPU) != 0) || (player->collision.unk34 == 0)) {
@@ -34,7 +37,12 @@ void update_actor_kiwano_fruit(struct KiwanoFruit* fruit) {
             temp_f2 = player->pos[0] - gCurrentTrackPath[nearestPathPoint].posX;
             temp_f16 = player->pos[1] - gCurrentTrackPath[nearestPathPoint].posY;
             temp_f14 = player->pos[2] - gCurrentTrackPath[nearestPathPoint].posZ;
+#ifdef VERSION_CN
+            temp_f0 = sqrtf((temp_f2 * temp_f2) + (temp_f16 * temp_f16) + (temp_f14 * temp_f14));
+            temp_f12 = fruit->velocity[0] / temp_f0;
+#else
             temp_f12 = fruit->velocity[0] / sqrtf((temp_f2 * temp_f2) + (temp_f16 * temp_f16) + (temp_f14 * temp_f14));
+#endif
             temp_f2 *= temp_f12;
             temp_f16 *= temp_f12;
             temp_f14 *= temp_f12;

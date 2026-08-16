@@ -270,6 +270,11 @@ SECTIONS
       /* the iQue OS trap stubs (skGetId..sk14) follow the device manager on
          cart (0x800CFBB0..0x800CFDFC) */
       BUILD_DIR/asm/os/iQueKernelCalls.o(.text);
+      /* iQue string helpers (cart 0x800CFE00), sitting between the trap stubs
+         and bcopy. Only strcmp is transcribed; menu_item_credits_render is its
+         only caller. memset/memcmp/strncmp share the object and are still asm
+         we do not have. */
+      BUILD_DIR/asm/os/strcmp_cn.o(.text);
       #endif
       BUILD_DIR/asm/os/bcopy.o(.text);
       #ifdef VERSION_CN
