@@ -1492,5 +1492,7 @@
 "textures/raw/font_cn_277.i4.png": {"meta": {"dims": [26, 16]}, "offsets": {"cn.v5": ["0x7FE028", "0x0"]}},
 "textures/raw/font_cn_278.i4.png": {"meta": {"dims": [26, 16]}, "offsets": {"cn.v5": ["0x7FE0F8", "0x0"]}},
 "textures/raw/font_cn_279.i4.png": {"meta": {"dims": [26, 16]}, "offsets": {"cn.v5": ["0x7FE1C8", "0x0"]}},
-"textures/raw/font_cn_280.i4.png": {"meta": {"dims": [26, 16]}, "offsets": {"cn.v5": ["0x7FE298", "0x0"]}}
+"textures/raw/font_cn_280.i4.png": {"meta": {"dims": [26, 16]}, "offsets": {"cn.v5": ["0x7FE298", "0x0"]}},
+"bin/cn/cn_texture_7DA298.bin": {"meta": {"size": "0x20"}, "offsets": {"cn.v5": ["0x7DA298", "0x0"]}},
+"bin/cn/cn_texture_7DB330.bin": {"meta": {"size": "0x1100"}, "offsets": {"cn.v5": ["0x7DB330", "0x0"]}}
 }

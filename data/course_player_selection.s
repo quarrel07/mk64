@@ -801,9 +801,27 @@ glabel gTextureCupBronze_end
 glabel push_start_button
 .incbin "textures/raw/push_start_button.rgba16"
 
+/* cn only: 32 bytes the iQue cart carries between these two banners. Kept raw
+   because its shape is unknown - it does not round trip through a png. */
+.ifdef VERSION_CN
+.align 2, 0x00
+glabel cn_texture_7DA298
+.incbin "bin/cn/cn_texture_7DA298.bin"
+.endif
+
 .align 2, 0x00
 glabel copyright_1996
 .incbin "textures/raw/copyright_1996.rgba16"
+
+/* cn only: 4352 bytes of rgba16-looking image data the iQue cart carries
+   after the copyright banner. No standard width lays it out squarely - 136x16,
+   128x17, 68x32, 64x34 and 124x17 all skew - so it stays raw until its shape
+   is known. The bytes are right; only the name and geometry are guesses. */
+.ifdef VERSION_CN
+.align 2, 0x00
+glabel cn_texture_7DB330
+.incbin "bin/cn/cn_texture_7DB330.bin"
+.endif
 
 .align 2, 0x00
 glabel gTextureP1BorderBlue
