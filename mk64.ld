@@ -678,10 +678,6 @@ SECTIONS
       BUILD_DIR/src/effects.o(.rodata*);
       BUILD_DIR/src/code_80091440.o(.rodata*);
       BUILD_DIR/src/menu_items.jp.o(.rodata*);
-#ifdef VERSION_CN
-      /* cart 0x00F06E0: 208 bytes of fill before this object */
-      . += 0xD0;
-#endif
       BUILD_DIR/src/code_800AF9B0.o(.rodata*);
       BUILD_DIR/src/menus.o(.rodata*);
       BUILD_DIR/src/save.o(.rodata*);
