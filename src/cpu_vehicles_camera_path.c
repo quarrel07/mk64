@@ -3238,7 +3238,11 @@ void func_800180F0(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     f32 sp94;
     f32 sp90;
     f32 sp8C;
+#ifdef VERSION_CN
+    Player* player;
+#else
     UNUSED s32 stackPadding4;
+#endif
     f32 distance;
     f32 midX;
     f32 midY;
@@ -3246,7 +3250,11 @@ void func_800180F0(Camera* camera, UNUSED Player* unusedPlayer, UNUSED s32 arg2,
     f32 xdiff;
     f32 ydiff;
     f32 zdiff;
+#ifdef VERSION_CN
+    UNUSED s32 stackPadding4;
+#else
     Player* player;
+#endif
     s32 playerId;
     s16 pathPoint1;
     s16 pathPoint2;

@@ -1638,7 +1638,9 @@ void func_8004BA08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 void func_8004BA98(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
+#endif
     s32 sp34;
     s32 sp30;
     s32 sp2C;
@@ -1650,9 +1652,14 @@ void func_8004BA98(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
         sp34 = arg0;
         sp30 = arg1;
         phi_v0 = arg4;
+#ifdef VERSION_CN
+        phi_v1 = arg5;
+#endif
         sp2C = arg2;
         phi_a3 = arg3;
+#ifndef VERSION_CN
         phi_v1 = arg5;
+#endif
         if (arg0 < 0) {
             phi_v0 = arg4 - arg0;
             sp34 = 0;
@@ -3542,6 +3549,9 @@ void func_800528EC(s32 arg0) {
 }
 
 void render_ice_block(s32 arg0) {
+#ifdef VERSION_CN
+    UNUSED s32 pad[4];
+#endif
     s32 playerId;
     s32 objectIndex;
 
@@ -3576,6 +3586,9 @@ void func_80052D70(s32 playerId) {
 }
 
 void func_80052E30(UNUSED s32 arg0) {
+#ifdef VERSION_CN
+    UNUSED s32 pad[4];
+#endif
     s32 var_s0;
 
     D_800E4620.l[0].l.dir[0] = D_80165840[0];
@@ -3824,7 +3837,11 @@ void func_80053D74(s32 objectIndex, UNUSED s32 arg1, s32 vertexIndex) {
     if (gMatrixHudCount <= MTX_HUD_POOL_SIZE_MAX) {
         object = &gObjectList[objectIndex];
         D_80183E80[2] = (s16) (object->unk_084[6] + 0x8000);
+#ifdef VERSION_CN
+        rsp_set_matrix_transformation(gObjectList[objectIndex].pos, (u16*) D_80183E80, object->sizeScaling);
+#else
         rsp_set_matrix_transformation(object->pos, (u16*) D_80183E80, object->sizeScaling);
+#endif
         set_color_render((s32) object->unk_084[0], (s32) object->unk_084[1], (s32) object->unk_084[2],
                          (s32) object->unk_084[3], (s32) object->unk_084[4], (s32) object->unk_084[5],
                          (s32) object->primAlpha);
@@ -3938,7 +3955,9 @@ void render_object_paddle_boat_smoke_particle(s32 objectIndex, s32 cameraId) {
 
 // Likely smoke related.
 void render_object_paddle_boat_smoke_particles(s32 cameraId) {
+#ifndef VERSION_CN
     UNUSED s32 pad[2];
+#endif
     Camera* camera;
     s32 i;
 
