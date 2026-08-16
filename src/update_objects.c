@@ -98,6 +98,7 @@ u8* gItemWindowTextures[] = { common_texture_item_window_none,
                               common_texture_item_window_triple_mushroom,
                               common_texture_item_window_super_mushroom };
 
+#ifndef VERSION_CN
 u16* gHudLapTextures[] = { common_texture_hud_lap_1_on_3, common_texture_hud_lap_2_on_3,
                            common_texture_hud_lap_3_on_3 };
 
@@ -109,6 +110,7 @@ u8* gPortraitTextures[] = { common_texture_portrait_mario,       common_texture_
                             common_texture_portrait_yoshi,       common_texture_portrait_toad,
                             common_texture_portrait_donkey_kong, common_texture_portrait_wario,
                             common_texture_portrait_peach,       common_texture_portrait_bowser };
+#endif
 
 s32 find_unused_obj_index(s32* arg0) {
     s32 temp_v0;

@@ -3004,8 +3004,37 @@ void func_80092C80(void) {
 // to get a character's width in pixels
 s32 char_to_glyph_index(char* character) {
     s32 index;
+#ifndef VERSION_CN
     s8 temp_v0;
+#endif
 
+#ifdef VERSION_CN
+    // cn: a GB2312 lead byte indexes the two-byte glyph block directly.
+    // The byte must stay a u8* deref (not a local) so it keeps its QImode
+    // temp, and the do/while(0) is load bearing: it is what puts the result
+    // bodies ahead of the tests in the register/delay-slot order.
+    if (((u8*)character)[0] >= 0xA1) {
+        return ((((u8*)character)[0] - 0xA1) << 8) + ((u8*)character)[1] + 0x30;
+    }
+    goto tests;
+lower:
+    index = (s8) character[0] - 0x61;
+    goto out;
+upper:
+    index = (s8) character[0] - 0x41;
+    goto out;
+digit:
+    index = (s8) character[0] - 0x10;
+    goto out;
+space:
+    index = -1;
+    goto out;
+tests:
+    do {
+        index = 1;
+        if (((s8) character[0] >= 'a') && ((s8) character[0] <= 'z')) {
+            goto lower;
+#else
     temp_v0 = *character;
     index = 1;
     if ((temp_v0 >= 'a') && (temp_v0 <= 'z')) {
@@ -3030,7 +3059,12 @@ s32 char_to_glyph_index(char* character) {
             case -85: // 0xAB
                 index = func_80092EE4(character);
                 break;
+#endif
         }
+#ifdef VERSION_CN
+        if (((s8) character[0] >= 'A') && ((s8) character[0] <= 'Z')) {
+            goto upper;
+#else
     } else {
         switch (temp_v0) {
             case '!':
@@ -3070,8 +3104,76 @@ s32 char_to_glyph_index(char* character) {
             default:
                 index = -2;
                 break;
+#endif
         }
+#ifdef VERSION_CN
+        if (((s8) character[0] >= '0') && ((s8) character[0] <= '9')) {
+            goto digit;
+        }
+        if ((s8) character[0] == ' ') {
+            goto space;
+        }
+        if ((s8) character[0] < 0) {
+            // Handling GB2312 characters
+            switch ((s8) character[0]) { /* irregular */
+                case -92: // 0xA4
+                    index = func_80092E1C(character + 1);
+                    break;
+                case -91: // 0xA5
+                    index = func_80092DF8(character + 1);
+                    break;
+                case -95: // 0xA1
+                case -93: // 0xA3
+                case -85: // 0xAB
+                    index = func_80092EE4(character);
+                    break;
+            }
+        } else {
+            switch ((s8) character[0]) {
+                case '!':
+                    index = 0x0000001A;
+                    break;
+                case '-':
+                    index = 0x0000001B;
+                    break;
+                case '?':
+                    index = 0x0000001C;
+                    break;
+                case '\'':
+                    index = 0x0000001D;
+                    break;
+                case '$':
+                    index = 0x0000001E;
+                    break;
+                case '.':
+                    index = 0x0000001F;
+                    break;
+                case '\"':
+                    index = 0x0000002A;
+                    break;
+                case '*':
+                    index = 0x0000002B;
+                    break;
+                case '+':
+                    index = 0x0000002C;
+                    break;
+                // Displayed as "cc"
+                case '(':
+                    index = 0x0000002D;
+                    break;
+                case ',':
+                    index = 0x0000002E;
+                    break;
+                default:
+                    index = -2;
+                    break;
+            }
+        }
+    } while (0);
+out:
+#else
     }
+#endif
     return index;
 }
 
@@ -6001,7 +6103,11 @@ void func_8009AD78(s32 arg0, s32 arg1) {
     s32 green;
     s32 blue;
     s32 alpha;
+#ifdef VERSION_CN
+    u32 newred;
+#else
     UNUSED s32 newred;
+#endif
     UNUSED s32 newgreen;
     UNUSED s32 newblue;
     u32 temp_t9;
@@ -6012,14 +6118,24 @@ void func_8009AD78(s32 arg0, s32 arg1) {
 
     color = &gMenuTextureBuffer[sMenuTextureMap[arg0].offset];
     size = sMenuTextureMap[arg0 + 1].offset - sMenuTextureMap[arg0].offset;
+#ifdef VERSION_CN
+    for (var_v1 = 0; (u32) var_v1 < (u32) size; var_v1++) {
+#else
     for (var_v1 = 0; var_v1 != size; var_v1++) {
+#endif
         red = ((*color & 0xF800) >> 0xB) * 0x4D;
         green = ((*color & 0x7C0) >> 6) * 0x96;
         blue = ((*color & 0x3E) >> 1) * 0x1D;
         alpha = *color & 0x1;
         temp_t9 = red + green + blue;
         temp_t9 = temp_t9 >> 8;
+#ifdef VERSION_CN
+        newred = 0x20 - temp_t9;
+        newred = (newred * arg1) >> 8;
+        temp_t9 += newred;
+#else
         temp_t9 += ((0x20 - temp_t9) * arg1) >> 8;
+#endif
         *color++ = (temp_t9 << 1) + (temp_t9 << 6) + (temp_t9 << 0xB) + alpha;
     }
 }
@@ -7951,6 +8067,19 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
 }
 
 void render_menus(MenuItem* arg0) {
+#ifdef VERSION_CN
+    s32 var_a1;
+    s32 var_v1;
+    MenuTexture* texture;
+    s32 temp_a0;
+    s32 temp_t2;
+    s32 temp_t5;
+    s32 temp_t9;
+    s32 temp_v1;
+    UNUSED s32 pad2;
+    char sp80[3];
+    UNUSED s32 pad3;
+#else
     s32 var_a1;
     s32 var_v1;
     UNUSED s32 pad[2];
@@ -7969,6 +8098,7 @@ void render_menus(MenuItem* arg0) {
 #endif
     s32 one = 1;
     UNUSED s32 pad3;
+#endif
 
     if (arg0->visible) {
         gDPPipeSync(gDisplayListHead++);
@@ -8028,6 +8158,33 @@ void render_menus(MenuItem* arg0) {
                         render_menu_textures(gDisplayListHead, seg2_push_start_button_texture, arg0->column, arg0->row);
                 }
                 break;
+#ifdef VERSION_CN
+            case MENU_ITEM_UI_START_RECORD_TIME: {
+                s32 strWidth;
+                f32 scale = 0.9f;
+                strWidth = (s32) ((f32) (get_string_width(gCourseNamesDup[0]) + 5) * scale) / 2;
+                gDisplayListHead = draw_box(gDisplayListHead, 0xA0 - strWidth, 0x0000007B, strWidth + 0xA0, 0x000000A4,
+                                            0, 0, 0, 0x00000096);
+                set_text_color(TEXT_GREEN);
+                print_text1_center_mode_1(0x000000A0, 0x0000008C, gCourseNamesDup[0], 0, scale, scale);
+                scale = 1.0f;
+                temp_v1 = func_800B4EB4(0, 7) & 0xFFFFF;
+                if (temp_v1 < 0x1EAA) {
+                    set_text_color((s32) gGlobalTimer % 2);
+                } else if (temp_v1 < 0x2329) {
+                    set_text_color((s32) gGlobalTimer % 3);
+                } else {
+                    set_text_color(TEXT_YELLOW);
+                }
+                get_time_record_minutes(temp_v1, sp80);
+                func_800939C8(0x00000077, 0x000000A0, sp80, 0, scale, scale);
+                print_text_mode_1(0x0000008B, 0x000000A0, "'", 0, scale, scale);
+                get_time_record_seconds(temp_v1, sp80);
+                func_800939C8(0x00000094, 0x000000A0, sp80, 0, scale, scale);
+                print_text_mode_1(0x000000A7, 0x000000A0, "\"", 0, scale, scale);
+                get_time_record_centiseconds(temp_v1, sp80);
+                func_800939C8(0x000000B4, 0x000000A0, sp80, 0, scale, scale);
+#else
             case MENU_ITEM_UI_START_RECORD_TIME: {
                 s32 strWidth;
                 strWidth = (s32) ((f32) (get_string_width(gCourseNamesDup[0]) + 5) * 0.9f) / 2;
@@ -8055,8 +8212,31 @@ void render_menus(MenuItem* arg0) {
                 print_text_mode_1(0x000000A7, 0x000000A0, "\"", 0, 1.0f, 1.0f);
                 get_time_record_centiseconds(temp_v1, sp80);
                 func_800939C8(0x000000B4, 0x000000A0, sp80, 0, 1.0f, 1.0f);
+#endif
                 break;
             }
+#ifdef VERSION_CN
+            case MENU_ITEM_UI_NO_CONTROLLER: {
+                s32 strWidth;
+                s32 strWidth2;
+                f32 why = 0.75f;
+                s32 one = 1;
+                strWidth = get_string_width(gTextNoController[0]);
+                strWidth2 = get_string_width(gTextNoController[1]);
+                if (strWidth < strWidth2) {
+                    strWidth = strWidth2;
+                }
+                temp_t2 = (s32) (strWidth * why) / 2;
+                temp_t5 = (s32) (((0.75f * 2) + 0.5) * 16.0) / 2;
+                gDisplayListHead = draw_box(gDisplayListHead, 0xA0 - temp_t2, 0xB6 - temp_t5, temp_t2 + 0xA0,
+                                            temp_t5 + 0xB6, 0, 0, 0, 0x00000096);
+                set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
+                for (strWidth = 0; strWidth < 2; strWidth++) {
+                    print_text1_center_mode_1(0xA0 * one - 1 * why,
+                                              (s32) (0xB4 * one + ((f32) (strWidth * 0x12) * why)),
+                                              gTextNoController[strWidth], 0, why, why);
+                }
+#else
             case MENU_ITEM_UI_NO_CONTROLLER: {
                 s32 strWidth;
                 UNUSED s32 padCont[2];
@@ -8085,6 +8265,7 @@ void render_menus(MenuItem* arg0) {
                                               gTextNoController[strWidth], 0, why, why);
 #endif
                 }
+#endif
                 break;
             }
             case MAIN_MENU_BACKGROUND:
@@ -8113,6 +8294,22 @@ void render_menus(MenuItem* arg0) {
             case MAIN_MENU_OPTION_GFX:
             case MAIN_MENU_DATA_GFX:
                 var_a1 = arg0->type - 0xF;
+#ifdef VERSION_CN
+                if (arg0->param1 < 0x20) {
+                    var_v1 = (arg0->param1 * 0x3A) / 64;
+                    if (gMainMenuSelection == var_a1) {
+                        s32 offset = var_v1 - 0x39;
+                        gDisplayListHead =
+                            draw_flash_select_case_fast(gDisplayListHead, arg0->column + var_v1, (u32) arg0->row,
+                                                        arg0->column - offset, arg0->row + 0x12);
+                    } else {
+                        s32 offset = var_v1 - 0x39;
+                        gDisplayListHead =
+                            draw_box_fill(gDisplayListHead, arg0->column + var_v1, arg0->row,
+                                          arg0->column - offset, arg0->row + 0x12, 1, 1, 1, 0x000000FF);
+                    }
+                }
+#else
                 if (arg0->param1 < 0x20) {
                     temp_t9 = (arg0->param1 * 0x3A) / 64;
                     if (var_a1 == gMainMenuSelection) {
@@ -8125,6 +8322,7 @@ void render_menus(MenuItem* arg0) {
                                           (arg0->column - temp_t9) + 0x39, arg0->row + 0x12, 1, 1, 1, 0x000000FF);
                     }
                 }
+#endif
                 var_v1 = arg0->type - 0xA;
                 gDisplayListHead =
                     func_8009BC9C(gDisplayListHead, D_800E8254[var_v1], arg0->column, arg0->row, 2, arg0->param1);
@@ -8207,6 +8405,23 @@ void render_menus(MenuItem* arg0) {
             case CHARACTER_SELECT_MENU_2P_CURSOR: /* switch 6 */
             case CHARACTER_SELECT_MENU_3P_CURSOR: /* switch 6 */
             case CHARACTER_SELECT_MENU_4P_CURSOR: /* switch 6 */
+#ifdef VERSION_CN
+                var_v1 = arg0->type - CHARACTER_SELECT_MENU_1P_CURSOR;
+                if (gCharacterGridSelections[var_v1]) {
+                    if (gCharacterGridIsSelected[var_v1] == 0) {
+                        var_a1 = 255;
+                    } else {
+                        var_a1 = gGlobalTimer % 16;
+                        if (var_a1 >= 8) {
+                            var_a1 = (0x10 - var_a1) * 8;
+                        } else {
+                            var_a1 *= 8;
+                        }
+                        var_a1 += 191;
+                    }
+                    render_cursor_player(arg0, var_v1, var_a1);
+                }
+#else
                 temp_a0 = arg0->type - CHARACTER_SELECT_MENU_1P_CURSOR;
                 if (gCharacterGridSelections[temp_a0]) {
                     if (gCharacterGridIsSelected[temp_a0] == 0) {
@@ -8222,6 +8437,7 @@ void render_menus(MenuItem* arg0) {
                     }
                     render_cursor_player(arg0, temp_a0, temp_t2);
                 }
+#endif
                 break;
             case CHARACTER_SELECT_MENU_OK: /* switch 6 */
                 func_800A8564(arg0);
@@ -8281,6 +8497,11 @@ void render_menus(MenuItem* arg0) {
                 break;
             case MENU_ITEM_TYPE_065: /* switch 6 */
             case MENU_ITEM_TYPE_066: {
+#ifdef VERSION_CN
+                func_800A86E8(arg0);
+                set_text_color(TEXT_YELLOW);
+                print_text_mode_1(arg0->column + 8, arg0->row + 0x10, gBestTimeText[arg0->type - 0x65], 0, 0.8f, 0.8f);
+#else
 #ifdef VERSION_JP
                 func_800A86E8(arg0);
                 set_text_color(TEXT_YELLOW);
@@ -8296,6 +8517,7 @@ void render_menus(MenuItem* arg0) {
                 set_text_color(TEXT_YELLOW);
                 print_text_mode_1(arg0->column + 8, arg0->row + 0x10, gBestTimeText[arg0->type - 0x65], 0, scaleX,
                                   0.8f);
+#endif
 #endif
                 func_800A874C(arg0);
                 break;
@@ -8331,8 +8553,13 @@ void render_menus(MenuItem* arg0) {
                                           arg0->row + 0x11, 0x000000FF, 0x000000F9, 0x000000DC, 0x000000FF);
                     } else {
                         gDisplayListHead =
+#ifdef VERSION_CN
+                            draw_flash_select_case_slow(gDisplayListHead, arg0->column ^ 0, arg0->row ^ 0,
+                                                        arg0->column + 0x3F, arg0->row + 0x11);
+#else
                             draw_flash_select_case_slow(gDisplayListHead, arg0->column ^ 0, one = arg0->row ^ 0,
                                                         arg0->column + 0x3F, arg0->row + 0x11);
+#endif
                     }
                 } else {
                     gDisplayListHead = draw_box_fill(gDisplayListHead, arg0->column, arg0->row, arg0->column + 0x3F,
@@ -8340,10 +8567,14 @@ void render_menus(MenuItem* arg0) {
                 }
                 gDisplayListHead = render_menu_textures(gDisplayListHead, seg2_data_texture, arg0->column, arg0->row);
                 set_text_color(TEXT_YELLOW);
+#ifdef VERSION_CN
+                print_text1_left(0x00000125, 0x00000019, gTextMenuData, 0, 0.75f, 0.75f);
+#else
 #ifdef VERSION_JP
                 print_text1_left(0x00000128, 0x0000001C, gTextMenuData, 0, 0.65f, 0.65f);
 #else
                 print_text1_left(0x00000125, 0x0000001C, gTextMenuData, 0, 0.55f, 0.55f);
+#endif
 #endif
                 break;
             case MENU_ITEM_TYPE_08D: /* switch 6 */
@@ -8403,9 +8634,15 @@ void render_menus(MenuItem* arg0) {
             case MENU_ITEM_TYPE_0B4: /* switch 6 */
                 if (arg0->state != 0) {
                     var_v1 = arg0->type - MENU_ITEM_TYPE_0B1;
+#ifdef VERSION_CN
+                    var_a1 = D_800EFD64[gCharacterSelections[var_v1]];
+                    gDisplayListHead = render_menu_textures(
+                        gDisplayListHead, segmented_to_virtual_dupe(D_800E7D54[var_a1]), arg0->column, arg0->row);
+#else
                     one = D_800EFD64[gCharacterSelections[var_v1]];
                     gDisplayListHead = render_menu_textures(
                         gDisplayListHead, segmented_to_virtual_dupe(D_800E7D54[one]), arg0->column, arg0->row);
+#endif
                     func_8009A7EC(arg0->D_8018DEE0_index, arg0->column, arg0->row, var_v1, arg0->param1);
                     render_cursor_player(arg0, var_v1, 0x000000FF);
                 }
@@ -8935,9 +9172,13 @@ void render_menu_item_data_course_image(MenuItem* arg0) {
     }
     // course minimap
     func_8004EF9C(gCupCourseOrder[gTimeTrialDataCourseIndex / 4][gTimeTrialDataCourseIndex % 4]);
+#ifdef VERSION_CN
+    gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
+#else
     do {
         gDPSetTextureFilter(gDisplayListHead++, G_TF_BILERP);
     } while (0);
+#endif
 }
 
 void render_menu_item_data_course_info(MenuItem* arg0) {
@@ -13684,42 +13925,92 @@ void func_800A8270(s32 arg0, MenuItem* arg1) {
     s32 temp_t6;
     s32 var_s0;
     s32 var_s2;
+#ifndef VERSION_CN
     s32 var_s3;
     s32 var_s4;
+#endif
 
     if (arg1->param1 < 0x20) {
+#ifdef VERSION_CN
+        temp_t6 = arg1->param1;
+#else
         temp_t6 = (arg1->param1 << 6) / 64;
+#endif
         temp_t1 = arg1->column;
         var_s0 = arg1->row;
+#ifndef VERSION_CN
         var_s3 = temp_t1 + temp_t6;
         var_s4 = (temp_t1 - temp_t6) + 0x3F;
+#endif
         gDPPipeSync(gDisplayListHead++);
         gDPSetRenderMode(gDisplayListHead++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineMode(gDisplayListHead++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+#ifdef VERSION_CN
+        if (arg0 == gPlayerCount - 1) {
+            /* cn: the nested test must stay a conditional expression - written as
+               `&&` the compiler folds it to an unsigned range check */
+            if ((gMainMenuSelection <= MAIN_MENU_PLAYER_SELECT) ? (gMainMenuSelection >= MAIN_MENU_OPTION) : 0) {
+                gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                                              (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x35);
+#else
         if ((arg0 + 1) == gPlayerCount) {
             if ((gMainMenuSelection == MAIN_MENU_OPTION) || (gMainMenuSelection == MAIN_MENU_DATA) ||
                 (gMainMenuSelection == MAIN_MENU_PLAYER_SELECT)) {
                 gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x35);
+#endif
             } else {
+#ifdef VERSION_CN
+                gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                                 (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x35, 0x000000FF, 0x000000F9,
+                                                 0x000000DC, 0x000000FF);
+#else
                 gDisplayListHead = draw_box_fill(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x35, 0x000000FF,
                                                  0x000000F9, 0x000000DC, 0x000000FF);
+#endif
             }
         } else {
+#ifdef VERSION_CN
+            gDisplayListHead = func_80098FC8(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                             (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x35);
+#else
             gDisplayListHead = func_80098FC8(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x35);
+#endif
         }
+#ifdef VERSION_CN
+        for (var_s0 += 0x41, var_s2 = 0; var_s2 <= gPlayerModeSelection[arg0]; var_s0 += 0x12, var_s2++) {
+            if ((gGameModeMenuColumn[arg0] == var_s2) && ((arg0 + 1) == gPlayerCount) &&
+                (gMainMenuSelection > MAIN_MENU_PLAYER_SELECT)) {
+#else
         for (var_s0 += 0x41, var_s2 = 0; var_s2 <= gPlayerModeSelection[arg0]; var_s2++, var_s0 += 0x12) {
             if ((var_s2 == gGameModeMenuColumn[arg0]) && ((arg0 + 1) == gPlayerCount) &&
                 (gMainMenuSelection > MAIN_MENU_PLAYER_SELECT)) {
+#endif
                 if (gMainMenuSelection == MAIN_MENU_MODE_SELECT) {
+#ifdef VERSION_CN
+                    gDisplayListHead = draw_flash_select_case_slow(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                                                  (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x11);
+#else
                     gDisplayListHead =
                         draw_flash_select_case_slow(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x11);
+#endif
                 } else {
+#ifdef VERSION_CN
+                    gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                                     (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x11, 0x000000FF, 0x000000F9,
+                                                     0x000000DC, 0x000000FF);
+#else
                     gDisplayListHead = draw_box_fill(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x11,
                                                      0x000000FF, 0x000000F9, 0x000000DC, 0x000000FF);
+#endif
                 }
             } else {
+#ifdef VERSION_CN
+                gDisplayListHead = draw_box_fill(gDisplayListHead, temp_t1 + temp_t6, var_s0,
+                                                 (temp_t1 + 0x3F) - temp_t6, var_s0 + 0x11, 1, 1, 1, 0x000000FF);
+#else
                 gDisplayListHead =
                     draw_box_fill(gDisplayListHead, var_s3, var_s0, var_s4, var_s0 + 0x11, 1, 1, 1, 0x000000FF);
+#endif
             }
         }
     }

@@ -805,7 +805,7 @@ ifeq ($(VERSION),cn.v5)
                       __osSiRawStartDma __osViInit __osDevMgrMain \
                       osEPiRawWriteIo osEPiRawReadIo osEPiRawStartDma \
                       osPiRawStartDma __osSpRawStartDma __osSpSetPc guMtxCatL \
-                      contramread contramwrite
+                      contramread contramwrite osSpTaskYield
   CN_EGCS_LIB_OBJS := $(addprefix $(BUILD_DIR)/src/os/,$(addsuffix .o,$(CN_EGCS_LIB_SRCS)))
   $(CN_EGCS_LIB_OBJS): CC := $(TOOLS_DIR)/ique_egcs_cc.sh
   $(CN_EGCS_LIB_OBJS): CFLAGS := -G 0 $(TARGET_CFLAGS) -D__sgi -DBBPLAYER -fno-pic -mno-abicalls \
