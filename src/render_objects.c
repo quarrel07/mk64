@@ -3058,7 +3058,7 @@ void func_800514BC(void) {
     if ((gPlayerCountSelection1 == 2) && (gActiveScreenMode == 2)) {
         var_s3 = 0;
     }
-    for (var_s0 = var_s3 - 1, var_s1 = 0; var_s1 < var_s3; var_s1++, var_s0--) {
+    for (var_s0 = var_s3 - 1, var_s1 = 0; var_s1 < var_s3; var_s0--, var_s1++) {
         temp_a0 = gGPCurrentRacePlayerIdByRank[var_s0];
         player = &gPlayerOne[temp_a0];
         if ((player->type & PLAYER_EXISTS) && ((temp_a0 != 0) || (gPlayerCountSelection1 != 1))) {
