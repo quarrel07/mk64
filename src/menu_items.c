@@ -6638,9 +6638,15 @@ void func_8009DB8C(void) {
     u32 var_s3;
     s32 var_v1;
 
+#ifdef VERSION_CN
+    /* cn: the incremented value is stored back rather than re-read */
+    var_v1 = gCurrentTransitionTime[4] + 1;
+    gCurrentTransitionTime[4] = var_v1;
+#else
     gCurrentTransitionTime[4]++;
     // why?
     var_v1 = gCurrentTransitionTime[4];
+#endif
     if ((u32) var_v1 >= gTransitionDuration[4]) {
         if ((u32) var_v1 == gTransitionDuration[4]) {
             for (var_s0 = 0; var_s0 < 0x4B0; var_s0++) {
