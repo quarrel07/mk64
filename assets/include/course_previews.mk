@@ -24,10 +24,17 @@ $(COURSE_PREVIEW_DIR)/gTextureCoursePreviewBigDonut.png
 
 COURSE_PREVIEW_EXPORT_SENTINEL := $(COURSE_PREVIEW_DIR)/.export
 
+# data/course_player_selection.s is what actually .incbin's these blobs; without
+# it here a changed preview never reaches the link.
+$(BUILD_DIR)/data/course_player_selection.o: $(COURSE_PREVIEW_PNG:%.png=%.mio0)
 $(BUILD_DIR)/src/data/textures.o: $(COURSE_PREVIEW_PNG:%.png=%.mio0)
 
 $(COURSE_PREVIEW_PNG:%.png=%.mio0): %.mio0 : %.bin
-	$(V)$(MIO0TOOL) -c $< $@
+	$(V)$(MIO0TOOL) -c $(MIO0_PREVIEW_LAZY) $< $@
+
+# Of the twenty previews only Mario Raceway's was recompressed by iQue, with the
+# rule MIO0_IQUE_LAZY selects; the other nineteen still carry Nintendo's bytes.
+$(COURSE_PREVIEW_DIR)/gTextureCoursePreviewMarioRaceway.mio0: MIO0_PREVIEW_LAZY := $(MIO0_IQUE_LAZY)
 
 $(COURSE_PREVIEW_PNG:%.png=%.bin): %.bin : %.png
 	@$(PRINT) "$(GREEN)Converting:  $(BLUE) $< -> $@$(NO_COL)\n"

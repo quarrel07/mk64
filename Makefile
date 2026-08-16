@@ -430,6 +430,14 @@ export LANG := C
 #==============================================================================#
 
 MIO0TOOL              := $(TOOLS_DIR)/mio0
+# iQue reran its own compressor over exactly two of the cart's 3,354 MIO0 blobs -
+# common_data and the Mario Raceway course preview. Every other blob still holds
+# the bytes Nintendo's tool produced, so this is a per-blob flag, not a per-version
+# one: it goes on those two recipes only, and only on cn.v5.
+MIO0_IQUE_LAZY        :=
+ifeq ($(VERSION),cn.v5)
+  MIO0_IQUE_LAZY      := -i
+endif
 N64CKSUM              := $(TOOLS_DIR)/n64cksum
 N64GRAPHICS           := $(TOOLS_DIR)/n64graphics
 DLPACKER              := $(TOOLS_DIR)/displaylist_packer
@@ -956,7 +964,7 @@ LDFLAGS += -R $(BUILD_DIR)/$(ASSET_CODE_DIR)/common_data/common_data.elf
 
 %/common_data.mio0: %/common_data.bin
 	@$(PRINT) "$(GREEN)Compressing Common Textures:  $(BLUE)$@ $(NO_COL)\n"
-	$(V)$(MIO0TOOL) -c $< $@
+	$(V)$(MIO0TOOL) -c $(MIO0_IQUE_LAZY) $< $@
 
 %/common_data.mio0.s: %/common_data.mio0
 	$(V)$(PRINT) ".include \"macros.inc\"\n\n.section .data\n\n.balign 4\n\n.incbin \"$<\"\n\n" > $@
