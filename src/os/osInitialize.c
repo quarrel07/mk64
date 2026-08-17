@@ -94,6 +94,11 @@ void __osInitialize_common(void) {
         osRomType = 0;
         osResetType = 0;
         osVersion = 1;
+#ifndef VERSION_CN_V5
+        /* the v4 cart keeps sm64's cn osMemSize default (its extra three
+           words sit exactly here, ending in lui 0x0040); v5 dropped it */
+        osMemSize = 0x00400000;
+#endif
     }
     if (__osBbIsBb == 0) {
         while (__osSiRawReadIo(PIF_ADDR_START, &pifdata)) {
