@@ -46,7 +46,7 @@ GCC ?= 0
 #  jp.v11 - builds revision 1.1 of the original December 1996 Japanese release
 #  cn.v5  - builds the iQue Player release, content revision 5
 VERSION ?= us
-$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v10 jp.v11 cn.v5 cn.v4))
+$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v10 jp.v11 cn.v4 cn.v5))
 
 ifeq      ($(VERSION),us)
   DEFINES += VERSION_US=1
@@ -63,14 +63,14 @@ else ifeq ($(VERSION),jp.v10)
 else ifeq ($(VERSION),jp.v11)
   DEFINES += VERSION_JP=1 VERSION_JP_V11=1
   GRUCODE   ?= f3dex_old
+else ifeq ($(VERSION),cn.v4)
+  DEFINES += VERSION_CN=1 VERSION_CN_V4=1
+  GRUCODE   ?= f3dex
 else ifeq ($(VERSION),cn.v5)
   DEFINES += VERSION_CN=1 VERSION_CN_V5=1
   # The iQue image carries F3DEX/F3DLX 1.23, where us carries 0.95 (both cite
   # their version in the ucode string). It is on f3dex rather than f3dex_old
   # for that reason. Not yet confirmed against generated code.
-  GRUCODE   ?= f3dex
-else ifeq ($(VERSION),cn.v4)
-  DEFINES += VERSION_CN=1 VERSION_CN_V4=1
   GRUCODE   ?= f3dex
 endif
 
