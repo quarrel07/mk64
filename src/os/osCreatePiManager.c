@@ -57,7 +57,13 @@ void osCreatePiManager(OSPri pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMsgC
 #if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
         __osPiDevMgr.edma = osEPiRawStartDma;
 #endif
+        /* revision delta, read from both carts: v5 creates the PI manager
+           thread with id 0xCE5 where v4 passes 0, the stock-libultra value. */
+#ifdef VERSION_CN_V5
         osCreateThread(&piMgrThread, 0xCE5, __osDevMgrMain, (void *) &__osPiDevMgr, &piMgrStack[0x400], pri);
+#else
+        osCreateThread(&piMgrThread, 0, __osDevMgrMain, (void *) &__osPiDevMgr, &piMgrStack[0x400], pri);
+#endif
         osStartThread(&piMgrThread);
         __osRestoreInt(int_disabled);
         if (newPri != -1) {

@@ -67,7 +67,15 @@ void osCreateViManager(OSPri pri) {
         viMgrMainArgs.edma_func = NULL;
 #endif
 
+        /* revision delta, read from both carts: v5 creates the VI manager
+           thread with id 0xD49 where v4 passes 0, the stock-libultra value
+           (one addiu vs one move - the only word the two carts disagree on
+           in this function). */
+#ifdef VERSION_CN_V5
         osCreateThread(&viMgrThread, 0xD49, viMgrMain, (void *) &viMgrMainArgs, &viMgrStack[0x400], pri);
+#else
+        osCreateThread(&viMgrThread, 0, viMgrMain, (void *) &viMgrMainArgs, &viMgrStack[0x400], pri);
+#endif
         __osViInit();
         osStartThread(&viMgrThread);
         __osRestoreInt(int_disabled);
