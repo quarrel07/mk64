@@ -598,7 +598,11 @@ $(JP_COURSE_NAMES): $(TOOLS_DIR)/jp_course_names.json $(TOOLS_DIR)/generate_jp_c
 	$(call print,Generating:,$<,$(ASSET_DIR)/course_metadata)
 	$(V)$(PYTHON) $(TOOLS_DIR)/generate_jp_course_names.py $(ASSET_DIR)/course_metadata
 
-ifeq ($(VERSION),jp.v11)
+# menu_items.c includes these under VERSION_JP, so both JP revisions need
+# them. The dependency was jp.v11-only, which built only when a jp.v11 build
+# earlier in the same tree had left the files behind; the six-version gate
+# builds jp.v10 first and caught it.
+ifneq (,$(filter jp.v10 jp.v11,$(VERSION)))
   $(BUILD_DIR)/src/menu_items.jp.o: $(JP_COURSE_NAMES)
 endif
 
