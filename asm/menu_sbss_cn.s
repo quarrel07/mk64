@@ -11,13 +11,14 @@
 # independent reference sites agree; the whole block is covered by two or more
 # except the three noted.
 #
-# The block is 0xD0 bytes. The last 0x10 is unclaimed - no reference in the ROM
-# resolves into it.
+# The block is 0xD0 bytes. 0xC at 0x800F3C14 is unclaimed - no reference in the
+# ROM resolves into it.
 #
-# Four members that used to sit here have been taken out because the same
-# measurement puts them elsewhere: sIntroModelTimer at 0x8018ABD8, and
-# D_8018E83C / D_8018E850 / D_8018E858 with no site referring to them at all.
-# They go back to being gathered commons until they are placed.
+# D_8018E850 (0x800F3B90) and D_8018E858 (0x800F3BD8) are back, four agreeing
+# sites each. Both are materialised with lui/daddiu, which the first resolver
+# did not decode, so they looked unreferenced. sIntroModelTimer is not here -
+# it measures at 0x8018ABD8, inside menu_items.jp.o's own .bss. D_8018E83C
+# still has no site referring to it and stays a gathered common.
 
 .include "macros.inc"
 
@@ -54,7 +55,13 @@ sLastHighestCount: .space 8                        # 2
 .global gGPPointsByCharacterId
 gGPPointsByCharacterId: .space 8                   # 1 vote
 .global __osViIntrCount
-__osViIntrCount: .space 16                         # 3
+__osViIntrCount: .space 8                          # 3 - osTimer.o's common is
+                                                   # 4 bytes; the cart gives it
+                                                   # 8 before the next symbol
+# 0x800F3B90
+.global D_8018E850
+D_8018E850: .space 8                               # 4 - lui/daddiu pairs in
+                                                   # menu_items.jp.o
 # 0x800F3B98
 .global D_8018ED91
 D_8018ED91: .space 4                               # 4
@@ -82,7 +89,11 @@ gControllerPak2FileNote: .space 4                  # 4
 .global D_8018ED90
 D_8018ED90: .space 4                               # 4
 .global sLastHighestCount2
-sLastHighestCount2: .space 16                      # 3
+sLastHighestCount2: .space 8                       # 3 - 8 bytes on cart
+# 0x800F3BD8
+.global D_8018E858
+D_8018E858: .space 8                               # 4 - lui/daddiu pairs in
+                                                   # menu_items.jp.o
 # 0x800F3BE0
 .global gMenuCompressedBuffer
 gMenuCompressedBuffer: .space 4                    # 32
@@ -110,7 +121,11 @@ gTextColor: .space 4                               # 2
 gMenuTextureBuffer: .space 4                       # 24
 .global sTKMK00_LowResBuffer
 sTKMK00_LowResBuffer: .space 4                     # 10
-# 0x800F3C10 - unclaimed, up to gControllers at 0x800F3C20
-.space 0x10
+# 0x800F3C10
+.global D_80194040
+D_80194040: .space 4                               # 1 - the sw at the head of
+                                                   # __osInitialize_common
+# 0x800F3C14 - unclaimed, up to gControllers at 0x800F3C20
+.space 0xC
 
 .endif

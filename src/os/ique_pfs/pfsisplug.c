@@ -7,7 +7,8 @@
 #include "PRinternal/controller.h"
 #include "PRinternal/siint.h"
 
-OSPifRam __osPfsPifRam;
+/* cart 0x80193B60, in main bss - real definition in asm/menu_bss_cn.s */
+extern OSPifRam __osPfsPifRam;
 
 s32 osPfsIsPlug(OSMesgQueue* mq, u8* pattern) {
     s32 ret = 0;
