@@ -200,6 +200,16 @@ ifeq ($(DUMMY),FAIL)
   $(error Unable to find python)
 endif
 
+# Torch generates C into a per-version tree, and EU has no entry in config.yml:
+# it builds on top of the US assets and Torch output. Defined up here, before
+# the parse-time extraction check below, because != expands at parse; must stay
+# outside the goal filter so clean/distclean see real paths too.
+TORCH_VERSION := $(VERSION)
+ifneq ($(filter $(VERSION),eu.v10 eu.v11),)
+  TORCH_VERSION := us
+endif
+ASSET_VERSION := $(TORCH_VERSION)
+
 ifeq ($(filter clean distclean print-%,$(MAKECMDGOALS)),)
    # Make tools if out of date
   # Not bare make: the tools makefile needs 3.82+, and macOS still ships 3.81 as
@@ -215,7 +225,14 @@ ifeq ($(filter clean distclean print-%,$(MAKECMDGOALS)),)
   # Make sure assets exist
   NOEXTRACT ?= 0
   ifeq ($(NOEXTRACT),0)
-    DUMMY != $(PYTHON) extract_assets.py $(VERSION) >&2 || echo FAIL
+    # Both versions, not just $(VERSION): eu borrows the us-keyed art (it has
+    # no art entries of its own) but owns its eu-keyed audio bins, so it needs
+    # the union. Passing only $(VERSION) made the extractor silently keep
+    # whatever art the previous version left at the shared paths - building eu
+    # after jp.v11 shipped JP art in the EU ROM - and passing only
+    # $(ASSET_VERSION) starves eu of its own audio. $(sort) dedups the pair
+    # when they are the same version.
+    DUMMY != $(PYTHON) extract_assets.py $(sort $(ASSET_VERSION) $(VERSION)) >&2 || echo FAIL
     ifeq ($(DUMMY),FAIL)
       $(error Failed to extract assets)
     endif
@@ -240,14 +257,6 @@ DATA_DIR       := data
 INCLUDE_DIRS   := include
 
 # Directories containing source files
-# Torch generates C into this tree, and its contents differ per version, so keep
-# each version's output apart instead of overwriting a shared directory. EU has
-# no entry in config.yml and is built on top of the US assets, so it reads the
-# US output rather than one of its own.
-TORCH_VERSION := $(VERSION)
-ifneq ($(filter $(VERSION),eu.v10 eu.v11),)
-  TORCH_VERSION := us
-endif
 ASSET_CODE_DIR := assets/code/$(TORCH_VERSION)
 
 # The group asset maps carry us and jp.v11 entries only: none of their 12,521
@@ -255,7 +264,6 @@ ASSET_CODE_DIR := assets/code/$(TORCH_VERSION)
 # So EU extracts the US assets out of the US cart, exactly as TORCH_VERSION above
 # builds EU on the US Torch output, and for the same reason. Without this, EU
 # reads the EU cart at US offsets and gets garbage.
-ASSET_VERSION := $(TORCH_VERSION)
 ASSET_BASEROM := baserom.$(ASSET_VERSION).z64
 SRC_ASSETS_DIR := $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo $(ASSET_CODE_DIR)/data_800E45C0 $(ASSET_CODE_DIR)/data_segment2 $(ASSET_CODE_DIR)/data_800E8700 $(ASSET_CODE_DIR)/common_data
 SRC_DIRS       := src src/data src/buffers src/racing src/ending src/audio src/debug src/os src/os/math courses $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo $(SRC_ASSETS_DIR)
