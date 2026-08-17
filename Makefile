@@ -71,6 +71,14 @@ else ifeq ($(VERSION),cn.v5)
   GRUCODE   ?= f3dex
 endif
 
+# Every iQue content revision builds the same platform machinery (BB boot,
+# libgcc/pfs sources, flash-file layout, the three-compiler split, no CIC).
+# A future cn.v4 joins by being added here; only revision-measured facts
+# (which MIO0 blobs iQue recompressed, the IDO 7.1 file lists' contents)
+# stay keyed on the exact version.
+CN_VERSIONS := cn.v5
+IS_CN := $(if $(filter $(CN_VERSIONS),$(VERSION)),1,0)
+
 ifeq ($(DEBUG),1)
   DEFINES += DEBUG=1
   DEFINES += AVOID_UB=1
@@ -273,7 +281,7 @@ SRC_ASSETS_DIR := $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo
 SRC_DIRS       := src src/data src/buffers src/racing src/ending src/audio src/debug src/os src/os/math courses $(ASSET_CODE_DIR)/ceremony_data $(ASSET_CODE_DIR)/startup_logo $(SRC_ASSETS_DIR)
 # iQue's EGCS-compiled llmuldiv calls libgcc's 64-bit division helpers, and
 # the cart carries them (cn only; four functions right before the ucode text)
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
   SRC_DIRS += src/os/libgcc src/os/ique_pfs
 endif
 ASM_DIRS       := asm asm/os asm/unused $(DATA_DIR) $(DATA_DIR)/sound_data $(DATA_DIR)/karts
@@ -299,7 +307,7 @@ EUC_JP_FILES := src/ending/credits.c src/cpu_vehicles_camera_path.c src/menu_ite
 C_FILES := $(filter-out %.inc.c,$(filter-out $(EUC_JP_FILES),$(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))))
 # code_8005D290.c is the second half of code_80057C60.c, which is one object on
 # every cart but iQue's. Everywhere else it would define the same functions twice.
-ifneq ($(VERSION),cn.v5)
+ifneq ($(IS_CN),1)
   C_FILES := $(filter-out src/code_8005D290.c,$(C_FILES))
 endif
 S_FILES := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
@@ -419,7 +427,7 @@ ASFLAGS = -march=vr4300 -mabi=32 -I include -I $(BUILD_DIR) $(VERSION_ASFLAGS) $
 # rather than a cartridge padded to a power-of-two size, so cn pads to 0xBF4000.
 # A flash file is also zero filled where a cartridge is 0xFF filled, which is
 # what the space before the image's own trailing descriptor is made of.
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
   ROM_END := 0xBF4000
   ROM_GAP_FILL := 0x00
 else
@@ -487,7 +495,7 @@ endif
 # ceremony_data end eight zero bytes longer there. objcopy emits the whole section.
 # Gate on VERSION, not ASSET_VERSION: eu borrows us assets but keeps the trim.
 EXTRACT_DATA_PADDED := $(EXTRACT_DATA_FOR_MIO)
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
   EXTRACT_DATA_PADDED := $(OBJCOPY) -O binary --only-section=.data
 endif
 
@@ -788,7 +796,7 @@ $(GLOBAL_ASM_RACING_O_FILES): CC := $(PYTHON) $(TOOLS_DIR)/asm_processor/build.p
 # match the cart under 7.1 -O2 -mips2 where 5.3 drifts). Audio and everything
 # unlisted still matches 5.3 output; render_objects/menu_items are EGCS and
 # handled separately. Only the macOS 7.1 binaries are vendored so far.
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
   IDO71_ROOT := $(TOOLS_DIR)/ido-recomp-7.1/$(DETECTED_OS)
   CN_IDO71_SRCS := main camera effects menus replays save spawn_players kart_dma \
                    math_util_2 render_player player_controller update_objects \
@@ -1006,7 +1014,7 @@ $(ELF): $(O_FILES) $(COURSE_DATA_TARGETS) $(BUILD_DIR)/$(LD_SCRIPT) $(BUILD_DIR)
 $(ROM): $(ELF)
 	$(call print,Building ROM:,$<,$@)
 	$(V)$(OBJCOPY) $(OBJCOPYFLAGS) $< $(@:.z64=.bin) -O binary
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
 # iQue has no CIC; the header checksum words stay zero
 	$(V)cp $(@:.z64=.bin) $@
 else
