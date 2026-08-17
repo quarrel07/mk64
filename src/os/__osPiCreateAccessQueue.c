@@ -7,7 +7,10 @@
    osPiMesgBuff at 0x801922B0 and gOsPiMessageQueue at 0x801935A0, both real
    definitions in asm. This file is built with -fno-common and EGCS emits the
    tentative definitions into .data, so they have to be externed rather than
-   left to be overridden - and the 0x20 they occupy is the build stamp's slot. */
+   left to be overridden - and the 0x20 they occupy is the build stamp's slot.
+   Revision 4 has neither the stamp nor anything in its place: its .data
+   chain simply runs 0x20 shorter there, with osClockRate at 0x800E8650.
+   The externs apply to both revisions. */
 extern OSMesg osPiMesgBuff[PIAccessQueueSize];
 extern OSMesgQueue gOsPiMessageQueue;
 #else

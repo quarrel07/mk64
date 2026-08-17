@@ -1325,9 +1325,10 @@ SECTIONS
    }
    END_SEG(instrument_sets)
 
-#ifdef VERSION_CN
-   /* The iQue image closes with a descriptor of its own, sitting at the very
-      end with only zero fill between it and the last segment. */
+#ifdef VERSION_CN_V5
+   /* The v5 image closes with a descriptor of its own, sitting at the very
+      end with only zero fill between it and the last segment. The v4 image
+      has no descriptor - its last 0x50 bytes are zero like the fill. */
    __romPos = 0xBF4000 - 0x50;
    BEGIN_SEG(ique_footer, .)
    {

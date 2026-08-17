@@ -15,7 +15,13 @@
 
 .include "macros.inc"
 
-.ifdef VERSION_CN
+# v5 only: the v4 image has no stamp and no padding in its place - its
+# .data chain runs straight from the access queue into osInitialize's
+# (measured: v4's osClockRate sits exactly 0x20 below v5's, and the
+# symbol table read out of v4's own code puts every earlier .data symbol
+# at the v5 position). The v4 libultra predates the stamp; the string is
+# dated 02/24/04 and the game shipped 12/03.
+.ifdef VERSION_CN_V5
 
 .section .data
 
