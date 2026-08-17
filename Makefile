@@ -470,10 +470,13 @@ export LANG := C
 MIO0TOOL              := $(TOOLS_DIR)/mio0
 # iQue reran its own compressor over exactly two of the cart's 3,354 MIO0 blobs -
 # common_data and the Mario Raceway course preview. Every other blob still holds
-# the bytes Nintendo's tool produced, so this is a per-blob flag, not a per-version
-# one: it goes on those two recipes only, and only on cn.v5.
+# the bytes Nintendo's tool produced, so this is a per-blob flag, not a
+# per-version one: it goes on those two recipes only. Both iQue revisions need
+# it - their asset segments, these two blobs included, are byte-identical
+# (measured 2026-08-17); without it common_data changes size and the whole ROM
+# behind it shifts.
 MIO0_IQUE_LAZY        :=
-ifeq ($(VERSION),cn.v5)
+ifeq ($(IS_CN),1)
   MIO0_IQUE_LAZY      := -i
 endif
 N64CKSUM              := $(TOOLS_DIR)/n64cksum
