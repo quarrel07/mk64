@@ -2889,10 +2889,11 @@ void func_8004E6C4(s32 playerId) {
 
 void draw_simplified_lap_count(s32 playerId) {
 #ifdef VERSION_CN
-    /* cn: the offsets move between the two draws - the LAP label sits 0x20 to
-       the right at the plain row, and the counter sits at the label's column */
-    draw_hud_2d_texture_32x8(playerHUD[playerId].lapX + 0x20, (s32) playerHUD[playerId].lapY,
-                             (u8*) common_texture_hud_lap);
+    /* cn: the offsets move between the two draws - the label sits 0x20 to the
+       right at the plain row, and the counter sits at the label's column. The
+       label itself is the 32x16 "lap time" texture, not the 32x8 "lap" one. */
+    draw_hud_2d_texture_32x16(playerHUD[playerId].lapX + 0x20, (s32) playerHUD[playerId].lapY,
+                              (u8*) common_texture_hud_lap_time);
     draw_hud_2d_texture_32x16((s32) playerHUD[playerId].lapX, (s32) playerHUD[playerId].lapY,
                               (u8*) gHudLapTextures[playerHUD[playerId].alsoLapCount]);
 #else
