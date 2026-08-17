@@ -2620,9 +2620,11 @@ void func_80091B78(void) {
         if (osEepromProbe(&gSIEventMesgQueue) != 0) {
             load_save_data();
         }
-#ifndef VERSION_CN
-        // iQue has no controller pak - its pak layer is a BB kernel stub - and
-        // the cart never switches to that menu here.
+#ifndef VERSION_CN_V5
+        // iQue has no controller pak - its pak layer is a BB kernel stub - but
+        // content revision 4 still ships this check (its cart carries the full
+        // 127-word US-shaped body, calling the stubbed probe); revision 5 is
+        // where the six words of the check leave the cart.
         if (func_80091D74() != 0) {
             gMenuSelection = CONTROLLER_PAK_MENU;
         }
