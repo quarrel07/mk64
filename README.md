@@ -13,6 +13,7 @@ It supports and builds the following versions:
 | mk64.jp.v10.z64 | JPN 1.0 | afeeec65b9a03f0cb8ec92f9ba7a9f0122e8bd0e |
 | mk64.jp.v11.z64 | JPN 1.1 | 9f439457585146a4e1da7e1dd9104f7f94381688 |
 | mk64.cn.v5.z64  | CHN iQue v5 | d6605879918b0dca3eafa1c75ecbc850a3b2535d |
+| mk64.cn.v4.z64  | CHN iQue v4 | 219660d0a321fc200ac4295dd79fd3417da3eea8 |
 
 ## Progress
 
