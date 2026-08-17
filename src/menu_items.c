@@ -13500,7 +13500,7 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
 
     for (i = 0; i < ARRAY_COUNT(gMenuItems); i++) {
         isRendered = false;
-        entry = &gMenuItems[i];
+        entry = &MENU_ITEMS[i];
 #ifdef VERSION_CN
         switch (entry->type) {
             case MENU_ITEM_UI_NO_CONTROLLER:
@@ -13906,7 +13906,7 @@ void handle_menus_with_pri_arg(s32 priSpecial) {
     for (j = 0; j < MENU_ITEM_PRIORITY_MAX; j++) {
         for (i = 0; i < ARRAY_COUNT(gMenuItems); i++) {
 #ifdef VERSION_CN
-            entry = &gMenuItems[i];
+            entry = &MENU_ITEMS[i];
 #endif
             isRendered = false;
 #ifndef VERSION_CN
