@@ -44,6 +44,10 @@
 // the cart pads the first object's .text to 16 bytes and starts the second on
 // the boundary. src/code_8005D290.c compiles the half below that point as the
 // second object, so the source itself stays in one place.
+
+// Defined at the end of the first object's .data, read from the second.
+extern s32 D_800E483C;
+
 #ifndef CODE_80057C60_TAIL
 
 #ifdef VERSION_JP_V10
@@ -670,6 +674,11 @@ s32 D_800E480C[] = {
     MAKE_RGB(0x60, 0x30, 0x11), MAKE_RGB(0x80, 0x40, 0x10), MAKE_RGB(0x70, 0x90, 0xA0), MAKE_RGB(0xA0, 0x60, 0x30),
     MAKE_RGB(0xA0, 0x70, 0x10), MAKE_RGB(0x30, 0x10, 0x11), MAKE_RGB(0xB0, 0xA0, 0x80), MAKE_RGB(0x80, 0x60, 0x10),
 };
+
+// Tyre particle slot count. File scope rather than a static in
+// setup_tyre_particles because on cn.v5 it is the last word of the first
+// translation unit's .data, and that function is in the second.
+s32 D_800E483C = 8;
 
 // UI Code?
 void func_80057C60(void) {
@@ -3216,10 +3225,9 @@ void setup_tyre_particles(Player* player, s16 arg1, s32 arg2, UNUSED s8 arg3, UN
     f32 tyre_y;
     f32 tyre_z;
     s32 randval;
-    static s32 test = 8;
 
     surfaceType = 0x000000FF;
-    randval = random_int(test);
+    randval = random_int(D_800E483C);
     if ((randval == 0) || (randval == 4)) {
         tyre_x = player->tyres[BACK_LEFT].pos[0];
         tyre_y = player->tyres[BACK_LEFT].baseHeight + 2.0f;
