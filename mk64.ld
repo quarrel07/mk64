@@ -167,6 +167,12 @@ SECTIONS
       BUILD_DIR/src/os/osViSwapBuffer.o(.text*);
       BUILD_DIR/src/os/__osViSwapContext.o(.text*);
       BUILD_DIR/src/os/osViBlack.o(.text*);
+#ifdef VERSION_CN_V4
+      /* the v4 image carries 0x10 of zero fill here that v5 does not:
+         every gu body from guMtxIdentF through guTranslate sits verbatim
+         0x10 later in it, re-absorbed by alignment before osEepromRead */
+      . += 0x10;
+#endif
       BUILD_DIR/asm/os/guMtxIdentF_cn.o(.text);
       BUILD_DIR/asm/os/guMtxF2L_cn.o(.text);
       BUILD_DIR/src/os/guMtxF2L.o(.text*);
@@ -254,8 +260,12 @@ SECTIONS
       BUILD_DIR/src/os/__osViInit.o(.text*);
       /* cart 0x800D3300 is a FOUR-word leaf; ours is a 12-word body */
       BUILD_DIR/src/os/__osViGetCurrentContext.o(.text*);
-      /* cart 0x0D3F10: 16 bytes of fill after this object */
+      /* cart 0x0D3F10: 16 bytes of fill after this object on v5; the v4
+         image runs straight through (its earlier 0x10 after osViBlack is
+         the compensating difference - the two fills trade places) */
+#ifdef VERSION_CN_V5
       . += 0x10;
+#endif
       BUILD_DIR/asm/os/guMtxL2F_cn.o(.text);
       BUILD_DIR/src/os/guMtxCatF.o(.text*);
       BUILD_DIR/asm/os/guMtxCatF_cn.o(.text);

@@ -3811,7 +3811,14 @@ asm(".globl func_80093C90\n"
     ".word 0x82020000\n"
     ".word 0x0441000C\n"
     ".word 0x00000000\n"
+    /* the two jals and the j below target func_80093C88 by absolute
+       address; the pak-check arm moves it 0x18 later on cn.v4, and the
+       cart's own words carry the moved targets */
+#ifdef VERSION_CN_V5
     ".word 0x0C025225\n"
+#else
+    ".word 0x0C02522B\n"
+#endif
     ".word 0x00000000\n"
     ".word 0x46160002\n"
     ".word 0x46140000\n"
@@ -3820,9 +3827,17 @@ asm(".globl func_80093C90\n"
     ".word 0x44021000\n"
     ".word 0xA2020000\n"
     ".word 0x24420078\n"
+#ifdef VERSION_CN_V5
     ".word 0x08025264\n"
+#else
+    ".word 0x0802526A\n"
+#endif
     ".word 0x00021023\n"
+#ifdef VERSION_CN_V5
     ".word 0x0C025225\n"
+#else
+    ".word 0x0C02522B\n"
+#endif
     ".word 0x00000000\n"
     ".word 0x46160002\n"
     ".word 0x46140000\n"

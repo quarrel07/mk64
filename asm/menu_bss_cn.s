@@ -101,13 +101,24 @@ gMenuItems: .space 0x174
 __osPfsInodeCache: .space 0x100
 .global __osEventStateTab
 __osEventStateTab: .space 0xC0
+# v4 places D_8018E060 and the pak-2 handle 8 earlier, with the slack
+# returned after the handle; the block's total and every neighbor are
+# unchanged (read from the callers' address constants in both carts)
+.ifdef VERSION_CN_V5
 .space 0x40
+.else
+.space 0x38
+.endif
 .global D_8018E060
 D_8018E060: .space 0x80
 .space 0x8
 .global gControllerPak2FileHandle
 gControllerPak2FileHandle: .space 0x68
+.ifdef VERSION_CN_V5
 .space 0x4
+.else
+.space 0xC
+.endif
 # 0x80193B60 - four base sites across pfsisplug.o and pfsgetstatus.o, plus one
 # at +0x3C (the OSPifRam status byte) that independently fixes the 0x40 extent.
 .global __osPfsPifRam
