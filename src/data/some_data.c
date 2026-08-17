@@ -306,7 +306,11 @@ f32 D_800E594C[] = {
     8.0, -8.0,
     -8.0, -8.0,
     // This feels super fake, but it matches
+#ifdef VERSION_CN
+    0.0, 0.0,
+#else
     -0.0, 0.0,
+#endif
 };
 
 s16 D_800E597C[] = { 0x0000, 0x0000, 0x4000, 0x8000, 0x8000, 0xc000 };

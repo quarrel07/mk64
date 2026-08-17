@@ -5353,7 +5353,12 @@ MenuTexture seg2_sunset_background_texture[2] = {
  *
  */
 MenuTexture seg2_copyright_1996_texture[2] = {
+#ifdef VERSION_CN
+    /* the Chinese copyright line is twice as wide, and dX still centers it */
+    { 1, copyright_1996, 252, 17, 34, 199, 0x0, 0 },
+#else
     { 1, copyright_1996, 124, 17, 98, 199, 0x0, 0 },
+#endif
     { 0, NULL, 0, 0, 0, 0, 0, 0 },
 };
 
@@ -5362,7 +5367,11 @@ MenuTexture seg2_copyright_1996_texture[2] = {
  *
  */
 MenuTexture seg2_push_start_button_texture[2] = {
+#ifdef VERSION_CN
+    { 1, push_start_button, 160, 16, 81, 179, 0x0, 0 },
+#else
     { 1, push_start_button, 159, 16, 81, 179, 0x0, 0 },
+#endif
     { 0, NULL, 0, 0, 0, 0, 0, 0 },
 };
 
