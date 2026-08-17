@@ -800,14 +800,60 @@ SECTIONS
       BUILD_DIR/src/audio/external.o(.bss*);
       BUILD_DIR/src/audio/port_eu.o(.bss*);
       BUILD_DIR/src/os/osInitialize.o(.bss*);
-      BUILD_DIR/src/os/osCreateViManager.o(.bss*);
+#ifdef VERSION_CN
+      /* From here to the menu block at 0x801922C0 the cart holds exactly
+         tmpTask, osSiMesgBuff, the VI manager's block, the PI manager's three,
+         piEventBuf and 0x10 of slack: 0x2450 bytes that account for the region
+         with nothing left over. Everything that used to sit in it besides
+         those is unreferenced by any site in the ROM, so its address cannot be
+         measured and it must not push the ones that can - all of it is parked
+         past the memory pool. */
+      BUILD_DIR/src/os/osSpTaskLoadGo.o(COMMON);            /* tmpTask      0x8018FE70 */
+      BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.scommon); /* osSiMesgBuff 0x8018FEB0 */
+#endif
+      BUILD_DIR/src/os/osCreateViManager.o(.bss*);          /*              0x8018FEB8 */
       BUILD_DIR/src/os/osCreatePiManager.o(.bss*);
       BUILD_DIR/src/os/osSetEventMesg.o(.bss*);
       BUILD_DIR/src/os/osSpTaskLoadGo.o(.bss*);
       BUILD_DIR/src/os/osContStartReadData.o(.bss*);
       BUILD_DIR/src/os/osContInit.o(.bss*);
       BUILD_DIR/src/os/osPfsIsPlug.o(.bss*);
+      BUILD_DIR/src/os/guRotateF.o(.bss*);
+#ifndef VERSION_CN
+      BUILD_DIR/src/os/__osLeoInterrupt.o(.bss*);
+#endif
+      BUILD_DIR/src/os/osTimer.o(.bss*);
+      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.bss*);
+      BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.bss*);
+      BUILD_DIR/src/os/osEepromWrite.o(.bss*);
+      BUILD_DIR/asm/os/__osException.o(.bss);
+#ifndef VERSION_CN
+      BUILD_DIR/src/os/osLeoDiskInit.o(.bss*);
+#endif
+      . = ALIGN(0x10);
       #ifdef VERSION_CN
+      /* the VI manager's block ends 8 short of the boundary, which the ALIGN
+         above has already taken up */
+      BUILD_DIR/asm/ique_pimgr_bss_cn.o(.bss);              /*              0x801910E0 */
+      BUILD_DIR/src/os/osCreatePiManager.o(.scommon);       /* piEventBuf   0x801922A8 */
+      . += 0x10;
+      BUILD_DIR/asm/menu_bss_cn.o(.bss);                    /*              0x801922C0 */
+      /* no ALIGN here: sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4
+         on cart (not 16-aligned) */
+      #endif
+   }
+   END_NOLOAD(main)
+
+   /* Checks that segments are not overlapping into the memory pool but is not strictly necessary */
+   BEGIN_NOLOAD(memoryPool)
+   {
+      BUILD_DIR/src/buffers/memory_pool.o(.bss*);
+      . = ALIGN(0x10);
+#ifdef VERSION_CN
+      /* Parked: no site in the ROM refers to any of these, so nothing can
+         place them, and in the main segment they displaced symbols that can
+         be placed. The pfs run is dead code on iQue's flash-backed pak; the
+         leo blocks belong to the 64DD handler the cart never reaches. */
       BUILD_DIR/src/os/ique_pfs/pfsinit.o(.bss*);
       BUILD_DIR/src/os/ique_pfs/pfsinit.o(.data*);
       BUILD_DIR/src/os/ique_pfs/pfsinit.o(.rodata*);
@@ -853,44 +899,13 @@ SECTIONS
       BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.bss*);
       BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.data*);
       BUILD_DIR/src/os/ique_pfs/conteeplongwrite.o(.rodata*);
-      #endif
-      BUILD_DIR/src/os/guRotateF.o(.bss*);
       BUILD_DIR/src/os/__osLeoInterrupt.o(.bss*);
-      BUILD_DIR/src/os/osTimer.o(.bss*);
-      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.bss*);
-      BUILD_DIR/src/os/__osSiCreateAccessQueue.o(.bss*);
-      BUILD_DIR/src/os/osEepromWrite.o(.bss*);
-      BUILD_DIR/asm/os/__osException.o(.bss);
       BUILD_DIR/src/os/osLeoDiskInit.o(.bss*);
-      . = ALIGN(0x10);
-      #ifdef VERSION_CN
-      /* iQue's menu_items commons: the os-library commons gather here, and
-         the menu block follows as real definitions in menu_bss_cn.s - ld
-         resolves each EGCS common against the same-name definition, so the
-         block's order, sizes and gaps are pinned to the cart's (v3 profile) */
-      *(COMMON);
-      . = ALIGN(0x10);
-      /* iQue-only PI handles (osInitialize/osCreatePiManager cn arms);
-         provisional slot until the data profile pins their cart addresses */
       BUILD_DIR/src/os/ique_globals.o(.bss*);
-      . = ALIGN(0x10);
-      BUILD_DIR/asm/menu_bss_cn.o(.bss);
-      /* no ALIGN here: sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4
-         on cart (not 16-aligned) */
-      /* The small commons the head block does not define. Their cart homes
-         are scattered through the segment and only two of them have more
-         than one reference to measure from, so they sit at the end where
-         they displace nothing. */
+      *(COMMON);
       *(.scommon);
-      #endif
-   }
-   END_NOLOAD(main)
-
-   /* Checks that segments are not overlapping into the memory pool but is not strictly necessary */
-   BEGIN_NOLOAD(memoryPool)
-   {
-      BUILD_DIR/src/buffers/memory_pool.o(.bss*);
       . = ALIGN(0x10);
+#endif
    }
    END_NOLOAD(memoryPool)
    

@@ -56,10 +56,14 @@ D_8018E7E8: .space 0x28
 .space 0x24
 .global pfsError
 pfsError: .space 0x40
-.space 0x20
+# 0x801936B8 (1 vote) - arrives as a common from osContInit.o
+.global __osEepromTimer
+__osEepromTimer: .space 0x20
 .global gCurrentTransitionTime
 gCurrentTransitionTime: .space 0x10
-.space 0x4
+# 0x801936E8 (4 votes)
+.global D_8018E7E0
+D_8018E7E0: .space 0x4
 .global D_8018DEE0
 D_8018DEE0: .space 0xc
 .global gMenuItems
