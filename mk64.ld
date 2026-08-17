@@ -708,6 +708,11 @@ SECTIONS
       BUILD_DIR/src/os/guPerspectiveF.o(.rodata*);
       BUILD_DIR/src/os/guLookAtF.o(.rodata*);
       BUILD_DIR/src/os/osAiSetFrequency.o(.rodata*);
+#ifdef VERSION_CN
+      /* the cart's order through here is sinf, __osException, osSetIntMask,
+         __osDevMgrMain, NAN, cosf - the two math tables are split apart */
+      BUILD_DIR/src/os/math/sinf.o(.rodata*);
+#endif
       BUILD_DIR/asm/os/__osException.o(.rodata*);
 #ifdef VERSION_CN
       /* the cart puts osSetIntMask's rodata here, between __osException and
@@ -718,11 +723,16 @@ SECTIONS
       BUILD_DIR/src/os/__osDevMgrMain.o(.rodata*);
       BUILD_DIR/src/os/guMtxF2L.o(.rodata*);
       BUILD_DIR/src/os/guNormalize.o(.rodata*);
+#ifndef VERSION_CN
       BUILD_DIR/src/os/math/sinf.o(.rodata*);
+#endif
+      #ifdef VERSION_CN
+      /* NAN's home _Ldtob.o is unlinked on iQue; NaN.c carries it instead,
+         and the cart puts it ahead of cosf */
+      BUILD_DIR/src/os/NaN.o(.rodata*);
+      #endif
       BUILD_DIR/src/os/math/cosf.o(.rodata*);
       #ifdef VERSION_CN
-      /* NAN's home _Ldtob.o is unlinked on iQue; NaN.c carries it instead */
-      BUILD_DIR/src/os/NaN.o(.rodata*);
       /* each libgcc helper carries its own 0x100 __clz_tab copy; the cart has
          all four between NaN and __osRcpImTable (0x800F0B40..0x800F0F40) */
       BUILD_DIR/src/os/libgcc/_divdi3.o(.rodata*);
