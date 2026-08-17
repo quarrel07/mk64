@@ -756,10 +756,15 @@ char* gWinLoseText[] = {
 #endif
 
 #ifdef VERSION_CN
+// cn.v5: the cart built this as one three-entry initializer; gLapTimeText is
+// gBestTimeText[2]. EGCS flushes each initializer's string pool last-first, so
+// splitting the declaration emits these literals in the wrong order.
 char* gBestTimeText[] = {
     "\xa2\x15\xa1\x72\xa1\x70\xa1\x98",
     "\xa2\x15\xa1\x8a\xa1\x3b\xa1\xba",
+    "\xa1\x3b\xa1\xba\xa1\x2e\xa1\x6b",
 };
+#define gLapTimeText (gBestTimeText[2])
 #else
 #ifdef VERSION_JP
 char* gBestTimeText[] = {
@@ -776,7 +781,7 @@ char* gBestTimeText[] = {
 
 // Might need a const?
 #ifdef VERSION_CN
-char* gLapTimeText = "\xa1\x3b\xa1\xba\xa1\x2e\xa1\x6b";
+// gLapTimeText is gBestTimeText[2] on cn.v5, see above.
 #else
 #ifdef VERSION_JP
 char* gLapTimeText = "ラップタイム";
@@ -1374,6 +1379,10 @@ char* D_800E7940[] = {
     "\xa1\xe6\xa1\x4a\xa1\x32\xa1\x77\xa2\x01\xa1\xea\xa1\xd4\xa1\x81\xa1\x06\xa1\x03",
     "\xa1\xc7\xa1\x31\xa1\xf5\xa1\x51\xa1\x00",
     "\xa1\xb6\xa1\x26\xa1\x84\xa2\x01\xa1\xea\xa1\xd3\xa1\x27\xa2\x10\xa1\x3f\xa1\xee\xa1\xeb\xa1\xd5\xa1\x9f\xa1\x00",
+    // cn.v5: D_800E7980 is the tail of this same initializer in the cart.
+    "\xa1\xbf\xa1\x59\xa1\xa9\xa1\xf3\xa1\x1b\xa1\x37\xa1\x2c\xa1\xfd\xa1\x06\xa1\x03",
+    "\xa1\xb6\xa2\x09\xa1\x7c\xa1\xc0\xa2\x01\xa1\xea\xa1\xb3\xa1\x06\xa1\x03",
+    "\xa1\xe4\xa1\xcb\xa2\x01\xa1\x69\xa1\xca\xa2\x0e\xa1\x6e\xa1\xfa\xa1\xb8\xa1\x00",
 };
 #else
 #ifdef VERSION_JP
@@ -1422,11 +1431,8 @@ char* D_800E7940[] = {
 
 // Unused?
 #ifdef VERSION_CN
-char* D_800E7980[] = {
-    "\xa1\xbf\xa1\x59\xa1\xa9\xa1\xf3\xa1\x1b\xa1\x37\xa1\x2c\xa1\xfd\xa1\x06\xa1\x03",
-    "\xa1\xb6\xa2\x09\xa1\x7c\xa1\xc0\xa2\x01\xa1\xea\xa1\xb3\xa1\x06\xa1\x03",
-    "\xa1\xe4\xa1\xcb\xa2\x01\xa1\x69\xa1\xca\xa2\x0e\xa1\x6e\xa1\xfa\xa1\xb8\xa1\x00",
-};
+// cn.v5: folded into D_800E7940 above (one initializer).
+#define D_800E7980 (&D_800E7940[16])
 #else
 #ifdef VERSION_JP
 char* D_800E7980[] = {
@@ -1599,6 +1605,8 @@ char* D_800E7A34[] = {
 char* D_800E7A3C[] = {
     "\xa1\xf1\xa2\x0a\xa1\xf5\xa1\x52\xa1\xff\xa1\x8c\xa1\x1b\xa1\x37\xa1\x03",
     "\xa1\x3f\xa1\xe5\xa1\x76",
+    // cn.v5: D_800E7A44 is D_800E7A3C[2] - one initializer in the cart.
+    "\xa1\x9b\xa2\x02\xa1\xd4\xa1\x81",
 };
 #else
 #ifdef VERSION_JP
@@ -1616,17 +1624,27 @@ char* D_800E7A3C[] = {
 
 // Might need a const?
 #ifdef VERSION_CN
-char* D_800E7A44 = "\xa1\x9b\xa2\x02\xa1\xd4\xa1\x81";
+#define D_800E7A44 (D_800E7A3C[2])
 #else
 char* D_800E7A44 = "NO DATA";
 #endif
 
 #ifdef VERSION_CN
-char* D_800E7A48[] = {
-    "\xa2\x0d\xa2\x09\xa1\x32\xa1\x77",
-    "\xa1\x99\xa1\x90\xa1\xac\xa1\x82\xa1\x43\xa1\x2c\xa1\x3f\xa1\x03",
-    "\xa2\x01\xa1\xea\xa1\xd4\xa1\x81",
+// cn.v5: D_800E7A48 and D_800E7A54 are two rows of one initializer in the cart.
+char* D_800E7A48_all[2][3] = {
+    {
+        "\xa2\x0d\xa2\x09\xa1\x32\xa1\x77",
+        "\xa1\x99\xa1\x90\xa1\xac\xa1\x82\xa1\x43\xa1\x2c\xa1\x3f\xa1\x03",
+        "\xa2\x01\xa1\xea\xa1\xd4\xa1\x81",
+    },
+    {
+        "\xa1\xe6\xa1\x4a\xa1\x32\xa1\x77\xa2\x01\xa1\xea\xa1\xd4\xa1\x81",
+        "",
+        "",
+    },
 };
+#define D_800E7A48 (D_800E7A48_all[0])
+#define D_800E7A54 (D_800E7A48_all[1])
 #else
 #ifdef VERSION_JP
 char* D_800E7A48[] = {
@@ -1644,11 +1662,7 @@ char* D_800E7A48[] = {
 #endif
 
 #ifdef VERSION_CN
-char* D_800E7A54[] = {
-    "\xa1\xe6\xa1\x4a\xa1\x32\xa1\x77\xa2\x01\xa1\xea\xa1\xd4\xa1\x81",
-    "",
-    "",
-};
+// cn.v5: folded into D_800E7A48_all above.
 #else
 #ifdef VERSION_JP
 char* D_800E7A54[] = {
@@ -1753,6 +1767,8 @@ char* D_800E7A88[] = {
     "\xa1\x7b\xa1\x1e",
     "\xa1\xfc\xa1\x1e",
     "\xa1\xdf\xa1\x1e",
+    // cn.v5: D_800E7A98 is D_800E7A88[4] - one initializer in the cart.
+    "\xa1\xec\xa1\x34\xa1\xaa\xa1\x90\xa1\x17\xa1\x04",
 };
 #else
 #ifdef VERSION_JP
@@ -1774,7 +1790,7 @@ char* D_800E7A88[] = {
 
 // Might need a const?
 #ifdef VERSION_CN
-char* D_800E7A98 = "\xa1\xec\xa1\x34\xa1\xaa\xa1\x90\xa1\x17\xa1\x04";
+#define D_800E7A98 (D_800E7A88[4])
 #else
 char* D_800E7A98 = "MAYBE NEXT TIME!";
 #endif
