@@ -12974,7 +12974,9 @@ void func_800A69C8(UNUSED MenuItem* arg0) {
             set_text_color((s32) gGlobalTimer % 3);
         }
 #ifdef VERSION_CN
-        func_800A79F4(var_s4, sp74);
+        /* the cart jals convert_number_to_ascii here; the two routines compile
+           to the same bytes, so only the call target differs */
+        convert_number_to_ascii(var_s4, sp74);
         text_draw(thing->column + 0x10, thing->row + 0x75, sp74, 0, sc, sc);
         thing = &D_800E7380[var_s0];
         print_text1_center_mode_2(thing->column, thing->row, temp_s3, 0, 0.65f, sc);
@@ -13056,7 +13058,11 @@ void func_800A6D94(s32 arg0, s32 arg1, u8* arg2) {
 #ifndef VERSION_CN
     stackPadding1 = &D_800E7300[((arg0 - 2) * 4) + arg1];
 #endif
+#ifdef VERSION_CN
+    convert_number_to_ascii(thing, sp30);
+#else
     func_800A79F4(thing, sp30);
+#endif
     otherThing = 0.75f;
     text_draw((stackPadding1->column + 0x20) - ((32.0f * otherThing) / 2), stackPadding1->row + 0x75, sp30, 0, 0.75f,
               0.75f);
