@@ -26,5 +26,16 @@ piMgrStack: .space 0x1000
 # 0x80192290
 .global piEventQueue
 piEventQueue: .space 0x18
+# 0x801922A8 - piEventBuf is the last 8-byte common left in osCreatePiManager.o
+# and mk64.ld used to place it with an (.scommon) line. It becomes a real
+# definition here because osPiMesgBuff has to follow it immediately and the ld
+# script cannot put an object between a gathered common and the next entry.
+.global piEventBuf
+piEventBuf: .space 8
+# 0x801922B0 - one site, the osCreateMesgQueue call in __osPiCreateAccessQueue.
+# The cart keeps this buffer in bss; our C kept it in that object's .data,
+# where it also occupied the slot the libultra build stamp needs.
+.global osPiMesgBuff
+osPiMesgBuff: .space 8
 
 .endif

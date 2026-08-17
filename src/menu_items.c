@@ -111,7 +111,14 @@ ALIGNED8 SaveData gSaveData;
 
 u8 D_8018ED90;
 u8 D_8018ED91;
-#ifndef VERSION_JP
+#ifdef VERSION_CN
+/* iQue emits it as a file static, which puts it in this object's own .bss at
+   +0x18 (cart 0x8018ABD8, right after the six func_800A66A8 statics) instead
+   of in the gathered common pool. The ld script cannot reach that slot - it is
+   inside a compiled object's section - so this has to be a source change. An
+   "= 0" initialiser does not work; EGCS would put it in .data. */
+static s32 sIntroModelTimer;
+#elif !defined(VERSION_JP)
 s32 sIntroModelTimer;
 #endif
 
@@ -4713,6 +4720,12 @@ Gfx* func_800963F0(Gfx* displayListHead, s8 arg1, s32 arg2, s32 arg3, f32 arg4, 
 /* JP's copy of this segment-0B texture sits 0x100 earlier. */
 extern u8 D_0B002900[];
 #define sStaticNoiseTexture D_0B002900
+#elif defined(VERSION_CN)
+/* iQue points it 0x200 later, at gTextureTitleChocoMountain's first byte. The
+   segment-0B payload is byte-identical between the two ROMs, so this is a
+   different asset inside the same data, expressed as a symbol address. */
+extern u8 D_0B002C00[];
+#define sStaticNoiseTexture D_0B002C00
 #else
 extern u8 D_0B002A00[];
 #define sStaticNoiseTexture D_0B002A00
@@ -7861,7 +7874,7 @@ void add_menu_item(s32 type, s32 column, s32 row, s8 priority) {
             /* cn: the row index carries the low two bits set - iQue's table
                starts three entries further in */
             menuItem->D_8018DEE0_index = animate_character_select_menu(
-                segmented_to_virtual_dupe_2(D_800E7E20[(((gCCSelection / 2) * 4) | 3) - menuItem->param2]));
+                segmented_to_virtual_dupe_2(D_800E7E14[(((gCCSelection / 2) * 4) | 3) - menuItem->param2]));
 #else
             menuItem->D_8018DEE0_index = animate_character_select_menu(
                 segmented_to_virtual_dupe_2(D_800E7E20[((gCCSelection / 2) * 4) - menuItem->param2]));
@@ -15894,7 +15907,7 @@ void func_800AB9B0(MenuItem* arg0) {
         arg0->param2 = func_800B54C0((s32) gCupSelection, gCCSelection);
 #ifdef VERSION_CN
         func_8009A594(arg0->D_8018DEE0_index, 0,
-                      segmented_to_virtual_dupe_2(D_800E7E20[(((gCCSelection / 2) * 4) | 3) - arg0->param2]));
+                      segmented_to_virtual_dupe_2(D_800E7E14[(((gCCSelection / 2) * 4) | 3) - arg0->param2]));
         temp_v1 = D_800E7268;
         arg0->column = (s32) temp_v1->column;
         arg0->row = temp_v1->row;

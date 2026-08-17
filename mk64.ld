@@ -626,9 +626,12 @@ SECTIONS
       BUILD_DIR/src/os/guRotateF.o(.data*);
       BUILD_DIR/asm/os/__osException.o(.data*);
       BUILD_DIR/src/os/osCreatePiManager.o(.data*);
-      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);
-      /* cart 0x00E9270: 16 bytes of fill before this object */
-      . += 0x10;
+      /* 0x800E8630..0x800E8670, the run that used to be a 0x30 object plus a
+         0x10 filler. Same 0x40 total, so osInitialize.o still starts at
+         0x800E8670 and ADDR(.main.noload) does not move. */
+      BUILD_DIR/src/os/__osPiCreateAccessQueue.o(.data*);   /* 0x800E8630 0x10 */
+      BUILD_DIR/src/os/ique_pfs/contpfs.o(.data*);          /* 0x800E8640 0x10 */
+      BUILD_DIR/asm/ique_build_stamp_cn.o(.data);           /* 0x800E8650 0x20 */
       BUILD_DIR/src/os/osInitialize.o(.data*);
       BUILD_DIR/src/os/__osViInit.o(.data*);
       BUILD_DIR/src/os/osViData.o(.data*);
@@ -834,9 +837,12 @@ SECTIONS
       #ifdef VERSION_CN
       /* the VI manager's block ends 8 short of the boundary, which the ALIGN
          above has already taken up */
+      /* piEventBuf and osPiMesgBuff are now real definitions at the tail of
+         this object (0x801922A8 and 0x801922B0), so osCreatePiManager.o has no
+         common left and the section grew 0x11C8 -> 0x11D8. The old 0x10 filler
+         drops to 0x8 to pay for it. */
       BUILD_DIR/asm/ique_pimgr_bss_cn.o(.bss);              /*              0x801910E0 */
-      BUILD_DIR/src/os/osCreatePiManager.o(.scommon);       /* piEventBuf   0x801922A8 */
-      . += 0x10;
+      . += 0x8;
       BUILD_DIR/asm/menu_bss_cn.o(.bss);                    /*              0x801922C0 */
       /* no ALIGN here: sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4
          on cart (not 16-aligned) */
@@ -845,7 +851,19 @@ SECTIONS
    END_NOLOAD(main)
 
    /* Checks that segments are not overlapping into the memory pool but is not strictly necessary */
+#ifdef VERSION_CN
+   /* sMemoryPool abuts gOsSiMessageQueue at 0x80193BF4 on cart and that is not
+      16-aligned. Two things round it up to 0x80193C00 and both have to go: the
+      output section inherits align 16 from memory_pool.o(.bss), so the start is
+      given explicitly, and SUBALIGN(0x4) stops ld re-aligning the input section
+      inside it. Verified against ld 2.42 - the address alone is not enough.
+      This section is NOLOAD, so repacking what follows costs no rom byte, and
+      no reference into the park matches the cart today. */
+   _memoryPoolSegmentNoloadStart = ADDR(.memoryPool.noload);
+   .memoryPool.noload _mainSegmentNoloadEnd (NOLOAD) : SUBALIGN(0x4)
+#else
    BEGIN_NOLOAD(memoryPool)
+#endif
    {
       BUILD_DIR/src/buffers/memory_pool.o(.bss*);
       . = ALIGN(0x10);
@@ -864,7 +882,8 @@ SECTIONS
       BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.data*);
       BUILD_DIR/src/os/ique_pfs/pfsisplug.o(.rodata*);
       BUILD_DIR/src/os/ique_pfs/contpfs.o(.bss*);
-      BUILD_DIR/src/os/ique_pfs/contpfs.o(.data*);
+      /* contpfs.o(.data*) is no longer parked: it is 0x10 now and belongs at
+         0x800E8640 in the main segment above. */
       BUILD_DIR/src/os/ique_pfs/contpfs.o(.rodata*);
       BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.bss*);
       BUILD_DIR/src/os/ique_pfs/pfsallocatefile.o(.data*);

@@ -11,7 +11,13 @@ typedef struct {
     u32 instr03;
 } exceptionPreamble;
 
+#ifdef VERSION_CN
+/* iQue keeps this flag in the head bss block at 0x800F3C10, not in this
+   object's .data; real definition in asm/menu_sbss_cn.s */
+extern u32 D_80194040;
+#else
 u32 D_80194040;
+#endif
 
 u64 osClockRate = 62500000;
 #ifdef VERSION_CN

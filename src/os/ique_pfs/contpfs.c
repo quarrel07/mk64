@@ -9,7 +9,11 @@
 #include "PR/rmon.h"
 
 #if BUILD_VERSION >= VERSION_J
-__OSInode __osPfsInodeCache ALIGNED(0x8);
+/* iQue's cache is a 0x100 main-bss object at 0x8019386C - 4-aligned, so the
+   ALIGNED(0x8) is not what they built - with the real definition in
+   asm/menu_bss_cn.s. Leaving it here would put 0x100 bytes in this object's
+   .data, where the cart holds only the two scalars below. */
+extern __OSInode __osPfsInodeCache;
 s32 __osPfsInodeCacheChannel = -1;
 u8 __osPfsInodeCacheBank = 250;
 #endif

@@ -43,6 +43,10 @@ D_0B002A00 = 0x0B002A00;
    sStaticNoiseTexture in menu_items.c. */
 D_0B002900 = 0x0B002900;
 
+/* iQue points the same reference 0x200 later, at gTextureTitleChocoMountain's
+   first byte; see sStaticNoiseTexture in menu_items.c. */
+D_0B002C00 = 0x0B002C00;
+
 /* JP-only. gCreditsText holds both credit sets in one table: the english names
    in the first 63 entries, the japanese ones in the second 63. Mirror mode
    shows the japanese half, which is this symbol - the same table entered at its
