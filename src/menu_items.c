@@ -2489,7 +2489,11 @@ f64 menu_ln(f64 arg0) {
     if (arg0 <= 0.0) {
         return 0.0;
     }
+#ifdef VERSION_CN
+    normalize_to_unit_interval(arg0 / 1.4142135623730951, &sp38);
+#else
     normalize_to_unit_interval(arg0 / 1.414213562373095, &sp38);
+#endif
     arg0 /= menu_pow2(1.0, sp38);
     var_v0 = 1;
     arg0 = (arg0 - 1.0) / (arg0 + 1.0);
@@ -10338,13 +10342,17 @@ void func_800A2EB8(MenuItem* arg0) {
     print_text_mode_1(arg0->column + 0x25, arg0->row + 0x19, "result", 0, 1.0f, 1.0f);
 #else
 #ifdef VERSION_CN
-    print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x19, "results", 0, 1.0f, 1.0f);
+    print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x19, "\xa1\x2e\xa1\x6b", 0, 1.0f, 1.0f);
 #else
     print_text_mode_1(arg0->column + 0x1E, arg0->row + 0x19, "results", 0, 1.0f, 1.0f);
 #endif
 #endif
     set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
+#ifdef VERSION_CN
+    print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x28, "\xa1\x67\xa1\x5f", 0, 0.7f, 0.7f);
+#else
     print_text_mode_1(arg0->column + 0x2C, arg0->row + 0x28, "round", 0, 0.7f, 0.7f);
+#endif
     convert_number_to_ascii(gCourseIndexInCup + 1, sp68);
     print_text_mode_1(arg0->column + 0x57, arg0->row + 0x28, &sp68[1], 0, 0.7f, 0.7f);
     for (var_s2 = 0; var_s2 < 4; var_s2++) {
@@ -10585,13 +10593,13 @@ void func_800A34A8(MenuItem* arg0) {
         }
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_1);
 #ifdef VERSION_CN
-        print_text_mode_1(arg0->column + 0x36, -arg0->row + 0x19, "driver's points", 0, 0.8f, 0.8f);
+        print_text_mode_1(arg0->column + 0x36, -arg0->row + 0x19, "\xa1\xc1\xa1\xd3\xa1\x6a\xa1\x4d", 0, 0.8f, 0.8f);
 #else
         print_text_mode_1(arg0->column + 0x19, 0x19 - arg0->row, "driver's points", 0, 0.8f, 0.8f);
 #endif
         set_text_color(TEXT_BLUE_GREEN_RED_CYCLE_2);
 #ifdef VERSION_CN
-        print_text_mode_1(arg0->column + 0x36, arg0->row + 0x28, "round", 0, 0.7f, 0.7f);
+        print_text_mode_1(arg0->column + 0x36, arg0->row + 0x28, "\xa1\x67\xa1\x5f", 0, 0.7f, 0.7f);
 #else
         print_text_mode_1(arg0->column + 0x36, 0x28 - arg0->row, "round", 0, 0.7f, 0.7f);
 #endif
@@ -13061,7 +13069,7 @@ void func_800A6E94(s32 playerCount, s32 playerId, u8* placeAry) {
     } else {
         set_text_color(TEXT_YELLOW);
     }
-    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x5A, "1 ｓ ー", 0, scale, scale);
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x5A, "\xa1\x41 \xa1\xf5", 0, scale, scale);
     convert_number_to_ascii(placeAry[playerId * 3], sp40);
     text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x5A, sp40, 0, scale, scale);
     if (rank == ++rankIdx) {
@@ -13069,7 +13077,7 @@ void func_800A6E94(s32 playerCount, s32 playerId, u8* placeAry) {
     } else {
         set_text_color(TEXT_BLUE);
     }
-    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x69, "2 ｎ ー", 0, scale, scale);
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x69, "\xa1\x41 \xa1\x49", 0, scale, scale);
     convert_number_to_ascii(placeAry[(playerId * 3) + 1], sp40);
     text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x69, sp40, 0, scale, scale);
     if (++rankIdx == rank) {
@@ -13077,7 +13085,7 @@ void func_800A6E94(s32 playerCount, s32 playerId, u8* placeAry) {
     } else {
         set_text_color(TEXT_RED);
     }
-    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x78, "3 ｒ ー", 0, scale, scale);
+    text_draw(temp_s0->column + 0xE, temp_s0->row + 0x78, "\xa1\x41 \xa1\xc2", 0, scale, scale);
     convert_number_to_ascii(placeAry[(playerId * 3) + 2], sp40);
     text_draw(temp_s0->column + 0x2D, temp_s0->row + 0x78, sp40, 0, scale, scale);
 #else
