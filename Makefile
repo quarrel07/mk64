@@ -46,7 +46,7 @@ GCC ?= 0
 #  jp.v11 - builds revision 1.1 of the original December 1996 Japanese release
 #  cn.v5  - builds the iQue Player release, content revision 5
 VERSION ?= us
-$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v10 jp.v11 cn.v5))
+$(eval $(call validate-option,VERSION,us eu.v10 eu.v11 jp.v10 jp.v11 cn.v5 cn.v4))
 
 ifeq      ($(VERSION),us)
   DEFINES += VERSION_US=1
@@ -69,6 +69,9 @@ else ifeq ($(VERSION),cn.v5)
   # their version in the ucode string). It is on f3dex rather than f3dex_old
   # for that reason. Not yet confirmed against generated code.
   GRUCODE   ?= f3dex
+else ifeq ($(VERSION),cn.v4)
+  DEFINES += VERSION_CN=1 VERSION_CN_V4=1
+  GRUCODE   ?= f3dex
 endif
 
 # Every iQue content revision builds the same platform machinery (BB boot,
@@ -76,7 +79,7 @@ endif
 # A future cn.v4 joins by being added here; only revision-measured facts
 # (which MIO0 blobs iQue recompressed, the IDO 7.1 file lists' contents)
 # stay keyed on the exact version.
-CN_VERSIONS := cn.v5
+CN_VERSIONS := cn.v5 cn.v4
 IS_CN := $(if $(filter $(CN_VERSIONS),$(VERSION)),1,0)
 
 ifeq ($(DEBUG),1)
@@ -226,6 +229,12 @@ endif
 TORCH_VERSION := $(VERSION)
 ifneq ($(filter $(VERSION),eu.v10 eu.v11),)
   TORCH_VERSION := us
+endif
+# cn.v4 and cn.v5 are byte-identical across every asset segment (measured
+# 2026-08-17: the images differ only below rom 0x126A00 and in the trailing
+# descriptor), so cn.v4 borrows cn.v5's extraction the way EU borrows US.
+ifeq ($(VERSION),cn.v4)
+  TORCH_VERSION := cn.v5
 endif
 ASSET_VERSION := $(TORCH_VERSION)
 
