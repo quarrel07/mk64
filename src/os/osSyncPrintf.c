@@ -6,13 +6,18 @@
 #ifndef DEBUG
 
 #ifdef VERSION_CN
-/* iQue stubbed both printfs to empty varargs bodies (cart 0x800cbe54/68:
-   just the four-register vararg homing and jr $ra), which drops the whole
-   ANSI formatter subtree (_Printf/_Litob/_Ldtob/string/ldiv) from the link */
-void osSyncPrintf(UNUSED const char* fmt, ...) {
+/* iQue stubbed the whole printf path, dropping the ANSI formatter subtree
+   (_Printf/_Litob/_Ldtob/string/ldiv) from the link. Three functions: the
+   prout callback is not varargs so it compiles to a bare jr $ra (cart
+   0x800CBE60), then the two empty varargs bodies at 0x800CBE68 (the one the
+   five call sites reach) and 0x800CBE7C. */
+char* proutSyncPrintf(UNUSED char* arg0, UNUSED const char* arg1, UNUSED size_t size) {
 }
 
 void rmonPrintf(UNUSED const char* fmt, ...) {
+}
+
+void osSyncPrintf(UNUSED const char* fmt, ...) {
 }
 #else
 char* osSyncPrintf(UNUSED char* arg0, UNUSED const char* arg1, UNUSED size_t size) {
